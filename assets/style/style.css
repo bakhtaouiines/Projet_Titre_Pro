@@ -1,0 +1,53 @@
+body {
+    background-color: rgb(47, 45, 45);
+}
+
+#subtitle {
+    font-size: smaller;
+}
+
+#container {
+    background-image: linear-gradient(black, pink);
+}
+
+
+/* hover images accueil */
+
+.hover-1 .hover-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+}
+
+.hover-1-title {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    z-index: 99;
+    transition: all 0.5s;
+}
+
+.hover-1-description {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    left: 0;
+    text-align: center;
+    z-index: 99;
+    transition: all 0.5s;
+}
+
+.hover-1:hover .hover-1-title {
+    transform: translateY(-1.5rem);
+}
+
+.hover-1:hover .hover-1-description {
+    bottom: 0.5rem;
+    opacity: 1;
+}
+
+
+/* .hover-1:hover .hover-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1));
+} */
