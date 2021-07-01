@@ -7,7 +7,9 @@ domain — Le (sous-)domaine pour lequel le cookie est disponible.
 secure — Indique si le cookie doit uniquement être transmis à travers une connexion sécurisée HTTPS depuis le client.
 httponly — Lorsque ce paramètre vaut true, le cookie ne sera accessible que par le protocole HTTP. Cela signifie que le cookie ne sera pas accessible via des langages de scripts
 */
+//on initialise un tableau qui contiendra les messages d'erreurs
 $formErrorList = [];
+//vérifications du formulaire de connexion
 if (isset($_POST['login'])) {
 
     if (!empty($_POST['email'])) {
@@ -29,6 +31,39 @@ if (isset($_POST['login'])) {
         setcookie('password', $password, time() + 60 * 60 * 24 * 30, null, null, false, true);
     }
 }
+//vérifications du formulaire d'inscription
+if (isset($_POST['register'])) {
+    $regex = '/^[A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç][A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç\-\s\']*$/';
+    if (!empty($_POST['lastName'])) {
+        if (preg_match($regex, $_POST['lastName'])) {
+            $lastname = htmlspecialchars($_POST['lastName']);
+        } else {
+            $formErrorList['lastName'] = 'Les caractères saisis ne sont pas valides. Seuls les lettres avec des accents le sont pour le nom.';
+        }
+    } else {
+        $formErrorList['lastName'] = 'Nom de famille manquant';
+    }
+    // Vérification REGEX + valeur Prénom
+    if (!empty($_POST['firstName'])) {
+        if (preg_match($regex, $_POST['firstName'])) {
+            $firstname = htmlspecialchars($_POST['firstName']);
+        } else {
+            $formErrorList['firstName'] = 'Les caractères saisis ne sont pas valides. Seuls les lettres avec des accents le sont pour le prénom.';
+        }
+    } else {
+        $formErrorList['firstName'] = 'Prénom manquant';
+    }
+    if (!empty($_POST['pseudo'])) {
+        if (preg_match('/^[a-zA-Z0-9.-_]{3,20}$/', $_POST['pseudo'])) { //on contrôle que le pseudo contient 3 à 20 caractères
+            $pseudo = htmlspecialchars($_POST['pseudo']);
+        } else {
+            $formErrorList['pseudo'] = 'Le pseudo doit contenir au moins 3 caractères et aucun espace.';
+        }
+    } else {
+        $formErrorList['pseudo'] = 'Pseudo manquant';
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -40,7 +75,7 @@ if (isset($_POST['login'])) {
     <!-- BS CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style/style.css">
-    
+
 </head>
 
 <body>
@@ -153,33 +188,70 @@ if (isset($_POST['login'])) {
                 <div class="modal-body">
                     <form method="POST" action="index.php">
                         <div class="mb-3">
-                            <label for="inputName" class="form-label">Mon nom
+                            <!-- NOM DE FAMILLE -->
+                            <label for="lastName" class="form-label">Mon nom
                                 <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastName" aria-required="true" oninput="checkName()">
                             </label>
-                            <p id="formErrorName"></p> <!-- on affiche msg d'erreur s'il y en a -->
-                            <label for="inputFirstName" class="form-label">Mon prénom
+                            <?php
+                            if (!empty($formErrorList['lastName'])) {
+                            ?>
+                                <p class="text-danger"><?= $formErrorList['lastName']; ?></p>
+                            <?php
+                            }
+                            ?>
+                            <!-- PRÉNOM -->
+                            <label for="firstName" class="form-label">Mon prénom
                                 <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstName" aria-required="true" oninput="checkName()">
                             </label>
-                            <p id="formErrorName"></p><!-- on affiche msg d'erreur s'il y en a -->
+                            <?php
+                            if (!empty($formErrorList['firstName'])) {
+                            ?>
+                                <p class="text-danger"><?= $formErrorList['firstName']; ?></p>
+                            <?php
+                            }
+                            ?>
                         </div>
+                        <!-- PSEUDO -->
                         <div class="mb-3">
-                            <label for="inputPseudo" class="form-label">Créer mon pseudo
+                            <label for="pseudo" class="form-label">Créer mon pseudo
                                 <input type="text" class="form-control" id="pseudo" name="pseudo" aria-describedby="pseudo" aria-required="true">
                             </label>
-                            <p id="formErrorPseudo"></p><!-- on affiche msg d'erreur s'il y en a -->
+                            <?php
+                            if (!empty($formErrorList['pseudo'])) {
+                            ?>
+                                <p class="text-danger"><?= $formErrorList['pseudo']; ?></p>
+                            <?php
+                            }
+                            ?>
                         </div>
+                        <!-- EMAIL -->
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Mon adresse Email
+                            <label for="email" class="form-label">Mon adresse Email
                                 <input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true" oninput="checkMail()">
                             </label>
-                            <!-- <p><span id="formErrorEmail"></span></p> -->
+                            <?php
+                            if (!empty($formErrorList['email'])) {
+                            ?>
+                                <p class="text-danger"><?= $formErrorList['email']; ?></p>
+                            <?php
+                            }
+                            ?>
                         </div>
+                        <!-- MOT DE PASSE -->
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">Créer mon mot de passe
-                                <input type="password" class="form-control" id="inputPassword" aria-required="true" aria-required="true" oninput="checkPassword()">
+                                <input type="password" class="form-control" id="inputPassword" aria-required="true" aria-required="true" name="password">
                             </label>
-                            <label for="inputPassword" class="form-label">Vérifier mon mot de passe
-                                <input type="password" class="form-control" id="verifPassword" aria-required="true">
+                            <?php
+                            if (!empty($formErrorList['password'])) {
+                            ?>
+                                <p class="text-danger"><?= $formErrorList['password']; ?></p>
+                            <?php
+                            }
+                            ?>
+                            <!-- VERIF MOT DE PASSE -->
+                            <label for="verifPassword" class="form-label">Vérifier mon mot de passe
+                                <input type="password" class="form-control" id="verifPassword" aria-required="true" name="verifPassword">
                             </label>
                         </div>
                         <!--validation de formulaire-->
