@@ -1,5 +1,4 @@
 <?php
-// GESTION DES COOKIES UTILISATEURS
 /* RAPPEL:
 setcookie — Envoie un cookie
 path — Le chemin sur le serveur sur lequel le cookie sera disponible.
@@ -9,9 +8,8 @@ httponly — Lorsque ce paramètre vaut true, le cookie ne sera accessible que p
 */
 //on initialise un tableau qui contiendra les messages d'erreurs
 $formErrorList = [];
-//vérifications du formulaire de connexion
+///////////////////////////////////////////////////////////////vérifications du formulaire de connexion////////////////////////////////////////////////
 if (isset($_POST['login'])) {
-
     if (!empty($_POST['email'])) {
         if (preg_match('#^[A-Za-z0-9]*[\-\.\_\]*@[A-Za-z0-9\-\_]+.[a-zA-Z0-9]{2,3}#', $_POST['email'])) {
             $email = htmlspecialchars($_POST['email']);
@@ -27,13 +25,22 @@ if (isset($_POST['login'])) {
         $formErrorList['password'] = 'Le champ "Mot de Passe" n\'est pas rempli';
     }
     if (empty($formErrorList)) {
+        // GESTION DE LA SESSION:
+        session_start();
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['password'] = $_POST['password'];
+        // on redirige notre visiteur vers la page de compte de l'utilisateur
+        header('location: userPage.php');
+        // GESTION DES COOKIES UTILISATEURS:
         setcookie('email', $email, time() + 60 * 60 * 24 * 30, null, null, false, true); // Expire dans 30 jours, path=null, domain=null, secure=false,httponly=true
         setcookie('password', $password, time() + 60 * 60 * 24 * 30, null, null, false, true);
     }
 }
-//vérifications du formulaire d'inscription
+
+/////////////////////////////////////////////////////vérifications du formulaire d'inscription/////////////////////////////////////////////////
 if (isset($_POST['register'])) {
     $regex = '/^[A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç][A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç\-\s\']*$/';
+    // verif nom
     if (!empty($_POST['lastName'])) {
         if (preg_match($regex, $_POST['lastName'])) {
             $lastname = htmlspecialchars($_POST['lastName']);
@@ -43,7 +50,7 @@ if (isset($_POST['register'])) {
     } else {
         $formErrorList['lastName'] = 'Nom de famille manquant';
     }
-    // Vérification REGEX + valeur Prénom
+    // verif prénom
     if (!empty($_POST['firstName'])) {
         if (preg_match($regex, $_POST['firstName'])) {
             $firstname = htmlspecialchars($_POST['firstName']);
@@ -53,14 +60,35 @@ if (isset($_POST['register'])) {
     } else {
         $formErrorList['firstName'] = 'Prénom manquant';
     }
+    // verif pseudo
     if (!empty($_POST['pseudo'])) {
         if (preg_match('/^[a-zA-Z0-9.-_]{3,20}$/', $_POST['pseudo'])) { //on contrôle que le pseudo contient 3 à 20 caractères
             $pseudo = htmlspecialchars($_POST['pseudo']);
         } else {
-            $formErrorList['pseudo'] = 'Le pseudo doit contenir au moins 3 caractères et aucun espace.';
+            $formErrorList['pseudo'] = 'Le pseudo doit contenir au moins 3 caractères, sans aucun espace et aucun caractères spéciaux.';
         }
     } else {
         $formErrorList['pseudo'] = 'Pseudo manquant';
+    }
+    // verif email
+    if (!empty($_POST['email'])) {
+        if (preg_match('#^[A-Za-z0-9]*[\-\.\_\]*@[A-Za-z0-9\-\_]+.[a-zA-Z0-9]{2,3}#', $_POST['email'])) {
+            $email = htmlspecialchars($_POST['email']);
+        } else {
+            $formErrorList['email'] = 'Votre email n\'est pas au bon format.';
+        }
+    } else {
+        $formErrorList['email'] = 'Le champ "Adresse Email" n\'est pas rempli';
+    }
+    // verif mdp
+    if (!empty($_POST['password']) && !empty($_POST['verifPassword'])) {
+        $password = $_POST['password'];
+        $verifPassword = $_POST['verifPassword'];
+        if ($password !== $verifPassword) {
+            $formErrorList['verifPassword'] = 'Le mot de passe indiqué ne correspond pas.';
+        }
+    } else {
+        $formErrorList['password'] = 'Le champ "Mot de Passe" n\'est pas rempli';
     }
 }
 
@@ -178,7 +206,7 @@ if (isset($_POST['register'])) {
         </div>
     </div>
     <!--------------------------------------------------------------------------------------Formulaire création de compte--------------------------->
-    <div class="modal fade" id="signIn" aria-hidden="true" aria-labelledby="signIn" tabindex="-1">
+    <div class="modal fade" id="signIn" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="signIn" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down ">
             <div class="modal-content">
                 <div class="modal-header ">
@@ -239,8 +267,8 @@ if (isset($_POST['register'])) {
                         </div>
                         <!-- MOT DE PASSE -->
                         <div class="mb-3">
-                            <label for="inputPassword" class="form-label">Créer mon mot de passe
-                                <input type="password" class="form-control" id="inputPassword" aria-required="true" aria-required="true" name="password">
+                            <label for="password" class="form-label">Créer mon mot de passe
+                                <input type="password" class="form-control" id="password" aria-required="true" aria-required="true" name="password">
                             </label>
                             <?php
                             if (!empty($formErrorList['password'])) {
@@ -253,9 +281,21 @@ if (isset($_POST['register'])) {
                             <label for="verifPassword" class="form-label">Vérifier mon mot de passe
                                 <input type="password" class="form-control" id="verifPassword" aria-required="true" name="verifPassword">
                             </label>
+                            <?php
+                            if (!empty($formErrorList['verifPassword'])) {
+                            ?>
+                                <p class="text-danger"><?= $formErrorList['verifPassword']; ?></p>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <!--validation de formulaire-->
                         <input type="submit" class="btn btn-primary" name="register" value="Créer mon compte">
+                        <?php
+                        if (!empty($formErrorList)) {
+                            // data-bs-backdrop="static"
+                        }
+                        ?>
                     </form>
                 </div>
                 <div class="modal-footer">
