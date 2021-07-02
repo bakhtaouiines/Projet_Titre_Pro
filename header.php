@@ -91,7 +91,6 @@ if (isset($_POST['register'])) {
         $formErrorList['password'] = 'Le champ "Mot de Passe" n\'est pas rempli';
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -103,7 +102,6 @@ if (isset($_POST['register'])) {
     <!-- BS CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style/style.css">
-
 </head>
 
 <body>
@@ -157,19 +155,21 @@ if (isset($_POST['register'])) {
         </div>
     </nav>
     <!-- Fenêtre modale du bouton login -->
-    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="login" aria-hidden="true">
+    <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-sm-down">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="login">Mon compte</h5>
+                    <h5 class="modal-title">Mon compte</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
+                    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
                     <!-------------------------------------------------------------- Formulaire connexion utilisateur---------------------------------------------------->
-                    <form method="POST" action="">
+                    <form method="POST" action="" name="logForm" id="logForm">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Adresse Email<input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true"></label>
+                            <label for="email" class="form-label">Adresse Email
+                                <input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true" oninput="checkForm()">
+                            </label>
                             <?php
                             if (!empty($formErrorList['email'])) {
                             ?>
@@ -178,8 +178,10 @@ if (isset($_POST['register'])) {
                             }
                             ?>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Mot de Passe<input type="password" class="form-control" id="password" name="password" aria-required="true"></label>
+                        <div class=" mb-3">
+                            <label for="password" class="form-label">Mot de Passe
+                                <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkForm()">
+                            </label>
                             <?php
                             if (!empty($formErrorList['password'])) {
                             ?>
@@ -188,12 +190,13 @@ if (isset($_POST['register'])) {
                             }
                             ?>
                         </div>
-                        <div class="mb-3 form-check">
-
-                            <label class="form-check-label fst-italic" for="rememberUser">Se souvenir de moi<input type="checkbox" class="form-check-input" id="rememberUser"></label>
-                        </div>
+                        <!-- <div class="mb-3 form-check">
+                            <label class="form-check-label fst-italic" for="rememberUser">Se souvenir de moi
+                                <input type="checkbox" class="form-check-input" id="rememberUser">
+                            </label>
+                        </div> -->
                         <!--validation de formulaire-->
-                        <input type="submit" name="login" value="Se connecter" class="btn btn-primary">
+                        <input type="submit" id="login" name="login" value="Se connecter" class="btn btn-primary" disabled="disabled"> 
                     </form>
                     <hr>
                     <p class="divider-text text-center">ou</p>
@@ -205,16 +208,18 @@ if (isset($_POST['register'])) {
             </div>
         </div>
     </div>
-    <!--------------------------------------------------------------------------------------Formulaire création de compte--------------------------->
-    <div class="modal fade" id="signIn" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="signIn" tabindex="-1">
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+        <!--------------------------------------------------------------------------------------Formulaire création de compte--------------------------->
+
+    <div class="modal fade" id="signIn" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="signIn">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down ">
             <div class="modal-content">
                 <div class="modal-header ">
-                    <h5 class="modal-title" id="signIn">Créer mon compte</h5>
+                    <h5 class="modal-title">Créer mon compte</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="index.php">
+                    <form method="POST" action="index.php" name="signInForm">
                         <div class="mb-3">
                             <!-- NOM DE FAMILLE -->
                             <label for="lastName" class="form-label">Mon nom
@@ -255,7 +260,7 @@ if (isset($_POST['register'])) {
                         <!-- EMAIL -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Mon adresse Email
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true" oninput="checkMail()">
+                                <input type="email" class="form-control" id="emailRegister" name="email" aria-describedby="email" aria-required="true" oninput="checkMail()">
                             </label>
                             <?php
                             if (!empty($formErrorList['email'])) {
@@ -268,7 +273,7 @@ if (isset($_POST['register'])) {
                         <!-- MOT DE PASSE -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Créer mon mot de passe
-                                <input type="password" class="form-control" id="password" aria-required="true" aria-required="true" name="password">
+                                <input type="password" class="form-control" id="passwordRegister" aria-required="true" aria-required="true" name="password">
                             </label>
                             <?php
                             if (!empty($formErrorList['password'])) {
@@ -290,12 +295,7 @@ if (isset($_POST['register'])) {
                             ?>
                         </div>
                         <!--validation de formulaire-->
-                        <input type="submit" class="btn btn-primary" name="register" value="Créer mon compte">
-                        <?php
-                        if (!empty($formErrorList)) {
-                            // data-bs-backdrop="static"
-                        }
-                        ?>
+                        <input type="submit" class="btn btn-primary" id="register" name="register" value="Créer mon compte">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -305,6 +305,8 @@ if (isset($_POST['register'])) {
             </div>
         </div>
     </div>
+        <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
     <script src="assets/scripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d6f0d1e82c.js" crossorigin="anonymous"></script>

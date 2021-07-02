@@ -1,3 +1,34 @@
+//////////////////// On vérifie que le formulaire est rempli , sinon, clique impossible /////////////////////////////////////////
+function checkForm() {
+    let formInput = document.forms["logForm"].elements; //contient le tableau des éléments du formulaire et permet l'accès
+    let canSubmit = true;
+    for (let i = 0; i < formInput.length; i++) { //length donne le nombre d'éléments
+        if (formInput[i].value.length == 0) {
+            canSubmit = false;
+        }
+        document.getElementById("login").disabled = !canSubmit;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ///////////////////////////////////////////// PARTIE LOG IN ////////////////////////////////////////////
 // // verification du champs mot de passe
 // function verif(a, b) {
@@ -32,5 +63,3 @@
 // //         formErrorEmail.style.color = 'red'
 // //     }
 // // }
-
-// // créer regex pour mdp
