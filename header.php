@@ -167,8 +167,8 @@ if (isset($_POST['register'])) {
                     <!-------------------------------------------------------------- Formulaire connexion utilisateur---------------------------------------------------->
                     <form method="POST" action="" name="logForm" id="logForm">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Adresse Email
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true" oninput="checkForm()">
+                            <label for="email" class="form-label">Adresse Email*
+                                <input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['email'])) {
@@ -179,8 +179,8 @@ if (isset($_POST['register'])) {
                             ?>
                         </div>
                         <div class=" mb-3">
-                            <label for="password" class="form-label">Mot de Passe
-                                <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkForm()">
+                            <label for="password" class="form-label">Mot de Passe*
+                                <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['password'])) {
@@ -196,11 +196,12 @@ if (isset($_POST['register'])) {
                             </label>
                         </div> -->
                         <!--validation de formulaire-->
-                        <input type="submit" id="login" name="login" value="Se connecter" class="btn btn-primary" disabled="disabled"> 
+                        <input type="submit" id="loginBtn" name="login" value="Se connecter" class="btn btn-primary" disabled="disabled"> 
                     </form>
                     <hr>
                     <p class="divider-text text-center">ou</p>
-                    <button class="btn btn-primary mb-3" data-bs-target="#signIn" data-bs-toggle="modal" data-bs-dismiss="modal">Créer un compte</button>
+                    <!-- bouton trigger 2e fenêtre modale -->
+                    <button class="btn btn-primary mb-3" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Créer un compte</button>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer la fenêtre</button>
                     </div>
@@ -211,7 +212,7 @@ if (isset($_POST['register'])) {
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
         <!--------------------------------------------------------------------------------------Formulaire création de compte--------------------------->
 
-    <div class="modal fade" id="signIn" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="signIn">
+    <div class="modal fade" id="register" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="register">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down ">
             <div class="modal-content">
                 <div class="modal-header ">
@@ -219,11 +220,11 @@ if (isset($_POST['register'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="index.php" name="signInForm">
+                    <form method="POST" action="index.php" name="registerForm" id="registerForm">
                         <div class="mb-3">
                             <!-- NOM DE FAMILLE -->
-                            <label for="lastName" class="form-label">Mon nom
-                                <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastName" aria-required="true" oninput="checkName()">
+                            <label for="lastName" class="form-label">Mon nom*
+                                <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastName" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['lastName'])) {
@@ -233,8 +234,8 @@ if (isset($_POST['register'])) {
                             }
                             ?>
                             <!-- PRÉNOM -->
-                            <label for="firstName" class="form-label">Mon prénom
-                                <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstName" aria-required="true" oninput="checkName()">
+                            <label for="firstName" class="form-label">Mon prénom*
+                                <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstName" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['firstName'])) {
@@ -246,8 +247,8 @@ if (isset($_POST['register'])) {
                         </div>
                         <!-- PSEUDO -->
                         <div class="mb-3">
-                            <label for="pseudo" class="form-label">Créer mon pseudo
-                                <input type="text" class="form-control" id="pseudo" name="pseudo" aria-describedby="pseudo" aria-required="true">
+                            <label for="pseudo" class="form-label">Créer mon pseudo*
+                                <input type="text" class="form-control" id="pseudo" name="pseudo" aria-describedby="pseudo" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['pseudo'])) {
@@ -259,8 +260,8 @@ if (isset($_POST['register'])) {
                         </div>
                         <!-- EMAIL -->
                         <div class="mb-3">
-                            <label for="email" class="form-label">Mon adresse Email
-                                <input type="email" class="form-control" id="emailRegister" name="email" aria-describedby="email" aria-required="true" oninput="checkMail()">
+                            <label for="email" class="form-label">Mon adresse Email*
+                                <input type="email" class="form-control" id="emailRegister" name="email" aria-describedby="email" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['email'])) {
@@ -272,8 +273,8 @@ if (isset($_POST['register'])) {
                         </div>
                         <!-- MOT DE PASSE -->
                         <div class="mb-3">
-                            <label for="password" class="form-label">Créer mon mot de passe
-                                <input type="password" class="form-control" id="passwordRegister" aria-required="true" aria-required="true" name="password">
+                            <label for="password" class="form-label">Créer mon mot de passe*
+                                <input type="password" class="form-control" id="passwordRegister" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()"> 
                             </label>
                             <?php
                             if (!empty($formErrorList['password'])) {
@@ -283,8 +284,8 @@ if (isset($_POST['register'])) {
                             }
                             ?>
                             <!-- VERIF MOT DE PASSE -->
-                            <label for="verifPassword" class="form-label">Vérifier mon mot de passe
-                                <input type="password" class="form-control" id="verifPassword" aria-required="true" name="verifPassword">
+                            <label for="verifPassword" class="form-label">Vérifier mon mot de passe*
+                                <input type="password" class="form-control" id="verifPassword" aria-required="true" name="verifPassword" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['verifPassword'])) {
@@ -295,7 +296,7 @@ if (isset($_POST['register'])) {
                             ?>
                         </div>
                         <!--validation de formulaire-->
-                        <input type="submit" class="btn btn-primary" id="register" name="register" value="Créer mon compte">
+                        <input type="submit" class="btn btn-primary" id="registerBtn" name="register" value="Créer mon compte" disabled="disabled">
                     </form>
                 </div>
                 <div class="modal-footer">

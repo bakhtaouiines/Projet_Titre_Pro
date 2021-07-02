@@ -1,13 +1,26 @@
-//////////////////// On vérifie que le formulaire est rempli , sinon, clique impossible /////////////////////////////////////////
-function checkForm() {
-    let formInput = document.forms["logForm"].elements; //contient le tableau des éléments du formulaire et permet l'accès
-    let canSubmit = true;
+//////////////////// On vérifie que les formulaires sont remplis , sinon, validation impossible /////////////////////////////////////////
+// formulaire de connexion
+function checkLogForm() {
+    let formInput = document.forms["logForm"].elements;
+    //contient le tableau des éléments du formulaire et permet l'accès
+    let canSubmit = false;
     for (let i = 0; i < formInput.length; i++) { //length donne le nombre d'éléments
-        if (formInput[i].value.length == 0) {
-            canSubmit = false;
+        if (formInput[i].value.length === 0) {
+            canSubmit = true;
         }
-        document.getElementById("login").disabled = !canSubmit;
     }
+    document.getElementById("loginBtn").disabled = canSubmit;
+}
+// formulaire d'inscription
+function checkRegisterForm() {
+    let formInput = document.forms["registerForm"].elements;
+    let canSubmit = false;
+    for (let i = 0; i < formInput.length; i++) {
+        if (formInput[i].value.length === 0) {
+            canSubmit = true;
+        }
+    }
+    document.getElementById("registerBtn").disabled = canSubmit;
 }
 
 
