@@ -90,6 +90,19 @@ if (isset($_POST['register'])) {
     } else {
         $formErrorList['password'] = 'Le champ "Mot de Passe" n\'est pas rempli';
     }
+    if (!empty($formErrorList)) {
+    }
+    if (empty($formErrorList)) {
+        // GESTION DE LA SESSION:
+        session_start();
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['password'] = $_POST['password'];
+        // on redirige notre visiteur vers la page de compte de l'utilisateur
+        header('location: userPage.php');
+        // GESTION DES COOKIES UTILISATEURS:
+        setcookie('email', $email, time() + 60 * 60 * 24 * 30, null, null, false, true); // Expire dans 30 jours, path=null, domain=null, secure=false,httponly=true
+        setcookie('password', $password, time() + 60 * 60 * 24 * 30, null, null, false, true);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -156,17 +169,24 @@ if (isset($_POST['register'])) {
     </nav>
     <!-- Fenêtre modale du bouton login -->
     <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-sm-down">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title">Mon compte</h5>
+                    <p class="modal-title text-uppercase fs-5">Mon compte</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4 p-md-5">
                     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
                     <!-------------------------------------------------------------- Formulaire connexion utilisateur---------------------------------------------------->
                     <form method="POST" action="" name="logForm" id="logForm">
                         <div class="mb-3">
+                            <div class="icon d-flex align-items-center justify-content-center mb-4">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    </svg>
+                                </span>
+                            </div>
                             <label for="email" class="form-label">Adresse Email*
                                 <input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true" oninput="checkLogForm()">
                             </label>
@@ -196,27 +216,25 @@ if (isset($_POST['register'])) {
                             </label>
                         </div> -->
                         <!--validation de formulaire-->
-                        <input type="submit" id="loginBtn" name="login" value="Se connecter" class="btn btn-primary" disabled="disabled"> 
+                        <input type="submit" id="loginBtn" name="login" value="Se connecter" class="form-control btn btn-primary rounded submit px-1" disabled="disabled">
                     </form>
                     <hr>
-                    <p class="divider-text text-center">ou</p>
                     <!-- bouton trigger 2e fenêtre modale -->
-                    <button class="btn btn-primary mb-3" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Créer un compte</button>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer la fenêtre</button>
+                    <div class="modal-footer justify-content-center">
+                        <p>Vous n'êtes pas membre? <button class="btn btn-primary" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Créer un compte</button></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
-        <!--------------------------------------------------------------------------------------Formulaire création de compte--------------------------->
+    <!--------------------------------------------------------------------------------------Formulaire création de compte--------------------------->
 
     <div class="modal fade" id="register" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="register">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down ">
             <div class="modal-content">
                 <div class="modal-header ">
-                    <h5 class="modal-title">Créer mon compte</h5>
+                    <h5 class="modal-title text-uppercase">Créer mon compte</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -274,7 +292,7 @@ if (isset($_POST['register'])) {
                         <!-- MOT DE PASSE -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Créer mon mot de passe*
-                                <input type="password" class="form-control" id="passwordRegister" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()"> 
+                                <input type="password" class="form-control" id="passwordRegister" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['password'])) {
@@ -301,12 +319,11 @@ if (isset($_POST['register'])) {
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-bs-target="#login" data-bs-toggle="modal" data-bs-dismiss="modal">Revenir en arrière</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer la fenêtre</button>
                 </div>
             </div>
         </div>
     </div>
-        <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
     <script src="assets/scripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

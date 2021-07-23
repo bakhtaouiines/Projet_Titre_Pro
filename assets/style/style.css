@@ -6,8 +6,28 @@ body {
     font-size: smaller;
 }
 
-#container {
-    background-image: linear-gradient(black, pink);
+.modal-content .modal-body .icon {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #7D0D09;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.modal-content .modal-body .icon span {
+    color: #7D0D09;
+}
+
+.modal-content .modal-footer {
+    border: none;
+    background: #f8f8f8;
+}
+
+.btn.btn-primary {
+    background: #7D0D09;
+    border: 1px solid #7D0D09;
+    color: #fff;
 }
 
 
@@ -46,8 +66,3 @@ body {
     bottom: 0.5rem;
     opacity: 1;
 }
-
-
-/* .hover-1:hover .hover-overlay {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1));
-} */
