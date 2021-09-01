@@ -94,7 +94,8 @@ if (isset($_POST['register'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- BS CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/style/style.css">
 </head>
 
 <body>
@@ -102,50 +103,49 @@ if (isset($_POST['register'])) {
     <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top" id="#menu">
         <div class="container-fluid ">
             <div class="row col-2">
-                <a class="navbar-brand text-white col" href="index.php">Logo</a>
+                <a class="navbar-brand text-white col" href="/index.php">Logo</a>
                 <span id="subtitle" class="row navbar-text text-white fst-italic ms-2">"l'accord parfait entre musique et cinéma"</span>
             </div>
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white ms-4" id="otherContent" role="button" data-bs-toggle="dropdown" aria-expanded="false">Autre contenu</a>
-                        <ul class="dropdown-menu bg-dark text-white" aria-labelledby="navbarScrollingDropdown">
-                            <li><a class="dropdown-item text-white" href="pageinfo1.php">Un peu d'histoire...</a></li>
-                            <li><a class="dropdown-item text-white" href="#">Des anecdotes...</a></li>
-                            <li><a class="dropdown-item text-white" href="#">Supports insolites...</a></li>
-                        </ul>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
+                <ul class="navbar-nav mb-lg-0">
+                    <li class="nav-item me-5 my-2">
+                        <a href="../views/articlelist.php" role="button" class="nav-link ms-4 btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
                     </li>
+                    <div class="d-flex align-items-center">
+                        <input class="form-control mx-3" type="search" placeholder="Rechercher" aria-label="Search">
+                        <button class="btn btn-outline-light me-5" type="submit"><i class="bi bi-search"></i></button>
+                        <!-- bouton d'inscription ou log + bouton accès listes -->
+                        <!-- Bouton login -->
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Login</button>
+
+                        <!-- A afficher lorsque l'utilisateur est connecté -->
+                        <!-- Menu déroulant utilisateur -->
+                        <ul class="navbar-nav me-4 my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" id="userContent" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon compte</a>
+                                <ul class="dropdown-menu bg-dark " aria-labelledby="navbarScrollingDropdown">
+                                    <li><a class="dropdown-item text-white" href="profilPage.php">Mon profil</a></li>
+                                    <li><a class="dropdown-item text-white" href="#">Mes listes d'écoute</a></li>
+                                    <li><a class="dropdown-item text-white" href="#">Mes votes</a></li>
+                                    <li><a class="dropdown-item text-white" href="#">Mes mini-post</a></li>
+                                    <li><a class="dropdown-item text-white" href="#">Me déconnecter</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- A afficher lorsque l'utilisateur est connecté -->
+                        <!-- bouton accès listes d'écoute -->
+                        <a class="btn btn-outline-light px-2" href="#" role="button">
+                            <i class="bi bi-music-player fs-3"></i>
+                        </a>
+                    </div>
                 </ul>
-                <div class="d-flex align-items-center">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light me-5" type="submit">Search</button>
-                    <!-- bouton d'inscription ou log + bouton accès listes -->
-                    <!-- Bouton login -->
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Login</button>
-                    <!-- Menu déroulant utilisateur -->
-                    <ul class="navbar-nav me-4 my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" id="userContent" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon compte</a>
-                            <ul class="dropdown-menu bg-dark " aria-labelledby="navbarScrollingDropdown">
-                                <li><a class="dropdown-item text-white" href="userPage.php">Mon profil</a></li>
-                                <li><a class="dropdown-item text-white" href="#">Mes listes d'écoute</a></li>
-                                <li><a class="dropdown-item text-white" href="#">Mes votes</a></li>
-                                <li><a class="dropdown-item text-white" href="#">Me déconnecter</a></li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- bouton accès listes d'écoute -->
-                    <a class="btn btn-outline-light px-3" href="#" role="button">
-                        <i class="fas fa-music" type="button"></i>
-                    </a>
-
-                </div>
             </div>
         </div>
+
     </nav>
     <!-- Fenêtre modale du bouton login -->
     <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
@@ -162,9 +162,7 @@ if (isset($_POST['register'])) {
                         <div class="mb-3">
                             <div class="icon d-flex align-items-center justify-content-center mb-4">
                                 <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                    </svg>
+                                    <i class="bi bi-person-fill"></i>
                                 </span>
                             </div>
                             <label for="email" class="form-label">Adresse Email*

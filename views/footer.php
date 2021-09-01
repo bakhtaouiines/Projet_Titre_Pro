@@ -1,7 +1,7 @@
 <!-----------------------------------------------------------footer------------------------------------------->
 
 <footer class="bg-dark text-center text-white">
-    <div class="container p-4 pb-0">
+    <div class="container-fluid p-4 pb-0">
         <!-- Section: Social media -->
         <section class="mb-4">
             <!-- Spotify -->
