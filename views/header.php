@@ -1,4 +1,5 @@
 <?php
+require_once 'config.php';
 require 'controllers/headerCtrl.php';
 ?>
 <!DOCTYPE html>
@@ -39,13 +40,14 @@ require 'controllers/headerCtrl.php';
 
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
+                        // On récupère nos variables de session
                         if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) { ?>
                             <!-- Menu déroulant utilisateur -->
                             <ul class="navbar-nav me-4 my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-white" id="userContent" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hello <?= $_SESSION['user']['pseudo'] ?></a>
                                     <ul class="dropdown-menu bg-dark " aria-labelledby="navbarScrollingDropdown">
-                                        <li><a class="dropdown-item text-white" href="profilPage.php?userID=<? ?>">Mon profil</a></li>
+                                        <li><a class="dropdown-item text-white" href="profilPage.php?userID=#">Mon profil</a></li>
                                         <li><a class="dropdown-item text-white" href="#">Mes listes d'écoute</a></li>
                                         <li><a class="dropdown-item text-white" href="#">Mes votes</a></li>
                                         <li><a class="dropdown-item text-white" href="#">Mes mini-post</a></li>
@@ -62,7 +64,7 @@ require 'controllers/headerCtrl.php';
                         ?>
 
                             <!-- Bouton login -->
-                            <a href="?view=connexion" type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Connexion/Inscription</a>
+                            <button type="submit" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Connexion/Inscription</button>
                         <?php
                         }
                         ?>
@@ -80,8 +82,9 @@ require 'controllers/headerCtrl.php';
                     <p class="modal-title text-uppercase fs-5">Mon compte</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
+                <!-- FORMULAIRE CONNEXION UTILISATEUR -->
                 <div class="modal-body p-4 p-md-5">
-                    <!-- FORMULAIRE CONNEXION UTILISATEUR -->
                     <form method="POST" action="" name="logForm" id="logForm">
                         <div class="mb-3">
                             <div class="icon d-flex align-items-center justify-content-center mb-4">
@@ -89,34 +92,34 @@ require 'controllers/headerCtrl.php';
                                     <i class="bi bi-person-fill"></i>
                                 </span>
                             </div>
-                            <label for="email" class="form-label">Adresse Email*
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="email" aria-required="true" oninput="checkLogForm()">
+                            <label for="emailLog" class="form-label">Adresse Email*
+                                <input type="email" class="form-control" id="email" name="emailLog" aria-describedby="email" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['email'])) {
+                            if (!empty($formErrorList['emailLog'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['email']; ?></p>
+                                <p class="text-danger"><?= $formErrorList['emailLog']; ?></p>
                             <?php
                             }
                             ?>
                         </div>
                         <div class=" mb-3">
-                            <label for="password" class="form-label">Mot de Passe*
-                                <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkLogForm()">
+                            <label for="passwordLog" class="form-label">Mot de Passe*
+                                <input type="password" class="form-control" id="password" name="passwordLog" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['password'])) {
+                            if (!empty($formErrorList['passwordLog'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['password']; ?></p>
+                                <p class="text-danger"><?= $formErrorList['passwordLog']; ?></p>
                             <?php
                             }
                             ?>
                         </div>
-                        <!-- <div class="mb-3 form-check">
-                            <label class="form-check-label fst-italic" for="rememberUser">Se souvenir de moi
-                                <input type="checkbox" class="form-check-input" id="rememberUser">
-                            </label>
-                        </div> -->
+                        <div class="mb-3 form-check">
+                            <p class="fst-italic">Mot de passe oublié?
+                                <a href="" class="text-danger">Cliquez ici!</a>
+                            </p>
+                        </div>
                         <!--validation de formulaire-->
                         <input type="submit" id="loginBtn" name="login" value="Se connecter" class="form-control btn btn-primary rounded submit px-1" disabled="disabled">
                     </form>

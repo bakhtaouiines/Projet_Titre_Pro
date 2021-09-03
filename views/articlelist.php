@@ -1,9 +1,7 @@
 <?php
-
 require 'controllers/articleListCtrl.php';
-
+include 'header.php';
 ?>
-<?php include('header.php'); ?>
 <div class="container p-5">
     <figure class="text-end">
         <blockquote class="blockquote fs-5 lead">
@@ -16,22 +14,22 @@ require 'controllers/articleListCtrl.php';
         </blockquote>
     </figure>
     <div class="list-group p-5">
-        <a href="articlepage.php" class="list-group-item list-group-item-action" aria-current="true">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1 ">Article n°</h5>
-                <small>auteur</small>
-            </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-            <small>Lire la suite...</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-            <small class="text-muted">And some muted small print.</small>
-        </a>
+        <?php
+        // On affiche chaque entrée une à une
+        foreach ($articleList as $value) {
+        ?>
+            <a href="articlepage.php?articleID=<?= $value->id ?>" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 ">Article n° <?= $value->id ?></h5>
+                    <small><?= $value->id_User ?></small>
+                </div>
+                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                <small>Lire la suite...</small>
+            </a>
+        <?php
+        }
+        ?>
+
     </div>
 </div>
 <?php include('footer.php'); ?>

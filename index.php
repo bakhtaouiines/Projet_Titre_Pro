@@ -1,4 +1,9 @@
-<?php include('views/header.php'); ?>
+<?php
+//inlusion du controlleur
+require_once 'controllers/indexCtrl.php';
+//inclusion du header
+include 'views/header.php';
+?>
 <!-- CORPS DE L'ACCUEIL -->
 <div class="carousel slide my-5" data-bs-ride="carousel" id="carousel" data-bs-interval="0">
     <div class="carousel-inner">

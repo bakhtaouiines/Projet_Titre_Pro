@@ -1,8 +1,8 @@
 <?php
-
+// une classe est un modèle de données définissant la structure commune à tous les objets qui seront créés à partir d'elle. c'est un "moule" 
 class User
 {
-
+// liste d'attributs (ou "données membres")
     public $id = 0;
     public $pseudo = '';
     public $mail = '';
@@ -78,32 +78,31 @@ class User
     public function getUserInfoByMail()
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `pseudo` 
+            'SELECT `pseudo`, `mail`
             FROM `user` 
-            INNER JOIN `role` 
-            ON `user`.`id_Role` = `role`.`id` 
             WHERE `mail` = :mail'
         );
+        var_dump($pdoStatment);
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $pdoStatment->execute();
         return $pdoStatment->fetch(PDO::FETCH_OBJ);
     }
 
-     /**
-      * Méthode pour modifier les infos d'un utilisateur
-      *
-      * @return string
-      */ 
-     public function updateUserInfo()
-     {
-         $pdoStatment = $this->pdo->prepare(
-             'UPDATE `user` 
+    /**
+     * Méthode pour modifier les infos d'un utilisateur
+     *
+     * @return string
+     */
+    public function updateUserInfo()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'UPDATE `user` 
              SET `pseudo` = :pseudo, `avatar` = :avatar 
              WHERE `id` = :id'
-         );
-         $pdoStatment->bindValue(':pseudo', $this->lastname, PDO::PARAM_STR);
-         $pdoStatment->bindValue(':avatar', $this->firstname, PDO::PARAM_STR);
-         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
-         $pdoStatment->execute();
-     }
+        );
+        $pdoStatment->bindValue(':pseudo', $this->lastname, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':avatar', $this->firstname, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
+    }
 }
