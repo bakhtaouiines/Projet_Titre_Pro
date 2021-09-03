@@ -1,11 +1,13 @@
-<?php include('header.php'); ?>
+<?php
+require 'controllers/profilPageCtrl.php';
+include('header.php'); ?>
 <div class="container my-5 p-5 d-flex justify-content-around">
     <div class="card p-5">
         <div class="image d-flex flex-column justify-content-center align-items-center">
             <button class="avatar btn btn-dark mb-4">
                 <img src="../assets/images/panxia.png" height="100" width="100">
             </button>
-            <h4 class="fw-bold">Pseudo Utilisateur</h4>
+            <h4 class="fw-bold"><?= $userInfo->pseudo ?></h4>
             <div class=" d-flex mt-2">
                 <button class="btn btn-outline-dark">Éditer mon profil</button>
             </div>

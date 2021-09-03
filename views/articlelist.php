@@ -1,3 +1,8 @@
+<?php
+
+require 'controllers/articleListCtrl.php';
+
+?>
 <?php include('header.php'); ?>
 <div class="container p-5">
     <figure class="text-end">

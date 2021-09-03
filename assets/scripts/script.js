@@ -1,4 +1,5 @@
-//////////////////// On vérifie que les formulaires sont remplis , sinon, validation impossible /////////////////////////////////////////
+// On vérifie que les formulaires sont remplis , sinon, validation impossible
+
 // formulaire de connexion
 function checkLogForm() {
     let formInput = document.forms["logForm"].elements;
@@ -11,6 +12,7 @@ function checkLogForm() {
     }
     document.getElementById("loginBtn").disabled = canSubmit;
 }
+
 // formulaire d'inscription
 function checkRegisterForm() {
     let formInput = document.forms["registerForm"].elements;

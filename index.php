@@ -1,5 +1,5 @@
 <?php include('views/header.php'); ?>
-<!--------------------------------------------------------------------------------- Corps de l'accueil-------------------------------------------------------------->
+<!-- CORPS DE L'ACCUEIL -->
 <div class="carousel slide my-5" data-bs-ride="carousel" id="carousel" data-bs-interval="0">
     <div class="carousel-inner">
         <div class="carousel-item active">

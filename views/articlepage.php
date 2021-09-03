@@ -1,3 +1,6 @@
+<?php
+require 'controllers/articlePageCtrl.php';
+?>
 <?php include('header.php'); ?>
 <!-----------------------------------------------------------corps de la page------------------------------------------->
 
