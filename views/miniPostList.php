@@ -7,12 +7,12 @@ include('header.php') ?>
         // On affiche chaque entrée une à une
         // foreach ($miniPostList as $value) {
         ?>
-            <a href="articlepage.php?articleID=" class="list-group-item list-group-item-action" aria-current="true">
+            <a href="miniPost.php?minipostID=" class="list-group-item list-group-item-action" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1 ">MiniPost Title</h5>
                     <small>OST Title</small>
                 </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                <p class="mb-1">début du mini post...</p>
                 <small>Lire la suite...</small>
             </a>
         <?php

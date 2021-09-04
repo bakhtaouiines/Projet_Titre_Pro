@@ -1,14 +1,13 @@
 <?php
 include('header.php') ?>
 
-<div class="container bg-light my-5 p-3">
-
+<div class="container-fluid bg-light p-5 my-2">
     <div class="row p-5">
-        <form action="" method="POST" class="col-auto">
+        <form action="" method="POST" class="col-6">
             <label for="playlistTitle" class="form-label">Titre de ma Playlist*</label>
             <input type="text" class="form-control" id="playlistTitle" name="playlistTitle">
-            <label for="playlistDescription" class="form-label">Description</label>
-            <textarea name="playlistDescription" id="playlistDescription" msg cols="50" rows="5" class="form-control"></textarea>
+            <label for="playlistDescription" class="form-label">Desciption de ma Playlist</label>
+            <textarea name="playlistDescription" id="playlistDescription" msg cols="5" rows="5" class="form-control"></textarea>
             <div class="mt-3">
                 <i class="fa fa-search"></i>
                 <input type="search" class="form-control " placeholder="Search OST...">
@@ -31,8 +30,6 @@ include('header.php') ?>
             </ul>
         </div>
     </div>
-    <a class="btn btn-outline-secondary bi bi-music-player fs-2" href="playlistList.php"><span class="fs-5">Mes listes d'écoute</span></a>
+    <a class="btn btn-outline-secondary bi bi-music-player fs-2" href="playlistList.php"><span class="fs-5">Mes Playlist</span></a>
 </div>
-
-
 <?php include('footer.php'); ?>

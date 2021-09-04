@@ -36,8 +36,8 @@
                     <!-- barre de recherche -->
                     <div class="d-flex align-items-center">
                         <input class="form-control mx-3" type="search" placeholder="Rechercher" aria-label="Search">
-                        <button class="btn btn-outline-light me-2" type="submit" title="rechercher"><i class="bi bi-search"></i></button>
-                        <a href="#" class="btn btn-outline-light me-5" type="button" title="index"><i class="bi bi-book"></i></a>
+                        <button class="btn btn-outline-light me-2 bi bi-search" type="submit" title="rechercher"></button>
+                        <a href="OSTIndex.php" class="btn btn-outline-light me-5 bi bi-book" type="button" title="index"></a>
 
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
