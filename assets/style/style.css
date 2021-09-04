@@ -134,10 +134,10 @@
     /* profil user  */
     
     .card {
-        width: 350px;
-        background-color: #efefef;
+        background-color: transparent;
         border: none;
-        transition: all 0.5s
+        transition: all 0.5s;
+        width: 500px;
     }
     
     .image img {
@@ -149,7 +149,5 @@
     }
     
     .avatar {
-        height: 140px;
-        width: 140px;
         border-radius: 50%
     }

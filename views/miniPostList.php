@@ -1,0 +1,24 @@
+<?php
+
+include('header.php') ?>
+<div class="container p-5">
+    <div class="list-group p-5">
+        <?php
+        // On affiche chaque entrée une à une
+        // foreach ($miniPostList as $value) {
+        ?>
+            <a href="articlepage.php?articleID=" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 ">MiniPost Title</h5>
+                    <small>OST Title</small>
+                </div>
+                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                <small>Lire la suite...</small>
+            </a>
+        <?php
+        // }
+        ?>
+
+    </div>
+</div>
+<?php include('footer.php'); ?>

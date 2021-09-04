@@ -1,6 +1,6 @@
 <?php
-require_once 'config.php';
-require 'controllers/headerCtrl.php';
+// require_once 'config.php';
+// require 'controllers/headerCtrl.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -22,6 +22,7 @@ require 'controllers/headerCtrl.php';
                 <a class="navbar-brand text-white col" href="/index.php">Logo</a>
                 <span id="subtitle" class="row navbar-text text-white fst-italic ms-2">"l'accord parfait entre musique et cinéma"</span>
             </div>
+            <!--Menu Burger-->
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,38 +42,54 @@ require 'controllers/headerCtrl.php';
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
                         // On récupère nos variables de session
-                        if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) { ?>
-                            <!-- Menu déroulant utilisateur -->
-                            <ul class="navbar-nav me-4 my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-white" id="userContent" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hello <?= $_SESSION['user']['pseudo'] ?></a>
-                                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarScrollingDropdown">
-                                        <li><a class="dropdown-item text-white" href="profilPage.php?userID=#">Mon profil</a></li>
-                                        <li><a class="dropdown-item text-white" href="#">Mes listes d'écoute</a></li>
-                                        <li><a class="dropdown-item text-white" href="#">Mes votes</a></li>
-                                        <li><a class="dropdown-item text-white" href="#">Mes mini-post</a></li>
-                                        <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <!-- bouton accès listes d'écoute -->
-                            <a class="btn btn-outline-light px-2" href="#" role="button">
-                                <i class="bi bi-music-player fs-3"></i>
-                            </a>
-                        <?php
-                        } else {
+                        // if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) { 
                         ?>
 
-                            <!-- Bouton login -->
-                            <button type="submit" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Connexion/Inscription</button>
+                        <!-- Menu déroulant item -->
+                        <li class="nav-item dropdown mx-3">
+                            <div class="btn-group">
+                                <i type="button" class="btn btn-outline-secondary bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="row dropdown-menu dropdown-menu-end bg-dark">
+                                    <a class="col dropdown-item text-white bi bi-music-player" href="playlistList.php">
+                                        Playlists
+                                    </a>
+                                    <a class="dropdown-item text-white bi bi-pencil" href="miniPostList.php">
+                                        Mini-Post
+                                    </a>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- Menu déroulant utilisateur -->
+                        <li class="nav-item dropdown mx-3">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">AVATAR</button>
+                                <ul class="dropdown-menu bg-dark">
+                                    <li class="dropdown-item text-white bg-dark">PSEUDO</li>
+                                    <li><a class="dropdown-item text-white" href="profilPage.php">Mon profil</a></li>
+                                    <li><a class="dropdown-item text-white" href="userSettings.php">Éditer mon profil</a></li>
+                                    <li><a class="dropdown-item text-white" href="playlistCreation.php">Créer une playlist</a></li>
+                                    <li><a class="dropdown-item text-white" href="miniPostCreation.php">Créer un mini-post</a></li>
+                                    <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- bouton accès listes d'écoute -->
+                        <a class="btn btn-outline-light mx-3 px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
                         <?php
-                        }
+                        // } else {
+                        ?>
+
+                        <!-- Bouton login -->
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Connexion/Inscription</button>
+                        <?php
+                        // }
                         ?>
                     </div>
                 </ul>
             </div>
         </div>
-
     </nav>
     <!-- Fenêtre modale du bouton login -->
     <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
