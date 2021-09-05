@@ -1,153 +1,170 @@
-    body {
-        background-color: rgb(167, 163, 163);
+@import url('https://fonts.googleapis.com/css2?family=Nixie+One&display=swap');
+body {
+    background-color: rgb(167, 163, 163);
+}
+
+.navbar {
+    opacity: 0.8;
+}
+
+#subtitle {
+    font-size: smaller;
+}
+
+
+/* fenêtre modale d'inscription et log */
+
+.modal-content .modal-body .icon {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #7D0D09;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.modal-content .modal-body .icon span {
+    color: #7D0D09;
+    font-size: xx-large;
+}
+
+.modal-content .modal-footer {
+    border: none;
+    background: #f8f8f8;
+}
+
+.btn.btn-primary {
+    background: #7D0D09;
+    border: 1px solid #7D0D09;
+    color: #fff;
+}
+
+
+/* hover images accueil */
+
+.hover-1 .hover-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+}
+
+.hover-1-title {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    transition: all 0.5s;
+    bottom: 0;
+    opacity: 0;
+    z-index: 99;
+}
+
+.hover-1:hover .hover-1-title {
+    bottom: 0.5rem;
+    opacity: 1;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto;
+}
+
+@media(min-width:568px) {
+    .end {
+        margin-left: auto
     }
-    
-    .navbar {
-        opacity: 0.8;
-    }
-    
-    #subtitle {
-        font-size: smaller;
-    }
-    /* fenêtre modale d'inscription et log */
-    
-    .modal-content .modal-body .icon {
-        width: 80px;
-        height: 80px;
-        border: 1px solid #7D0D09;
-        border-radius: 50%;
-        margin: 0 auto;
-        margin-bottom: 10px;
-    }
-    
-    .modal-content .modal-body .icon span {
-        color: #7D0D09;
-        font-size: xx-large;
-    }
-    
-    .modal-content .modal-footer {
-        border: none;
-        background: #f8f8f8;
-    }
-    
-    .btn.btn-primary {
-        background: #7D0D09;
-        border: 1px solid #7D0D09;
-        color: #fff;
-    }
-    /* hover images accueil */
-    
-    .hover-1 .hover-overlay {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
-    }
-    
-    .hover-1-title {
-        position: absolute;
-        top: 20%;
-        left: 0;
-        text-align: center;
-        width: 100%;
-        transition: all 0.5s;
-        bottom: 0;
-        opacity: 0;
-        z-index: 99;
-    }
-    
-    .hover-1:hover .hover-1-title {
-        bottom: 0.5rem;
-        opacity: 1;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: auto;
-    }
-    
-    @media(min-width:568px) {
-        .end {
-            margin-left: auto
-        }
-    }
-    /* commentaires */
-    
-    .comments {
-        margin-top: 5%;
-        margin-left: 20px
-    }
-    
-    .darker {
-        background-color: black;
-        float: right;
-        border-radius: 5px;
-        padding-left: 40px;
-        padding-right: 30px;
-        padding-top: 10px
-    }
-    
-    .comment {
-        background-color: rgb(248, 248, 248);
-        float: left;
-        border-radius: 5px;
-        padding-left: 40px;
-        padding-right: 30px;
-        padding-top: 10px
-    }
-    
-    .comment h4,
-    .comment span,
-    .darker h4,
-    .darker span {
-        display: inline
-    }
-    
-    .comment p,
-    .comment span,
-    .darker p,
-    .darker span {
-        color: rgb(184, 183, 183)
-    }
-    
-    #align-form {
-        margin-top: 20px
-    }
-    
-    .form-group p a {
-        color: white
-    }
-    
-    #darker img {
-        margin-right: 15px;
-        position: static
-    }
-    
-    .form-group input,
-    .form-group textarea {
-        border: 1px solid rgb(240, 229, 229);
-        border-radius: 12px
-    }
-    
-    #align-form {
-        background-color: rgb(240, 229, 229);
-        border-radius: 5px;
-        padding: 20px
-    }
-    /* profil user  */
-    
-    .card {
-        background-color: transparent;
-        border: none;
-        transition: all 0.5s;
-        width: 500px;
-    }
-    
-    .image img {
-        transition: all 0.5s
-    }
-    
-    .card:hover .image img {
-        transform: scale(1.5)
-    }
-    
-    .avatar {
-        border-radius: 50%
-    }
+}
+
+
+/* article */
+
+.article {
+    font-family: 'Nixie One', cursive;
+    font-weight: bolder;
+}
+
+
+/* commentaires */
+
+.comments {
+    margin-top: 5%;
+    margin-left: 20px
+}
+
+.darker {
+    background-color: black;
+    float: right;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px
+}
+
+.comment {
+    background-color: rgb(248, 248, 248);
+    float: left;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px
+}
+
+.comment h4,
+.comment span,
+.darker h4,
+.darker span {
+    display: inline
+}
+
+.comment p,
+.comment span,
+.darker p,
+.darker span {
+    color: rgb(184, 183, 183)
+}
+
+#align-form {
+    margin-top: 20px
+}
+
+.form-group p a {
+    color: white
+}
+
+#darker img {
+    margin-right: 15px;
+    position: static
+}
+
+.form-group input,
+.form-group textarea {
+    border: 1px solid rgb(240, 229, 229);
+    border-radius: 12px
+}
+
+#align-form {
+    background-color: rgb(240, 229, 229);
+    border-radius: 5px;
+    padding: 20px
+}
+
+
+/* profil user  */
+
+.card {
+    background-color: transparent;
+    border: none;
+    transition: all 0.5s;
+    width: 500px;
+}
+
+.image img {
+    transition: all 0.5s
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+.avatar {
+    border-radius: 50%
+}

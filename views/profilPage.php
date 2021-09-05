@@ -1,6 +1,6 @@
 <?php
-// require 'controllers/profilPageCtrl.php';
-include('header.php') ?>
+require_once '../controllers/profilPageCtrl.php';
+include 'header.php' ?>
 <div class="container my-5 p-5 bg-light">
     <div class="row my-5">
         <div class="col card">
@@ -9,7 +9,7 @@ include('header.php') ?>
                     <img src="../assets/images/panxia.png" height="130" width="130">
                 </div>
             </div>
-            <h4 class="fw-bold mt-5">nom utilisateur</h4>
+            <h4 class="fw-bold mt-5">$userInfo->pseudo</h4>
         </div>
 
         <div class="col-3">
@@ -35,4 +35,4 @@ include('header.php') ?>
 
 
 
-<?php include('footer.php'); ?>
+<?php include 'footer.php'; ?>

@@ -1,5 +1,5 @@
 <?php
-include('header.php') ?>
+include 'header.php' ?>
 
 <div class="card border border-secondary border-3 p-2 mx-auto my-5" style="width: 900px;">
     <div class="row g-0">
@@ -15,6 +15,9 @@ include('header.php') ?>
                 <p class="card-text">OST Summary</p>
                 <p class="card-text"><a href="#" class="card-link mb-3">OST Buy Link</a></p>
                 <iframe src="https://open.spotify.com/embed/track/55n2WpwjQnIM1lvmxkzllb?theme=0" width="100%" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <form action="" method="POST">
+                    <button type="submit" name="submitVote" class="btn btn-success bi bi-heart" title="je vote!" ></button>
+                </form>
             </div>
         </div>
     </div>

@@ -59,12 +59,10 @@ class User
      */
     public function getUserInfoById()
     {
-        $pdoStatment = $this->pdo->prepare(
+        $pdoStatment = $this->pdo->query(
             'SELECT `id`, `pseudo`, `avatar`
-            FROM `user`  
-            WHERE `id` = :id'
+            FROM `user`'
         );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $pdoStatment->fetch(PDO::FETCH_OBJ);

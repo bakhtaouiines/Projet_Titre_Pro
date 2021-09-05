@@ -1,24 +1,20 @@
 <?php
-// require 'controllers/articlePageCtrl.php';
-include('header.php'); ?>
-<!-----------------------------------------------------------corps de la page------------------------------------------->
+require_once '../controllers/articleCtrl.php';
+include 'header.php'; ?>
 
 <!-- affichage de l'article -->
-<div class="p-5">
+<div class="article container p-3">
+    <?= $pictureInfo->path ?>
     <a href="articlelist.php" class="btn btn-outline-dark mb-5 offset-md-10" role="button">Revenir à la liste des articles</a>
     <section>
         <header>
-            <h1>Title de l'article</h1>
+            <h1 class="fs-2 fst-italic"><?= $articleInfo->title ?></h1>
         </header>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut ornare lectus sit amet est placerat in. Tristique et egestas quis ipsum suspendisse ultrices. Nunc scelerisque viverra mauris in aliquam sem fringilla. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Viverra nam libero justo laoreet sit. Accumsan lacus vel facilisis volutpat. Tristique et egestas quis ipsum suspendisse ultrices gravida. Facilisis leo vel fringilla est. Pharetra magna ac placerat vestibulum lectus mauris. Tincidunt dui ut ornare lectus sit amet est placerat. Porta non pulvinar neque laoreet suspendisse interdum consectetur. Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Ipsum a arcu cursus vitae congue mauris rhoncus aenean. Sed augue lacus viverra vitae congue eu consequat ac felis. Id venenatis a condimentum vitae sapien pellentesque habitant morbi. Arcu dui vivamus arcu felis. At ultrices mi tempus imperdiet nulla malesuada pellentesque. Enim diam vulputate ut pharetra sit. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien.
-
-            Leo a diam sollicitudin tempor. Posuere urna nec tincidunt praesent semper feugiat nibh sed. Pharetra pharetra massa massa ultricies mi quis hendrerit dolor magna. Quis eleifend quam adipiscing vitae. Pharetra pharetra massa massa ultricies mi quis hendrerit dolor. Vitae tempus quam pellentesque nec nam aliquam. Leo in vitae turpis massa sed elementum tempus. Cursus sit amet dictum sit. Pretium quam vulputate dignissim suspendisse in est ante in nibh. Nulla malesuada pellentesque elit eget gravida cum sociis natoque penatibus. Enim diam vulputate ut pharetra sit. Id donec ultrices tincidunt arcu non sodales. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque. Lacus vel facilisis volutpat est velit egestas dui. Nunc pulvinar sapien et ligula ullamcorper. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Quis lectus nulla at volutpat diam ut. Dolor purus non enim praesent elementum.
-
-            Neque vitae tempus quam pellentesque nec nam aliquam. Lacus suspendisse faucibus interdum posuere lorem. Viverra aliquet eget sit amet tellus cras adipiscing enim eu. Fermentum posuere urna nec tincidunt. Tincidunt lobortis feugiat vivamus at augue eget. Morbi quis commodo odio aenean sed adipiscing diam donec. Consectetur adipiscing elit ut aliquam. Tincidunt eget nullam non nisi est sit amet. Fusce ut placerat orci nulla pellentesque. Egestas integer eget aliquet nibh praesent tristique magna sit.
-        </p>
+        <p><?= $articleInfo->content ?></p>
+        <p class="lead"><?= $userInfo->pseudo ?></p>
     </section>
 </div>
+
 <hr>
 
 <!-- section commentaires -->

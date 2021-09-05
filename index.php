@@ -1,6 +1,4 @@
 <?php
-//inlusion du controlleur
-require_once 'controllers/indexCtrl.php';
 //inclusion du header
 include 'views/header.php';
 ?>
@@ -15,8 +13,7 @@ include 'views/header.php';
                         <img src="assets/images/her.png" class="card-img" alt="affiche du film her">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
-
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Mélancolie</h5>
                                 </a>
                             </div>
@@ -29,7 +26,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Mystère et Suspens</h5>
                                 </a>
                             </div>
@@ -43,7 +40,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Passion et lyricisme</h5>
                                 </a>
                             </div>
@@ -57,7 +54,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Épique/Héroïque</h5>
                                 </a>
                             </div>
@@ -75,7 +72,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Onirisme/Sérénité</h5>
                                 </a>
                             </div>
@@ -89,7 +86,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Pathos</h5>
                                 </a>
                             </div>
@@ -103,7 +100,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Chant guerrier</h5>
                                 </a>
                             </div>
@@ -117,7 +114,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Aventure, Challenge, Courage</h5>
                                 </a>
                             </div>
@@ -136,7 +133,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Fantastique</h5>
                                 </a>
                             </div>
@@ -150,7 +147,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Comédie musicale</h5>
                                 </a>
                             </div>
@@ -164,7 +161,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Extraterrestre</h5>
                                 </a>
                             </div>
@@ -178,7 +175,7 @@ include 'views/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="#" class="card-title text-decoration-none text-white">
+                                <a href="/views/category.php" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Voyage</h5>
                                 </a>
                             </div>

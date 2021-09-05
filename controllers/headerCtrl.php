@@ -1,7 +1,7 @@
 <?php
 // On charge le fichier du modèle.
-require_once 'models/mainModel.php';
-require_once 'models/user.php';
+require_once '../models/mainModel.php';
+require_once '../models/user.php';
 
 // instance de classe ; création d'un nouvel objet, qui appelle la méthode constructeur 
 $user = new User();

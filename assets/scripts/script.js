@@ -25,9 +25,7 @@ function checkRegisterForm() {
     document.getElementById("registerBtn").disabled = canSubmit;
 }
 
-
-
-
+// créer une fonction pour le popover (fichier ost.php)
 
 
 

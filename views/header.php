@@ -1,6 +1,5 @@
 <?php
-// require_once 'config.php';
-// require 'controllers/headerCtrl.php';
+require_once '../controllers/headerCtrl.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -30,14 +29,13 @@
                 <ul class="navbar-nav mb-lg-0">
                     <!-- bouton d'accès aux articles -->
                     <li class="nav-item me-5 my-2">
-                        <a href="../views/articlelist.php" role="button" class="nav-link ms-4 btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
+                        <a href="/views/articlelist.php" role="button" class="nav-link ms-4 btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
                     </li>
-
                     <!-- barre de recherche -->
                     <div class="d-flex align-items-center">
                         <input class="form-control mx-3" type="search" placeholder="Rechercher" aria-label="Search">
                         <button class="btn btn-outline-light me-2 bi bi-search" type="submit" title="rechercher"></button>
-                        <a href="OSTIndex.php" class="btn btn-outline-light me-5 bi bi-book" type="button" title="index"></a>
+                        <a href="/views/OSTIndex.php" class="btn btn-outline-light me-5 bi bi-book" type="button" title="index"></a>
 
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
@@ -50,10 +48,10 @@
                             <div class="btn-group">
                                 <i type="button" class="btn btn-outline-secondary bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                 <ul class="row dropdown-menu dropdown-menu-end bg-dark">
-                                    <a class="col dropdown-item text-white bi bi-music-player" href="playlistList.php">
+                                    <a class="col dropdown-item text-white bi bi-music-player" href="/views/playlistList.php">
                                         Playlists
                                     </a>
-                                    <a class="dropdown-item text-white bi bi-pencil" href="miniPostList.php">
+                                    <a class="dropdown-item text-white bi bi-pencil" href="/views/miniPostList.php">
                                         Mini-Post
                                     </a>
                                 </ul>
@@ -66,17 +64,17 @@
                                 <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">AVATAR</button>
                                 <ul class="dropdown-menu bg-dark">
                                     <li class="dropdown-item text-white bg-dark">PSEUDO</li>
-                                    <li><a class="dropdown-item text-white" href="profilPage.php">Mon profil</a></li>
-                                    <li><a class="dropdown-item text-white" href="userSettings.php">Éditer mon profil</a></li>
-                                    <li><a class="dropdown-item text-white" href="playlistCreation.php">Créer une playlist</a></li>
-                                    <li><a class="dropdown-item text-white" href="miniPostCreation.php">Créer un mini-post</a></li>
+                                    <li><a class="dropdown-item text-white" href="/views/profilPage.php">Mon profil</a></li>
+                                    <li><a class="dropdown-item text-white" href="/views/userSettings.php">Éditer mon profil</a></li>
+                                    <li><a class="dropdown-item text-white" href="/views/playlistCreation.php">Créer une playlist</a></li>
+                                    <li><a class="dropdown-item text-white" href="/views/miniPostCreation.php">Créer un mini-post</a></li>
                                     <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
                                 </ul>
                             </div>
                         </li>
 
                         <!-- bouton accès listes d'écoute -->
-                        <a class="btn btn-outline-light mx-3 px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
+                        <a class="btn btn-outline-light mx-3 px-2 bi bi-music-player fs-3" href="/views/playlistList.php" role="button"></a>
                         <?php
                         // } else {
                         ?>
