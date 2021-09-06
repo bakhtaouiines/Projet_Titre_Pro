@@ -41,13 +41,16 @@ class Article
     public function getArticleInfo()
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `id`, `title`, `content` 
+            'SELECT `id`, `title`, `content`, `id_User`
            FROM `article`
            WHERE `id` = :id'
         );
         $pdoStatment->bindParam(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
-        return $pdoStatment->fetch(PDO::FETCH_OBJ);
+        $article = $pdoStatment->fetch(PDO::FETCH_OBJ);
+        $this->title = $article->title;
+        $this->content = $article->content;
+        $this->id_User = $article->id_User;
     }
 }

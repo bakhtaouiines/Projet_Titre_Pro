@@ -1,7 +1,7 @@
 <?php
 // On charge le fichier du modèle.
-require_once '../models/mainModel.php';
-require_once '../models/user.php';
+require_once 'models/mainModel.php';
+require_once 'models/user.php';
 
 $user = new User();
 // on stocke l'ID de l'utilisateur

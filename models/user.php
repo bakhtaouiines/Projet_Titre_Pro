@@ -2,7 +2,7 @@
 // une classe est un modèle de données définissant la structure commune à tous les objets qui seront créés à partir d'elle. c'est un "moule" 
 class User
 {
-// liste d'attributs (ou "données membres")
+    // liste d'attributs (ou "données membres")
     public $id = 0;
     public $pseudo = '';
     public $mail = '';
@@ -33,6 +33,23 @@ class User
         $pdoStatment->execute();
         return $this->pdo->lastInsertId();
     }
+    /**
+     * Méthode permettant de récupérer les informations d'un utilisateur via l'ID
+     *
+     * @return string
+     */
+    public function getUserInfoById()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'SELECT `id`, `pseudo`, `avatar`
+            FROM `user`
+            WHERE `id` = :id'
+        );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
+        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
+        return $pdoStatment->fetch(PDO::FETCH_OBJ);
+    }
 
     /**
      * Methode permettant de récupérer la clé de hachage du mot de passe
@@ -52,21 +69,6 @@ class User
         return $pdoStatment->fetch(PDO::FETCH_OBJ)->password_hash;
     }
 
-    /**
-     * Méthode permettant de récupérer les informations d'un utilisateur via l'ID
-     *
-     * @return string
-     */
-    public function getUserInfoById()
-    {
-        $pdoStatment = $this->pdo->query(
-            'SELECT `id`, `pseudo`, `avatar`
-            FROM `user`'
-        );
-        $pdoStatment->execute();
-        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
-        return $pdoStatment->fetch(PDO::FETCH_OBJ);
-    }
 
     /**
      * Méthode permettant de récupérer les informations d'un utilisateur via le mail
@@ -80,7 +82,6 @@ class User
             FROM `user` 
             WHERE `mail` = :mail'
         );
-        var_dump($pdoStatment);
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $pdoStatment->execute();
         return $pdoStatment->fetch(PDO::FETCH_OBJ);
