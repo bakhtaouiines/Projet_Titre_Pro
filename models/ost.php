@@ -9,6 +9,9 @@ class Ost
     public $date = '';
     public $buy_link = '';
     public $music_link = '';
+    public $title = '';
+    public $path = '';
+    public $alt = '';
     public $id_OSTPicture  = 0; // FK ostPicture
     public $id_OST = 0; //FK category
     public $pdo = null;
@@ -19,44 +22,49 @@ class Ost
     }
 
     /**
-     * Méthode pour lister les OST
-     *
-     * @return string
-     */
-    public function getOSTList()
-    {
-        // On récupère le contenu qui nous intéresse, de la table ost
-        $pdoStatment = $this->pdo->query(
-            'SELECT `id`, `name`, `album`, `date` , `buy_link` , `music_link`
-           FROM `ost`
-           ORDER BY `album` ASC'
-        );
-        // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
-        // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
-
-        return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    /**
-     * Méthode pour récupérer les informations d'une OST
+     * Méthode pour récupérer les informations d'une OST afin de toutes les lister
      *
      * @return string
      */
     public function getOSTInfo()
     {
-        $pdoStatment = $this->pdo->prepare(
-            'SELECT `id`, `name`, `album`, `date` , `buy_link` , `music_link`
+        $pdoStatment = $this->pdo->query(
+            'SELECT `op`.`id`, `ost`.`name` AS `ostName`, `album`, `date` , `buy_link` , `music_link`,  `path` , `title` , `alt` , `id_OSTPicture` , `category`.`name` AS `categoryName` , `category`.`id` , `categorizedby`.`id_OST` , `composerlist`.`id_OST`
            FROM `ost`
-           WHERE `id` = :id'
+           LEFT JOIN `ostpicture` AS `op`
+           ON `id_OSTPicture` = `op`.`id`
+           LEFT JOIN `categorizedby`
+           ON `categorizedby`.`id_OST` = `ost`.`id`
+           LEFT JOIN `category`
+           ON `category`.`id` = `categorizedby`.`id_OST`
+           LEFT JOIN `composerlist`
+           ON `ost`.`id` = `composerlist`.`id_OST`
+           LEFT Join `composer`
+           ON `composer.id` = `id_Composer`
+           ORDER BY `album`'
         );
-        $pdoStatment->bindParam(':id', $this->id, PDO::PARAM_INT);
+        return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getOneOSTInfo()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'SELECT `op`.`id`, `ost`.`id` AS `ostId` , `ost`.`name` AS `ostName`, `album`, `date` , `buy_link` , `music_link`,  `path` , `title` , `alt` , `id_OSTPicture` , `category`.`name` AS `categoryName`
+           FROM `ost`
+           LEFT JOIN `ostpicture` AS `op`
+           ON `id_OSTPicture` = `op`.`id`
+           LEFT JOIN `categorizedby`
+           ON `id_OST` = `ost`.`id`
+           LEFT JOIN `category`
+           ON `category`.`id` = `id_OST`
+           LEFT JOIN `composerlist`
+           ON `id_OST` = `ost`.`id`
+           LEFT Join `composer`
+           ON `composer.id` = `id_Composer`
+           AND `ostId` = :ostId'
+        );
+        $pdoStatment->bindValue(':ostId', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
-        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
-        $ost = $pdoStatment->fetch(PDO::FETCH_OBJ);
-        $this->name = $ost->name;
-        $this->album = $ost->album;
-        $this->date = $ost->date;
-        $this->buy_link = $ost->buy_link;
-        $this->music_link = $ost->music_link;
+        return $pdoStatment->fetch(PDO::FETCH_OBJ);
     }
 }

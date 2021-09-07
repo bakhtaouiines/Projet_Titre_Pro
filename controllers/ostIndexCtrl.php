@@ -3,30 +3,15 @@
 require_once 'models/mainModel.php';
 require_once 'models/ost.php';
 require_once 'models/ostPicture.php';
-require_once 'models/category.php';
 require_once 'models/composerList.php';
 require_once 'models/composer.php';
 
 
 /**
- * Récupération des OST
+ * Récupération des OST avec leur catégorie, leur image d'album
  */
 $ost = new Ost();
-$ostIndex = $ost->getOSTList();
-
-/**
- * Récupération de la catégorie
- */
-$category = new Category();
-$category->id = $ost->id_OST;
-$categoryName = $category->getCategory();
-
-/**
- * Récupération de l'image d'album
- */
-$cover = new OstPicture();
-$cover->id = $ost->id_OSTPicture;
-$coverInfo = $cover->getOSTPicture();
+$ostInfo = $ost->getOSTInfo();
 
 /**
  * Récupération du compositeur

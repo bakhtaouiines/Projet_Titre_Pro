@@ -14,31 +14,26 @@ include 'parts/header.php' ?>
     </div>
     <?php
     // On affiche chaque entrée une à une
-    foreach ($ostIndex as $value) {
+    foreach ($ostInfo as $value) {
     ?>
         <div class="card mb-3 border border-secondary p-3" style="max-width: 540px;">
-
             <div class="row g-0">
                 <div class="col-md-5">
-                    <img src="<?= $coverInfo->path ?>" class="img-fluid rounded-start" alt="<?= $coverInfo->alt ?>">
+                    <img src="<?= $value->path ?>" class="img-fluid rounded-start" alt="<?= $value->alt ?>">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body text-light">
-
-                        <a href="ost.php?ostID=<?= $value->id ?>" class="fs-5 card-title" value=""><?= $value->name ?></a>
+                        <a href="ost.php?ostID=<?= $value->id ?>" class="fs-5 card-title" value=""><?= $value->ostName ?></a>
                         <h4 class="card-title">OST Compositeur</h4>
                         <p class="card-text"><?= $value->album ?></p>
                         <p class="card-text"><small class="text-muted"><?= $value->date ?></small></p>
-                        <h5 class="card-title"><?= $categoryName->name ?></h5>
+                        <h5 class="card-title"><?= $value->categoryName ?></h5>
                         <form action="" method="POST">
                             <button type="submit" name="submitVote" class="btn btn-success bi bi-heart" title="je vote!"></button>
                         </form>
-
                     </div>
                 </div>
             </div>
-
-
         </div>
     <?php
     }

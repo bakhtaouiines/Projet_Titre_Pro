@@ -17,17 +17,6 @@ class Category
      *
      * @return string
      */
-    public function getCategory()
-    {
-        $pdoStatment = $this->pdo->prepare(
-            'SELECT `id`, `name`, `id_OST`
-            FROM `category`
-            WHERE `id` = :id'
-        );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $pdoStatment->execute();
-        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
-        return $pdoStatment->fetch(PDO::FETCH_OBJ);
-    }
+    
 
 }
