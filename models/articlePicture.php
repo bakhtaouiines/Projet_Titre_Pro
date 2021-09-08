@@ -22,12 +22,10 @@ class ArticlePicture
      */
     public function getArticlePicture()
     {
-        $pdoStatment = $this->pdo->prepare(
+        $pdoStatment = $this->pdo->query(
             'SELECT `id`, `title`, `path`, `alt`, `id_Article`
-           FROM `articlepicture`
-           WHERE `id` = :id'
-        );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+           FROM `articlepicture`'
+        );  
         $pdoStatment->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $pdoStatment->fetch(PDO::FETCH_OBJ);

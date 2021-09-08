@@ -74,6 +74,13 @@
             .article {
                 font-family: 'Nixie One', cursive;
                 font-weight: bolder;
+                background-color: rgb(231, 223, 210);
+            }
+            
+            .figure-img {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
             }
             /* commentaires */
             

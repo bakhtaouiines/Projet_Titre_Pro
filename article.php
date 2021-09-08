@@ -3,25 +3,24 @@ require_once 'controllers/articleCtrl.php';
 include 'parts/header.php'; ?>
 
 <!-- affichage de l'article -->
-<div class="article container bg-secondary p-3 mt-4">
-    <div>
-        <img src="<?= $pictureInfo->path ?>" title="<?= $pictureInfo->title ?>" alt="<?= $pictureInfo->alt ?>">
-    </div>
-    <a href="articlelist.php" class="btn btn-outline-dark mb-5 offset-md-10" role="button">Revenir à la liste des articles</a>
-    <section>
-        <header>
-            <h1 class="fs-2 fst-italic"><?= $article->title ?></h1>
-        </header>
-        <p><?= $article->content ?></p>
-        <p class="lead"><?= $authorInfo->pseudo ?></p>
-    </section>
+<div class="article p-5 mt-4">
+    <a href="articlelist.php" class="btn btn-outline-dark mb-3 offset-md-10" role="button">Revenir à la liste des articles</a>
+    <div class="card mb-3">
+        <div class="row">
+            <img src="<?= $articleInfo->path ?>" class="figure-img img-fluid rounded" title="<?= $articleInfo->title ?>" alt="<?= $articleInfo->alt ?>">
+            <figcaption class="figure-caption text-end"><?= $articleInfo->title ?></figcaption>
+        </div>
 
+        <div class="card-body">
+            <h1 class="card-title fs-2 fst-italic"><?= $articleInfo->articleTitle ?></h1>
+            <p class="card-text"><?= $articleInfo->content ?></p>
+            <p class="card-text lead text-end"><?= $articleInfo->pseudo ?></p>
+        </div>
+    </div>
 </div>
 
-<hr>
-
 <!-- section commentaires -->
-<!-- Main Body -->
+
 <section class="p-5">
     <div class="container">
         <div class="row">
