@@ -3,16 +3,6 @@ require_once 'controllers/articleListCtrl.php';
 include 'parts/header.php';
 ?>
 <div class="container p-5">
-    <figure class="text-end">
-        <blockquote class="blockquote fs-5 lead">
-            <p class="fst-italic text-light">
-                "So much of what we do is ephemeral and quickly forgotten, even by ourselves, so it's gratifying to have something you have done linger in people's memories."
-            <figcaption class="blockquote-footer">
-                John Williams
-            </figcaption>
-            </p>
-        </blockquote>
-    </figure>
     <div class="list-group p-5">
         <?php
         // On affiche chaque entrée une à une

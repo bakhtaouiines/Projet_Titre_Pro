@@ -14,6 +14,7 @@ class Ost
     public $alt = '';
     public $id_OSTPicture  = 0; // FK ostPicture
     public $id_OST = 0; //FK category
+    public $id_Composer = 0; //FK composerList
     public $pdo = null;
 
     public function __construct()
@@ -26,44 +27,44 @@ class Ost
      *
      * @return string
      */
-    public function getOSTInfo()
+    public function getOSTList()
     {
         $pdoStatment = $this->pdo->query(
-            'SELECT `op`.`id`, `ost`.`name` AS `ostName`, `album`, `date` , `buy_link` , `music_link`,  `path` , `title` , `alt` , `id_OSTPicture` , `category`.`name` AS `categoryName` , `category`.`id` , `categorizedby`.`id_OST` , `composerlist`.`id_OST`
+            'SELECT `op`.`id`, `ost`.`id` , `ost`.`name` AS `ostName`, `album`, `date` , `path` , `title` , `alt` , `category`.`name` AS `categoryName` , `categorizedby`.`id_OST` , `composerlist`.`id_OST` , `lastname` , `firstname` , `id_Composer`
            FROM `ost`
            LEFT JOIN `ostpicture` AS `op`
            ON `id_OSTPicture` = `op`.`id`
            LEFT JOIN `categorizedby`
-           ON `categorizedby`.`id_OST` = `ost`.`id`
+           ON `ost`.`id` = `categorizedby`.`id_OST`
            LEFT JOIN `category`
-           ON `category`.`id` = `categorizedby`.`id_OST`
+           ON `categorizedby`.`id` = `category`.`id`
            LEFT JOIN `composerlist`
            ON `ost`.`id` = `composerlist`.`id_OST`
-           LEFT Join `composer`
-           ON `composer.id` = `id_Composer`
+        LEFT JOIN `composer`
+            ON `composer`.`id` = `id_Composer`
            ORDER BY `album`'
         );
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getOneOSTInfo()
+    public function getOSTInfo()
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `op`.`id`, `ost`.`id` AS `ostId` , `ost`.`name` AS `ostName`, `album`, `date` , `buy_link` , `music_link`,  `path` , `title` , `alt` , `id_OSTPicture` , `category`.`name` AS `categoryName`
-           FROM `ost`
-           LEFT JOIN `ostpicture` AS `op`
-           ON `id_OSTPicture` = `op`.`id`
-           LEFT JOIN `categorizedby`
-           ON `id_OST` = `ost`.`id`
-           LEFT JOIN `category`
-           ON `category`.`id` = `id_OST`
-           LEFT JOIN `composerlist`
-           ON `id_OST` = `ost`.`id`
-           LEFT Join `composer`
-           ON `composer.id` = `id_Composer`
-           AND `ostId` = :ostId'
+            'SELECT `op`.`id`, `ost`.`id` , `ost`.`name` AS `ostName`, `album`, `date` , `buy_link` , `music_link` , `path` , `title` , `alt` , `category`.`name` AS `categoryName` , `categorizedby`.`id_OST` , `composerlist`.`id_OST` , `lastname` , `firstname` , `id_Composer`
+            FROM `ost`
+            LEFT JOIN `ostpicture` AS `op`
+            ON `id_OSTPicture` = `op`.`id`
+            LEFT JOIN `categorizedby`
+            ON `ost`.`id` = `categorizedby`.`id_OST`
+            LEFT JOIN `category`
+            ON `categorizedby`.`id` = `category`.`id`
+            LEFT JOIN `composerlist`
+            ON `ost`.`id` = `composerlist`.`id_OST`
+         LEFT JOIN `composer`
+             ON `composer`.`id` = `id_Composer`
+             WHERE `ost`.`id` = :id'
         );
-        $pdoStatment->bindValue(':ostId', $this->id, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
         return $pdoStatment->fetch(PDO::FETCH_OBJ);
     }
