@@ -1,6 +1,7 @@
 <?php
+include 'parts/header.php';
 require_once 'controllers/ostCtrl.php';
-include 'parts/header.php' ?>
+?>
 
     <div class="card border border-secondary border-3 p-2 mx-auto my-5" style="width: 900px;">
         <div class="row g-0">

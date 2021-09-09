@@ -1,6 +1,7 @@
 <?php
+include 'parts/header.php'; 
 require_once 'controllers/articleCtrl.php';
-include 'parts/header.php'; ?>
+?>
 
 <!-- affichage de l'article -->
 <div class="article p-5 mt-4">

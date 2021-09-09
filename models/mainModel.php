@@ -16,7 +16,7 @@ class MainModel
 
         try {
             // On se connecte à MySQL pour faire le lien avec la BDD
-            $this->pdo = new PDO('mysql:host=localhost;dbname=projet_titre_pro;charset=utf8', 'root', '');
+            $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASSWORD);
             // En cas d'erreur, on affiche un message et on arrête tout
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());

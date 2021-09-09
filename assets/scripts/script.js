@@ -1,6 +1,7 @@
-// On vérifie que les formulaires sont remplis , sinon, validation impossible
-
-// formulaire de connexion
+/**
+ *  On vérifie que les formulaires sont remplis , sinon, validation impossible
+ */
+// pour le formulaire de connexion
 function checkLogForm() {
     let formInput = document.forms["logForm"].elements;
     //contient le tableau des éléments du formulaire et permet l'accès
@@ -12,8 +13,7 @@ function checkLogForm() {
     }
     document.getElementById("loginBtn").disabled = canSubmit;
 }
-
-// formulaire d'inscription
+// pour le formulaire d'inscription
 function checkRegisterForm() {
     let formInput = document.forms["registerForm"].elements;
     let canSubmit = false;
@@ -25,6 +25,12 @@ function checkRegisterForm() {
     document.getElementById("registerBtn").disabled = canSubmit;
 }
 
+/**
+ * suppression utilisateur
+ */
+function deleteIdUser(id) {
+    document.getElementById('deleteInfo').value = id;
+}
 // créer une fonction pour le popover (fichier ost.php)
 
 

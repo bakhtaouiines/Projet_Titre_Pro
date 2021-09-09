@@ -1,6 +1,7 @@
 <?php
+include 'parts/header.php';
 require_once 'controllers/ostIndexCtrl.php';
-include 'parts/header.php' ?>
+?>
 <div class="container-fluid p-5">
     <figure class="text-center p-3">
         <blockquote class="blockquote fs-5 lead">

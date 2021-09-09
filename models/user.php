@@ -33,6 +33,25 @@ class User
         $pdoStatment->execute();
         return $this->pdo->lastInsertId();
     }
+
+    /**
+     * Methode permettant de lister les utilisateurs
+     *
+     * @return boolean
+     */
+    public function getUsersList()
+    {
+        // On récupère tout le contenu de la table patients
+        $pdoStatment = $this->pdo->query(
+            'SELECT `id`, `pseudo`, `mail` 
+            FROM `user`
+            ORDER BY `pseudo`'
+        );
+        // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
+        // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
+        return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
+    }
+
     /**
      * Méthode permettant de récupérer les informations d'un utilisateur via l'ID
      *
@@ -64,22 +83,22 @@ class User
         );
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $pdoStatment->execute();
-        // On retourne un tableau contenant la/les ligne(s) du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
-        // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
         return $pdoStatment->fetch(PDO::FETCH_OBJ)->password_hash;
     }
 
 
     /**
-     * Méthode permettant de récupérer les informations d'un utilisateur via le mail
+     * Méthode permettant de récupérer les informations d'un utilisateur via le mail -> pour la connexion
      *
      * @return string
      */
     public function getUserInfoByMail()
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `pseudo`, `mail`
+            'SELECT `user`.`id` , `pseudo`, `mail` , `level` , `avatar`
             FROM `user` 
+            INNER JOIN `role`
+            ON `user`.`id_Role` = `role`.`id`
             WHERE `mail` = :mail'
         );
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
@@ -96,11 +115,13 @@ class User
     {
         $pdoStatment = $this->pdo->prepare(
             'UPDATE `user` 
-             SET `pseudo` = :pseudo, `avatar` = :avatar 
+             SET `avatar` = :avatar , `pseudo` = :pseudo , `mail` = :mail , `password_hash` = :password_hash
              WHERE `id` = :id'
         );
-        $pdoStatment->bindValue(':pseudo', $this->lastname, PDO::PARAM_STR);
-        $pdoStatment->bindValue(':avatar', $this->firstname, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
     }

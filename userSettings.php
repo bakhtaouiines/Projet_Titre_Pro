@@ -1,4 +1,7 @@
-<?php include 'parts/header.php' ?>
+<?php
+include 'parts/header.php';
+require_once 'controllers/userSettingsCtrl.php' ?>
+
 <div class="container bg-light my-5 p-4">
     <form method="POST" enctype="multipart/form-data" action="">
         <legend class="fs-2">Éditer mon profil</legend>
@@ -12,25 +15,40 @@
 
             <div class="col form-group position-relative">
                 <label for="updatePseudo" class="form-label">Pseudo</label>
-                <input type="text" class="form-control" id="updatePseudo" name="updatePseudo" value="">
-                <p class="text-danger fst-italic fst-italic">
-                </p>
+                <input type="text" class="form-control" id="updatePseudo" name="updatePseudo" value="<?= $_SESSION['user']['pseudo'] ?>">
+                <?php
+                if (!empty($formErrorList['updatePseudo'])) {
+                ?>
+                    <p class="fst-italic text-danger"><?= $formErrorList['updatePseudo']; ?></p>
+                <?php
+                }
+                ?>
             </div>
 
             <div class="col form-group position-relative">
                 <label for="updatePassword" class="form-label">Mot de Passe</label>
                 <input type="password" class="form-control" id="updatePassword" name="updatePassword">
-                <p class="text-danger fst-italic">
-                </p>
+                <?php
+                if (!empty($formErrorList['updatePassword'])) {
+                ?>
+                    <p class="fst-italic text-danger"><?= $formErrorList['updatePassword']; ?></p>
+                <?php
+                }
+                ?>
             </div>
 
             <div class="col form-group position-relative">
                 <label for="updateMail" class="form-label">Adresse Email</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="mailPrepend">@</span>
-                    <input type="text" class="form-control" id="updateMail" name="updateMail" aria-describedby="mailPrepend" value="">
-                    <p class="text-danger fst-italic">
-                    </p>
+                    <input type="text" class="form-control" id="updateMail" name="updateMail" aria-describedby="mailPrepend" value="<?= $_SESSION['user']['mail'] ?>">
+                    <?php
+                    if (!empty($formErrorList['updateMail'])) {
+                    ?>
+                        <p class="fst-italic text-danger"><?= $formErrorList['updateMail']; ?></p>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -66,9 +84,7 @@
             <button type="submit" id="updateUser" class="btn btn-outline-success btn-sm px-3" name="updateUser">Enregistrer les modifications</button>
             <a href="profilPage.php" type="button" class="btn btn-secondary btn-sm px-3">Annuler</a>
         </div>
-
     </form>
 </div>
-
 
 <?php include 'parts/footer.php'; ?>

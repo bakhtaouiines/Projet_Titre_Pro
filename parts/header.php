@@ -1,4 +1,5 @@
 <?php
+require_once 'config.php';
 require_once 'controllers/headerCtrl.php';
 ?>
 <!DOCTYPE html>
@@ -40,49 +41,50 @@ require_once 'controllers/headerCtrl.php';
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
                         // On récupère nos variables de session
-                        // if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) { 
+                        if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
                         ?>
+                            <!-- Menu déroulant item -->
+                            <li class="nav-item dropdown mx-3">
+                                <div class="btn-group">
+                                    <i type="button" class="btn btn-outline-secondary bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                    <ul class="row dropdown-menu dropdown-menu-end bg-dark">
+                                        <a class="col dropdown-item text-white bi bi-music-player" href="playlistList.php">
+                                            Playlists
+                                        </a>
+                                        <a class="dropdown-item text-white bi bi-pencil" href="miniPostList.php">
+                                            Mini-Post
+                                        </a>
+                                    </ul>
+                                </div>
+                            </li>
 
-                        <!-- Menu déroulant item -->
-                        <li class="nav-item dropdown mx-3">
-                            <div class="btn-group">
-                                <i type="button" class="btn btn-outline-secondary bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                <ul class="row dropdown-menu dropdown-menu-end bg-dark">
-                                    <a class="col dropdown-item text-white bi bi-music-player" href="playlistList.php">
-                                        Playlists
-                                    </a>
-                                    <a class="dropdown-item text-white bi bi-pencil" href="miniPostList.php">
-                                        Mini-Post
-                                    </a>
-                                </ul>
-                            </div>
-                        </li>
+                            <!-- Menu déroulant utilisateur -->
+                            <li class="nav-item dropdown mx-3">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?= $_SESSION['user']['avatar'] ?>
+                                    </button>
+                                    <ul class="dropdown-menu bg-dark">
+                                        <li class="dropdown-item text-white bg-dark">Hello <?= $_SESSION['user']['pseudo'] ?>
+                                        </li>
+                                        <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item text-white" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
+                                        <a class="dropdown-item text-white" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
+                                        <li><a class="dropdown-item text-white" href="playlistCreation.php?userID=">Créer une playlist</a></li>
+                                        <li><a class="dropdown-item text-white" href="miniPostCreation.php?userID=">Créer un mini-post</a></li>
+                                        <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
+                                    </ul>
+                                </div>
+                            </li>
 
-                        <!-- Menu déroulant utilisateur -->
-                        <li class="nav-item dropdown mx-3">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">AVATAR</button>
-                                <ul class="dropdown-menu bg-dark">
-                                    <li class="dropdown-item text-white bg-dark">PSEUDO</li>
-                                    <li><a class="dropdown-item text-white" href="profilPage.php">Mon profil</a></li>
-                                    <li><a class="dropdown-item text-white" href="userSettings.php">Éditer mon profil</a></li>
-                                    <li><a class="dropdown-item text-white" href="playlistCreation.php">Créer une playlist</a></li>
-                                    <li><a class="dropdown-item text-white" href="miniPostCreation.php">Créer un mini-post</a></li>
-                                    <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <!-- bouton accès listes d'écoute -->
-                        <a class="btn btn-outline-light mx-3 px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
+                            <!-- bouton accès listes d'écoute -->
+                            <a class="btn btn-outline-light mx-3 px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
                         <?php
-                        // } else {
+                        } else {
                         ?>
-
-                        <!-- Bouton login -->
-                        <button type="submit" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Connexion/Inscription</button>
+                            <!-- Bouton login -->
+                            <button type="submit" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-4">Connexion/Inscription</button>
                         <?php
-                        // }
+                        }
                         ?>
                     </div>
                 </ul>
@@ -91,7 +93,7 @@ require_once 'controllers/headerCtrl.php';
     </nav>
     <!-- Fenêtre modale du bouton login -->
     <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
             <div class="modal-content text-center">
                 <div class="modal-header">
                     <p class="modal-title text-uppercase fs-5">Mon compte</p>
@@ -101,31 +103,33 @@ require_once 'controllers/headerCtrl.php';
                 <!-- FORMULAIRE CONNEXION UTILISATEUR -->
                 <div class="modal-body p-4 p-md-5">
                     <form method="POST" action="" name="logForm" id="logForm">
+                        <!-- EMAIL -->
                         <div class="mb-3">
                             <div class="icon d-flex align-items-center justify-content-center mb-4">
                                 <span>
                                     <i class="bi bi-person-fill"></i>
                                 </span>
                             </div>
-                            <label for="emailLog" class="form-label">Adresse Email*
-                                <input type="email" class="form-control" id="email" name="emailLog" aria-describedby="email" aria-required="true" oninput="checkLogForm()">
+                            <label for="mail" class="form-label">Adresse Email*
+                                <input type="email" class="form-control" id="mail" name="mail" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['emailLog'])) {
+                            if (!empty($formErrorList['mail'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['emailLog']; ?></p>
+                                <p class="text-danger"><?= $formErrorList['mail']; ?></p>
                             <?php
                             }
                             ?>
                         </div>
+                        <!-- MOT DE PASSE -->
                         <div class=" mb-3">
-                            <label for="passwordLog" class="form-label">Mot de Passe*
-                                <input type="password" class="form-control" id="password" name="passwordLog" aria-required="true" oninput="checkLogForm()">
+                            <label for="password" class="form-label">Mot de Passe*
+                                <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['passwordLog'])) {
+                            if (!empty($formErrorList['password'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['passwordLog']; ?></p>
+                                <p class="text-danger"><?= $formErrorList['password']; ?></p>
                             <?php
                             }
                             ?>
@@ -141,7 +145,9 @@ require_once 'controllers/headerCtrl.php';
                     <hr>
                     <!-- bouton trigger 2e fenêtre modale -->
                     <div class="modal-footer justify-content-center">
-                        <p>Vous n'êtes pas membre? <button class="btn btn-primary" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Créer un compte</button></p>
+                        <p>Vous n'êtes pas membre?
+                            <button class="btn btn-primary" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Créer un compte</button>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -150,7 +156,7 @@ require_once 'controllers/headerCtrl.php';
 
     <!-- FORMULAIRE CREATION DE COMPTE UTILISATEUR -->
     <div class="modal fade" id="register" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="register">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down ">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
             <div class="modal-content">
                 <div class="modal-header ">
                     <h5 class="modal-title text-uppercase">Créer mon compte</h5>
@@ -158,11 +164,10 @@ require_once 'controllers/headerCtrl.php';
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="index.php" name="registerForm" id="registerForm">
-
                         <!-- PSEUDO -->
                         <div class="mb-3">
                             <label for="pseudo" class="form-label">Créer mon pseudo*
-                                <input type="text" class="form-control" id="pseudo" name="pseudo" aria-describedby="pseudo" aria-required="true" oninput="checkRegisterForm()">
+                                <input type="text" class="form-control" id="pseudo" name="pseudo" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['pseudo'])) {
@@ -175,12 +180,12 @@ require_once 'controllers/headerCtrl.php';
                         <!-- EMAIL -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Mon adresse Email*
-                                <input type="email" class="form-control" id="emailRegister" name="email" aria-describedby="email" aria-required="true" oninput="checkRegisterForm()">
+                                <input type="email" class="form-control" id="mailRegister" name="mail" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['email'])) {
+                            if (!empty($formErrorList['mail'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['email']; ?></p>
+                                <p class="text-danger"><?= $formErrorList['mail']; ?></p>
                             <?php
                             }
                             ?>
@@ -188,7 +193,7 @@ require_once 'controllers/headerCtrl.php';
                         <!-- MOT DE PASSE -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Créer mon mot de passe*
-                                <input type="password" class="form-control" id="passwordRegister" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()">
+                                <input type="password" class="form-control" id="password" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()">
                             </label>
                             <?php
                             if (!empty($formErrorList['password'])) {
@@ -198,13 +203,13 @@ require_once 'controllers/headerCtrl.php';
                             }
                             ?>
                             <!-- VERIF MOT DE PASSE -->
-                            <label for="verifPassword" class="form-label">Vérifier mon mot de passe*
-                                <input type="password" class="form-control" id="verifPassword" aria-required="true" name="verifPassword" oninput="checkRegisterForm()">
+                            <label for="checkPassword" class="form-label">Vérifier mon mot de passe*
+                                <input type="password" class="form-control" id="checkPassword" aria-required="true" name="checkPassword" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['verifPassword'])) {
+                            if (!empty($formErrorList['checkPassword'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['verifPassword']; ?></p>
+                                <p class="text-danger"><?= $formErrorList['checkPassword']; ?></p>
                             <?php
                             }
                             ?>

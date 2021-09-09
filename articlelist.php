@@ -1,6 +1,6 @@
 <?php
-require_once 'controllers/articleListCtrl.php';
 include 'parts/header.php';
+require_once 'controllers/articleListCtrl.php';
 ?>
 <div class="container p-5">
     <div class="list-group p-5">

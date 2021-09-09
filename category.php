@@ -16,7 +16,7 @@ include 'parts/header.php' ?>
             </div>
         </div>
 
-        <div class="card border border-secondary border-3 p-2 bg-light" style="width: 500px;">
+        <div class="card border border-secondary border-3 p-2 bg-light" style="width: 600px;">
             <div class="row g-0">
                 <div class="col-md-5 my-auto me-2">
                     <img src="../assets/images/cover/edward_scissorhands.jpg" class="img-fluid rounded-start" alt="...">
@@ -29,7 +29,7 @@ include 'parts/header.php' ?>
                         <p class="card-text"><small class="text-muted">OST Date</small></p>
                         <p class="card-text">OST Summary</p>
                         <p class="card-text"><a href="#" class="card-link mb-3">OST Buy Link</a></p>
-                        <iframe src="https://open.spotify.com/embed/track/55n2WpwjQnIM1lvmxkzllb?theme=0" width="100%" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe src="https://open.spotify.com/embed/track/55n2WpwjQnIM1lvmxkzllb" width="100%" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                         <form action="" method="POST">
                             <button type="submit" name="submitVote" class="btn btn-success bi bi-heart" title="je vote!"></button>
                         </form>

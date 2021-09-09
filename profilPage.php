@@ -1,6 +1,7 @@
 <?php
+include 'parts/header.php';
 require_once 'controllers/profilPageCtrl.php';
-include 'parts/header.php' ?>
+?>
 <div class="container my-5 p-5 bg-light">
     <div class="row my-5">
         <div class="col card">
@@ -9,7 +10,7 @@ include 'parts/header.php' ?>
                     <img src="../assets/images/panxia.png" height="130" width="130">
                 </div>
             </div>
-            <h4 class="fw-bold mt-5">$userInfo->pseudo</h4>
+            <h4 class="fw-bold mt-5"><?= $_SESSION['user']['pseudo'] ?></h4>
         </div>
 
         <div class="col-3">
@@ -23,11 +24,9 @@ include 'parts/header.php' ?>
         <section class="col-3">
             <i class="btn bi bi-award fs-1"><span class="fs-5">Mes Badges</span></i>
         </section>
-
     </div>
-
     <div class="col offset-10">
-        <a href="userSettings.php" button type="button" class="btn btn-outline-dark">Éditer mon profil</a>
+        <a href="userSettings.php?userID=" button type="button" class="btn btn-outline-dark">Éditer mon profil</a>
     </div>
 
 </div>
