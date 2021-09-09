@@ -41,5 +41,6 @@ if (isset($_POST['updateUser'])) {
     // s'il n'y a pas d'erreurs...
     if (empty($formErrorList)) {
         $user->updateUserInfo();
+        print_r($user);
     }
 }

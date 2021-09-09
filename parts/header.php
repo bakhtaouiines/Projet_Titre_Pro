@@ -17,8 +17,8 @@ require_once 'controllers/headerCtrl.php';
 <body>
     <!-- barre de navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top" id="#menu">
-        <div class="container-fluid ">
-            <div class="row col-2">
+        <div class="container-fluid p-3">
+            <div class="col-2">
                 <a class="navbar-brand text-white col" href="index.php">Logo</a>
                 <span id="subtitle" class="row navbar-text text-white fst-italic ms-2">"l'accord parfait entre musique et cinéma"</span>
             </div>
@@ -27,57 +27,46 @@ require_once 'controllers/headerCtrl.php';
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
-                <ul class="navbar-nav mb-lg-0">
-                    <!-- bouton d'accès aux articles -->
-                    <li class="nav-item me-5 my-2">
-                        <a href="../articlelist.php" role="button" class="btn btn-outline-light ms-4" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
-                    </li>
-                    <!-- barre de recherche -->
+                <ul class="navbar-nav mb-lg-0 my-2">
+                    
+                    <a href="OSTIndex.php" class="btn btn-outline-light rounded me-5 bi bi-collection-play" type="button" title="index"></a>
                     <div class="d-flex align-items-center">
-                        <input class="form-control mx-3" type="search" placeholder="Rechercher" aria-label="Search">
-                        <button class="btn btn-outline-light me-2 bi bi-search" type="submit" title="rechercher"></button>
-                        <a href="OSTIndex.php" class="btn btn-outline-light me-5 bi bi-book" type="button" title="index"></a>
-
+                        <!-- bouton d'accès aux articles -->
+                        <li class="nav-item me-5">
+                            <a href="../articlelist.php" role="button" class="btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
+                        </li>
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
                         // On récupère nos variables de session
                         if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
                         ?>
                             <!-- Menu déroulant item -->
-                            <li class="nav-item dropdown mx-3">
-                                <div class="btn-group">
-                                    <i type="button" class="btn btn-outline-secondary bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                    <ul class="row dropdown-menu dropdown-menu-end bg-dark">
-                                        <a class="col dropdown-item text-white bi bi-music-player" href="playlistList.php">
-                                            Playlists
-                                        </a>
-                                        <a class="dropdown-item text-white bi bi-pencil" href="miniPostList.php">
-                                            Mini-Post
-                                        </a>
-                                    </ul>
-                                </div>
+                            <li class="nav-item dropdown me-5">
+                                <button class="btn btn-outline-light bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                <ul class="dropdown-menu dropdown-menu-end bg-dark">
+                                    <a class="dropdown-item text-white bi bi-music-player fs-5" href="playlistList.php"> Playlists</a>
+                                    <a class="dropdown-item text-white bi bi-pencil fs-5" href="miniPostList.php"> Mini-Post</a>
+                                    <a class="dropdown-item text-white bi bi-book fs-5" href="miniPostList.php"> Articles</a>
+                                </ul>
                             </li>
-
                             <!-- Menu déroulant utilisateur -->
-                            <li class="nav-item dropdown mx-3">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <?= $_SESSION['user']['avatar'] ?>
-                                    </button>
-                                    <ul class="dropdown-menu bg-dark">
-                                        <li class="dropdown-item text-white bg-dark">Hello <?= $_SESSION['user']['pseudo'] ?>
-                                        </li>
-                                        <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item text-white" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
-                                        <a class="dropdown-item text-white" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
-                                        <li><a class="dropdown-item text-white" href="playlistCreation.php?userID=">Créer une playlist</a></li>
-                                        <li><a class="dropdown-item text-white" href="miniPostCreation.php?userID=">Créer un mini-post</a></li>
-                                        <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
-                                    </ul>
-                                </div>
+                            <li class="nav-item dropdown me-5">
+                                <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?= $_SESSION['user']['avatar'] ?>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end bg-dark">
+                                    <li class="dropdown-item text-white bg-dark">Hello <?= $_SESSION['user']['pseudo'] ?>
+                                    </li>
+                                    <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item text-white" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
+                                    <a class="dropdown-item text-white" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
+                                    <li><a class="dropdown-item text-white" href="playlistCreation.php?userID=">Créer une playlist</a></li>
+                                    <li><a class="dropdown-item text-white" href="miniPostCreation.php?userID=">Créer un mini-post</a></li>
+                                    <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
+                                </ul>
                             </li>
 
                             <!-- bouton accès listes d'écoute -->
-                            <a class="btn btn-outline-light mx-3 px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
+                            <a class="btn btn-outline-light px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
                         <?php
                         } else {
                         ?>
@@ -86,6 +75,7 @@ require_once 'controllers/headerCtrl.php';
                         <?php
                         }
                         ?>
+
                     </div>
                 </ul>
             </div>

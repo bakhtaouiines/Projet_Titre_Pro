@@ -13,14 +13,21 @@ require_once 'controllers/ostIndexCtrl.php';
             </p>
         </blockquote>
     </figure>
-    <div class="btn-group offset-11 mb-5">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-            Trier par:
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-            <li><a class="dropdown-item" href="#">Ordre Alphabétique</a></li>
-            <li><a class="dropdown-item" href="#">Catégorie</a></li>
-        </ul>
+    <!-- barre de recherche -->
+    <div class="btn-group offset-8 mb-5">    
+        <form method="GET" action="">
+            <div class="input-group rounded">
+                <input type="search" id="searchOst" name="searchOst" class="form-control mx-2" placeholder="Rechercher" aria-label="Search">
+                <button type="submit" id="submitSearchOst" name="submitSearchOst" class="btn btn-outline-light me-2 bi bi-search" title="rechercher"></button>
+
+                <select id="ostFilter" name="ostFilter[]" class="btn btn-dark dropdown-toggle dropdown-menu-dark" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    <option value="" selected disabled> Trier par:</option>
+                    <option value="album" class="dropdown-item">Album</option>
+                    <option value="category" class="dropdown-item">Catégorie</option>
+                    <option value="composer" class="dropdown-item">Compositeur</option>
+                </select>
+            </div>
+        </form>
     </div>
     <div class="row d-flex justify-content-evenly mt-4">
         <?php

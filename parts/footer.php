@@ -18,7 +18,7 @@
     </div>
     <!-- Copyright à rédiger-->
     <div class="p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        <a href="/contact.php" class="offset-11 text-decoration-none link-light">CONTACT</a>
+        <a href="../contact.php" class="offset-11 text-decoration-none link-light">Me contacter</a>
     </div>
 
     <!-- Fin Copyright -->

@@ -3,6 +3,7 @@
 require_once 'models/mainModel.php';
 require_once 'models/user.php';
 
+
 // instance de classe ; création d'un nouvel objet, qui appelle la méthode constructeur 
 $user = new User();
 //on initialise un tableau qui contiendra les messages d'erreurs
