@@ -18,4 +18,16 @@ function authorizedAccess($levelMin)
     }
 }
 
-var_dump($_SESSION);
+/**
+ * fonction pour vérifier que l'utilisateur est bien connecté pour empêcher l'accès à certaines pages(si non connecté)
+ *
+ * @return boolean
+ */
+function isConnected()
+{
+    if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
+        return true;
+    } else {
+        return false;
+    }
+}

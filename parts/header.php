@@ -27,9 +27,8 @@ require_once 'controllers/headerCtrl.php';
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
-                <ul class="navbar-nav mb-lg-0 my-2">
-                    
-                    <a href="OSTIndex.php" class="btn btn-outline-light rounded me-5 bi bi-collection-play" type="button" title="index"></a>
+                <ul class="navbar-nav mb-lg-0 my-2">                  
+                    <a href="OSTIndex.php" class="btn btn-outline-light fs-5 rounded me-5 bi bi-collection-play" type="button" title="index"></a>
                     <div class="d-flex align-items-center">
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
@@ -169,7 +168,7 @@ require_once 'controllers/headerCtrl.php';
                         </div>
                         <!-- EMAIL -->
                         <div class="mb-3">
-                            <label for="email" class="form-label">Mon adresse Email*
+                            <label for="mail" class="form-label">Mon adresse Email*
                                 <input type="email" class="form-control" id="mailRegister" name="mail" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php

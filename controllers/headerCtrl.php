@@ -8,11 +8,8 @@ require_once 'models/user.php';
 $user = new User();
 //on initialise un tableau qui contiendra les messages d'erreurs
 $formErrorList = [];
-
 /**
- * 
  *  Vérifications du formulaire d'inscription
- * 
  */
 if (isset($_POST['register'])) {
 
@@ -28,14 +25,14 @@ if (isset($_POST['register'])) {
     }
 
     // vérification sur l'adresse email
-    if (!empty($_POST['email'])) {
-        if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { // Ceci valide l'adresse de courriel selon la syntaxe défini par la RFC 822
-            $user->mail = htmlspecialchars($_POST['email']);
+    if (!empty($_POST['mail'])) {
+        if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) { // Ceci valide l'adresse de courriel selon la syntaxe défini par la RFC 822
+            $user->mail = htmlspecialchars($_POST['mail']);
         } else {
-            $formErrorList['email'] = 'Votre email n\'est pas au bon format.';
+            $formErrorList['mail'] = 'Votre email n\'est pas au bon format.';
         }
     } else {
-        $formErrorList['email'] = 'Le champ "Adresse Email" n\'est pas rempli';
+        $formErrorList['mail'] = 'Le champ "Adresse Email" n\'est pas rempli';
     }
 
     // vérification sur le mot de passe
@@ -55,6 +52,12 @@ if (isset($_POST['register'])) {
 
     // S'il n'y a pas d'erreurs...
     if (empty($formErrorList)) {
+        // if ($user->checkUserExists() == 0) {
+        //     return true;
+        // } else {
+        //     $formErrorList['mail'] = 'Cette adresse mail existe déjà!';
+        //     return false;
+
         // ... on exécute la méthode addUser liée à l'instance PDO $user qui permet d'ajouter un utlisateur
         // et comme le nouvel utilisateur n'est pas indexé...
         if ($user->addUser() != 0) {
@@ -64,9 +67,7 @@ if (isset($_POST['register'])) {
 }
 
 /**
- * 
  * Vérification du formulaire de connexion
- * 
  */
 if (isset($_POST['login'])) {
     if (isset($_POST['mail'])) {
@@ -78,7 +79,6 @@ if (isset($_POST['login'])) {
     } else {
         $formErrorList['mail'] = 'Le champ "Adresse Email" n\'est pas rempli';
     }
-
     if (!isset($_POST['password'])) {
         $formErrorList['password'] = 'Le champ "Mot de Passe" n\'est pas rempli';
     }
@@ -109,13 +109,13 @@ if (isset($_POST['login'])) {
             exit;
         }
     } else {
+        var_dump($formErrorList);
         //Laisse ouvert la fenetre modale !!!!!
     }
 }
 
 /**
  * lorsque l'on clique sur le bouton déconnexion, la session prend fin et on est redirigé vers la page d'accueil
- * 
  */
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'disconnect') {

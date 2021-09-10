@@ -115,14 +115,30 @@ class User
     {
         $pdoStatment = $this->pdo->prepare(
             'UPDATE `user` 
-             SET `avatar` = :avatar , `pseudo` = :pseudo , `mail` = :mail , `password_hash` = :password_hash
+             SET `avatar` = :avatar , `pseudo` = :pseudo , `mail` = :mail 
              WHERE `id` = :id'
         );
         $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
         $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
-        $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
     }
+
+    /**
+     * Méthode pour vérifier l'existence de l'utilisateur par le mail
+     */
+    // public function checkUserExists()
+    // {
+    //     $pdoStatment = $this->pdo->prepare(
+    //         'SELECT
+    //         COUNT (`id`) AS `isUserExists`
+    //         FROM `user`
+    //         WHERE `mail` = :mail'
+    //     );
+    //     $pdoStatment->bindValue(':mail', $this->pseudo, PDO::PARAM_INT);
+    //     $pdoStatment->execute();
+    //     $result = $pdoStatment->fetch(PDO::FETCH_OBJ);
+    //     return $result->isUserExists;
+    // }
 }

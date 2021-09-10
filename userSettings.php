@@ -15,7 +15,7 @@ require_once 'controllers/userSettingsCtrl.php' ?>
 
             <div class="col form-group position-relative">
                 <label for="updatePseudo" class="form-label">Pseudo</label>
-                <input type="text" class="form-control" id="updatePseudo" name="updatePseudo" value="<?= $_SESSION['user']['pseudo'] ?>">
+                <input type="text" class="form-control" id="updatePseudo" name="updatePseudo" value="<?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?>">
                 <?php
                 if (!empty($formErrorList['updatePseudo'])) {
                 ?>
@@ -28,20 +28,14 @@ require_once 'controllers/userSettingsCtrl.php' ?>
             <div class="col form-group position-relative">
                 <label for="updatePassword" class="form-label">Mot de Passe</label>
                 <input type="password" class="form-control" id="updatePassword" name="updatePassword">
-                <?php
-                if (!empty($formErrorList['updatePassword'])) {
-                ?>
-                    <p class="fst-italic text-danger"><?= $formErrorList['updatePassword']; ?></p>
-                <?php
-                }
-                ?>
+                <p class="fst-italic text-danger"></p>
             </div>
 
             <div class="col form-group position-relative">
                 <label for="updateMail" class="form-label">Adresse Email</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="mailPrepend">@</span>
-                    <input type="text" class="form-control" id="updateMail" name="updateMail" aria-describedby="mailPrepend" value="<?= $_SESSION['user']['mail'] ?>">
+                    <input type="text" class="form-control" id="updateMail" name="updateMail" aria-describedby="mailPrepend" value="<?= isset($_SESSION['user']['mail']) ? $_SESSION['user']['mail'] : '' ?>">
                     <?php
                     if (!empty($formErrorList['updateMail'])) {
                     ?>
@@ -83,6 +77,7 @@ require_once 'controllers/userSettingsCtrl.php' ?>
         <div class="d-flex justify-content-between m-5">
             <button type="submit" id="updateUser" class="btn btn-outline-success btn-sm px-3" name="updateUser">Enregistrer les modifications</button>
             <a href="profilPage.php" type="button" class="btn btn-secondary btn-sm px-3">Annuler</a>
+            <p class="lead"><?= $successMessage ?></p>
         </div>
     </form>
 </div>
