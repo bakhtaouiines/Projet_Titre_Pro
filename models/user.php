@@ -79,11 +79,24 @@ class User
         $pdoStatment = $this->pdo->prepare(
             'SELECT `password_hash` 
             FROM `user` 
-            WHERE `mail` = :mail'
+            WHERE `id` = :id'
         );
-        $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
-        return $pdoStatment->fetch(PDO::FETCH_OBJ)->password_hash;
+        $data = $pdoStatment->fetch(PDO::FETCH_OBJ);
+        return $data->password_hash;
+    }
+
+    public function updateUserHash()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'UPDATE `user`
+            SET `password_hash` = :password_hash
+            WHERE `id` = :id'
+        );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
+        return $pdoStatment->execute();;
     }
 
 

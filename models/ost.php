@@ -77,19 +77,19 @@ class Ost
     /**
      * Méthode permettant d'avoir le nombre de pages à afficher. Elle a besoin de plusieurs paramètres pour fonctionner.
      *
-     * @param string $searchOst = l'input de recherche
+     * @param string $searchOstList = l'input de recherche
      * @param integer $numberOSTPerPage = nombre d'ost par page
      * @param array $ostFilter = filtre les ost , 'album' indique le filtre par défaut (au cas où rien est sélectionné)
      * @return int
      */
-    public function totalPagesOST($searchOst, $numberOSTPerPage = 10, $ostFilter = ['album'])
+    public function totalPagesOST($searchOstList, $numberOSTPerPage = 10, $ostFilter = ['album'])
     {
         $where = '';
-        if ($searchOst != '') {
+        if ($searchOstList != '') {
             $whereArray = [];
             foreach ($ostFilter as $filter) {
-                // ceci va permettre d'avoir par exemple : `album` LIKE `:searchOst`(etc)
-                $whereArray[] = '`' . $filter . '` LIKE :searchOst ';
+                // ceci va permettre d'avoir par exemple : `album` LIKE `:searchOstList`(etc)
+                $whereArray[] = '`' . $filter . '` LIKE :searchOstList ';
             }
             // implode = transforme le tableau whereArray en chaîne de caractères 
             $where = 'WHERE ' . implode(' OR ', $whereArray);
@@ -101,20 +101,20 @@ class Ost
         ); // nombre de pages = nombre d'ost totales divisé par nombre d'ost par page
         // on concatène avec une chaîne vide (s'il n'y a pas de recherches) ou avec ce qui a été recherché ($whereArray)
         $totalPages->bindValue(':numberOSTPerPage', $numberOSTPerPage, PDO::PARAM_INT);
-        if ($searchOst != '') {
-            $totalPages->bindValue(':searchOst', '%' . $searchOst . '%', PDO::PARAM_STR);
+        if ($searchOstList != '') {
+            $totalPages->bindValue(':searchOstList', '%' . $searchOstList . '%', PDO::PARAM_STR);
         }
         $totalPages->execute();
         $result = $totalPages->fetch(PDO::FETCH_OBJ);
         return ceil($result->numberPages); // ceil = arrondit au supérieur
     }
-    public function infoPageOST($firstsOst, $numberResultsPage, $searchOst, $ostFilter = ['album'])
+    public function infoPageOST($firstsOst, $numberResultsPage, $searchOstList, $ostFilter = ['album'])
     {
         $where = '';
-        if ($searchOst != '') {
+        if ($searchOstList != '') {
             $whereArray = [];
             foreach ($ostFilter as $filter) {
-                $whereArray[] = '`' . $filter . '` LIKE :searchOst ';
+                $whereArray[] = '`' . $filter . '` LIKE :searchOstList ';
             }
             $where = 'WHERE ' . implode(' OR ', $whereArray);
         }
@@ -138,8 +138,8 @@ class Ost
         );
         $infoPage->bindValue(':numberResultsPage', $numberResultsPage, PDO::PARAM_INT);
         $infoPage->bindValue(':firstsOst', $firstsOst, PDO::PARAM_INT);
-        if ($searchOst != '') {
-            $infoPage->bindValue(':searchOst', '%' . $searchOst . '%', PDO::PARAM_STR);
+        if ($searchOstList != '') {
+            $infoPage->bindValue(':searchOstList', '%' . $searchOstList . '%', PDO::PARAM_STR);
         }
         $infoPage->execute();
         return $infoPage->fetchAll(PDO::FETCH_OBJ);

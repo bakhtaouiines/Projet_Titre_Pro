@@ -27,13 +27,17 @@ require_once 'controllers/headerCtrl.php';
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
-                <ul class="navbar-nav mb-lg-0 my-2">                  
+                <ul class="navbar-nav mb-lg-0 my-2">
                     <a href="OSTIndex.php" class="btn btn-outline-light fs-5 rounded me-5 bi bi-collection-play" type="button" title="index"></a>
                     <div class="d-flex align-items-center">
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
                             <a href="../articlelist.php" role="button" class="btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
                         </li>
+
+                        <!-- A afficher lorsque l'administrateur est connecté
+                         <a class="btn btn-outline-light" href="adminSettings.php">Gestion du site</a> -->
+
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
                         // On récupère nos variables de session
@@ -49,6 +53,7 @@ require_once 'controllers/headerCtrl.php';
                                 </ul>
                             </li>
                             <!-- Menu déroulant utilisateur -->
+
                             <li class="nav-item dropdown me-5">
                                 <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?= $_SESSION['user']['avatar'] ?>
@@ -58,12 +63,11 @@ require_once 'controllers/headerCtrl.php';
                                     </li>
                                     <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item text-white" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
                                     <a class="dropdown-item text-white" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
-                                    <li><a class="dropdown-item text-white" href="playlistCreation.php?userID=">Créer une playlist</a></li>
-                                    <li><a class="dropdown-item text-white" href="miniPostCreation.php?userID=">Créer un mini-post</a></li>
+                                    <li><a class="dropdown-item text-white" href="playlistCreation.php">Créer une playlist</a></li>
+                                    <li><a class="dropdown-item text-white" href="miniPostCreation.php">Créer un mini-post</a></li>
                                     <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
                                 </ul>
                             </li>
-
                             <!-- bouton accès listes d'écoute -->
                             <a class="btn btn-outline-light px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
                         <?php
@@ -74,7 +78,6 @@ require_once 'controllers/headerCtrl.php';
                         <?php
                         }
                         ?>
-
                     </div>
                 </ul>
             </div>
@@ -91,7 +94,7 @@ require_once 'controllers/headerCtrl.php';
 
                 <!-- FORMULAIRE CONNEXION UTILISATEUR -->
                 <div class="modal-body p-4 p-md-5">
-                    <form method="POST" action="" name="logForm" id="logForm">
+                    <form method="POST" action="" name="logForm">
                         <!-- EMAIL -->
                         <div class="mb-3">
                             <div class="icon d-flex align-items-center justify-content-center mb-4">
@@ -129,7 +132,7 @@ require_once 'controllers/headerCtrl.php';
                             </p>
                         </div>
                         <!--validation de formulaire-->
-                        <input type="submit" id="loginBtn" name="login" value="Se connecter" class="form-control btn btn-primary rounded submit px-1" disabled="disabled">
+                        <input type="submit" name="login" value="Se connecter" class="form-control btn btn-primary rounded submit px-1">
                     </form>
                     <hr>
                     <!-- bouton trigger 2e fenêtre modale -->

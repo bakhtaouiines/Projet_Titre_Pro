@@ -9,7 +9,7 @@ $user = new User();
 //on initialise un tableau qui contiendra les messages d'erreurs
 $formErrorList = [];
 /**
- *  Vérifications du formulaire d'inscription
+ *  Vérifications du formulaire d'INSCRIPTION
  */
 if (isset($_POST['register'])) {
 
@@ -109,7 +109,6 @@ if (isset($_POST['login'])) {
             exit;
         }
     } else {
-        var_dump($formErrorList);
         //Laisse ouvert la fenetre modale !!!!!
     }
 }

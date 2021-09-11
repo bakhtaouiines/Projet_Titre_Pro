@@ -12,26 +12,26 @@ $ostInfo = $ost->getOSTList();
 /**
  * Barre de recherche
  */
-$searchOst = '';
+$searchOstList = '';
 $ostFilter = ['album'];
 if (!empty($_GET['searchOst'])) {
     if (!empty($_GET['ostFilter'])) {
         $ostFilter = $_GET['ostFilter'];
     }
-    $ostFilterString = implode('&ostFilter%5B%5D=', $ostFilter);
-    $searchOst = htmlspecialchars($_GET['searchOst']);
-    $searchOst = trim($searchOst); // supprime les espaces dans la requête AVANT ou APRES
+    $ostFilterString = implode('&ostFilter%5B%5D=', $ostFilter); // rassemble les éléments d'un tableau en une chaîne
+    $searchOstList = htmlspecialchars($_GET['searchOst']);
+    $searchOstList = trim($searchOstList); // supprime les espaces dans la requête AVANT ou APRES
     
 }
 
 /**
  * Pagination
  */
-// On détermine le nombre d'articles par page
+// On détermine le nombre d'OST par page
 $numberOSTPerPage = 10;
 // On détermine sur quelle page on se trouve
-// On récupère le nombre de patients
-$numberOfPages = $ost->totalPagesOST($searchOst, $numberOSTPerPage, $ostFilter);
+// On récupère le nombre d'OST
+$numberOfPages = $ost->totalPagesOST($searchOstList, $numberOSTPerPage, $ostFilter);
 $isCorrectPage = true;
 if (!empty($_GET['page'])) {
     if ($_GET['page'] >= 1 && $_GET['page'] <= $numberOfPages) {
@@ -46,5 +46,5 @@ if ($isCorrectPage) {
     // Calcul du 1er affichage de la page
     $firstsOst = ($currentPage * $numberOSTPerPage) - $numberOSTPerPage;
     // On récupère les valeurs
-    $ostList = $ost->infoPageOST($firstsOst, $numberOSTPerPage, $searchOst, $ostFilter);
+    $ostList = $ost->infoPageOST($firstsOst, $numberOSTPerPage, $searchOstList, $ostFilter);
 }

@@ -14,25 +14,56 @@ require_once 'controllers/ostIndexCtrl.php';
         </blockquote>
     </figure>
     <!-- barre de recherche -->
-    <div class="btn-group offset-8 mb-5">    
-        <form method="GET" action="">
-            <div class="input-group rounded">
-                <input type="search" id="searchOst" name="searchOst" class="form-control mx-2" placeholder="Rechercher" aria-label="Search">
-                <button type="submit" id="submitSearchOst" name="submitSearchOst" class="btn btn-outline-light me-2 bi bi-search" title="rechercher"></button>
-
-                <select id="ostFilter" name="ostFilter[]" class="btn btn-dark dropdown-toggle dropdown-menu-dark" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                    <option value="" selected disabled> Trier par:</option>
-                    <option value="album" class="dropdown-item">Album</option>
-                    <option value="category" class="dropdown-item">Catégorie</option>
-                    <option value="composer" class="dropdown-item">Compositeur</option>
-                </select>
-            </div>
-        </form>
-    </div>
-    <div class="row d-flex justify-content-evenly mt-4">
+    <div class="row justify-content-end offset-5 my-3 mb-5">
+        <div class="col-8 mb-5">
+            <form method="GET" action="">
+                <div class="input-group rounded">
+                    <input type="search" id="searchOst" name="searchOst" class="form-control mx-2" placeholder="Rechercher" aria-label="Search">
+                    <button type="submit" id="submitSearchOst" name="submitSearchOst" class="btn btn-outline-light me-2 bi bi-search" title="rechercher"></button>
+                    <!-- filtre -->
+                    <select id="ostFilter" name="ostFilter[]" class="btn btn-dark dropdown-toggle dropdown-menu-dark" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        <option value="" selected disabled> Trier par:</option>
+                        <option value="album" class="dropdown-item">Album</option>
+                        <option value="category" class="dropdown-item">Catégorie</option>
+                        <option value="composer" class="dropdown-item">Compositeur</option>
+                    </select>
+                </div>
+            </form>
+        </div>
         <?php
-        // On affiche chaque entrée une à une
-        foreach ($ostInfo as $value) {
+        if ($isCorrectPage) {
+        ?>
+            <!-- pagination -->
+            <div class="col-auto">
+                <nav aria-label="navigationOst">
+                    <ul class="pagination">
+                        <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                            <a class="page-link" href="?page=<?= $currentPage - 1 ?><?= ($searchOstList != '') ? '&searchOst=' . $searchOstList . '&ostFilter%5B%5D=' . $ostFilterString :  ''  ?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+
+                        <?php for ($page = 1; $page <= $numberOfPages; $page++) : ?>
+                            <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+                                <a class="page-link" href="?page=<?= $page ?><?= ($searchOstList != '') ? '&searchOst=' . $searchOstList . '&ostFilter%5B%5D=' . $ostFilterString : '' ?>"><?= $page ?>
+                                </a>
+                            </li>
+                        <?php endfor ?>
+
+                        <li class="page-item <?= ($currentPage == $numberOfPages) ? "disabled" : "" ?>">
+                            <a class="page-link" href="?page=<?= $currentPage + 1 ?><?= ($searchOstList != '') ? '&searchOst=' . $searchOstList . '&ostFilter%5B%5D=' . $ostFilterString :  ''  ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+    </div>
+
+    <div class="row d-flex justify-content-evenly mt-5">
+        <?php
+            // On affiche chaque entrée une à une
+            foreach ($ostInfo as $value) {
         ?>
             <div class="card mb-3 border border-dark border-2 p-3 shadow-lg" style="max-width: 440px;">
                 <div class="row">
@@ -54,9 +85,18 @@ require_once 'controllers/ostIndexCtrl.php';
                 </div>
             </div>
         <?php
-        }
+            }
         ?>
     </div>
+<?php
+        } else { ?>
+    <p>Une erreur est survenue lors de l'obtention de cette page.
+        <a href="OSTIndex.php" class="btn btn-outline-secondary p-2" role="button">Retour à l'index'</a>
+    </p>
+
+<?php
+        }
+?>
 </div>
 
 <?php include 'parts/footer.php'; ?>
