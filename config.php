@@ -31,3 +31,4 @@ function isConnected()
         return false;
     }
 }
+var_dump($_SESSION);

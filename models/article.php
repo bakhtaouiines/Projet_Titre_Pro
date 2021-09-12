@@ -1,6 +1,6 @@
 <?php
 // une classe est un modèle de données définissant la structure commune à tous les objets qui seront créés à partir d'elle. c'est un "moule" 
-class Article
+class Article extends MainModel
 {
     // liste d'attributs (ou "données membres")
     public $id = 0;
@@ -14,7 +14,7 @@ class Article
 
     public function __construct()
     {
-        $this->pdo = MainModel::getPdo();
+        parent::__construct();
     }
 
     /**

@@ -6,14 +6,12 @@
 
 class MainModel
 {
-    //L'attribut $pdo sera disponible dans ses enfants
+    //Les attributs $pdo et $table seront disponibles dans les enfants
     public $pdo = null;
-    // attribut $instancep rivé et statique qui conservera l'instance unique de la classe.
-    private static $instance = null;
+    public $table = null;
 
     public function __construct()
     {
-
         try {
             // On se connecte à MySQL pour faire le lien avec la BDD
             $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASSWORD);
@@ -23,14 +21,76 @@ class MainModel
         }
     }
     /**
-     * Méthode statique permettant de retourner l'unique instance créée 
-     *
+     * Getter permettant d'avoir accès à tous les attributs de la classe
+     * 
+     * @param string $property
+     * @return mixed
      */
-    public static function getPdo()
+    public function __get($property)
     {
-        if (is_null(self::$instance)) {
-            self::$instance = new MainModel();
+        if (property_exists($this, $property)) {
+            if ($property != 'pdo') {
+                return $this->$property;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-        return self::$instance->pdo;
+    }
+
+    /**
+     * Setter permettant de modifier les attributs de la classe
+     * 
+     * @param string $property
+     * @param mixed $value
+     * @return boolean
+     */
+    public function __set($property, $value)
+    {
+        if (property_exists($this, $property)) {
+            if ($property != 'pdo') {
+                $this->$property = $value;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Fonction permettant de vérifier si un champ est unique
+     *
+     * @param [type] $field
+     * @param [type] $value
+     * @return boolean
+     */
+    public function isUnique($field, $value)
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'SELECT COUNT(*) AS `isUsed` 
+            FROM ' . $this->table . ' WHERE ' . $field . ' = :' . $field
+        );
+        $pdoStatment->bindValue(':' . $field, $value, PDO::PARAM_STR);
+        $pdoStatment->execute();
+        return !$pdoStatment->fetch(PDO::FETCH_OBJ)->isUsed;
+    }
+    
+    /**
+     * Fonction permettant de vérifier si une value existe dans une table
+     *
+     * @param [type] $field
+     * @param [type] $value
+     * @return void
+     */
+    public function doesExist($field, $value)
+    {
+        $pdoStatment = $this->pdo->prepare('SELECT COUNT(*) AS `isUsed` 
+        FROM ' . $this->table . ' WHERE ' . $field . ' = :' . $field);
+        $pdoStatment->bindValue(':' . $field, $value, PDO::PARAM_STR);
+        $pdoStatment->execute();
+        return $pdoStatment->fetch(PDO::FETCH_OBJ)->isUsed;
     }
 }

@@ -34,7 +34,6 @@ require_once 'controllers/headerCtrl.php';
                         <li class="nav-item me-5">
                             <a href="../articlelist.php" role="button" class="btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
                         </li>
-
                         <!-- A afficher lorsque l'administrateur est connecté
                          <a class="btn btn-outline-light" href="adminSettings.php">Gestion du site</a> -->
 
@@ -83,6 +82,7 @@ require_once 'controllers/headerCtrl.php';
             </div>
         </div>
     </nav>
+
     <!-- Fenêtre modale du bouton login -->
     <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
@@ -94,7 +94,7 @@ require_once 'controllers/headerCtrl.php';
 
                 <!-- FORMULAIRE CONNEXION UTILISATEUR -->
                 <div class="modal-body p-4 p-md-5">
-                    <form method="POST" action="" name="logForm">
+                    <form method="POST" action="" name="logForm" id="logForm">
                         <!-- EMAIL -->
                         <div class="mb-3">
                             <div class="icon d-flex align-items-center justify-content-center mb-4">
@@ -106,9 +106,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="email" class="form-control" id="mail" name="mail" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['mail'])) {
+                            if (!empty($error['mail'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['mail']; ?></p>
+                                <p class="text-danger"><?= $error['mail']; ?></p>
                             <?php
                             }
                             ?>
@@ -119,9 +119,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['password'])) {
+                            if (!empty($error['password'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['password']; ?></p>
+                                <p class="text-danger"><?= $error['password']; ?></p>
                             <?php
                             }
                             ?>
@@ -162,9 +162,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="text" class="form-control" id="pseudo" name="pseudo" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['pseudo'])) {
+                            if (!empty($error['pseudo'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['pseudo']; ?></p>
+                                <p class="text-danger"><?= $error['pseudo']; ?></p>
                             <?php
                             }
                             ?>
@@ -175,9 +175,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="email" class="form-control" id="mailRegister" name="mail" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['mail'])) {
+                            if (!empty($error['mail'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['mail']; ?></p>
+                                <p class="text-danger"><?= $error['mail']; ?></p>
                             <?php
                             }
                             ?>
@@ -188,9 +188,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="password" class="form-control" id="password" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['password'])) {
+                            if (!empty($error['password'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['password']; ?></p>
+                                <p class="text-danger"><?= $error['password']; ?></p>
                             <?php
                             }
                             ?>
@@ -199,19 +199,39 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="password" class="form-control" id="checkPassword" aria-required="true" name="checkPassword" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($formErrorList['checkPassword'])) {
+                            if (!empty($errorMessagePassword['checkPassword'])) {
                             ?>
-                                <p class="text-danger"><?= $formErrorList['checkPassword']; ?></p>
+                                <p class="text-danger"><?= $errorMessagePassword['checkPassword']; ?></p>
                             <?php
                             }
                             ?>
                         </div>
                         <!--validation de formulaire-->
-                        <input type="submit" class="btn btn-primary" id="registerBtn" name="register" value="Créer mon compte" disabled="disabled">
+                        <input type="submit" class="btn btn-primary" id="registerBtn" name="register" value="Créer mon compte" data-bs-toggle="modal" data-bs-target="#userCreated" disabled="disabled">
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-bs-target="#login" data-bs-toggle="modal" data-bs-dismiss="modal">Revenir en arrière</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- message dans une fenêtre modale, informant que le compte a bien été crée -->
+    <div class="modal" tabindex="-1" id="userCreated" aria-labelledby="userCreatedLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bienvenue!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead"><?= $userCreated;
+                                    ?>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

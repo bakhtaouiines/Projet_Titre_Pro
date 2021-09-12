@@ -1,6 +1,6 @@
 <?php
 // une classe est un modèle de données définissant la structure commune à tous les objets qui seront créés à partir d'elle. c'est un "moule" 
-class User
+class User extends MainModel
 {
     // liste d'attributs (ou "données membres")
     public $id = 0;
@@ -9,10 +9,11 @@ class User
     public $password_hash = '';
     public $avatar = '';
     public $hash = null;
+    public $table = 'user';
 
     public function __construct()
     {
-        $this->pdo = MainModel::getPdo();
+       parent::__construct();
     }
 
     /**
@@ -79,9 +80,9 @@ class User
         $pdoStatment = $this->pdo->prepare(
             'SELECT `password_hash` 
             FROM `user` 
-            WHERE `id` = :id'
+            WHERE `mail` = :mail'
         );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $pdoStatment->execute();
         $data = $pdoStatment->fetch(PDO::FETCH_OBJ);
         return $data->password_hash;

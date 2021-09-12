@@ -2,75 +2,85 @@
 // On charge le fichier du modèle.
 require_once 'models/mainModel.php';
 require_once 'models/user.php';
-require_once 'models/article.php';
+require_once 'classes/form.php';
 
-$user = new User();
-$userPassword = new User();
-$userInfo = $user->getUserInfoById();
+$updateForm = new Form();
+
+$errorMessagePassword = [];
 $successMessage = '';
 /**
  * Modification des informations de l'utilisateur
  */
-// tableau où seront stockées les erreurs
-$formErrorList = [];
-var_dump($formErrorList);
 if (isset($_POST['updateUser'])) {
-    $regex = '/^[A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç][A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç\-\s\']*$/';
-    // verif pseudo
-    // je vérifie que la valeur dans $_POST à la clé "updatePseudo" est différente du pseudo déjà renseigné par l'utilisateur actuel
-    if ($_POST['updatePseudo'] != $user->pseudo) {
-        // si oui, je vérifie que l'input n'est pas vide et qu'il existe...
-        if (!empty($_POST['updatePseudo'])) {
-            // ...puis je vérifie qu'il correspond bien aux conditions de la regex
-            if (preg_match($regex, $_POST['updatePseudo'])) {
-                //...enfin, j'hydrate l'attribut pseudo de l'objet $user et je convertis les caractères spéciaux en entités HTML
-                $user->pseudo = htmlspecialchars($_POST['updatePseudo']);
-            } else {
-                $formErrorList['updatePseudo'] = 'Les caractères saisis ne sont pas valides et/ou le nombre de caractère limite (25) a été atteint.';
-            }
-        }
+
+    $updatePseudo = '';
+    $updateMail = '';
+    $oldPassword = '';
+    $updatePassword = '';
+    //Je récupère les données du formulaire
+    if (isset($_POST['updatePseudo'])) {
+        $updatePseudo = htmlspecialchars($_POST['updatePseudo']);
     }
-    // verif email
-    if (!empty($_POST['updateMail'])) {
-        if ($_POST['updateMail'] != $user->mail) {
-            if (filter_var($_POST['updateMail'], FILTER_VALIDATE_EMAIL)) {
-                $user->mail = htmlspecialchars($_POST['updateMail']);
-            } else {
-                $formErrorList['updateMail'] = 'Les caractères saisis ne sont pas valides et/ou le nombre de caractère limite (100) a été atteint.';
-            }
-        }
+
+    if (isset($_POST['updateMail'])) {
+        $updateMail = htmlspecialchars($_POST['updateMail']);
     }
     // verif mot de passe
     // ancien mot de passe
-    if (!empty($_POST['oldPassword'])) {
+    if (isset($_POST['oldPassword'])) {
         // j'exécute la méthode getUserHash() de l'objet $userPassword et stocke dans une variable nommée $hash le mot de passe hashé enregistré dans la BDD
+        $userPassword = new User();
         $hash = $userPassword->getUserHash();
         if (!password_verify($_POST['oldPassword'], $hash)) {
-            $formErrorList['oldPassword'] = 'Mauvais mot de passe';
-        } else {
-            $formErrorList['oldPassword'] = 'Veuillez renseigner votre mot de passe actuel';
+            $errorMessagePassword['oldPassword'] = 'Mauvais mot de passe';
         }
         // nouveau mot de passe
-        if (!empty($_POST['updatePassword'])) {
-            $password = $_POST['updatePassword'];
-        } else {
-            $formErrorList['updatePassword'] = 'Veuillez renseigner votre nouveau mot de passe';
+        if (isset($_POST['updatePassword'])) {
+            $updatePassword = $_POST['updatePassword'];
         }
     }
 
+    //Je vérifie le pseudo
+    $updateForm->isNotEmpty('updatePseudo', $updatePseudo);
+    $updateForm->isValidFormat('updatePseudo', $updatePseudo, FORM::PATTERN);
+    $updateForm->isUnique('updatePseudo', $updatePseudo, 'user');
+    $updateForm->isValidLength('updatePseudo', $updatePseudo, 3, 20);
 
-    // s'il n'y a pas d'erreurs...
-    if (empty($formErrorList)) {
-        // si le nouveau mot de passe est différent de l'ancien mot de passe enregistré
+    //Je vérifie le mail
+    $updateForm->isNotEmpty('updateMail', $updateMail);
+    $updateForm->isValidEmail('updateMail', $updateMail);
+    $updateForm->isUnique('updateMail', $updateMail, 'user');
+
+    //Je vérifie l'ancien et nouveau mdp
+    $updateForm->isNotEmpty('oldPassword', $oldPassword);
+    $updateForm->isValidLength('oldPassword', $oldPassword, 6, 255);
+    $updateForm->isNotEmpty('updatePassword', $updatePassword);
+    $updateForm->isValidLength('updatePassword', $updatePassword, 6, 255);
+
+    // vérif avatar
+    // if (isset($_POST['submitAvatar'])) {
+    //     if (isset($_FILES['avatar'])) {
+    //         $avatar = $_FILES['avatar'];
+    //     }
+    //     $picture->isNotEmpty('avatar', $avatar);
+    //     $picture->isValidLength('avatar', $avatar, $widthMax = SELF::WIDTH_MAX, $heightMax = SELF::HEIGHT_MAX);
+    //     $picture->isValidFormat('avatar', $avatar, $format = SELF::EXTENSIONS);
+    // }
+
+    //Si il n'y a pas d'erreur sur le formulaire...
+    if ($updateForm->isValid()) {
+        //...je crée une instance de classe ; création d'un nouvel objet, qui appelle la méthode constructeur 
+        $user = new User();
+        // si le nouveau mot de passe est bien différent de l'ancien mot de passe enregistré
         if (($_POST['updatePassword']) != ($_POST['oldPassword'])) {
             // j'hydrate l'attribut password_hash de mon objet $userPassword dans lequel je stocke la saisie, sécurisée grâce ) la fonction password_hash(), qui crée une clé de hachage pour le mdp, avec la constante PASSWORD_DEFAULT (qui est un algorithme de hachage)
             $userPassword->password_hash = password_hash($_POST['updatePassword'], PASSWORD_DEFAULT);
+            $user->__set('updatePseudo', $updatePseudo);
+            $user->__set('updateMail', $updateMail);
             // ici j'exécute les méthodes updateUserInfo() et updateUserHash() des objets $user et $userPassword
             $user->updateUserInfo();
             $userPassword->updateUserHash();
             $successMessage = 'Modifications enregistrées avec succès!';
-        } else {
-            echo 'Une erreur est survenue';
         }
     }
 }

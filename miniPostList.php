@@ -8,7 +8,6 @@ include 'parts/header.php' ?>
         ?>
             <a href="miniPost.php?minipostID=" class="list-group-item list-group-item-action" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1 ">MiniPost Title</h5>
                     <small>OST Title</small>
                 </div>
                 <p class="mb-1">début du mini post...</p>

@@ -10,16 +10,16 @@ require_once 'controllers/userSettingsCtrl.php' ?>
             <div class="col-12 form-group p-3 position-relative">
                 <label for="avatar" title="Recherchez le fichier à uploader !">Envoyer l'image:</label>
                 <input name="avatar" type="file" id="avatar">
-                <input type="submit" name="submit" value="Télécharger">
+                <input type="submit" name="submitAvatar" value="Télécharger">
             </div>
 
             <div class="col form-group position-relative">
                 <label for="updatePseudo" class="form-label">Pseudo</label>
                 <input type="text" class="form-control" id="updatePseudo" name="updatePseudo" value="<?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?>">
                 <?php
-                if (!empty($formErrorList['updatePseudo'])) {
+                if (!empty($error['updatePseudo'])) {
                 ?>
-                    <p class="fst-italic text-danger"><?= $formErrorList['updatePseudo']; ?></p>
+                    <p class="fst-italic text-danger"><?= $error['updatePseudo']; ?></p>
                 <?php
                 }
                 ?>
@@ -31,9 +31,9 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                     <span class="input-group-text" id="mailPrepend">@</span>
                     <input type="text" class="form-control" id="updateMail" name="updateMail" aria-describedby="mailPrepend" value="<?= isset($_SESSION['user']['mail']) ? $_SESSION['user']['mail'] : '' ?>">
                     <?php
-                    if (!empty($formErrorList['updateMail'])) {
+                    if (!empty($error['updateMail'])) {
                     ?>
-                        <p class="fst-italic text-danger"><?= $formErrorList['updateMail']; ?></p>
+                        <p class="fst-italic text-danger"><?= $error['updateMail']; ?></p>
                     <?php
                     }
                     ?>
@@ -44,21 +44,14 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                 <label for="oldPassword" class="form-label">Ancien Mot de Passe</label>
                 <input type="password" class="form-control" id="oldPassword" name="oldPassword">
                 <?php
-                    if (!empty($formErrorList['oldPassword'])) {
+                    if (!empty($errorMessagePassword['oldPassword'])) {
                     ?>
-                        <p class="fst-italic text-danger"><?= $formErrorList['oldPassword']; ?></p>
+                        <p class="fst-italic text-danger"><?= $errorMessagePassword['oldPassword']; ?></p>
                     <?php
                     }
                     ?>
                 <label for="updatePassword" class="form-label">Nouveau Mot de Passe</label>
                 <input type="password" class="form-control" id="updatePassword" name="updatePassword">
-                <?php
-                    if (!empty($formErrorList['updatePassword'])) {
-                    ?>
-                        <p class="fst-italic text-danger"><?= $formErrorList['updatePassword']; ?></p>
-                    <?php
-                    }
-                    ?>
             </div>
         </div>
 
