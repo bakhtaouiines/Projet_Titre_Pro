@@ -1,5 +1,5 @@
 <?php
-include 'parts/header.php'; 
+include 'parts/header.php';
 require_once 'controllers/articleCtrl.php';
 ?>
 
@@ -27,38 +27,43 @@ require_once 'controllers/articleCtrl.php';
         <div class="row">
             <div class="col-sm-5 col-md-6 col-12 pb-4">
                 <h2>Commentaires</h2>
-                <div class="comment mt-4 text-justify float-left">
-                    <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
-                    <h4>Jhon Doe</h4> <span>- 20 October, 2018</span> <br>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                </div>
-                <div class="text-justify darker mt-4 float-right"> <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
-                    <h4>Rob Simpson</h4> <span>- 20 October, 2018</span> <br>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                </div>
-                <div class="comment mt-4 text-justify"> <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
-                    <h4>Jhon Doe</h4> <span>- 20 October, 2018</span> <br>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                </div>
-                <div class="darker mt-4 text-justify"> <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
-                    <h4>Rob Simpson</h4> <span>- 20 October, 2018</span> <br>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                </div>
+                <?php
+                // On affiche chaque entrée une à une
+                foreach ($commentList as $value) {
+                ?>
+                    <div class="comment mt-4 text-justify float-left">
+                        <img src="<?= $value->avatar ?>" alt="" class="rounded-circle" width="40" height="40">
+                        <h4><?= $value->pseudo ?></h4><small class="text-muted fst-italic ms-3"><?= date('d-m-Y', strtotime($value->date)) ?></small>
+                        <p><?= $value->content ?></p>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
             <!-- espace d'écriture de commentaire -->
             <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
-                <form id="align-form">
-                    <div class="form-group">
+                <form method="POST" id="align-form">
+                    <div class="form-group p-3">
                         <h4>Laisser un commentaire:</h4>
-                        <label for="message">Message</label>
-                        <textarea name="msg" id="" msg cols="30" rows="5" class="form-control" style="background-color: white;"></textarea>
+                        <small class="fst-italic">Merci de rester bienveillant!</small>
+                        <textarea name="content" id="" content cols="30" rows="5" class="form-control mt-3" style="background-color: white;"></textarea>
                     </div>
-                    <button type="submit" id="postComment" name="postComment" class="btn btn-outline-dark my-4">Publier mon commentaire</button>
-                    <!-- Bouton login -->
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-dark me-4">Se connecter pour écrire un commentaire</button>
+                    <!-- A afficher lorsque l'utilisateur est connecté -->
+                    <?php
+                    // On récupère nos variables de session
+                    if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
+                    ?>
+                        <button type="submit" id="submitComment" name="submitComment" class="btn btn-outline-dark my-4">Publier</button>
                 </form>
+            <?php
+                    } else {
+            ?>
+                <!-- Bouton login -->
+                <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-dark me-4">Se connecter pour écrire un commentaire</button>
+            <?php
+                    }
+            ?>
             </div>
-
         </div>
     </div>
 </section>

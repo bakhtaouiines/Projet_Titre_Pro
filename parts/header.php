@@ -16,7 +16,7 @@ require_once 'controllers/headerCtrl.php';
 
 <body>
     <!-- barre de navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top" id="#menu">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="#menu">
         <div class="container-fluid p-3">
             <div class="col-2">
                 <a class="navbar-brand text-white col" href="index.php">Logo</a>

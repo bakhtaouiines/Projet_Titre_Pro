@@ -5,25 +5,38 @@ require_once 'models/user.php';
 require_once 'classes/form.php';
 
 $updateForm = new Form();
-
+$updateArray = [];
 $errorMessagePassword = [];
 $successMessage = '';
+
 /**
  * Modification des informations de l'utilisateur
  */
 if (isset($_POST['updateUser'])) {
 
-    $updatePseudo = '';
-    $updateMail = '';
     $oldPassword = '';
     $updatePassword = '';
     //Je récupère les données du formulaire
     if (isset($_POST['updatePseudo'])) {
         $updatePseudo = htmlspecialchars($_POST['updatePseudo']);
+        //Je vérifie le pseudo
+        $updateForm->isNotEmpty('updatePseudo', $updatePseudo);
+        $updateForm->isValidFormat('updatePseudo', $updatePseudo, FORM::PATTERN);
+        $updateForm->isUnique('updatePseudo', $updatePseudo, 'user');
+        $updateForm->isValidLength('updatePseudo', $updatePseudo, 3, 20);
+        if (!isset($updateForm->errors['updatePseudo'])) {
+        $updateArray['updatePseudo'] = $updatePseudo;
+        }
     }
-
     if (isset($_POST['updateMail'])) {
         $updateMail = htmlspecialchars($_POST['updateMail']);
+        //Je vérifie le mail
+        $updateForm->isNotEmpty('updateMail', $updateMail);
+        $updateForm->isValidEmail('updateMail', $updateMail);
+        $updateForm->isUnique('updateMail', $updateMail, 'user');
+        if (!isset($updateForm->errors['updateMail'])) {
+            $updateArray['updateMail'] = $updateMail;
+        }
     }
     // verif mot de passe
     // ancien mot de passe
@@ -40,19 +53,11 @@ if (isset($_POST['updateUser'])) {
         }
     }
 
-    //Je vérifie le pseudo
-    $updateForm->isNotEmpty('updatePseudo', $updatePseudo);
-    $updateForm->isValidFormat('updatePseudo', $updatePseudo, FORM::PATTERN);
-    $updateForm->isUnique('updatePseudo', $updatePseudo, 'user');
-    $updateForm->isValidLength('updatePseudo', $updatePseudo, 3, 20);
 
-    //Je vérifie le mail
-    $updateForm->isNotEmpty('updateMail', $updateMail);
-    $updateForm->isValidEmail('updateMail', $updateMail);
-    $updateForm->isUnique('updateMail', $updateMail, 'user');
+
 
     //Je vérifie l'ancien et nouveau mdp
-    $updateForm->isNotEmpty('oldPassword', $oldPassword);
+    // $updateForm->isNotEmpty('oldPassword', $oldPassword);
     $updateForm->isValidLength('oldPassword', $oldPassword, 6, 255);
     $updateForm->isNotEmpty('updatePassword', $updatePassword);
     $updateForm->isValidLength('updatePassword', $updatePassword, 6, 255);

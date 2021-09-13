@@ -104,12 +104,12 @@ if (isset($_POST['login'])) {
             // on enregistre les paramètres de notre visiteur comme variables de session
             $_SESSION['user']['id'] = $userInfo->id;
             $_SESSION['user']['pseudo'] = $userInfo->pseudo;
-            $_SESSION['user']['mail'] = $userInfo->$mail;
+            $_SESSION['user']['mail'] = $mail;
             $_SESSION['user']['levelAccess'] = $userInfo->level;
             $_SESSION['user']['avatar'] = $userInfo->avatar;
             // GESTION DES COOKIES UTILISATEURS:
-            setcookie('mail', $mail, time() + 60 * 60 * 24 * 30, null, null, false, true); // Expire dans 30 jours, path=null, domain=null, secure=false,httponly=true
-            setcookie('password', $password, time() + 60 * 60 * 24 * 30, null, null, false, true);
+            setcookie('mail', $mail, time() + 3600, null, null, false, true); // Expire dans 1 heure, path=null, domain=null, secure=false,httponly=true
+            setcookie('password', $password, time() + 3600, null, null, false, true);
             // on redirige notre visiteur vers la page de compte de l'utilisateur
             header('location: ../profilPage.php');
             exit;

@@ -1,271 +1,328 @@
-            @import url('https://fonts.googleapis.com/css2?family=Nixie+One&display=swap');
-            body {
-                background-color: rgb(175, 162, 162);
-            }
-            
-            .navbar {
-                opacity: 0.8;
-            }
-            
-            #subtitle {
-                font-size: smaller;
-            }
-            /* fenêtre modale d'inscription et log */
-            
-            .modal-content .modal-body .icon {
-                width: 80px;
-                height: 80px;
-                border: 1px solid #7D0D09;
-                border-radius: 50%;
-                margin: 0 auto;
-                margin-bottom: 10px;
-            }
-            
-            .modal-content .modal-body .icon span {
-                color: #7D0D09;
-                font-size: xx-large;
-            }
-            
-            .modal-content .modal-footer {
-                border: none;
-                background: #f8f8f8;
-            }
-            
-            .btn.btn-primary {
-                background: #7D0D09;
-                border: 1px solid #7D0D09;
-                color: #fff;
-            }
-            /* hover images accueil */
-            
-            .hover-1 .hover-overlay {
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
-            }
-            
-            .hover-1-title {
-                position: absolute;
-                top: 20%;
-                left: 0;
-                text-align: center;
-                width: 100%;
-                transition: all 0.5s;
-                bottom: 0;
-                opacity: 0;
-                z-index: 99;
-            }
-            
-            .hover-1:hover .hover-1-title {
-                bottom: 0.5rem;
-                opacity: 1;
-            }
-            
-            .carousel-control-prev,
-            .carousel-control-next {
-                width: auto;
-            }
-            
-            @media(min-width:568px) {
-                .end {
-                    margin-left: auto
-                }
-            }
-            /* article */
-            
-            .article {
-                font-family: 'Nixie One', cursive;
-                font-weight: bolder;
-                background-color: rgb(231, 223, 210);
-            }
-            
-            .figure-img {
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-            }
-            /* commentaires */
-            
-            .comments {
-                margin-top: 5%;
-                margin-left: 20px
-            }
-            
-            .darker {
-                background-color: black;
-                float: right;
-                border-radius: 5px;
-                padding-left: 40px;
-                padding-right: 30px;
-                padding-top: 10px
-            }
-            
-            .comment {
-                background-color: rgb(248, 248, 248);
-                float: left;
-                border-radius: 5px;
-                padding-left: 40px;
-                padding-right: 30px;
-                padding-top: 10px
-            }
-            
-            .comment h4,
-            .comment span,
-            .darker h4,
-            .darker span {
-                display: inline
-            }
-            
-            .comment p,
-            .comment span,
-            .darker p,
-            .darker span {
-                color: rgb(184, 183, 183)
-            }
-            
-            #align-form {
-                margin-top: 20px
-            }
-            
-            .form-group p a {
-                color: white
-            }
-            
-            #darker img {
-                margin-right: 15px;
-                position: static
-            }
-            
-            .form-group input,
-            .form-group textarea {
-                border: 1px solid rgb(240, 229, 229);
-                border-radius: 12px
-            }
-            
-            #align-form {
-                background-color: rgb(240, 229, 229);
-                border-radius: 5px;
-                padding: 20px
-            }
-            /* profil user  */
-            
-            .card {
-                background-color: transparent;
-                border: none;
-                transition: all 0.5s;
-                width: 500px;
-            }
-            
-            .image img {
-                transition: all 0.5s
-            }
-            
-            .card:hover .image img {
-                transform: scale(1.5)
-            }
-            
-            .avatar {
-                border-radius: 50%
-            }
-            /* contact */
-            
-            .wrapper {
-                max-width: 850px;
-                margin: 50px auto;
-                height: 600px;
-                background-color: #FFF;
-                overflow: hidden;
-                box-shadow: 5px 25px 35px #3535356b
-            }
-            
-            .wrapper .bg-red {
-                background-color: #7D0D09;
-                height: 100%;
-                width: 40%;
-                padding-top: 40px;
-                padding-left: 50px;
-                padding-right: 20px
-            }
-            
-            .wrapper .bg-red .text-white {
-                font-size: 3rem
-            }
-            
-            .wrapper .bg-red .cursive {
-                font-family: 'Nixie One', cursive;
-                font-size: 1rem;
-                font-weight: 600
-            }
-            
-            .wrapper .contact-form {
-                width: 100%;
-                padding: 40px 80px 40px 50px
-            }
-            
-            .wrapper .contact-form label {
-                font-size: 0.9rem;
-                color: #555;
-                font-weight: 500;
-                margin-bottom: 10px
-            }
-            
-            .wrapper .contact-form textarea {
-                height: 120px
-            }
-            
-            .wrapper .contact-form .form-control {
-                background-color: #e7e7e7;
-                box-shadow: none;
-                font-weight: 600;
-                font-size: 0.95rem;
-                border: none;
-                border-top: 1px solid #bbb
-            }
-            
-            .wrapper .contact-form .btn {
-                font-size: 1.2rem;
-                font-weight: 700
-            }
-            
-            .wrapper .contact-form .btn.btn-primary {
-                background: #7D0D09;
-                border: none;
-                padding: 8px 18px;
-                box-shadow: 0 8px 12px #3535356b
-            }
-            
-            .wrapper .contact-form .btn.btn-primary:hover {
-                background-color: #883532;
-            }
-            
-            .modal .modal-content .modal-header .bi {
-                color: #F50057
-            }
-            
-            @media(max-width: 900.5px) {
-                .wrapper {
-                    margin: 20px
-                }
-            }
-            
-            @media(max-width: 575.5px) {
-                .wrapper .contact-form {
-                    padding: 40px
-                }
-                .wrapper .bg-red {
-                    padding-left: 30px
-                }
-            }
-            
-            @media(max-width: 496px) {
-                .wrapper .bg-red {
-                    display: none
-                }
-            }
-            
-            @media(max-width: 350px) {
-                .wrapper {
-                    height: 570px
-                }
-                .wrapper .contact-form {
-                    padding: 20px
-                }
-            }
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
+body {
+    background-color: #2c0705;
+}
+
+.navbar {
+    opacity: 0.8;
+    background-color: #1a1e21;
+}
+
+#subtitle {
+    font-size: smaller;
+}
+
+
+/* fenêtre modale d'inscription et log */
+
+.modal-content .modal-body .icon {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #7D0D09;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.modal-content .modal-body .icon span {
+    color: #7D0D09;
+    font-size: xx-large;
+}
+
+.modal-content .modal-footer {
+    border: none;
+    background: #f8f8f8;
+}
+
+.btn.btn-primary {
+    background: #7D0D09;
+    border: 1px solid #7D0D09;
+    color: #fff;
+}
+
+
+/* hover images accueil */
+
+.hover-1 .hover-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+}
+
+.hover-1-title {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    transition: all 0.5s;
+    bottom: 0;
+    opacity: 0;
+    z-index: 99;
+    font-family: 'Life Savers', cursive;
+    font-size: xx-large;
+}
+
+.hover-1:hover .hover-1-title {
+    bottom: 0.5rem;
+    opacity: 1;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto;
+}
+
+@media(min-width:568px) {
+    .end {
+        margin-left: auto
+    }
+}
+
+
+/* article */
+
+.article {
+    font-family: 'Life Savers', cursive;
+    font-weight: bolder;
+    background-color: rgb(231, 223, 210);
+}
+
+.figure-img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+
+/* commentaires */
+
+.comments {
+    margin-top: 5%;
+    margin-left: 20px
+}
+
+.darker {
+    background-color: black;
+    float: right;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px
+}
+
+.comment {
+    background-color: rgb(248, 248, 248);
+    float: left;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px
+}
+
+.comment h4,
+.comment span,
+.darker h4,
+.darker span {
+    display: inline
+}
+
+.comment p,
+.comment span,
+.darker p,
+.darker span {
+    color: rgb(184, 183, 183)
+}
+
+#align-form {
+    margin-top: 20px
+}
+
+.form-group p a {
+    color: white
+}
+
+#darker img {
+    margin-right: 15px;
+    position: static
+}
+
+.form-group input,
+.form-group textarea {
+    border: 1px solid rgb(240, 229, 229);
+    border-radius: 12px
+}
+
+#align-form {
+    background-color: rgb(240, 229, 229);
+    border-radius: 5px;
+    padding: 20px
+}
+
+
+/* profil user  */
+
+.card {
+    background-color: transparent;
+    border: none;
+    transition: all 0.5s;
+    width: 500px;
+}
+
+.image img {
+    transition: all 0.5s
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+.avatar {
+    border-radius: 50%;
+    background-color: #7D0D09;
+}
+
+
+/* contact */
+
+.wrapper {
+    max-width: 850px;
+    margin: 50px auto;
+    height: 600px;
+    background-color: #FFF;
+    overflow: hidden;
+    box-shadow: 5px 25px 35px #3535356b
+}
+
+.wrapper .bg-red {
+    background-color: #7D0D09;
+    height: 100%;
+    width: 40%;
+    padding-top: 40px;
+    padding-left: 50px;
+    padding-right: 20px
+}
+
+.wrapper .bg-red .text-white {
+    font-size: 3rem
+}
+
+.wrapper .bg-red .cursive {
+    font-family: 'Nixie One', cursive;
+    font-size: 1rem;
+    font-weight: 600
+}
+
+.wrapper .contact-form {
+    width: 100%;
+    padding: 40px 80px 40px 50px
+}
+
+.wrapper .contact-form label {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 10px
+}
+
+.wrapper .contact-form textarea {
+    height: 120px
+}
+
+.wrapper .contact-form .form-control {
+    background-color: #e7e7e7;
+    box-shadow: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    border-top: 1px solid #bbb
+}
+
+.wrapper .contact-form .btn {
+    font-size: 1.2rem;
+    font-weight: 700
+}
+
+.wrapper .contact-form .btn.btn-primary {
+    background: #7D0D09;
+    border: none;
+    padding: 8px 18px;
+    box-shadow: 0 8px 12px #3535356b
+}
+
+.wrapper .contact-form .btn.btn-primary:hover {
+    background-color: #883532;
+}
+
+.modal .modal-content .modal-header .bi {
+    color: #F50057
+}
+
+@media(max-width: 900.5px) {
+    .wrapper {
+        margin: 20px
+    }
+}
+
+@media(max-width: 575.5px) {
+    .wrapper .contact-form {
+        padding: 40px
+    }
+    .wrapper .bg-red {
+        padding-left: 30px
+    }
+}
+
+@media(max-width: 496px) {
+    .wrapper .bg-red {
+        display: none
+    }
+}
+
+@media(max-width: 350px) {
+    .wrapper {
+        height: 570px
+    }
+    .wrapper .contact-form {
+        padding: 20px
+    }
+}
+
+
+/* changement couleur de la pagination */
+
+.pagination>li>a {
+    background-color: white;
+    color: #000000;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+    color: #7D0D09;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination>.active>a {
+    color: white;
+    background-color: #7D0D09 !Important;
+    border: solid 1px #7D0D09 !Important;
+}
+
+.pagination>.active>a:hover {
+    background-color: #903e3b !Important;
+    border: solid 1px #903e3b;
+}
+
+
+/* changement couleur titre des liens  */
+
+.ostName {
+    -webkit-transition: color 1s;
+    transition: color 1s;
+}
+
+.ostName:hover {
+    color: #903e3b !Important;
+}

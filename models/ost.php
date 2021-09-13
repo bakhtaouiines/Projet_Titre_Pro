@@ -82,7 +82,7 @@ class Ost extends MainModel
      * @param array $ostFilter = filtre les ost , 'album' indique le filtre par défaut (au cas où rien est sélectionné)
      * @return int
      */
-    public function totalPagesOST($searchOstList, $numberOSTPerPage = 10, $ostFilter = ['album'])
+    public function totalPagesOST($searchOstList, $numberOSTPerPage = 8, $ostFilter = ['album'])
     {
         $where = '';
         if ($searchOstList != '') {

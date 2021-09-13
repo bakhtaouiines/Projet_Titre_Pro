@@ -6,12 +6,12 @@
 
 class Picture
 {
-    public $error = array();
+    public $error = [];
 
     // Constantes
-    const WIDTH_MAX = 200;    // Largeur max de l'image en pixels
-    const HEIGHT_MAX = 200;    // Hauteur max de l'image en pixels
-    const EXTENSIONS = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
+    const WIDTH_MAX = 200; // Largeur max de l'image en pixels
+    const HEIGHT_MAX = 200; // Hauteur max de l'image en pixels
+    const EXTENSIONS = ['jpg', 'gif', 'png', 'jpeg']; // Extensions autorisees
 
     /**
      * Fonction pour vérifier que le champ n'est pas vide et qu'il existe
@@ -38,13 +38,13 @@ class Picture
      * @param [int] $heightMax
      * @return boolean
      */
-    public function isValidLength($fileName, $fileValue, $widthMax = SELF::WIDTH_MAX, $heightMax = SELF::HEIGHT_MAX)
+    public function isValidDimension($fileName, $fileValue, $widthMax = SELF::WIDTH_MAX, $heightMax = SELF::HEIGHT_MAX)
     {
         $length = strlen($fileValue);
-        if ($length <= $widthMax && $length <= $widthMax) {
+        if ($length <= $widthMax && $length <= $heightMax) {
             return true;
         } else {
-            $this->error[$fileName] = 'La taille de l\'image ' . $fileName . ' doit être comprise entre ' . $widthMax . ' et ' . $widthMax;
+            $this->error[$fileName] = 'La taille de l\'image ' . $fileName . ' ne doit pas dépasser ' . $widthMax . ' et ' . $heightMax;
             return false;
         }
     }

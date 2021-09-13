@@ -84,8 +84,7 @@ class User extends MainModel
         );
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $pdoStatment->execute();
-        $data = $pdoStatment->fetch(PDO::FETCH_OBJ);
-        return $data->password_hash;
+        return $pdoStatment->fetch(PDO::FETCH_OBJ)->password_hash;
     }
 
     public function updateUserHash()

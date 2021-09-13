@@ -6,8 +6,8 @@ require_once 'controllers/profilPageCtrl.php';
     <div class="row my-5">
         <div class="col card">
             <div class="image d-flex">
-                <div class="avatar bg-secondary">
-                    <img src="../assets/images/panxia.png" height="130" width="130">
+                <div class="avatar">
+                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" height="130" width="130">
                 </div>
             </div>
             <h4 class="fw-bold mt-5"><?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?></h4>

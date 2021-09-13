@@ -7,7 +7,7 @@ require_once 'models/ost.php';
  * Récupération des OST avec leur catégorie, leur image d'album, compositeur
  */
 $ost = new Ost();
-$ostInfo = $ost->getOSTList();
+
 
 /**
  * Barre de recherche
@@ -18,7 +18,7 @@ if (!empty($_GET['searchOst'])) {
     if (!empty($_GET['ostFilter'])) {
         $ostFilter = $_GET['ostFilter'];
     }
-    $ostFilterString = implode('&ostFilter%5B%5D=', $ostFilter); // rassemble les éléments d'un tableau en une chaîne
+    $ostFilterString = implode('&ostFilter%5B%5D=', $ostFilter); // rassemble les éléments d'un tableau en une chaîne, %5B%5D = []
     $searchOstList = htmlspecialchars($_GET['searchOst']);
     $searchOstList = trim($searchOstList); // supprime les espaces dans la requête AVANT ou APRES
     
@@ -28,7 +28,7 @@ if (!empty($_GET['searchOst'])) {
  * Pagination
  */
 // On détermine le nombre d'OST par page
-$numberOSTPerPage = 10;
+$numberOSTPerPage = 9;
 // On détermine sur quelle page on se trouve
 // On récupère le nombre d'OST
 $numberOfPages = $ost->totalPagesOST($searchOstList, $numberOSTPerPage, $ostFilter);
