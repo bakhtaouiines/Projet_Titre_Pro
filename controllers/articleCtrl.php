@@ -31,7 +31,7 @@ if (isset($_POST['submitComment'])) {
     if ($commentForm->isValid()) {
  
         $comment->__set('content', $content);
-        $comment->addComment;
+        $comment->addComment();
     }
 }
 

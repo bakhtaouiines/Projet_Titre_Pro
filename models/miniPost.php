@@ -5,6 +5,7 @@ class MiniPost extends MainModel
     public $content = '';
     public $id_User = 0;
     public $id_OST = 0;
+    public $id_OSTPicture = 0;
 
     public function __construct()
     {
@@ -27,5 +28,49 @@ class MiniPost extends MainModel
         $pdoStatment->bindValue(':id_OST', $this->id_OST, PDO::PARAM_STR);
         $pdoStatment->execute();
         return $this->pdo->lastInsertId();
+    }
+
+    /**
+     * Méthode pour lister les mini-posts
+     *
+     * @return string
+     */
+    public function getMiniPostList()
+    {
+        // On récupère le contenu qui nous intéresse, de la table minipost
+        $pdoStatment = $this->pdo->query(
+            'SELECT `id`, `content`, `id_User`, `id_OST`
+           FROM `minipost`
+           LEFT JOIN `ost`
+            ON `id_OST` = `ost`.`id`
+            WHERE `minipost`.`id` = :id
+           ORDER BY `id` ASC'
+        );
+        // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
+        // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
+
+        return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Méthode pour récupérer les informations d'un mini-post
+     *
+     * @return string
+     */
+    public function getMiniPostInfo()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'SELECT `minipost`.`id`, `content`, `id_User` , `pseudo`, `op`.`id`, `path` , `alt` , `id_OST` , 
+            FROM `minipost`
+            LEFT JOIN `ost`
+            ON `id_OST` = `ost`.`id`
+            LEFT JOIN `ostpicture` AS `op`
+            ON `id_OSTPicture` = `op`.`id`
+            WHERE `minipost`.`id` = :id'
+        );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
+        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
+        return $pdoStatment->fetch(PDO::FETCH_OBJ);
     }
 }

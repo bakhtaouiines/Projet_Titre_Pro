@@ -8,7 +8,6 @@ require_once 'models/ost.php';
  */
 $ost = new Ost();
 
-
 /**
  * Barre de recherche
  */

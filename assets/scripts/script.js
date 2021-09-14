@@ -31,6 +31,31 @@ function checkRegisterForm() {
 function deleteIdUser(id) {
     document.getElementById('deleteInfo').value = id;
 }
+
+/**
+ * Barre de recherche Ajax
+ */
+
+function searchOst(searchContent) {
+    let xhr
+    if (searchContent == '') {
+        document.getElementById('resultSearch').innerHtml = 'OST non trouvée.'
+        return
+    }
+    xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) { //4: request finished and response is ready, 200: "OK"
+            //faire une boucle
+            let p = document.createElement('p')
+            p.innerHtml = this.responseText
+            document.getElementById('resultSearch').appendChild(p)
+            console.log(this)
+        }
+    }
+    xhr.open('GET', '../controllers/ajaxCtrl.php?search=' + encodeURIComponent(searchContent), true)
+    xhr.send()
+}
+
 // créer une fonction pour le popover (fichier ost.php)
 
 

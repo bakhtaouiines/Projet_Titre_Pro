@@ -29,6 +29,7 @@ class Comment extends MainModel
             'INSERT INTO `comment`(`comment`.`id`, `content`, `date`, `id_User`, `id_Article`) 
             VALUES(:id, :content, :date, :id_User, :id_Article)'
         );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_STR);
         $pdoStatment->bindValue(':content', $this->content, PDO::PARAM_STR);
         $pdoStatment->bindValue(':date', $this->date, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id_User', $this->id_User, PDO::PARAM_INT);

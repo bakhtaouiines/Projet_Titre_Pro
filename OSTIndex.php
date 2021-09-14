@@ -21,13 +21,13 @@ require_once 'controllers/ostIndexCtrl.php';
                     <input type="search" id="searchOst" name="searchOst" class="form-control mx-2" placeholder="Rechercher" aria-label="Search">
                     <button type="submit" id="submitSearchOst" name="submitSearchOst" class="btn btn-outline-light me-2 bi bi-search" title="rechercher"></button>
                     <!-- filtre -->
-                    <select id="ostFilter" name="ostFilter[]" class="btn btn-dark dropdown-toggle dropdown-menu-dark" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    <!-- <select id="ostFilter" name="ostFilter[]" class="btn btn-dark dropdown-toggle dropdown-menu-dark" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                         <option value="" selected disabled> Trier par:</option>
                         <option value="album" class="dropdown-item">Titre</option>
                         <option value="album" class="dropdown-item">Album</option>
                         <option value="category" class="dropdown-item">Catégorie</option>
                         <option value="composer" class="dropdown-item">Compositeur</option>
-                    </select>
+                    </select> -->
                 </div>
             </form>
         </div>
@@ -42,7 +42,7 @@ require_once 'controllers/ostIndexCtrl.php';
                 <div class="row">
                     <div class="col-md-6 mt-3">
                         <a href="ost.php?ostID=<?= $value->id ?>"><img src="<?= $value->path ?>" class="img-fluid rounded" alt="<?= $value->alt ?>" title="<?= $value->title ?>"></a>
-                        <p class="card-title lead text-light"><?= $value->categoryName ?></p>
+                        <a class="card-title lead text-light" href="category.php?categoryID=<?= $value->categoryID ?>"><?= $value->categoryName ?></a>
                         <form action="" method="POST">
                             <button type="submit" name="submitVote" class="btn btn-danger btn-sm bi bi-heart" title="je vote!"></button>
                         </form>
@@ -52,7 +52,7 @@ require_once 'controllers/ostIndexCtrl.php';
                             <a href="ost.php?ostID=<?= $value->id ?>" class="ostName fs-5 lead link-light card-title" value=""><?= $value->ostName ?></a>
                             <h4 class="card-title fs-5"><?= $value->firstname ?> <?= $value->lastname ?></h4>
                             <p class="card-text fst-italic"><?= $value->album ?>
-                            <br>
+                                <br>
                                 <small class="text-muted"><?= $value->date ?></small>
                             </p>
                         </div>
