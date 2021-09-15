@@ -38,6 +38,7 @@ require_once 'controllers/ostIndexCtrl.php';
         // On affiche chaque entrée une à une
         foreach ($ostList as $value) {
         ?>
+        
             <div class="card mb-3 border border-dark border-2 bg-dark p-4 shadow-lg" style="max-width: 440px;">
                 <div class="row">
                     <div class="col-md-6 mt-3">

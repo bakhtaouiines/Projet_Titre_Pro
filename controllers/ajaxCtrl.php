@@ -12,5 +12,5 @@ $searchOst = '';
 if (!empty($_GET['search'])) {
     $searchOst = htmlspecialchars($_GET['search']);
     $searchOst = trim($_GET['search']);
-    echo $ost->searchOst($searchOst);
+    echo json_encode($ost->searchOst($searchOst));
 }

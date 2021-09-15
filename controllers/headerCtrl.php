@@ -62,7 +62,7 @@ if (isset($_POST['register'])) {
         $user->__set('password_hash', $hashPassword);
         $user->__set('mail', $mail);
         // On génère le hash qui servira à la validation du compte 
-        $user->hash = random_int(1, 999);
+        $user->token = random_int(1, 999);
         if ($user->addUser() != 0) {
             $userCreated = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
             //envoyer un mail de validation de l'inscription

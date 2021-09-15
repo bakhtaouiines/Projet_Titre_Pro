@@ -1,6 +1,7 @@
 <?php
 //inclusion du header
 include 'parts/header.php';
+require_once 'controllers/categoryCtrl.php'
 ?>
 <!-- CORPS DE L'ACCUEIL -->
 <div class="carousel slide my-5" data-bs-ride="carousel" id="carousel" data-bs-interval="0">
@@ -13,7 +14,7 @@ include 'parts/header.php';
                         <img src="/assets/images/her.png" class="card-img" alt="affiche du film her">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=1" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Mélancolie</h5>
                                 </a>
                             </div>
@@ -25,8 +26,7 @@ include 'parts/header.php';
                         <img src="../assets/images/shining.jpg" class="card-img" alt="affiche du film shining">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
-
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=2" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Mystère et Suspens</h5>
                                 </a>
                             </div>
@@ -40,7 +40,7 @@ include 'parts/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=3" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Passion et lyricisme</h5>
                                 </a>
                             </div>
@@ -54,7 +54,7 @@ include 'parts/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=4" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Épique/Héroïque</h5>
                                 </a>
                             </div>
@@ -72,7 +72,7 @@ include 'parts/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=5" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Onirisme/Sérénité</h5>
                                 </a>
                             </div>
@@ -86,7 +86,7 @@ include 'parts/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=6" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Pathos</h5>
                                 </a>
                             </div>
@@ -100,7 +100,7 @@ include 'parts/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=7" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Chant guerrier</h5>
                                 </a>
                             </div>
@@ -114,7 +114,7 @@ include 'parts/header.php';
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=8" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Aventure, Challenge, Courage</h5>
                                 </a>
                             </div>

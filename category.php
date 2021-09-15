@@ -1,7 +1,10 @@
 <?php
-include 'parts/header.php' ?>
+include 'parts/header.php';
+require_once 'controllers/categoryCtrl.php'
+?>
 <div class="container-fluid p-5">
     <div class="row d-flex justify-content-between">
+        <!-- VOTES -->
         <div class="card" style="width: 18rem;">
             <div class="card-header bg-light">
                 Votes
@@ -12,24 +15,34 @@ include 'parts/header.php' ?>
                 <li class="list-group-item">A third item</li>
             </ul>
             <div class="card-footer">
+                <!-- A afficher lorsque l'utilisateur est connecté -->
+                <?php
+                // On récupère nos variables de session
+                if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
+                ?><?php
+                } else {
+                    ?>
                 <button class="btn btn-outline-secondary" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">S'inscrire pour voter</button>
+            <?php
+                }
+            ?>
             </div>
         </div>
-
-        <div class="card border border-secondary border-3 p-2 bg-light" style="width: 600px;">
+        <!-- OST -->
+        <div class="card border border-dark border-2 bg-dark text-light p-2 mx-auto shadow-lg" style="width: 700px;">
             <div class="row g-0">
-                <div class="col-md-5 my-auto me-2">
-                    <img src="../assets/images/cover/edward_scissorhands.jpg" class="img-fluid rounded-start" alt="...">
+                <div class="col-md-6 my-auto me-2">
+                    <img src="<?= $ostInfo->path ?>" class="img-fluid rounded-start" alt="<?= $ostInfo->alt ?>">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="card-body">
-                        <h3 class="card-title">OST Name</h3>
-                        <h4 class="card-title">OST Compositeur</h4>
-                        <h5 class="card-title">OST Catégorie</h5>
-                        <p class="card-text"><small class="text-muted">OST Date</small></p>
-                        <p class="card-text">OST Summary</p>
-                        <p class="card-text"><a href="#" class="card-link mb-3">OST Buy Link</a></p>
-                        <iframe src="https://open.spotify.com/embed/track/55n2WpwjQnIM1lvmxkzllb" width="100%" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <h3 class="card-title"><?= $ostInfo->ostName ?></h3>
+                        <h4 class="card-title"><?= $ostInfo->firstname ?> <?= $ostInfo->lastname ?></h4>
+                        <p class="card-text"><?= $ostInfo->album ?></p>
+                        <p class="card-text"><small class="text-muted"><?= $ostInfo->date ?></small></p>
+                        <a class="fs-5card-title" href="category.php?categoryID=<?= $ostInfo->categoryID ?>"><?= $ostInfo->categoryName ?></a>
+                        <p class="card-text"><a href="<?= $ostInfo->buy_link ?>" class="card-link mb-3 link-light" target="_blank">Lien d'achat</a></p>
+                        <?= $ostInfo->music_link ?>
                         <form action="" method="POST">
                             <button type="submit" name="submitVote" class="btn btn-success bi bi-heart" title="je vote!"></button>
                         </form>
@@ -37,7 +50,7 @@ include 'parts/header.php' ?>
                 </div>
             </div>
         </div>
-
+        <!-- MINI-POST -->
         <div class="card" style="width: 18rem;">
             <div class="card-body bg-light" style="flex: none;">
                 <h5 class="card-header card-title">Mini-Post title</h5>
@@ -47,4 +60,4 @@ include 'parts/header.php' ?>
 
     </div>
 </div>
-<?php include 'parts/footer.php'  ; ?>
+<?php include 'parts/footer.php'; ?>

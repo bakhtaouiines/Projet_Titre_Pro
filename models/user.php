@@ -8,12 +8,12 @@ class User extends MainModel
     public $mail = '';
     public $password_hash = '';
     public $avatar = '';
-    public $hash = null;
+    public $token = null;
     public $table = 'user';
 
     public function __construct()
     {
-       parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -24,13 +24,13 @@ class User extends MainModel
     public function addUser()
     {
         $pdoStatment = $this->pdo->prepare(
-            'INSERT INTO `user`(`pseudo`, `mail`, `password_hash`, `hash`) 
-            VALUES(:pseudo, :mail, :password_hash, :hash)'
+            'INSERT INTO `user`(`pseudo`, `mail`, `password_hash`, `token`) 
+            VALUES(:pseudo, :mail, :password_hash, :token)'
         );
         $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
-        $pdoStatment->bindValue(':hash', $this->hash, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':token', $this->token, PDO::PARAM_STR);
         $pdoStatment->execute();
         return $this->pdo->lastInsertId();
     }
@@ -137,7 +137,6 @@ class User extends MainModel
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
     }
-
     /**
      * Méthode pour vérifier l'existence de l'utilisateur par le mail
      */

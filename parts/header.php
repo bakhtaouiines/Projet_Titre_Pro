@@ -19,7 +19,7 @@ require_once 'controllers/headerCtrl.php';
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="#menu">
         <div class="container-fluid p-3">
             <div class="col-2">
-                <a class="navbar-brand text-white col" href="index.php">Logo</a>
+                <a class="navbar-brand text-white col" href="index.php"><img src="assets/images/logo.png" style="width: 5rem; height:auto"></a>
                 <span id="subtitle" class="row navbar-text text-white fst-italic ms-2">"l'accord parfait entre musique et cinéma"</span>
             </div>
             <!--Menu Burger-->
@@ -28,8 +28,8 @@ require_once 'controllers/headerCtrl.php';
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                 <ul class="navbar-nav mb-lg-0 my-2">
-                    <a href="OSTIndex.php" class="btn btn-outline-light fs-5 rounded me-5 bi bi-collection-play" type="button" title="index"></a>
                     <div class="d-flex align-items-center">
+                        <a href="OSTIndex.php" class="btn btn-outline-light fs-5 rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
                             <a href="../articlelist.php" role="button" class="btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
@@ -48,12 +48,14 @@ require_once 'controllers/headerCtrl.php';
                                 <ul class="dropdown-menu dropdown-menu-end bg-dark">
                                     <a class="dropdown-item text-white bi bi-music-player fs-5" href="playlistList.php"> Playlists</a>
                                     <a class="dropdown-item text-white bi bi-pencil fs-5" href="miniPostList.php"> Mini-Post</a>
-                                    <a class="dropdown-item text-white bi bi-book fs-5" href="miniPostList.php"> Articles</a>
+                                    <a class="dropdown-item text-white bi bi-book fs-5" href=""> Articles</a>
                                 </ul>
                             </li>
+                            <!-- bouton accès listes d'écoute -->
+                            <a class="btn btn-outline-light me-5 px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
                             <!-- Menu déroulant utilisateur -->
 
-                            <li class="nav-item dropdown me-5">
+                            <li class="nav-item dropdown">
                                 <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?= $_SESSION['user']['avatar'] ?>
                                 </button>
@@ -67,8 +69,7 @@ require_once 'controllers/headerCtrl.php';
                                     <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
                                 </ul>
                             </li>
-                            <!-- bouton accès listes d'écoute -->
-                            <a class="btn btn-outline-light px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
+
                         <?php
                         } else {
                         ?>

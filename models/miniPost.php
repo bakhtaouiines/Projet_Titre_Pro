@@ -5,7 +5,6 @@ class MiniPost extends MainModel
     public $content = '';
     public $id_User = 0;
     public $id_OST = 0;
-    public $id_OSTPicture = 0;
 
     public function __construct()
     {
@@ -20,9 +19,10 @@ class MiniPost extends MainModel
     public function createMiniPost()
     {
         $pdoStatment = $this->pdo->prepare(
-            'INSERT INTO `minipost`(`content`, `id_User`, `id_OST`)
-            VALUES(:content, :id_User, :id_OST)'
+            'INSERT INTO `minipost`(`id`, `content`, `id_User`, `id_OST`)
+            VALUES(:id, :content, :id_User, :id_OST)'
         );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_STR);
         $pdoStatment->bindValue(':content', $this->content, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id_User', $this->id_User, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id_OST', $this->id_OST, PDO::PARAM_STR);
@@ -39,16 +39,16 @@ class MiniPost extends MainModel
     {
         // On récupère le contenu qui nous intéresse, de la table minipost
         $pdoStatment = $this->pdo->query(
-            'SELECT `id`, `content`, `id_User`, `id_OST`
+            'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`, `ost`.`name` AS `ostName`
            FROM `minipost`
            LEFT JOIN `ost`
-            ON `id_OST` = `ost`.`id`
-            WHERE `minipost`.`id` = :id
+           ON `id_OST = `ost`.`id`
+           WHERE `minipost`.`id` = :id
            ORDER BY `id` ASC'
         );
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
         // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
-
+        
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
 

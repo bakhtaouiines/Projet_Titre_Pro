@@ -17,7 +17,7 @@
         </section>
     </div>
     <div class="p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        <a href="../contact.php" class="offset-11 text-decoration-none link-light">Me contacter</a>
+        <a href="../contact.php" class="d-flex justify-content-end text-decoration-none link-light">Me contacter</a>
     </div>
 </footer>
 <script src="/assets/scripts/script.js"></script>

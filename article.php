@@ -6,16 +6,19 @@ require_once 'controllers/articleCtrl.php';
 <!-- affichage de l'article -->
 <div class="article p-5 mt-4">
     <a href="articlelist.php" class="btn btn-outline-dark mb-3 offset-md-10" role="button">Revenir à la liste des articles</a>
-    <div class="card mb-3">
-        <div class="row">
-            <img src="<?= $articleInfo->path ?>" class="figure-img img-fluid rounded" title="<?= $articleInfo->title ?>" alt="<?= $articleInfo->alt ?>">
-            <figcaption class="figure-caption text-end"><?= $articleInfo->title ?></figcaption>
-        </div>
-
-        <div class="card-body">
-            <h1 class="card-title fs-2 fst-italic"><?= $articleInfo->articleTitle ?></h1>
-            <p class="card-text"><?= $articleInfo->content ?></p>
-            <p class="card-text lead text-end"><?= $articleInfo->pseudo ?></p>
+    <div class="container mb-3">
+        <div class="row g-0">
+            <div class="col-md-5 my-auto">
+                <img src="<?= $articleInfo->path ?>" class="figure-img rounded" title="<?= $articleInfo->title ?>" alt="<?= $articleInfo->alt ?>">
+                <figcaption class="figure-caption text-center"><?= $articleInfo->title ?></figcaption>
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h1 class="card-title fs-2 fst-italic"><?= $articleInfo->articleTitle ?></h1>
+                    <p class="card-text"><?= $articleInfo->content ?></p>
+                    <p class="card-text lead text-end"><?= $articleInfo->pseudo ?></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -26,7 +29,7 @@ require_once 'controllers/articleCtrl.php';
     <div class="container">
         <div class="row">
             <div class="col-sm-5 col-md-6 col-12 pb-4">
-                <h2>Commentaires</h2>
+                <h2 class="text-light">Commentaires</h2>
                 <?php
                 // On affiche chaque entrée une à une
                 foreach ($commentList as $value) {

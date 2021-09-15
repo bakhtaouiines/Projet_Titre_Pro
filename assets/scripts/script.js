@@ -35,21 +35,30 @@ function deleteIdUser(id) {
 /**
  * Barre de recherche Ajax
  */
+function clearElement(elementId) {
+    document.getElementById(elementId).innerHTML = "";
+}
 
 function searchOst(searchContent) {
     let xhr
-    if (searchContent == '') {
-        document.getElementById('resultSearch').innerHtml = 'OST non trouvée.'
-        return
-    }
+
     xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { //4: request finished and response is ready, 200: "OK"
-            //faire une boucle
-            let p = document.createElement('p')
-            p.innerHtml = this.responseText
-            document.getElementById('resultSearch').appendChild(p)
+            //On commence par vider le contenue de la div parent
+            clearElement("resultSearch")
+            let selectParent = document.getElementById("resultSearch")
+            let element = JSON.parse(this.response)
+                //faire une boucle
+            for (let i = 0; i < element.length; i++) {
+                let optionChild = document.createElement('option')
+                optionChild.value = element[i].id
+                optionChild.innerText = element[i].ostName
+                selectParent.appendChild(optionChild)
+            }
             console.log(this)
+        } else {
+            document.getElementById('resultSearch').innerHtml = '<option>OST non trouvée.</option>'
         }
     }
     xhr.open('GET', '../controllers/ajaxCtrl.php?search=' + encodeURIComponent(searchContent), true)

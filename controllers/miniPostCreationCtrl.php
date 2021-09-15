@@ -13,17 +13,25 @@ $minipostForm = new Form();
  *  Vérifications du formulaire d'écriture de minipost
  */
 if (isset($_POST['submitMiniPost'])) {
-    $content = '';
+    $miniPostContent = '';
+    $resultSearch = '';
     //Je récupère les données du formulaire
     if (isset($_POST['miniPostContent'])) {
         $miniPostContent = htmlspecialchars($_POST['miniPostContent']);
     }
-    //Je vérifie le content du commentaire
+    if (isset($_POST['resultSearch'])) {
+        $resultSearch = htmlspecialchars($_POST['resultSearch']);
+    }
+    //Je vérifie le content du minipost
     $minipostForm->isNotEmpty('miniPostContent', $miniPostContent);
+    $minipostForm->isNotEmpty('resultSearch', $resultSearch);
     //Si il n'y a pas d'erreur sur le formulaire...
     if ($minipostForm->isValid()) {
- 
-        $comment->__set('miniPostContent', $miniPostContent);
-        $comment->createMiniPost();
+        $minipost->__set('miniPostContent', $miniPostContent);
+        $minipost->__set('resultSearch', $resultSearch);
+        $minipost->createMiniPost();
+        echo 'Mini-Post Publié!';
+    } else {
+        echo 'Une erreur a été identifié.';
     }
 }

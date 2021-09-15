@@ -1,7 +1,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
     body {
-        background-color: #f0f0f0;
+        background-color: #470a0a;
     }
     
     .navbar {
@@ -90,7 +90,7 @@
     
     .comments {
         margin-top: 5%;
-        margin-left: 20px
+        margin-left: 20px;
     }
     
     .darker {
@@ -182,7 +182,7 @@
     }
     
     .wrapper .bg-red {
-        background-color: #7D0D09;
+        background-color: #1a1e21;
         height: 100%;
         width: 40%;
         padding-top: 40px;
@@ -195,9 +195,9 @@
     }
     
     .wrapper .bg-red .cursive {
-        font-family: 'Nixie One', cursive;
-        font-size: 1rem;
-        font-weight: 600
+        font-family: 'Life Savers', cursive;
+        font-size: 1.3rem;
+        font-weight: 300
     }
     
     .wrapper .contact-form {
@@ -207,7 +207,6 @@
     
     .wrapper .contact-form label {
         font-size: 0.9rem;
-        color: #555;
         font-weight: 500;
         margin-bottom: 10px
     }
@@ -309,9 +308,4 @@
     
     .ostName:hover {
         color: #903e3b !Important;
-    }
-    
-    #resultSearch {
-        border: 1px solid black;
-        margin-bottom: 10px;
     }

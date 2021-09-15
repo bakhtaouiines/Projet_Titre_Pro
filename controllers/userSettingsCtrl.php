@@ -22,7 +22,6 @@ if (isset($_POST['updateUser'])) {
         //Je vérifie le pseudo
         $updateForm->isNotEmpty('updatePseudo', $updatePseudo);
         $updateForm->isValidFormat('updatePseudo', $updatePseudo, FORM::PATTERN);
-        $updateForm->isUnique('updatePseudo', $updatePseudo, 'user');
         $updateForm->isValidLength('updatePseudo', $updatePseudo, 3, 20);
         if (!isset($updateForm->errors['updatePseudo'])) {
         $updateArray['updatePseudo'] = $updatePseudo;
@@ -33,7 +32,6 @@ if (isset($_POST['updateUser'])) {
         //Je vérifie le mail
         $updateForm->isNotEmpty('updateMail', $updateMail);
         $updateForm->isValidEmail('updateMail', $updateMail);
-        $updateForm->isUnique('updateMail', $updateMail, 'user');
         if (!isset($updateForm->errors['updateMail'])) {
             $updateArray['updateMail'] = $updateMail;
         }
@@ -52,10 +50,6 @@ if (isset($_POST['updateUser'])) {
             $updatePassword = $_POST['updatePassword'];
         }
     }
-
-
-
-
     //Je vérifie l'ancien et nouveau mdp
     // $updateForm->isNotEmpty('oldPassword', $oldPassword);
     $updateForm->isValidLength('oldPassword', $oldPassword, 6, 255);
@@ -73,17 +67,18 @@ if (isset($_POST['updateUser'])) {
     // }
 
     //Si il n'y a pas d'erreur sur le formulaire...
-    if ($updateForm->isValid()) {
+    if (!empty($updateArray)) {
         //...je crée une instance de classe ; création d'un nouvel objet, qui appelle la méthode constructeur 
         $user = new User();
         // si le nouveau mot de passe est bien différent de l'ancien mot de passe enregistré
         if (($_POST['updatePassword']) != ($_POST['oldPassword'])) {
             // j'hydrate l'attribut password_hash de mon objet $userPassword dans lequel je stocke la saisie, sécurisée grâce ) la fonction password_hash(), qui crée une clé de hachage pour le mdp, avec la constante PASSWORD_DEFAULT (qui est un algorithme de hachage)
             $userPassword->password_hash = password_hash($_POST['updatePassword'], PASSWORD_DEFAULT);
-            $user->__set('updatePseudo', $updatePseudo);
-            $user->__set('updateMail', $updateMail);
+            $user->__set('updatePseudo', $_SESSION['user']['pseudo']);
+            $user->__set('updateMail', $_SESSION['user']['mail']);
+            $user->__set('id', $_SESSION['user']['id']);
             // ici j'exécute les méthodes updateUserInfo() et updateUserHash() des objets $user et $userPassword
-            $user->updateUserInfo();
+            $isUpdated = $user->updateUserInfo();
             $userPassword->updateUserHash();
             $successMessage = 'Modifications enregistrées avec succès!';
         }

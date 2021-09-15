@@ -128,18 +128,40 @@ class Ost extends MainModel
     public function searchOst($searchOstList)
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `ost`.`name` AS `ostName`, `album`,  `composerlist`.`id_OST` , `lastname` , `firstname`
-           FROM `ost`
-           LEFT JOIN `composerlist`
-           ON `ost`.`id` = `composerlist`.`id_OST`
-        LEFT JOIN `composer`
-            ON `composer`.`id` = `id_Composer` 
-                WHERE `ost`.`album`
-                 LIKE :searchOstList
-           ORDER BY `ostName`  
-                LIMIT 5'
+           'SELECT 
+                `ost`.`name` AS `ostName`, `album`,  `composerlist`.`id_OST` , `lastname` , `firstname`, `ost`.`id`
+            FROM 
+                `ost`
+                LEFT JOIN `composerlist` ON `ost`.`id` = `composerlist`.`id_OST`
+                LEFT JOIN `composer` ON `composer`.`id` = `id_Composer` 
+            WHERE 
+                `ost`.`album` LIKE :searchOstList
+                OR `ost`.`name` LIKE :searchOstList
+            ORDER BY `ostName`  
+            LIMIT 5'
         );
         $pdoStatment->bindValue(':searchOstList', $searchOstList . '%', PDO::PARAM_STR);
+        $pdoStatment->execute();
+        return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function getRandomOST($catId)
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'SELECT `op`.`id`, `ost`.`id` , `ost`.`name` AS `ostName`, `album`, `date` , `buy_link` , `music_link` , `path` , `title` , `alt` , `category`.`id` AS `categoryID`, `category`.`name` AS `categoryName` , `categorizedby`.`id_OST` , `composerlist`.`id_OST` , `lastname` , `firstname` , `id_Composer`
+            FROM `ost`
+            LEFT JOIN `ostpicture` AS `op`
+            ON `id_OSTPicture` = `op`.`id`
+            LEFT JOIN `categorizedby`
+            ON `ost`.`id` = `categorizedby`.`id_OST`
+            LEFT JOIN `category`
+            ON `categorizedby`.`id` = `category`.`id`
+            LEFT JOIN `composerlist`
+            ON `ost`.`id` = `composerlist`.`id_OST`
+         LEFT JOIN `composer`
+             ON `composer`.`id` = `id_Composer`
+             WHERE `category`.`id` = :catid'
+        );
+        $pdoStatment->bindValue(':catid', $catId, PDO::PARAM_INT);
         $pdoStatment->execute();
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
