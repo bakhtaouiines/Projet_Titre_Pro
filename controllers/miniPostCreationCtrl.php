@@ -17,7 +17,7 @@ if (isset($_POST['submitMiniPost'])) {
     $resultSearch = '';
     //Je récupère les données du formulaire
     if (isset($_POST['miniPostContent'])) {
-        $miniPostContent = htmlspecialchars($_POST['miniPostContent']);
+        $miniPostContent = ($_POST['miniPostContent']);
     }
     if (isset($_POST['resultSearch'])) {
         $resultSearch = htmlspecialchars($_POST['resultSearch']);
@@ -27,8 +27,9 @@ if (isset($_POST['submitMiniPost'])) {
     $minipostForm->isNotEmpty('resultSearch', $resultSearch);
     //Si il n'y a pas d'erreur sur le formulaire...
     if ($minipostForm->isValid()) {
-        $minipost->__set('miniPostContent', $miniPostContent);
-        $minipost->__set('resultSearch', $resultSearch);
+        $minipost->__set('content', $miniPostContent);
+        $minipost->__set('id_OST', $resultSearch);
+        $minipost->__set('id_User', $_SESSION['user']['id']);
         $minipost->createMiniPost();
         echo 'Mini-Post Publié!';
     } else {

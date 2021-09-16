@@ -10,9 +10,12 @@ include 'parts/header.php' ?>
             <textarea name="playlistDescription" id="playlistDescription" msg cols="5" rows="5" class="form-control"></textarea>
             <div class="mt-3">
                 <i class="fa fa-search"></i>
-                <input type="search" class="form-control " placeholder="Search OST...">
-                <!-- afficher le résultat dans une liste déroulante-->
-                <!-- item sélectionnable grâce à un bouton radio -->
+                <input type="search" class="form-control " placeholder="Search OST..." onkeyup="searchOst(this.value)">
+                <!-- affichage du résultat de la recherche-->
+                <div class="col-6">
+                    <select class="form-select" id="resultSearch" name="resultSearch">
+                    </select>
+                </div>
                 <div class="d-flex flex-row">
                     <!-- bouton d'ajout dans la liste -->
                     <button class="btn btn-success m-2"><i class="fa fa-plus"></i></button>

@@ -10,7 +10,7 @@ require_once 'controllers/miniPostListCtrl.php';
         ?>
             <a href="miniPost.php?minipostID=<?= $value->id ?>" class="list-group-item list-group-item-action" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
-                    <small><?= $value->ostName ?></small>
+                   
                 </div>
                 <p class="mb-1"><?= substr($value->content, 0, 250) ?></p>
                 <small>Lire la suite...</small>

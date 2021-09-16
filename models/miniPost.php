@@ -19,10 +19,9 @@ class MiniPost extends MainModel
     public function createMiniPost()
     {
         $pdoStatment = $this->pdo->prepare(
-            'INSERT INTO `minipost`(`id`, `content`, `id_User`, `id_OST`)
-            VALUES(:id, :content, :id_User, :id_OST)'
+            'INSERT INTO `minipost`(`content`, `id_User`, `id_OST`)
+            VALUES(:content, :id_User, :id_OST)'
         );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_STR);
         $pdoStatment->bindValue(':content', $this->content, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id_User', $this->id_User, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id_OST', $this->id_OST, PDO::PARAM_STR);
@@ -39,12 +38,9 @@ class MiniPost extends MainModel
     {
         // On récupère le contenu qui nous intéresse, de la table minipost
         $pdoStatment = $this->pdo->query(
-            'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`, `ost`.`name` AS `ostName`
+            'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`
            FROM `minipost`
-           LEFT JOIN `ost`
-           ON `id_OST = `ost`.`id`
-           WHERE `minipost`.`id` = :id
-           ORDER BY `id` ASC'
+           ORDER BY `id`'
         );
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
         // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
@@ -60,12 +56,14 @@ class MiniPost extends MainModel
     public function getMiniPostInfo()
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `minipost`.`id`, `content`, `id_User` , `pseudo`, `op`.`id`, `path` , `alt` , `id_OST` , 
+            'SELECT `minipost`.`id`, `content`, `id_User` , `pseudo`, `op`.`id`, `path` , `alt` , `id_OST`, `title`
             FROM `minipost`
+            LEFT JOIN `user`
+            ON `minipost`.`id_User` = `user`.`id`
             LEFT JOIN `ost`
-            ON `id_OST` = `ost`.`id`
+            ON `minipost`.`id_OST` = `ost`.`id`
             LEFT JOIN `ostpicture` AS `op`
-            ON `id_OSTPicture` = `op`.`id`
+            ON `op`.`id` = `ost`.`id_OSTPicture`
             WHERE `minipost`.`id` = :id'
         );
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);

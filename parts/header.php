@@ -12,6 +12,7 @@ require_once 'controllers/headerCtrl.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/style/style.css">
+    
 </head>
 
 <body>
@@ -32,7 +33,7 @@ require_once 'controllers/headerCtrl.php';
                         <a href="OSTIndex.php" class="btn btn-outline-light fs-5 rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
-                            <a href="../articlelist.php" role="button" class="btn btn-outline-light" id="otherContent" role="button" aria-expanded="false">Espace lecture</a>
+                            <a href="../articlelist.php" role="button" class="btn btn-outline-light fs-5 bi bi-book" id="otherContent" role="button" aria-expanded="false"> Espace lecture</a>
                         </li>
                         <!-- A afficher lorsque l'administrateur est connecté
                          <a class="btn btn-outline-light" href="adminSettings.php">Gestion du site</a> -->
