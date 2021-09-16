@@ -9,9 +9,6 @@ class Comment extends MainModel
     public $date = '';
     public $id_User = 0;
     public $id_Article = 0;
-    public $pseudo = '';
-    public $avatar = '';
-    public $table = 'comment';
 
     public function __construct()
     {
@@ -26,12 +23,10 @@ class Comment extends MainModel
     public function addComment()
     {
         $pdoStatment = $this->pdo->prepare(
-            'INSERT INTO `comment`(`comment`.`id`, `content`, `date`, `id_User`, `id_Article`) 
-            VALUES(:id, :content, :date, :id_User, :id_Article)'
+            'INSERT INTO `comment`(`content`, `id_User`, `id_Article`) 
+            VALUES(:content, :id_User, :id_Article)'
         );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_STR);
         $pdoStatment->bindValue(':content', $this->content, PDO::PARAM_STR);
-        $pdoStatment->bindValue(':date', $this->date, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id_User', $this->id_User, PDO::PARAM_INT);
         $pdoStatment->bindValue(':id_Article', $this->id_Article, PDO::PARAM_INT);
         $pdoStatment->execute();
@@ -45,16 +40,16 @@ class Comment extends MainModel
      */
     public function getCommentsList()
     {
-        // On récupère tout le contenu de la table patients
-        $pdoStatment = $this->pdo->query(
-            'SELECT `comment`.`id`, `content`, `date`, `user`.`id`, `pseudo`, `avatar`
+        $pdoStatment = $this->pdo->prepare(
+            'SELECT `comment`.`id`, `content`, `date`, `id_User`, `pseudo`, `avatar`, `id_Article`
             FROM `comment`
             LEFT JOIN `user`
             ON `comment`.`id_User` = `user`.`id`
+            WHERE `id_Article` = :id_Article
             ORDER BY `date`'
         );
-        // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
-        // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
+        $pdoStatment->bindValue(':id_Article', $this->id_Article, PDO::PARAM_INT);
+        $pdoStatment->execute();
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
 }

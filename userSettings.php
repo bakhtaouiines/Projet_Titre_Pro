@@ -3,7 +3,7 @@ include 'parts/header.php';
 require_once 'controllers/userSettingsCtrl.php' ?>
 
 <div class="container bg-light my-5 p-4">
-<p class="lead text-success"><?= $successMessage ?></p>
+    <p class="lead text-success"><?= $successMessage ?></p>
     <form method="POST" enctype="multipart/form-data" action="">
         <legend class="fs-2">Éditer mon profil</legend>
         <div class="row">
@@ -44,12 +44,12 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                 <label for="oldPassword" class="form-label">Ancien Mot de Passe</label>
                 <input type="password" class="form-control" id="oldPassword" name="oldPassword">
                 <?php
-                    if (!empty($errorMessagePassword['oldPassword'])) {
-                    ?>
-                        <p class="fst-italic text-danger"><?= $errorMessagePassword['oldPassword']; ?></p>
-                    <?php
-                    }
-                    ?>
+                if (!empty($errorMessagePassword['oldPassword'])) {
+                ?>
+                    <p class="fst-italic text-danger"><?= $errorMessagePassword['oldPassword']; ?></p>
+                <?php
+                }
+                ?>
                 <label for="updatePassword" class="form-label">Nouveau Mot de Passe</label>
                 <input type="password" class="form-control" id="updatePassword" name="updatePassword">
             </div>
@@ -66,10 +66,27 @@ require_once 'controllers/userSettingsCtrl.php' ?>
             </div>
             <div class="col-4">
                 <h3>Mes Mini-Post :</h3>
-                <ul class="list-group list-group-flush col-auto">
-                    <li class="list-group-item">Mini-Post Title <i class="bi bi-x-circle btn"></i></li>
-                    <li class="list-group-item">Mini-Post Title <i class="bi bi-x-circle btn"></i></li>
-                    <li class="list-group-item">Mini-Post Title <i class="bi bi-x-circle btn"></i></li>
+                <ul class="list-group list-group-flush">
+                    <?php
+                    foreach ($minipostList as $value) {
+                    ?>
+                        <li class="list-group-item mb-2">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <a href="miniPost.php?minipostID=<?= $value->id ?>" class="list-group-item list-group-item-action" aria-current="true">
+                                        <p class="mb-1"><?= substr($value->content, 0, 12) ?></p>
+                                        <small>Lire la suite...</small>
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn btn-sm btn-outline-danger bi bi-x-circle my-3" data-bs-toggle="modal" data-bs-target="#deleteElement"></button>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="col-4">
@@ -85,34 +102,35 @@ require_once 'controllers/userSettingsCtrl.php' ?>
         <div class="d-flex justify-content-around p-5">
             <button type="submit" id="updateUser" class="btn btn-outline-success px-3 me-5" name="updateUser">Enregistrer les modifications</button>
             <a href="profilPage.php" type="button" class="btn btn-outline-secondary px-3 me-5">Annuler</a>
-            
+
         </div>
     </form>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProfile">
         Supprimer mon profil
     </button>
+</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="deleteProfile" tabindex="-1" aria-labelledby="deleteProfileLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteProfileLabel">Suppression de votre profil</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="lead">
-                        Voulez-vous vraiment supprimer votre profil? <br>Cela supprimera toutes les informations relatives à votre compte (mini-posts, commentaires, votes...)?
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-danger">Supprimer</button>
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="deleteProfile" tabindex="-1" aria-labelledby="deleteProfileLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProfileLabel">Suppression de votre profil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">
+                    Voulez-vous vraiment supprimer votre profil? <br>Cela supprimera toutes les informations relatives à votre compte (mini-posts, commentaires, votes...)?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger">Supprimer</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <?php include 'parts/footer.php'; ?>

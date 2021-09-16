@@ -24,7 +24,6 @@ require_once 'controllers/articleCtrl.php';
 </div>
 
 <!-- section commentaires -->
-
 <section class="p-5">
     <div class="container">
         <div class="row">
@@ -49,14 +48,16 @@ require_once 'controllers/articleCtrl.php';
                     <div class="form-group p-3">
                         <h4>Laisser un commentaire:</h4>
                         <small class="fst-italic">Merci de rester bienveillant!</small>
-                        <textarea name="content" id="" content cols="30" rows="5" class="form-control mt-3" style="background-color: white;"></textarea>
+                        <textarea name="content" id="content" class="form-control mt-3" style="background-color: white;"></textarea>
                     </div>
                     <!-- A afficher lorsque l'utilisateur est connecté -->
                     <?php
                     // On récupère nos variables de session
                     if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
                     ?>
-                        <button type="submit" id="submitComment" name="submitComment" class="btn btn-outline-dark my-4">Publier</button>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" id="submitComment" name="submitComment" class="btn btn-outline-dark my-4">Publier</button>
+                        </div>
                 </form>
             <?php
                     } else {

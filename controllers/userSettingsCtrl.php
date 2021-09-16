@@ -3,11 +3,17 @@
 require_once 'models/mainModel.php';
 require_once 'models/user.php';
 require_once 'classes/form.php';
+require_once 'models/comment.php';
+require_once 'models/playlist.php';
 
 $updateForm = new Form();
 $updateArray = [];
 $errorMessagePassword = [];
 $successMessage = '';
+
+
+$minipost = new MiniPost();
+$minipostList = $minipost->getMiniPostList();
 
 /**
  * Modification des informations de l'utilisateur
@@ -24,7 +30,7 @@ if (isset($_POST['updateUser'])) {
         $updateForm->isValidFormat('updatePseudo', $updatePseudo, FORM::PATTERN);
         $updateForm->isValidLength('updatePseudo', $updatePseudo, 3, 20);
         if (!isset($updateForm->errors['updatePseudo'])) {
-        $updateArray['updatePseudo'] = $updatePseudo;
+            $updateArray['updatePseudo'] = $updatePseudo;
         }
     }
     if (isset($_POST['updateMail'])) {

@@ -1,38 +1,52 @@
 <?php
-include 'parts/header.php' ?>
+include 'parts/header.php';
+require_once 'controllers/playlistCreationCtrl.php'; ?>
 
 <div class="container-fluid bg-light p-5 my-2">
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-outline-secondary bi bi-music-player fs-5" href="playlistList.php"> Mes Playlist</a>
+    </div>
     <div class="row p-5">
-        <form action="" method="POST" class="col-6">
-            <label for="playlistTitle" class="form-label">Titre de ma Playlist*</label>
-            <input type="text" class="form-control" id="playlistTitle" name="playlistTitle">
-            <label for="playlistDescription" class="form-label">Desciption de ma Playlist</label>
-            <textarea name="playlistDescription" id="playlistDescription" msg cols="5" rows="5" class="form-control"></textarea>
+        <form method="POST" class="col-6">
+            <label for="playlistName" class="form-label">Titre*</label>
+            <input type="text" class="form-control" id="playlistName" name="playlistName">
+            <label for="playlistDescription" class="form-label">Desciption</label>
+            <input type="text" name="playlistDescription" id="playlistDescription" class="form-control">
             <div class="mt-3">
                 <i class="fa fa-search"></i>
-                <input type="search" class="form-control " placeholder="Search OST..." onkeyup="searchOst(this.value)">
+                <input type="search" class="form-control" placeholder="Search OST..." onkeyup="searchOst(this.value)">
+
                 <!-- affichage du résultat de la recherche-->
                 <div class="col-6">
-                    <select class="form-select" id="resultSearch" name="resultSearch">
-                    </select>
+                    <select class="form-select" id="resultSearch" name="resultSearch"></select>
                 </div>
-                <div class="d-flex flex-row">
-                    <!-- bouton d'ajout dans la liste -->
-                    <button class="btn btn-success m-2"><i class="fa fa-plus"></i></button>
-                </div>
+                <!-- bouton d'ajout dans la liste d'affichage des OST-->
+                <button type="submit" name="submitOst" class="btn btn-success m-2 fa fa-plus"></button>
+            </div>
+
+            <div class="d-flex justify-cpntent-start">
+                <!-- bouton pour finaliser et créer la playlist  -->
+                <button type="submit" name="submitPlaylist" class="btn btn-outline-secondary my-5">Créer ma playlist</button>
             </div>
         </form>
         <!-- les ost se rajoutent au fur et à mesure après validation -->
         <div class="col-6">
             <ul class="list-group">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
+                <?php
+                foreach ($ostList as $value) {
+                ?>
+                    <li class="list-group-item">
+                        <a href="<?= $value->id_OST ?>">
+                            <img src="<?= $value->path ?>" title="<?= $value->title ?>" alt="<?= $value->alt ?>" class="img-thumbnail">
+                            <?= $value->ostName ?>
+                        </a>
+                    </li>
+                <?php
+                }
+                ?>
             </ul>
         </div>
     </div>
-    <a class="btn btn-outline-secondary bi bi-music-player fs-2" href="playlistList.php"><span class="fs-5">Mes Playlist</span></a>
+
 </div>
 <?php include 'parts/footer.php'; ?>

@@ -22,7 +22,7 @@ require_once 'controllers/miniPostCreationCtrl.php';
     </form>
 </div>
 <div class="d-flex justify-content-end">
-    <a class="btn btn-outline-secondary bi bi-pencil fs-3" href="miniPostList.php">
+    <a class="btn btn-outline-secondary bi bi-pencil fs-5" href="miniPostList.php">
         Mes Mini-Post
     </a>
 </div>

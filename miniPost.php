@@ -1,21 +1,44 @@
 <?php
 include 'parts/header.php';
 require_once 'controllers/miniPostCtrl.php' ?>
-<div class="container p-5">
-    <div class="card p-5 mx-auto " style="width: 50rem;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="<?= $minipostInfo->path ?>" title="<?= $minipostInfo->title ?>" class="img-fluid rounded-start" alt="<?= $minipostInfo->alt ?>">
+<div class="container-fluid p-5">
+    <div class="card mb-3 bg-dark text-white p-2 mx-auto mb-5" style="width: 940px;">
+        <div class="row">
+            <div class="col-md-7">
+                <img src="<?= $minipostInfo->path ?>" class="img-fluid rounded-start" title="<?= $minipostInfo->title ?>" alt="<?= $minipostInfo->alt ?>">
             </div>
-            <div class="col-md-8 my-auto">
-                <div class="card-body bg-light my-auto">
-                    <p class="card-text">
-                        <?= $minipostInfo->content ?>
-                    </p>
+            <div class="col-md-5">
+                <div class="card-body">
+                    <p class="card-text"><?= $minipostInfo->content ?></p>
                 </div>
             </div>
         </div>
     </div>
-    <a href="miniPostCreation.php" class="btn btn-outline-secondary bi bi-list">Créer un mini-post</a>
+    <div class="col-auto d-flex justify-content-between">
+        <a href="miniPostCreation.php" class="btn btn-outline-secondary bi bi-list">Créer un mini-post</a>
+        <a href="miniPostList.php" class="btn btn-outline-secondary bi bi-list">Revenir à la liste des minipost</a>
+        <button type="button" class="btn btn-outline-danger bi bi-x-circle" data-bs-toggle="modal" data-bs-target="#deleteElement"> Supprimer</button>
+    </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="deleteElement" tabindex="-1" aria-labelledby="deleteElementLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ddeleteElementLabel">Confirmation de suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">Voulez-vous vraiment supprimer cet élément?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <form method="POST">
+                    <button type="submit" class="btn btn-danger" type="submit" name="delete">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <?php include 'parts/footer.php'; ?>

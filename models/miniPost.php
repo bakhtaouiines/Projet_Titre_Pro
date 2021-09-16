@@ -38,13 +38,17 @@ class MiniPost extends MainModel
     {
         // On récupère le contenu qui nous intéresse, de la table minipost
         $pdoStatment = $this->pdo->query(
-            'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`
+            'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`, `path` , `alt` ,`title`
            FROM `minipost`
+           LEFT JOIN `ost`
+            ON `minipost`.`id_OST` = `ost`.`id`
+            LEFT JOIN `ostpicture` AS `op`
+            ON `op`.`id` = `ost`.`id_OSTPicture`
            ORDER BY `id`'
         );
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
         // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
-        
+
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -70,5 +74,20 @@ class MiniPost extends MainModel
         $pdoStatment->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $pdoStatment->fetch(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Méthode pour supprimer un minipost
+     *
+     * @return void
+     */
+    public function deleteMiniPost()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'DELETE FROM `minipost`
+            WHERE `id`= :id'
+        );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
     }
 }
