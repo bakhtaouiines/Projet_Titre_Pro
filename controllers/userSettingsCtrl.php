@@ -41,6 +41,7 @@ if (isset($_POST['updateUser'])) {
         $oldPassword = $_POST['oldPassword'];
         //j'exécute la méthode getUserHash() de l'objet $userPassword et stocke dans une variable nommée $hash le mot de passe hashé enregistré dans la BDD
         $userPassword = new User();
+        $userPassword->__set('mail',$_POST['updateMail']);
         $hash = $userPassword->getUserHash();
         //   si le mot de passe n'est pas bon (càd, qu'il est différent de celui indiqué dans la BDD)...
         if (!password_verify($_POST['oldPassword'], $hash)) {
@@ -79,19 +80,19 @@ if (isset($_POST['updateUser'])) {
         // si le nouveau mot de passe est bien différent de l'ancien mot de passe enregistré
         if (($_POST['updatePassword']) != ($_POST['oldPassword'])) {
             // j'hydrate l'attribut password_hash de mon objet $userPassword dans lequel je stocke la saisie, sécurisée grâce à la fonction password_hash(), qui crée une clé de hachage pour le mdp, avec la constante PASSWORD_DEFAULT (qui est un algorithme de hachage)
-            $userPassword->password_hash = password_hash($_POST['updatePassword'], PASSWORD_DEFAULT);
+            $user->__set('password_hash',password_hash($_POST['updatePassword'], PASSWORD_DEFAULT));
             $user->__set('id', $_SESSION['user']['id']);
             $user->__set('pseudo', $updateArray['pseudo']);
             $user->__set('mail', $updateArray['mail']);
-            $user->__set('updatePassword', $updateArray['updatePassword']);
+            // $user->__set('updatePassword', $updateArray['updatePassword']);
             // ici j'exécute les méthodes updateUserInfo() et updateUserHash() des objets $user et $userPassword
             $isUpdated = $user->updateUserInfo($updateArray);
+            $user->updateUserHash();
+            $successMessage = 'Modifications enregistrées avec succès!';
             if ($isUpdated) {
                 $_SESSION['user']['mail'] = $updateArray['mail'];
                 $_SESSION['user']['pseudo'] = $updateArray['pseudo'];
             }
-            $userPassword->updateUserHash();
-            $successMessage = 'Modifications enregistrées avec succès!';
         }
     }
 }

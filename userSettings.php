@@ -52,7 +52,7 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                 <label for="updatePassword" class="form-label">Nouveau Mot de Passe</label>
                 <input type="password" class="form-control" id="updatePassword" name="updatePassword">
                 <?php
-                if (!empty($error['oldPassword'])) {
+                if (!empty($error['updatePassword'])) {
                 ?>
                     <p class="fst-italic text-danger"><?= $error['updatePassword']; ?></p>
                 <?php
