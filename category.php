@@ -40,7 +40,6 @@ require_once 'controllers/categoryCtrl.php'
                         <h4 class="card-title"><?= $ostInfo->firstname ?> <?= $ostInfo->lastname ?></h4>
                         <p class="card-text"><?= $ostInfo->album ?></p>
                         <p class="card-text"><small class="text-muted"><?= $ostInfo->date ?></small></p>
-                        <a class="fs-5card-title" href="category.php?categoryID=<?= $ostInfo->categoryID ?>"><?= $ostInfo->categoryName ?></a>
                         <p class="card-text"><a href="<?= $ostInfo->buy_link ?>" class="card-link mb-3 link-light" target="_blank">Lien d'achat</a></p>
                         <?= $ostInfo->music_link ?>
                         <form action="" method="POST">

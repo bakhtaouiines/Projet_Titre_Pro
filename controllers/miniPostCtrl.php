@@ -22,6 +22,6 @@ if (isset($_POST['delete'])) {
         $delete->id = htmlspecialchars($_GET['minipostID']);
         $deleteMinipost = $delete->deleteMiniPost();
         // si tout est ok, on redirige vers la page de la liste des miniposts
-        // header('Location: miniPostList.php');
+        header('Location: miniPostList.php');
     }
 }

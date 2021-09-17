@@ -35,6 +35,25 @@ class User extends MainModel
         return $this->pdo->lastInsertId();
     }
 
+    // /**
+    //  * Méthode permettant de vérifier qu'un utilisateur existe
+    //  *
+    //  * @return boolean
+    //  */
+    // public function checkUserExists()
+    // {
+    //     $pdoStatment = $this->pdo->prepare(
+    //         'SELECT 
+    //         COUNT(`id`) AS `userExists`
+    //         FROM `user`
+    //         WHERE `mail` = :mail
+    //         OR `pseudo` = :pseudo'
+    //     );
+    //     $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_INT);
+    //     $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_INT);
+    //     return $pdoStatment->fetch(PDO::FETCH_OBJ)->userExists;
+    // }
+
     /**
      * Methode permettant de lister les utilisateurs
      *
@@ -61,7 +80,7 @@ class User extends MainModel
     public function getUserInfoById()
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `id`, `pseudo`, `avatar`
+            'SELECT `id`, `pseudo`, `avatar`, `mail`
             FROM `user`
             WHERE `id` = :id'
         );
@@ -85,18 +104,6 @@ class User extends MainModel
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $pdoStatment->execute();
         return $pdoStatment->fetch(PDO::FETCH_OBJ)->password_hash;
-    }
-
-    public function updateUserHash()
-    {
-        $pdoStatment = $this->pdo->prepare(
-            'UPDATE `user`
-            SET `password_hash` = :password_hash
-            WHERE `id` = :id'
-        );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
-        return $pdoStatment->execute();;
     }
 
 
@@ -128,29 +135,30 @@ class User extends MainModel
     {
         $pdoStatment = $this->pdo->prepare(
             'UPDATE `user` 
-             SET `avatar` = :avatar , `pseudo` = :pseudo , `mail` = :mail 
+             SET `pseudo` = :pseudo , `mail` = :mail , `password_hash` = :password_hash
              WHERE `id` = :id'
         );
         $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
-        $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $pdoStatment->execute();
+        return $pdoStatment->execute();
     }
+
     /**
-     * Méthode pour vérifier l'existence de l'utilisateur par le mail
+     * Méthode permettant de modifier le mot de passe
+     *
+     * @return void
      */
-    // public function checkUserExists()
-    // {
-    //     $pdoStatment = $this->pdo->prepare(
-    //         'SELECT
-    //         COUNT (`id`) AS `isUserExists`
-    //         FROM `user`
-    //         WHERE `mail` = :mail'
-    //     );
-    //     $pdoStatment->bindValue(':mail', $this->pseudo, PDO::PARAM_INT);
-    //     $pdoStatment->execute();
-    //     $result = $pdoStatment->fetch(PDO::FETCH_OBJ);
-    //     return $result->isUserExists;
-    // }
+    public function updateUserHash()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'UPDATE `user`
+            SET `password_hash` = :password_hash
+            WHERE `id` = :id'
+        );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
+        return $pdoStatment->execute();
+    }
 }

@@ -8,13 +8,14 @@ require_once 'classes/form.php';
 
 $minipost = new MiniPost();
 $minipostForm = new Form();
-
+$message = '';
 /**
  *  Vérifications du formulaire d'écriture de minipost
  */
 if (isset($_POST['submitMiniPost'])) {
     $miniPostContent = '';
     $resultSearch = '';
+
     //Je récupère les données du formulaire
     if (isset($_POST['miniPostContent'])) {
         $miniPostContent = ($_POST['miniPostContent']);
@@ -31,8 +32,10 @@ if (isset($_POST['submitMiniPost'])) {
         $minipost->__set('id_OST', $resultSearch);
         $minipost->__set('id_User', $_SESSION['user']['id']);
         $minipost->createMiniPost();
-        echo 'Mini-Post Publié!';
+        echo $message = 'Mini-post bien publié!';
+        // redirection au bout de 3s sur la page des minipost
+        header("Refresh:3; url=../miniPostList.php");
     } else {
-        echo 'Une erreur a été identifié.';
+        echo $message = 'Une erreur a été identifié.';
     }
 }

@@ -38,7 +38,7 @@ class MiniPost extends MainModel
     {
         // On récupère le contenu qui nous intéresse, de la table minipost
         $pdoStatment = $this->pdo->query(
-            'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`, `path` , `alt` ,`title`
+            'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`, `path` , `alt` ,`title`, `ost`.`name` AS `ostName`
            FROM `minipost`
            LEFT JOIN `ost`
             ON `minipost`.`id_OST` = `ost`.`id`
@@ -60,7 +60,7 @@ class MiniPost extends MainModel
     public function getMiniPostInfo()
     {
         $pdoStatment = $this->pdo->prepare(
-            'SELECT `minipost`.`id`, `content`, `id_User` , `pseudo`, `op`.`id`, `path` , `alt` , `id_OST`, `title`
+            'SELECT `minipost`.`id`, `content`, `id_User` , `pseudo`, `op`.`id`, `path` , `alt` , `id_OST`, `title`, `ost`.`name` AS `ostName`
             FROM `minipost`
             LEFT JOIN `user`
             ON `minipost`.`id_User` = `user`.`id`

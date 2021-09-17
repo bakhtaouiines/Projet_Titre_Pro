@@ -4,6 +4,17 @@ require_once 'models/mainModel.php';
 require_once 'models/user.php';
 require_once 'classes/form.php';
 
+// j'ai crée une variable $controllers avec le chemin 'controllers/miniPostCtrl.php', qui sera appelé dans les vues la nécessitant; je vérifie au préalable qu'elle existe, puis je l'appelle
+
+if(isset($controllers)){
+    require $controllers;
+}
+
+// $user = new User();
+// $user->__set('id', 80);
+// $user->__set('password_hash', password_hash('141095',PASSWORD_DEFAULT));
+// $user->updateUserHash();
+
 $registerForm = new Form();
 $loginForm = new Form();
 $errorMessagePassword = [];

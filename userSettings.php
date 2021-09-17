@@ -2,18 +2,17 @@
 include 'parts/header.php';
 require_once 'controllers/userSettingsCtrl.php' ?>
 
-<div class="container bg-light my-5 p-4">
-    <p class="lead text-success"><?= $successMessage ?></p>
-    <form method="POST" enctype="multipart/form-data" action="">
-        <legend class="fs-2">Éditer mon profil</legend>
-        <div class="row">
-            <div class="col-12 form-group p-3 position-relative">
+<div class="container bg-dark text-light my-5 p-5">
+    <p class="lead text-success fs-2"><?= $successMessage ?></p>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="row row-cols-1 row-cols-md-2 g-5">
+            <div class="col form-group p-3">
                 <label for="avatar" title="Recherchez le fichier à uploader !">Envoyer l'image:</label>
                 <input name="avatar" type="file" id="avatar">
                 <input type="submit" name="submitAvatar" value="Télécharger">
             </div>
 
-            <div class="col form-group position-relative">
+            <div class="col form-group">
                 <label for="updatePseudo" class="form-label">Pseudo</label>
                 <input type="text" class="form-control" id="updatePseudo" name="updatePseudo" value="<?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?>">
                 <?php
@@ -25,7 +24,7 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                 ?>
             </div>
 
-            <div class="col form-group position-relative">
+            <div class="col form-group">
                 <label for="updateMail" class="form-label">Adresse Email</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="mailPrepend">@</span>
@@ -40,68 +39,31 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                 </div>
             </div>
 
-            <div class="col form-group position-relative">
+            <div class="col form-group">
                 <label for="oldPassword" class="form-label">Ancien Mot de Passe</label>
                 <input type="password" class="form-control" id="oldPassword" name="oldPassword">
                 <?php
-                if (!empty($errorMessagePassword['oldPassword'])) {
+                if (!empty($error['oldPassword'])) {
                 ?>
-                    <p class="fst-italic text-danger"><?= $errorMessagePassword['oldPassword']; ?></p>
+                    <p class="fst-italic text-danger"><?= $error['oldPassword']; ?></p>
                 <?php
                 }
                 ?>
                 <label for="updatePassword" class="form-label">Nouveau Mot de Passe</label>
                 <input type="password" class="form-control" id="updatePassword" name="updatePassword">
-            </div>
-        </div>
-
-        <div class="row m-5 p-5">
-            <div class="col-4">
-                <h3>Mes Playlist :</h3>
-                <ul class="list-group list-group-flush col-auto">
-                    <li class="list-group-item">Playlist Title <i class="bi bi-x-circle btn"></i></li>
-                    <li class="list-group-item">Playlist Title <i class="bi bi-x-circle btn"></i></li>
-                    <li class="list-group-item">Playlist Title <i class="bi bi-x-circle btn"></i></li>
-                </ul>
-            </div>
-            <div class="col-4">
-                <h3>Mes Mini-Post :</h3>
-                <ul class="list-group list-group-flush">
-                    <?php
-                    foreach ($minipostList as $value) {
-                    ?>
-                        <li class="list-group-item mb-2">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <a href="miniPost.php?minipostID=<?= $value->id ?>" class="list-group-item list-group-item-action" aria-current="true">
-                                        <p class="mb-1"><?= substr($value->content, 0, 12) ?></p>
-                                        <small>Lire la suite...</small>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" class="btn btn-sm btn-outline-danger bi bi-x-circle my-3" data-bs-toggle="modal" data-bs-target="#deleteElement"></button>
-                                    
-                                </div>
-                            </div>
-                        </li>
-                    <?php
-                    }
-                    ?>
-                </ul>
-            </div>
-            <div class="col-4">
-                <h3>Mes Commentaires :</h3>
-                <ul class="list-group list-group-flush col-auto">
-                    <li class="list-group-item">Commentaire Title <i class="bi bi-x-circle btn"></i></li>
-                    <li class="list-group-item">Commentaire Title <i class="bi bi-x-circle btn"></i></li>
-                    <li class="list-group-item">Commentaire Title <i class="bi bi-x-circle btn"></i></li>
-                </ul>
+                <?php
+                if (!empty($error['oldPassword'])) {
+                ?>
+                    <p class="fst-italic text-danger"><?= $error['updatePassword']; ?></p>
+                <?php
+                }
+                ?>
             </div>
         </div>
 
         <div class="d-flex justify-content-around p-5">
-            <button type="submit" id="updateUser" class="btn btn-outline-success px-3 me-5" name="updateUser">Enregistrer les modifications</button>
-            <a href="profilPage.php" type="button" class="btn btn-outline-secondary px-3 me-5">Annuler</a>
+            <button type="submit" id="updateUser" class="btn btn-sm btn-outline-success px-3 me-5" name="updateUser">Enregistrer les modifications</button>
+            <a href="profilPage.php" type="button" class="btn btn-sm btn-outline-secondary px-3 me-5">Annuler</a>
 
         </div>
     </form>
@@ -131,6 +93,5 @@ require_once 'controllers/userSettingsCtrl.php' ?>
         </div>
     </div>
 </div>
-
 
 <?php include 'parts/footer.php'; ?>

@@ -1,6 +1,7 @@
 <?php
+$controllers = 'controllers/miniPostCtrl.php';
 include 'parts/header.php';
-require_once 'controllers/miniPostCtrl.php' ?>
+?>
 <div class="container-fluid p-5">
     <div class="card mb-3 bg-dark text-white p-2 mx-auto mb-5" style="width: 940px;">
         <div class="row">
@@ -9,6 +10,7 @@ require_once 'controllers/miniPostCtrl.php' ?>
             </div>
             <div class="col-md-5">
                 <div class="card-body">
+                    <h3 class="card-title"><?= $minipostInfo->ostName ?></h3>
                     <p class="card-text"><?= $minipostInfo->content ?></p>
                 </div>
             </div>

@@ -59,38 +59,4 @@ class MainModel
             return false;
         }
     }
-
-    /**
-     * Fonction permettant de vérifier si un champ est unique
-     *
-     * @param [type] $field
-     * @param [type] $value
-     * @return boolean
-     */
-    public function isUnique($field, $value)
-    {
-        $pdoStatment = $this->pdo->prepare(
-            'SELECT COUNT(*) AS `isUsed` 
-            FROM ' . $this->table . ' WHERE ' . $field . ' = :' . $field
-        );
-        $pdoStatment->bindValue(':' . $field, $value, PDO::PARAM_STR);
-        $pdoStatment->execute();
-        return !$pdoStatment->fetch(PDO::FETCH_OBJ)->isUsed;
-    }
-    
-    /**
-     * Fonction permettant de vérifier si une value existe dans une table
-     *
-     * @param [type] $field
-     * @param [type] $value
-     * @return void
-     */
-    public function doesExist($field, $value)
-    {
-        $pdoStatment = $this->pdo->prepare('SELECT COUNT(*) AS `isUsed` 
-        FROM ' . $this->table . ' WHERE ' . $field . ' = :' . $field);
-        $pdoStatment->bindValue(':' . $field, $value, PDO::PARAM_STR);
-        $pdoStatment->execute();
-        return $pdoStatment->fetch(PDO::FETCH_OBJ)->isUsed;
-    }
 }
