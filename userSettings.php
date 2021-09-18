@@ -3,13 +3,15 @@ include 'parts/header.php';
 require_once 'controllers/userSettingsCtrl.php' ?>
 
 <div class="container bg-dark border border-secondary rounded text-light my-5 p-5">
-    <p class="lead text-success fs-2"><?= $successMessage ?></p>
+    <p class="lead text-warning fs-2"><?= $message ?></p>
+    <!-- formulaire modification avatar, pseudo, email -->
     <form method="POST" enctype="multipart/form-data">
         <div class="row row-cols-1 row-cols-md-2 g-5">
             <div class="col-lg-6 mx-auto">
                 <!-- Upload d'image-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                    <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="<?= MAX_SIZE; ?>" />
+                    <input name="avatar" id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
                     <label id="upload-label" for="upload" class="font-weight-light text-muted">Choisir une image</label>
                     <div class="input-group-append">
                         <label for="upload" class="btn btn-light m-0 rounded-pill px-4"><i class="bi bi-cloud-arrow-up fs-5 text-muted"></i></label>
@@ -72,6 +74,7 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                 <h5 class="modal-title" id="updatePasswordLabel">Modification de votre mot de passe</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- formulaire modification du mot de passe -->
             <form method="POST">
                 <div class="modal-body">
                     <div class="col form-group">
@@ -118,7 +121,10 @@ require_once 'controllers/userSettingsCtrl.php' ?>
             </div>
             <div class="modal-footer bg-dark">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-danger">Supprimer</button>
+                <!-- formulaire suppression du profil -->
+                <form method="POST">
+                    <button type="submit" name="deleteProfile" class="btn btn-danger">Supprimer</button>
+                </form>
             </div>
         </div>
     </div>

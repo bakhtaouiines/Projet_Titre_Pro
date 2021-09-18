@@ -137,12 +137,12 @@ class User extends MainModel
     {
         $pdoStatment = $this->pdo->prepare(
             'UPDATE `user` 
-             SET `pseudo` = :pseudo , `mail` = :mail , `password_hash` = :password_hash
+             SET `pseudo` = :pseudo , `mail` = :mail , `avatar` = :avatar
              WHERE `id` = :id'
         );
         $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
-        $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $pdoStatment->execute();
     }
@@ -162,5 +162,20 @@ class User extends MainModel
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
         return $pdoStatment->execute();
+    }
+
+    /**
+     * Méthode pour supprimer un profil d'utilisateur
+     *
+     * @return void
+     */
+    public function deleteProfile()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'DELETE FROM `user`
+            WHERE `id`= :id'
+        );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
     }
 }

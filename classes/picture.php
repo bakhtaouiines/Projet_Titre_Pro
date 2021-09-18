@@ -6,13 +6,27 @@
 
 class Picture
 {
+    public $extension = '';
+    public $length = '';
+    public $nomImage = '';
     public $error = [];
 
-    // Constantes
+    /**
+     * Attributs pour la gestion du fichier
+     */
+    public $directory = '';
+    //Ici on stockera le $_Files['myFile']
+    public $file;
+
+    /**
+     * Constantes pour la vérifications du fichier
+     */
+    const SIZE = 100000; // Taille max de l'image en octets 
     const WIDTH_MAX = 200; // Largeur max de l'image en pixels
     const HEIGHT_MAX = 200; // Hauteur max de l'image en pixels
     const EXTENSIONS = ['jpg', 'gif', 'png', 'jpeg']; // Extensions autorisees
 
+    
     /**
      * Fonction pour vérifier que le champ n'est pas vide et qu'il existe
      *
@@ -58,11 +72,13 @@ class Picture
      * @return boolean
      */
     public function isValidFormat($fileName, $fileValue, $format = SELF::EXTENSIONS)
-    {
-        if (strtolower($format, $fileValue)) {
-            return true;
-        } else {
-            $this->error[$fileValue] = 'L\'image ' . $fileName . ' n\'est pas au bon format';
+    
+    { 
+        $extension = strtolower(pathinfo($this->file['name'], $format = SELF::EXTENSIONS));
+        if (!in_array($this->extension, $this->format)) {
+            $this->errors['extension'] = 'Extension du fichier non valide';
+            return $this->error[$fileValue] = 'L\'image ' . $fileName . ' n\'est pas au bon format';;
         }
+        return true;
     }
 }

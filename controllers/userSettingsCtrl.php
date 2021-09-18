@@ -6,14 +6,88 @@ require_once 'classes/form.php';
 require_once 'models/comment.php';
 require_once 'models/playlist.php';
 
+/**
+ * Définitions des constantes, tableaux de données et variables
+ * 
+ */
+// Constantes (valeurs qui ne changeront pas)
+define('TARGET', 'assets/images/upload/');  // Repertoire cible
+define('MAX_SIZE', 5242880);  // Taille max de 5mo 
+define('WIDTH_MAX', 200);   // Largeur max de l'image en pixels
+define('HEIGHT_MAX', 200); // Hauteur max de l'image en pixels
+
+// Tableaux de données
+$extensionArray = array('jpg', 'gif', 'png', 'jpeg'); // Extensions autorisees
+$avatarInfos = array();
+
+// Variables
+$user = new User(); // création d'une instance de classe; création d'un nouvel objet
 $updateForm = new Form();
 $updateArray = [];
-$successMessage = '';
+$extension = '';
+$message = '';
+$avatarName = '';
+
+/**
+ * Création du répertoire cible, si il est inexistant
+ */
+if (!is_dir(TARGET)) {
+    if (!mkdir(TARGET, 0755)) { //cette permission implique le propriétaire peut lire/écrire/exécuter, les utilisateurs (groupe) peuvent lire/exécuter, les autres peuvent lire/exécuter
+        exit('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement.');
+    }
+}
 
 /**
  * Vérification formulaire de modification des informations de l'utilisateur (pseudo,mail,avatar)
  */
 if (isset($_POST['updateUser'])) {
+    // On vérifie l'avatar
+    // On verifie si le champ est rempli
+    if (!empty($_FILES['avatar']['name'])) {
+        $updateAvatar = $_FILES['avatar']['name'];
+        // Recuperation de l'extension du fichier
+        $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+
+        // On verifie l'extension du fichier
+        if (in_array(strtolower($extension), $extensionArray)) {
+            // On recupere les dimensions du fichier
+            $avatarInfos = getimagesize($updateAvatar);
+            var_dump($avatarInfos);
+            // On verifie les dimensions et taille de l'image
+            // 0 = largeur, 1 = hauteur
+            if (($avatarInfos[0] <= WIDTH_MAX) && ($avatarInfos[1] <= HEIGHT_MAX) && (filesize($_FILES['file']['tmp_name']) <= MAX_SIZE)) {
+                // Parcours du tableau d'erreurs
+                if (
+                    isset($_FILES['avatar']['error'])
+                    && UPLOAD_ERR_OK === $_FILES['avatar']['error']
+                ) {
+                    // On renomme le fichier grâce au hachage md5, tout en lui donnant un identifiant unique 
+                    $avatarName = md5(uniqid()) . '.' . $extension;
+
+                    // Si c'est OK, on teste l'upload et on déplace le fichier
+                    if (move_uploaded_file($_FILES['avatar']['tmp_name'], TARGET . $avatarName)) {
+                        $message = 'Upload réussi !';
+                        $updateArray['avatar'] = $updateAvatar;
+                    } else {
+                        // Sinon on affiche une erreur systeme
+                        $message = 'Problème lors de l\'upload !';
+                    }
+                } else {
+                    $message = 'Une erreur interne a empêché l\'uplaod de l\'image';
+                }
+            } else {
+                // Sinon erreur sur les dimensions et taille de l'image
+                $message = 'Erreur dans les dimensions de l\'image !';
+            }
+        } else {
+            // Sinon on affiche une erreur pour l'extension
+            $message = 'L\'extension du fichier est incorrecte !';
+        }
+    } else {
+        // Sinon on affiche une erreur pour le champ vide
+        $message = 'Veuillez remplir le formulaire svp !';
+    }
+
     //Je récupère les données du formulaire
     if (isset($_POST['updatePseudo'])) {
         $updatePseudo = htmlspecialchars($_POST['updatePseudo']);
@@ -36,35 +110,26 @@ if (isset($_POST['updateUser'])) {
             $updateArray['mail'] = $updateMail;
         }
     }
-    // vérif avatar
-    // if (isset($_POST['submitAvatar'])) {
-    //     if (isset($_FILES['avatar'])) {
-    //         $avatar = $_FILES['avatar'];
-    //     }
-    //     $picture->isNotEmpty('avatar', $avatar);
-    //     $picture->isValidLength('avatar', $avatar, $widthMax = SELF::WIDTH_MAX, $heightMax = SELF::HEIGHT_MAX);
-    //     $picture->isValidFormat('avatar', $avatar, $format = SELF::EXTENSIONS);
-    // }
 
     //Si il n'y a pas d'erreur sur le formulaire...
     if (!empty($updateArray)) {
-        //...je crée une instance de classe; création d'un nouvel objet
-        $user = new User();
+
         // je modifie les attributs de la classe grâce au setter
         $user->__set('id', $_SESSION['user']['id']);
         $user->__set('pseudo', $updateArray['pseudo']);
         $user->__set('mail', $updateArray['mail']);
+        $user->__set('avatar', $updateArray['avatar']);
         // ici j'exécute la méthodes updateUserInfo() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
         $isUpdated = $user->updateUserInfo($updateArray);
         if ($isUpdated) {
             // ici, je mets à jour les informations, visuellement, sur le profil de l'utilisateur en passant par les variables de session
             $_SESSION['user']['mail'] = $updateArray['mail'];
             $_SESSION['user']['pseudo'] = $updateArray['pseudo'];
+            $_SESSION['user']['avatar'] = $updateArray['avatar'];
             $successMessage = 'Modifications enregistrées avec succès!';
         }
     }
 }
-
 
 /**
  * Vérification formulaire de modification de mot de passe
@@ -104,5 +169,19 @@ if (isset($_POST['updateUserPassword'])) {
                 $successMessage = 'Mot de passe modifié avec succès!';
             }
         }
+    }
+}
+
+/**
+ * Vérification formulaire de suppression du compte
+ */
+if (isset($_POST['deleteProfile'])) {
+    // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
+    if (isset($_GET['userID'])) {
+        $delete = new User();
+        $delete->id = htmlspecialchars($_GET['userID']);
+        $deleteProfile = $delete->deleteProfile();
+        // si tout est ok, on redirige vers la page de la liste des miniposts
+        header('Location: index.php');
     }
 }

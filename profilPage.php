@@ -7,7 +7,17 @@ require_once 'controllers/profilPageCtrl.php';
         <div class="col card">
             <div class="image d-flex">
                 <div class="avatar">
-                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" height="170" width="170">
+                    <?php
+                    if (file_exists('assets/images/upload/' . $_SESSION['user']['id'] . "/" . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
+                    ?>
+                        <img src="<?= 'assets/images/upload/' . $_SESSION['user']['id'] . '/' . $_SESSION['user']['avatar'] ?>" height="170" width="170">
+                    <?php
+                    } else {
+                    ?>
+                        <img src="<?=(!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" height="170" width="170" />
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <h4 class="fw-bold mt-5"><?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?></h4>
