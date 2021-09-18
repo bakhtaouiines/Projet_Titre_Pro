@@ -2,7 +2,7 @@
 include 'parts/header.php';
 require_once 'controllers/profilPageCtrl.php';
 ?>
-<div class="container my-5 p-5 bg-dark text-light">
+<div class="container my-5 p-5 bg-dark border border-secondary rounded text-light">
     <div class="row my-5">
         <div class="col card">
             <div class="image d-flex">

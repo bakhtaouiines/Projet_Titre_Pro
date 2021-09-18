@@ -1,6 +1,6 @@
 <!-----------------------------------------------------------footer------------------------------------------->
 
-<footer class="bg-dark text-white">
+<footer class="text-white" style="background-color: #0a0808;">
     <div class="container-fluid text-center p-4 pb-0">
         <!-- Section: Social media -->
         <section class="mb-4">
@@ -16,7 +16,7 @@
             <a class="btn btn-floating m-1" style="background-color: #E14B0C;" href="#!" role="button"><i class="fas fa-rss-square"></i></a>
         </section>
     </div>
-    <div class="p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="p-3" style="background-color: #1f1818">
         <a href="../contact.php" class="d-flex justify-content-end text-decoration-none link-light">Me contacter</a>
     </div>
 </footer>
@@ -29,6 +29,8 @@
         selector: 'textarea'
     });
 </script>
+<!-- JQUERY -->
+<script src="/assets/scripts/jquery-3.6.0.min.js"></script>
 <!-- JS Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/d6f0d1e82c.js" crossorigin="anonymous"></script>

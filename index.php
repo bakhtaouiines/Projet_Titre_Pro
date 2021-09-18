@@ -133,7 +133,7 @@ require_once 'controllers/categoryCtrl.php'
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=9" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Fantastique</h5>
                                 </a>
                             </div>
@@ -147,7 +147,7 @@ require_once 'controllers/categoryCtrl.php'
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="views/category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=10" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Comédie musicale</h5>
                                 </a>
                             </div>
@@ -161,7 +161,7 @@ require_once 'controllers/categoryCtrl.php'
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=11" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Extraterrestre</h5>
                                 </a>
                             </div>
@@ -175,7 +175,7 @@ require_once 'controllers/categoryCtrl.php'
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
-                                <a href="category.php" class="card-title text-decoration-none text-white">
+                                <a href="category.php?categoryID=12" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Voyage</h5>
                                 </a>
                             </div>

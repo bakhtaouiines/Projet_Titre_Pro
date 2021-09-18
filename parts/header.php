@@ -17,11 +17,11 @@ require_once 'controllers/headerCtrl.php';
 
 <body>
     <!-- barre de navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="#menu">
+    <nav class="navbar navbar-expand-lg sticky-top" id="#menu">
         <div class="container-fluid p-3">
             <div class="col-2">
-                <a class="navbar-brand text-white col" href="index.php"><img src="assets/images/logo.png" style="width: 5rem; height:auto"></a>
-                <span id="subtitle" class="row navbar-text text-white fst-italic ms-2">"l'accord parfait entre musique et cinéma"</span>
+                <a class="navbar-brand col" href="index.php"><img src="assets/images/logo.png" style="width: 5rem; height:auto"></a>
+                <span id="subtitle" class="row navbar-text text-uppercase fst-italic ms-2">"l'accord parfait entre musique et cinéma"</span>
             </div>
             <!--Menu Burger-->
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

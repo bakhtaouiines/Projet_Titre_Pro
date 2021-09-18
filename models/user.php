@@ -91,7 +91,7 @@ class User extends MainModel
     }
 
     /**
-     * Methode permettant de récupérer la clé de hachage du mot de passe
+     * Methode permettant de récupérer la clé de hachage du mot de passe (le mail pour la connexion, l'id pour la modification)
      * @return string
      */
     public function getUserHash()
@@ -99,9 +99,11 @@ class User extends MainModel
         $pdoStatment = $this->pdo->prepare(
             'SELECT `password_hash` 
             FROM `user` 
-            WHERE `mail` = :mail'
+            WHERE `mail` = :mail
+            OR `id` = :id'
         );
         $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_STR);
         $pdoStatment->execute();
         return $pdoStatment->fetch(PDO::FETCH_OBJ)->password_hash;
     }

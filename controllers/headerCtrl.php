@@ -10,10 +10,10 @@ if(isset($controllers)){
     require $controllers;
 }
 
-// $user = new User();
-// $user->__set('id', 80);
-// $user->__set('password_hash', password_hash('141095',PASSWORD_DEFAULT));
-// $user->updateUserHash();
+//  $user = new User();
+//  $user->__set('id', 80);
+//  $user->__set('password_hash', password_hash('141095',PASSWORD_DEFAULT));
+//  $user->updateUserHash();
 
 $registerForm = new Form();
 $loginForm = new Form();
