@@ -5,17 +5,18 @@ require_once 'models/miniPost.php';
 require_once 'models/ost.php';
 require_once 'classes/form.php';
 
-
 $minipost = new MiniPost();
 $minipostForm = new Form();
 $message = '';
+
+$minipost->id = $_GET['minipostID'];
+
 /**
  *  Vérifications du formulaire d'écriture de minipost
  */
 if (isset($_POST['submitMiniPost'])) {
     $miniPostContent = '';
     $resultSearch = '';
-
     //Je récupère les données du formulaire
     if (isset($_POST['miniPostContent'])) {
         $miniPostContent = ($_POST['miniPostContent']);
@@ -34,7 +35,7 @@ if (isset($_POST['submitMiniPost'])) {
         $minipost->createMiniPost();
         echo $message = 'Mini-post bien publié!';
         // redirection au bout de 3s sur la page des minipost
-        header("Refresh:3; url=../miniPostList.php");
+        header('Refresh:3; url=../miniPost.php?=' . $_GET['minipostID']);
     } else {
         echo $message = 'Une erreur a été identifié.';
     }

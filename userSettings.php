@@ -2,8 +2,8 @@
 include 'parts/header.php';
 require_once 'controllers/userSettingsCtrl.php' ?>
 
-<div class="container bg-dark border border-secondary rounded text-light my-5 p-5">
-    <p class="lead text-warning fs-2"><?= $message ?></p>
+<div class="container bg-dark border border-secondary rounded text-light my-5 p-5"> 
+
     <!-- formulaire modification avatar, pseudo, email -->
     <form method="POST" enctype="multipart/form-data">
         <div class="row row-cols-1 row-cols-md-2 g-5">
@@ -48,7 +48,10 @@ require_once 'controllers/userSettingsCtrl.php' ?>
                 </div>
             </div>
         </div>
-        <button type="submit" id="updateUser" class="mt-3 btn btn-outline-success text-center" name="updateUser">Enregistrer les modifications</button>
+        <div class="popup">
+        <button type="submit" id="updateUser" class="mt-3 btn btn-outline-success text-center" name="updateUser" onclick="myFunction()">Enregistrer les modifications</button>
+        <span class="popuptext" id="myPopup"><?= $message ?></span>
+    </div>
     </form>
 
     <!-- Button trigger modal modification mot de passe -->

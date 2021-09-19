@@ -75,6 +75,22 @@ class MiniPost extends MainModel
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $pdoStatment->fetch(PDO::FETCH_OBJ);
     }
+    /**
+     * Méthode pour modifier un minipost
+     *
+     * @return void
+     */
+    public function updateMiniPost()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'UPDATE `minipost`
+            SET `content` = :content
+            WHERE `id` = :id'
+        );
+        $pdoStatment->bindValue(':content', $this->content, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $pdoStatment->execute();
+    }
 
     /**
      * Méthode pour supprimer un minipost

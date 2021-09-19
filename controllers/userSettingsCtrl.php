@@ -55,7 +55,7 @@ if (isset($_POST['updateUser'])) {
             var_dump($avatarInfos);
             // On verifie les dimensions et taille de l'image
             // 0 = largeur, 1 = hauteur
-            if (($avatarInfos[0] <= WIDTH_MAX) && ($avatarInfos[1] <= HEIGHT_MAX) && (filesize($_FILES['file']['tmp_name']) <= MAX_SIZE)) {
+            if (($avatarInfos[0] <= WIDTH_MAX) && ($avatarInfos[1] <= HEIGHT_MAX) && (filesize($_FILES['avatar']['tmp_name']) <= MAX_SIZE)) {
                 // Parcours du tableau d'erreurs
                 if (
                     isset($_FILES['avatar']['error'])
@@ -126,7 +126,7 @@ if (isset($_POST['updateUser'])) {
             $_SESSION['user']['mail'] = $updateArray['mail'];
             $_SESSION['user']['pseudo'] = $updateArray['pseudo'];
             $_SESSION['user']['avatar'] = $updateArray['avatar'];
-            $successMessage = 'Modifications enregistrées avec succès!';
+            $message = 'Modifications enregistrées avec succès!';
         }
     }
 }
@@ -166,7 +166,7 @@ if (isset($_POST['updateUserPassword'])) {
                 // j'hydrate l'attribut password_hash de mon objet $userPassword dans lequel je stocke la saisie, sécurisée grâce à la fonction password_hash(), qui crée une clé de hachage pour le mdp, avec la constante PASSWORD_DEFAULT (qui est un algorithme de hachage)
                 $userPassword->__set('password_hash', password_hash($_POST['updatePassword'], PASSWORD_DEFAULT));
                 $userPassword->updateUserHash();
-                $successMessage = 'Mot de passe modifié avec succès!';
+                $message = 'Mot de passe modifié avec succès!';
             }
         }
     }

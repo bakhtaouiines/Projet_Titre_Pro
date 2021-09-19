@@ -31,14 +31,14 @@ function checkRegisterForm() {
  * Tiny MCE
  */
 tinymce.init({
-    selector: 'textarea#miniPostContent',
+    selector: 'textarea',
     height: 500,
     menubar: false,
     plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
         'insertdatetime media table paste code help wordcount',
-        'emoticons'
+        'emoticons',
     ],
     toolbar: 'undo redo | formatselect | ' +
         'bold italic | alignleft aligncenter ' +
@@ -64,7 +64,6 @@ function clearElement(elementId) {
 
 function searchOst(searchContent) {
     let xhr
-
     xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { //4: request finished and response is ready, 200: "OK"
@@ -111,58 +110,9 @@ $(function() {
 });
 
 /**
- * Affichage du nom de l'image uploadé
+ * Affichage du popup
  */
-var input = document.getElementById('upload');
-var infoArea = document.getElementById('upload-label');
-
-input.addEventListener('change', showFileName);
-
-function showFileName(event) {
-    var input = event.srcElement;
-    var fileName = input.files[0].name;
-    infoArea.textContent = 'File name: ' + fileName;
+function myFunction() {
+    let popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
 }
-
-
-
-
-
-
-
-
-
-// ///////////////////////////////////////////// PARTIE LOG IN ////////////////////////////////////////////
-// // verification du champs mot de passe
-// function verif(a, b) {
-//     if (a.value != b.value) {
-//         color = "border-color: red"
-//     } else {
-//         color = "border-color: green"
-//     }
-//     a.style.cssText = color
-//     b.style.cssText = color
-// }
-// ///////////////////////////////////////////// PARTIE CREATION DE COMPTE ////////////////////////////////////////////
-// // verification regex du nom, mail, mdp
-// function checkName() {
-//     let nameValue = document.getElementById('lastName').value
-//     let nameRGEX = /^[A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç][A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç\-\s\']*$/
-//     let result = nameRGEX.test(nameValue)
-//     console.log(result)
-//     if (result == false) {
-//         formErrorName.innerText = ("Format invalide")
-//         formErrorName.style.color = 'red'
-//     }
-// }
-
-
-// // function checkMail() {
-// //     let mail = document.getElementById('inputEmail').value
-// //     let mailRGEX = /^[A-Za-z0-9]*[\-\.\_\]*@[A-Za-z0-9\-\_]+.[a-zA-Z0-9]{2,3}$/
-// //     let result = mailRGEX.test(mail)
-// //     if (result == false) {
-// //         formErrorEmail.innerText = ("Format invalide")
-// //         formErrorEmail.style.color = 'red'
-// //     }
-// // }

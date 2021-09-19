@@ -14,11 +14,11 @@ include 'parts/header.php';
                 </select>
             </div>
         </div>
-        <div class="col-6 offset-3 mt-5">
+        <div class="col-6 my-5">
             <textarea name="miniPostContent" id="miniPostContent"></textarea>
         </div>
         <!-- bouton de validation -->
-        <button type="submit" name="submitMiniPost" class="btn btn-outline-light m-2">Publier</button>
+        <button type="submit" name="submitMiniPost" class="btn btn-outline-light mt-2">Publier</button>
         <p class="text-lead"><?= $message ?></p>
     </form>
 </div>

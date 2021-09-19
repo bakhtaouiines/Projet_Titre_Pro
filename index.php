@@ -4,7 +4,11 @@ include 'parts/header.php';
 require_once 'controllers/categoryCtrl.php'
 ?>
 <!-- CORPS DE L'ACCUEIL -->
-<div class="carousel slide my-5" data-bs-ride="carousel" id="carousel" data-bs-interval="0">
+<div id="subtitle" class="text-center text-uppercase mt-5">
+    <h2 class="fs-4">"l'accord parfait entre musique et cinéma"</h2>
+</div>
+
+<div class="carousel slide my-2" data-bs-ride="carousel" id="carousel" data-bs-interval="0">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <!-- Premier slide -->

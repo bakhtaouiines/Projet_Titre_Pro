@@ -26,9 +26,13 @@ class Article extends MainModel
     {
         // On récupère le contenu qui nous intéresse, de la table article
         $pdoStatment = $this->pdo->query(
-            'SELECT `id`, `title`, `content`
+            'SELECT `article`.`id` AS `articleID`, `article`.`title` AS `articleTitle`, `content`, `ap`.`id` , `path` , `alt` , `ap`.`title` , `id_Article` , `pseudo`
            FROM `article`
-           ORDER BY `id` ASC'
+           LEFT JOIN `articlepicture` AS `ap`
+            ON `article`.`id` = `ap`.`id_Article`
+            LEFT JOIN `user`
+            ON `id_User` = `user`.`id`
+           ORDER BY `article`.`id` ASC'
         );
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
         // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats

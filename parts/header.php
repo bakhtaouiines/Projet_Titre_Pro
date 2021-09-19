@@ -12,16 +12,20 @@ require_once 'controllers/headerCtrl.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/style/style.css">
-    
+    <!-- Tiny MCE -->
+    <script src=" https://cdn.tiny.cloud/1/0ovoaprxuy8l9dx3lgrrwdl5ec0fj54v4s5eu8n05a2tfe88/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
 <body>
     <!-- barre de navigation -->
     <nav class="navbar navbar-expand-lg sticky-top" id="#menu">
         <div class="container-fluid p-3">
-            <div class="col-2">
-                <a class="navbar-brand col" href="index.php"><img src="assets/images/logo.png" style="width: 5rem; height:auto"></a>
-                <span id="subtitle" class="row navbar-text text-uppercase fst-italic ms-2">"l'accord parfait entre musique et cinéma"</span>
+            <div class="col-auto">
+                <div class="position-absolute top-0 start-0">
+                    <a href="index.php" class="text-decoration-none"><img class="navbar-brand col" src="assets/images/logo.png" style="width: 5rem; height:auto">
+                        <span id="title" class="text-uppercase text-light me-2">orpheus</span><span id="collection">collection</span>
+                    </a>
+                </div>
             </div>
             <!--Menu Burger-->
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,10 +50,10 @@ require_once 'controllers/headerCtrl.php';
                             <!-- Menu déroulant item -->
                             <li class="nav-item dropdown me-5">
                                 <button class="btn btn-outline-light bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                                <ul class="dropdown-menu dropdown-menu-end bg-dark">
-                                    <a class="dropdown-item text-white bi bi-music-player fs-5" href="playlistList.php"> Playlists</a>
-                                    <a class="dropdown-item text-white bi bi-pencil fs-5" href="miniPostList.php"> Mini-Post</a>
-                                    <a class="dropdown-item text-white bi bi-book fs-5" href=""> Articles</a>
+                                <ul class="dropdown-menu dropdown-menu-end bg-dark text-center">
+                                    <a class="dropdown-item text-white" href="playlistList.php">Playlists</a>
+                                    <a class="dropdown-item text-white" href="miniPostList.php">Mini-Post</a>
+                                    <a class="dropdown-item text-white" href="">Articles</a>
                                 </ul>
                             </li>
                             <!-- bouton accès listes d'écoute -->
@@ -57,9 +61,21 @@ require_once 'controllers/headerCtrl.php';
                             <!-- Menu déroulant utilisateur -->
 
                             <li class="nav-item dropdown">
-                                <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?= $_SESSION['user']['avatar'] ?>
-                                </button>
+                                <div class="avatar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <!-- si l'image existe, on l'affiche -->
+                                    <?php
+                                    if (file_exists('assets/images/upload/' . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
+                                    ?>
+                                        <img src="<?= 'assets/images/upload/' . $_SESSION['user']['avatar'] ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" style="width: 5rem; height:auto">
+                                    <?php
+                                        // sinon, on affiche l'image par défaut
+                                    } else {
+                                    ?>
+                                        <img src="<?= (!empty($_SESSION['user']['avatar'])) ? $_SESSION['user']['avatar'] :  $defaultImage ?>" style="width: 5rem; height:auto">
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
                                 <ul class="dropdown-menu dropdown-menu-end bg-dark">
                                     <li class="dropdown-item text-white bg-dark">Hello <?= $_SESSION['user']['pseudo'] ?>
                                     </li>

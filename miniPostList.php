@@ -5,7 +5,7 @@ require_once 'controllers/miniPostListCtrl.php';
 
 <div class="container p-5">
 <span class="d-flex justify-content-end my-5">
-    <a href="miniPostCreation.php" class="btn btn-outline-secondary bi bi-list ">Créer un mini-post</a>
+    <a href="miniPostCreation.php" class="btn btn-outline-secondary bi bi-pencil-square ">Créer un mini-post</a>
 </span>
     <div class="row row-cols-1 row-cols-md-3 g-5 mt-5">
         <?php

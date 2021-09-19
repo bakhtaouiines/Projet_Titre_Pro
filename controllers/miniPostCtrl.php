@@ -2,15 +2,34 @@
 // On charge le fichier du modèle.
 require_once 'models/mainModel.php';
 require_once 'models/miniPost.php';
-require_once 'models/ost.php';
+require_once 'classes/form.php';
 
+$minipostForm = new Form();
+$minipost = new MiniPost();
 /**
  * Récupération des informations du mini-post + pochette de l'OST et son nom
  */
-$minipost = new MiniPost();
 $minipost->id = $_GET['minipostID'];
 // on stocke dans une variable la fonction qui va appeler toutes les informations de l'article
 $minipostInfo = $minipost->getMiniPostInfo();
+
+/**
+ * Modification du minipost
+ */
+if (isset($_POST['updateMiniPost'])) {
+    //Je récupère les données du formulaire
+    if (isset($_POST['updateContent'])) {
+        $updateContent = $_POST['updateContent'];
+        //Je vérifie le contenu du minipost
+        $minipostForm->isNotEmpty('content', $updateContent);
+        //Si il n'y a pas d'erreur sur le formulaire...
+        if ($minipostForm->isValid()) {
+            $minipost->__set('content', $updateContent);
+            $minipost->updateMiniPost();
+            header('Refresh:0');
+        }
+    }
+}
 
 /**
  * Suppression du minipost
@@ -25,3 +44,4 @@ if (isset($_POST['delete'])) {
         header('Location: miniPostList.php');
     }
 }
+

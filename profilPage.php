@@ -7,14 +7,16 @@ require_once 'controllers/profilPageCtrl.php';
         <div class="col card">
             <div class="image d-flex">
                 <div class="avatar">
+                    <!-- si l'image existe, on l'affiche -->
                     <?php
-                    if (file_exists('assets/images/upload/' . $_SESSION['user']['id'] . "/" . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
+                    if (file_exists('assets/images/upload/' . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
                     ?>
-                        <img src="<?= 'assets/images/upload/' . $_SESSION['user']['id'] . '/' . $_SESSION['user']['avatar'] ?>" height="170" width="170">
+                        <img src="<?= 'assets/images/upload/' . $_SESSION['user']['avatar'] ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>"height="170" width="170">
                     <?php
+                        // sinon, on affiche l'image par défaut
                     } else {
                     ?>
-                        <img src="<?=(!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" height="170" width="170" />
+                        <img src="<?= (!empty($_SESSION['user']['avatar'])) ? $_SESSION['user']['avatar'] :  $defaultImage ?>" height="170" width="170" />
                     <?php
                     }
                     ?>
@@ -39,8 +41,6 @@ require_once 'controllers/profilPageCtrl.php';
             <i class="btn btn-outline-light bi bi-award fs-1"><span class="fs-5">Mes Badges</span></i>
         </section>
     </div>
-
-
 </div>
 
 <?php include 'parts/footer.php'; ?>

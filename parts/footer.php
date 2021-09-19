@@ -1,6 +1,7 @@
 <!-----------------------------------------------------------footer------------------------------------------->
 
 <footer class="text-white" style="background-color: #0a0808;">
+
     <div class="container-fluid text-center p-4 pb-0">
         <!-- Section: Social media -->
         <section class="mb-4">
@@ -19,14 +20,14 @@
     <div class="p-3" style="background-color: #1f1818">
         <a href="../contact.php" class="d-flex justify-content-end text-decoration-none link-light">Me contacter</a>
     </div>
+    <a href="#" id="scroll" style="display: none;">
 </footer>
 <script src="/assets/scripts/script.js"></script>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<!-- Tiny MCE -->
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script>
     tinymce.init({
         selector: 'textarea'
+        
     });
 </script>
 <!-- JQUERY -->
