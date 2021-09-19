@@ -30,25 +30,27 @@ class MiniPost extends MainModel
     }
 
     /**
-     * Méthode pour lister les mini-posts
+     * Méthode pour lister les mini-posts d'un utilisateur
      *
      * @return string
      */
-    public function getMiniPostList()
+    public function getMiniPostList($idUser)
     {
         // On récupère le contenu qui nous intéresse, de la table minipost
-        $pdoStatment = $this->pdo->query(
+        $pdoStatment = $this->pdo->prepare(
             'SELECT `minipost`.`id`, `content`, `id_User`, `id_OST`, `path` , `alt` ,`title`, `ost`.`name` AS `ostName`
            FROM `minipost`
            LEFT JOIN `ost`
             ON `minipost`.`id_OST` = `ost`.`id`
             LEFT JOIN `ostpicture` AS `op`
             ON `op`.`id` = `ost`.`id_OSTPicture`
+            WHERE `id_User` = :id_User
            ORDER BY `id`'
         );
+        $pdoStatment->bindValue(':id_User', $idUser, PDO::PARAM_STR);
+        $pdoStatment->execute();
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
         // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
-
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
 

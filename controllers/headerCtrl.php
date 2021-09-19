@@ -118,10 +118,6 @@ if (isset($_POST['login'])) {
             $_SESSION['user']['mail'] = $mail;
             $_SESSION['user']['levelAccess'] = $userInfo->level;
             $_SESSION['user']['avatar'] = $userInfo->avatar;
-            // GESTION DES COOKIES UTILISATEURS:
-            // setcookie('mail', $mail, time() + 3600, null, null, false, true); // Expire dans 1 heure, path=null, domain=null, secure=false,httponly=true
-            // setcookie('password', $password, time() + 3600, null, null, false, true);
-            // on redirige notre visiteur vers la page de compte de l'utilisateur
             header('location: ../profilPage.php');
             exit;
         } else {

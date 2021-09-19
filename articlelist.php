@@ -2,15 +2,15 @@
 include 'parts/header.php';
 require_once 'controllers/articleListCtrl.php';
 ?>
-<div class="container p-5">
-    <?php
-    // On affiche chaque entrée une à une
-    foreach ($articlesList as $value) {
-    ?>
-        <div class="row py-5" >
-            <div class="col-11">
+<div class="container py-5 p-5">
+    <div class="row g-5 mt-5 py-5">
+        <?php
+        // On affiche chaque entrée une à une
+        foreach ($articlesList as $value) {
+        ?>
+            <div class="articleList mx-auto">
                 <a href="article.php?articleID=<?= $value->articleID ?>">
-                    <div class="card bg-dark text-white">
+                    <div class="card m-3 bg-dark text-white" style="max-width: 500px;">
                         <img src="<?= $value->path ?>" alt="<?= $value->alt ?>" title="<?= $value->title ?>" style="opacity: 0.4;">
                         <div class="card-img-overlay mb-0">
                             <h5 class="card-title"><?= $value->articleTitle ?></h5>
@@ -20,10 +20,10 @@ require_once 'controllers/articleListCtrl.php';
                     </div>
                 </a>
             </div>
-        </div>
-    <?php
-    }
-    ?>
+        <?php
+        }
+        ?>
+    </div>
 </div>
 
 <?php include 'parts/footer.php'; ?>

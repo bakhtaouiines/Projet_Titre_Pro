@@ -5,6 +5,7 @@ require_once 'controllers/articleCtrl.php';
 
 <!-- affichage de l'article -->
 <div class="article p-5 mt-4">
+    <p class="lead text-success fs-2"><?= $message ?></p>
     <a href="articlelist.php" class="btn btn-outline-dark mb-3 offset-md-10" role="button">Revenir à la liste des articles</a>
     <div class="container mb-3">
         <div class="row g-0">
@@ -34,7 +35,18 @@ require_once 'controllers/articleCtrl.php';
                 foreach ($commentList as $value) {
                 ?>
                     <div class="comment mt-4 text-justify float-left">
-                        <img src="<?= $value->avatar ?>" alt="" class="rounded-circle" width="40" height="40">
+                    <?php
+                        if (file_exists('assets/images/upload/' . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
+                        ?>
+                            <img src="<?= $value->avatar ?>" class="rounded-circle" alt="Profil de <?= $value->pseudo ?>" height="40" width="40">
+                        <?php
+                            // sinon, on affiche l'image par défaut
+                        } else {
+                        ?>
+                            <img src="<?= (!empty($value->avatar)) ? $value->avatar : $defaultImage ?>" class="rounded-circle" height="40" width="40">
+                        <?php
+                        }
+                        ?>
                         <h4><?= $value->pseudo ?></h4><small class="text-muted fst-italic ms-3"><?= date('d-m-Y', strtotime($value->date)) ?></small>
                         <p><?= $value->content ?></p>
                     </div>

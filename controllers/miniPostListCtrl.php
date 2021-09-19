@@ -5,4 +5,4 @@ require_once 'models/minipost.php';
 require_once 'models/ost.php';
 
 $minipost = new MiniPost();
-$minipostList = $minipost->getMiniPostList();
+$minipostList = $minipost->getMiniPostList($_SESSION['user']['id']);

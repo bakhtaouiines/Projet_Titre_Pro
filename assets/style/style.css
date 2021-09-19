@@ -150,10 +150,20 @@
     }
     /* article */
     
+    .articleList {
+        transition: transform .4s;
+        width: auto;
+    }
+    
+    .articleList:hover {
+        transform: scale(1.1);
+        /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+    
     .article {
         font-family: 'Life Savers', cursive;
         font-weight: bolder;
-        background-color: rgb(231, 223, 210);
+        background-color: #a79e9d;
     }
     
     .figure-img {
@@ -168,17 +178,8 @@
         margin-left: 20px;
     }
     
-    .darker {
-        background-color: black;
-        float: right;
-        border-radius: 5px;
-        padding-left: 40px;
-        padding-right: 30px;
-        padding-top: 10px
-    }
-    
     .comment {
-        background-color: rgb(248, 248, 248);
+        background-color: #A79E9D;
         float: left;
         border-radius: 5px;
         padding-left: 40px;
@@ -187,40 +188,17 @@
     }
     
     .comment h4,
-    .comment span,
-    .darker h4,
-    .darker span {
+    .comment span {
         display: inline
     }
     
     .comment p,
-    .comment span,
-    .darker p,
-    .darker span {
+    .comment span {
         color: rgb(184, 183, 183)
     }
     
     #align-form {
-        margin-top: 20px
-    }
-    
-    .form-group p a {
-        color: white
-    }
-    
-    #darker img {
-        margin-right: 15px;
-        position: static
-    }
-    
-    .form-group input,
-    .form-group textarea {
-        border: 1px solid rgb(240, 229, 229);
-        border-radius: 12px
-    }
-    
-    #align-form {
-        background-color: rgb(240, 229, 229);
+        background-color: #A79E9D;
         border-radius: 5px;
         padding: 20px
     }
@@ -248,7 +226,6 @@
     
     .avatar-toggle {
         transition: transform .3s;
-        /* Animation */
     }
     
     .avatar-toggle:hover {

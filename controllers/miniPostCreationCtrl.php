@@ -9,7 +9,6 @@ $minipost = new MiniPost();
 $minipostForm = new Form();
 $message = '';
 
-$minipost->id = $_GET['minipostID'];
 
 /**
  *  Vérifications du formulaire d'écriture de minipost

@@ -38,7 +38,7 @@ class Comment extends MainModel
      *
      * @return boolean
      */
-    public function getCommentsList()
+    public function getCommentsList($idArticle)
     {
         $pdoStatment = $this->pdo->prepare(
             'SELECT `comment`.`id`, `content`, `date`, `id_User`, `pseudo`, `avatar`, `id_Article`
@@ -48,7 +48,7 @@ class Comment extends MainModel
             WHERE `id_Article` = :id_Article
             ORDER BY `date`'
         );
-        $pdoStatment->bindValue(':id_Article', $this->id_Article, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':id_Article', $idArticle, PDO::PARAM_INT);
         $pdoStatment->execute();
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
