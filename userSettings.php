@@ -1,6 +1,6 @@
 <?php
-include 'parts/header.php';
-require_once 'controllers/userSettingsCtrl.php' ?>
+$controllers = 'controllers/userSettingsCtrl.php';
+include 'parts/header.php';?>
 
 <div class="container bg-dark border border-secondary rounded text-light my-5 p-5"> 
 

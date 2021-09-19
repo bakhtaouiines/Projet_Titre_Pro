@@ -1,12 +1,49 @@
     @import url('https://fonts.googleapis.com/css2?family=Life+Savers&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100;300;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
     body {
         background-color: #000000;
     }
     
+    .quote {
+        color: rgb(141, 76, 76);
+        font-family: 'Josefin Slab', serif;
+    }
+    
+    .contact {
+        font-family: 'Raleway', sans-serif;
+        letter-spacing: 0.03rem;
+        color: rgb(218, 64, 64);
+    }
+    
+    .contact:hover {
+        color: rgb(119, 88, 88);
+        transition: color 0.2s;
+    }
+    
     .navbar {
         background: rgb(51, 24, 24);
-        opacity: 0.8;
+        opacity: 0.7;
+    }
+    
+    .navbar-collapse {
+        margin-right: 20px;
+        font-family: 'Raleway', sans-serif;
+        letter-spacing: 0.03rem;
+    }
+    
+    .dropdown-item {
+        color: rgb(129, 44, 44);
+        font-weight: bolder;
+    }
+    
+    .helloUser {
+        color: rgb(218, 64, 64);
+    }
+    
+    .helloUser:hover {
+        color: rgb(119, 88, 88);
+        transition: color 0.2s;
     }
     /* Popup container */
     
@@ -68,6 +105,12 @@
         to {
             opacity: 1;
         }
+    }
+    
+    #title {
+        font-family: 'Raleway', sans-serif;
+        font-weight: bolder;
+        letter-spacing: .1rem;
     }
     
     #subtitle,
@@ -230,23 +273,21 @@
     
     .avatar-toggle:hover {
         cursor: pointer;
-        transform: scale(1.5);
-        /* (150% zoom)*/
+        transform: scale(1.2);
+        /* (120% zoom)*/
     }
     /* contact */
     
     .wrapper {
         max-width: 850px;
         margin: 50px auto;
-        height: 600px;
-        background-color: #FFF;
+        background-color: #4d4646;
         overflow: hidden;
         box-shadow: 5px 25px 35px #3535356b
     }
     
     .wrapper .bg-red {
         background-color: #1a1e21;
-        height: 100%;
         width: 40%;
         padding-top: 40px;
         padding-left: 50px;

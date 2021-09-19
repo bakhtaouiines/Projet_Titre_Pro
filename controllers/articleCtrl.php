@@ -18,13 +18,11 @@ $articleInfo = $article->getArticleInfo();
  * Création d'un commentaire et son affichage
  */
 $comment = new Comment();
-$commentList = $comment->getCommentsList($idArticle);
 $commentForm = new Form();
 /**
  *  Vérifications du formulaire d'écriture de commentaire
  */
 if (isset($_POST['submitComment'])) {
-    $content = '';
     //Je récupère les données du formulaire
     if (isset($_POST['content'])) {
         $content = ($_POST['content']);
@@ -42,3 +40,6 @@ if (isset($_POST['submitComment'])) {
         echo 'Une erreur a été identifié.';
     }
 }
+
+$commentList = $comment->getCommentsList($idArticle);
+var_dump($idArticle);

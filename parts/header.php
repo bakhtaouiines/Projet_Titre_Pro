@@ -33,11 +33,11 @@ require_once 'controllers/headerCtrl.php';
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                 <ul class="navbar-nav mb-lg-0 my-2">
-                    <div class="d-flex align-items-center">
-                        <a href="OSTIndex.php" class="btn btn-outline-light fs-5 rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
+                    <div class="d-flex align-items-center text-uppercase">
+                        <a href="OSTIndex.php" class="btn btn-outline-light rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
-                            <a href="../articlelist.php" role="button" class="btn btn-outline-light fs-5 bi bi-book" id="otherContent" role="button" aria-expanded="false"> Espace lecture</a>
+                            <a href="../articlelist.php" role="button" class="btn btn-outline-light bi bi-book" id="otherContent" role="button" aria-expanded="false"> Espace lecture</a>
                         </li>
                         <!-- A afficher lorsque l'administrateur est connecté
                          <a class="btn btn-outline-light" href="adminSettings.php">Gestion du site</a> -->
@@ -49,17 +49,14 @@ require_once 'controllers/headerCtrl.php';
                         ?>
                             <!-- Menu déroulant item -->
                             <li class="nav-item dropdown me-5">
-                                <button class="btn btn-outline-light bi bi-grid-3x3-gap fs-3" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                                <ul class="dropdown-menu dropdown-menu-end bg-dark text-center">
-                                    <a class="dropdown-item text-white" href="playlistList.php">Playlists</a>
-                                    <a class="dropdown-item text-white" href="miniPostList.php">Mini-Post</a>
-                                    <a class="dropdown-item text-white" href="">Articles</a>
+                                <i class="bi bi-menu-app fs-3 text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu dropdown-menu-end bg-dark text-center text-uppercase">
+                                    <a class="dropdown-item" href="playlistList.php">Playlists</a>
+                                    <a class="dropdown-item" href="miniPostList.php">Mini-Post</a>
+                                    <a class="dropdown-item" href="">Articles</a>
                                 </ul>
                             </li>
-                            <!-- bouton accès listes d'écoute -->
-                            <a class="btn btn-outline-light me-5 px-2 bi bi-music-player fs-3" href="playlistList.php" role="button"></a>
                             <!-- Menu déroulant utilisateur -->
-
                             <li class="nav-item dropdown">
                                 <div class="avatar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <!-- si l'image existe, on l'affiche -->
@@ -76,14 +73,14 @@ require_once 'controllers/headerCtrl.php';
                                     }
                                     ?>
                                 </div>
-                                <ul class="dropdown-menu dropdown-menu-end bg-dark">
-                                    <li class="dropdown-item text-white bg-dark">Hello <?= $_SESSION['user']['pseudo'] ?>
+                                <ul class="dropdown-menu dropdown-menu-end bg-dark p-3">
+                                    <li class="helloUser dropdown-item bg-dark">Hello <?= $_SESSION['user']['pseudo'] ?>
                                     </li>
-                                    <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item text-white" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
-                                    <a class="dropdown-item text-white" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
-                                    <li><a class="dropdown-item text-white" href="playlistCreation.php">Créer une playlist</a></li>
-                                    <li><a class="dropdown-item text-white" href="miniPostCreation.php">Créer un mini-post</a></li>
-                                    <li><a class="dropdown-item text-white" href="?action=disconnect">Me déconnecter</a></li>
+                                    <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
+                                    <a class="dropdown-item" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
+                                    <li><a class="dropdown-item" href="playlistCreation.php">Créer une playlist</a></li>
+                                    <li><a class="dropdown-item" href="miniPostCreation.php">Créer un mini-post</a></li>
+                                    <li><a class="dropdown-item" href="?action=disconnect">Me déconnecter</a></li>
                                 </ul>
                             </li>
 

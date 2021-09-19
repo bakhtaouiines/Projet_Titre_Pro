@@ -1,7 +1,6 @@
 <!-----------------------------------------------------------footer------------------------------------------->
 
 <footer class="text-white" style="background-color: #0a0808;">
-
     <div class="container-fluid text-center p-4 pb-0">
         <!-- Section: Social media -->
         <section class="mb-4">
@@ -17,8 +16,8 @@
             <a class="btn btn-floating m-1" style="background-color: #E14B0C;" href="#!" role="button"><i class="fas fa-rss-square"></i></a>
         </section>
     </div>
-    <div class="p-3" style="background-color: #1f1818">
-        <a href="../contact.php" class="d-flex justify-content-end text-decoration-none link-light">Me contacter</a>
+    <div class="p-4" style="background-color: #1f1818">
+        <a href="../contact.php" class="contact d-flex justify-content-end text-decoration-none text-uppercase me-5">Me contacter</a>
     </div>
     <a href="#" id="scroll" style="display: none;">
 </footer>

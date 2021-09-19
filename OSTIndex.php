@@ -5,7 +5,7 @@ require_once 'controllers/ostIndexCtrl.php';
 <div class="container-fluid p-5">
     <figure class="text-center p-3">
         <blockquote class="blockquote fs-5 lead">
-            <p class="fst-italic text-light">
+            <p class="quote fst-italic">
                 "So much of what we do is ephemeral and quickly forgotten, even by ourselves, so it's gratifying to have something you have done linger in people's memories."
             <figcaption class="blockquote-footer text-end">
                 John Williams

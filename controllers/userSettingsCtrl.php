@@ -181,7 +181,7 @@ if (isset($_POST['deleteProfile'])) {
         $delete = new User();
         $delete->id = htmlspecialchars($_GET['userID']);
         $deleteProfile = $delete->deleteProfile();
-        // si tout est ok, on redirige vers la page de la liste des miniposts
+        // si tout est ok, on redirige vers la page d'accueil
         header('Location: index.php');
     }
 }
