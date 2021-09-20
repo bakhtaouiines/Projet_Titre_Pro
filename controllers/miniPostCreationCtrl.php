@@ -1,4 +1,5 @@
 <?php
+// Je charge ici les 
 require_once 'config.php';
 require_once 'models/mainModel.php';
 require_once 'models/miniPost.php';
@@ -8,7 +9,6 @@ require_once 'classes/form.php';
 $minipost = new MiniPost();
 $minipostForm = new Form();
 $message = '';
-
 
 /**
  *  Vérifications du formulaire d'écriture de minipost

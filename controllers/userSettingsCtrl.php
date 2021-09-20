@@ -11,7 +11,6 @@ require_once 'models/playlist.php';
  * 
  */
 // Constantes (valeurs qui ne changeront pas)
-define('TARGET', 'assets/images/upload/');  // Repertoire cible
 define('MAX_SIZE', 5242880);  // Taille max de 5mo 
 define('WIDTH_MAX', 200);   // Largeur max de l'image en pixels
 define('HEIGHT_MAX', 200); // Hauteur max de l'image en pixels
@@ -40,18 +39,18 @@ if (!is_dir(TARGET)) {
 /**
  * Vérification formulaire de modification des informations de l'utilisateur (pseudo,mail,avatar)
  */
-if (isset($_POST['updateUser'])) {
+if (isset($_POST['updateAvatar'])) {
     // On vérifie l'avatar
     // On verifie si le champ est rempli
     if (!empty($_FILES['avatar']['name'])) {
-        $updateAvatar = $_FILES['avatar']['name'];
+        $avatar = $_FILES['avatar']['name'];
         // Recuperation de l'extension du fichier
         $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
 
         // On verifie l'extension du fichier
         if (in_array(strtolower($extension), $extensionArray)) {
             // On recupere les dimensions du fichier
-            $avatarInfos = getimagesize($updateAvatar);
+            $avatarInfos = getimagesize($_FILES['avatar']['tmp_name']);
             var_dump($avatarInfos);
             // On verifie les dimensions et taille de l'image
             // 0 = largeur, 1 = hauteur
@@ -67,7 +66,7 @@ if (isset($_POST['updateUser'])) {
                     // Si c'est OK, on teste l'upload et on déplace le fichier
                     if (move_uploaded_file($_FILES['avatar']['tmp_name'], TARGET . $avatarName)) {
                         $message = 'Upload réussi !';
-                        $updateArray['avatar'] = $updateAvatar;
+                        $updateArray['avatar'] = $avatarName;
                     } else {
                         // Sinon on affiche une erreur systeme
                         $message = 'Problème lors de l\'upload !';
@@ -87,7 +86,11 @@ if (isset($_POST['updateUser'])) {
         // Sinon on affiche une erreur pour le champ vide
         $message = 'Veuillez remplir le formulaire svp !';
     }
-
+}
+/**
+ * Vérification formulaire de modification des informations de l'utilisateur (pseudo,mail,avatar)
+ */
+if (isset($_POST['updateUser'])) {
     //Je récupère les données du formulaire
     if (isset($_POST['updatePseudo'])) {
         $updatePseudo = htmlspecialchars($_POST['updatePseudo']);
@@ -118,14 +121,14 @@ if (isset($_POST['updateUser'])) {
         $user->__set('id', $_SESSION['user']['id']);
         $user->__set('pseudo', $updateArray['pseudo']);
         $user->__set('mail', $updateArray['mail']);
-        $user->__set('avatar', $updateArray['avatar']);
+        $user->__set('avatar', $avatarName);
         // ici j'exécute la méthodes updateUserInfo() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
         $isUpdated = $user->updateUserInfo($updateArray);
         if ($isUpdated) {
             // ici, je mets à jour les informations, visuellement, sur le profil de l'utilisateur en passant par les variables de session
             $_SESSION['user']['mail'] = $updateArray['mail'];
             $_SESSION['user']['pseudo'] = $updateArray['pseudo'];
-            $_SESSION['user']['avatar'] = $updateArray['avatar'];
+            $_SESSION['user']['avatar'] = $avatarName;
             $message = 'Modifications enregistrées avec succès!';
         }
     }

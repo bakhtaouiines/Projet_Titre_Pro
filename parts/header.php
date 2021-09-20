@@ -18,7 +18,7 @@ require_once 'controllers/headerCtrl.php';
 
 <body>
     <!-- barre de navigation -->
-    <nav class="navbar navbar-expand-lg sticky-top" id="#menu">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="#menu">
         <div class="container-fluid p-3">
             <div class="col-auto">
                 <div class="position-absolute top-0 start-0">
@@ -50,7 +50,7 @@ require_once 'controllers/headerCtrl.php';
                             <!-- Menu déroulant item -->
                             <li class="nav-item dropdown me-5">
                                 <i class="bi bi-menu-app fs-3 text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                <ul class="dropdown-menu dropdown-menu-end bg-dark text-center text-uppercase">
+                                <ul class="dropdown-menu dropdown-menu-end text-center text-uppercase">
                                     <a class="dropdown-item" href="playlistList.php">Playlists</a>
                                     <a class="dropdown-item" href="miniPostList.php">Mini-Post</a>
                                     <a class="dropdown-item" href="">Articles</a>
@@ -68,13 +68,13 @@ require_once 'controllers/headerCtrl.php';
                                         // sinon, on affiche l'image par défaut
                                     } else {
                                     ?>
-                                        <img src="<?= (!empty($_SESSION['user']['avatar'])) ? $_SESSION['user']['avatar'] :  $defaultImage ?>" style="width: 5rem; height:auto">
+                                        <img src="<?= $defaultImage ?>" style="width: 5rem; height:auto">
                                     <?php
                                     }
                                     ?>
                                 </div>
-                                <ul class="dropdown-menu dropdown-menu-end bg-dark p-3">
-                                    <li class="helloUser dropdown-item bg-dark">Hello <?= $_SESSION['user']['pseudo'] ?>
+                                <ul class="dropdown-menu p-3">
+                                    <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
                                     </li>
                                     <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
                                     <a class="dropdown-item" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
@@ -101,14 +101,14 @@ require_once 'controllers/headerCtrl.php';
     <!-- Fenêtre modale du bouton login -->
     <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
-            <div class="modal-content text-center">
+            <div class="modal-content text-center text-light" style="background: #102128;">
                 <div class="modal-header">
                     <p class="modal-title text-uppercase fs-5">Mon compte</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <!-- FORMULAIRE CONNEXION UTILISATEUR -->
-                <div class="modal-body p-4 p-md-5">
+                <div class="modal-body p-4 p-md-5 text-light" >
                     <form method="POST" action="" name="logForm" id="logForm">
                         <!-- EMAIL -->
                         <div class="mb-3">
@@ -143,7 +143,7 @@ require_once 'controllers/headerCtrl.php';
                         </div>
                         <div class="mb-3 form-check">
                             <p class="fst-italic">Mot de passe oublié?
-                                <a href="" class="text-danger">Cliquez ici!</a>
+                                <a href="" class="text-muted">Cliquez ici!</a>
                             </p>
                         </div>
                         <!--validation de formulaire-->

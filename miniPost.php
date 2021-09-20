@@ -34,7 +34,7 @@ include 'parts/header.php';
             </div>
             <form method="POST">
                 <div class="modal-body">
-                    <textarea name="updateContent" value="<?= $minipostInfo->content ?>"></textarea>
+                    <textarea name="updateContent"><?= $minipostInfo->content ?></textarea>
                 </div>
                 <div class="modal-footer bg-dark text-white">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

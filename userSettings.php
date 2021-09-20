@@ -1,12 +1,11 @@
 <?php
 $controllers = 'controllers/userSettingsCtrl.php';
-include 'parts/header.php';?>
+include 'parts/header.php'; ?>
 
-<div class="container bg-dark border border-secondary rounded text-light my-5 p-5"> 
-
+<div class="container bg-dark border border-secondary rounded text-light my-5 p-5">
     <!-- formulaire modification avatar, pseudo, email -->
-    <form method="POST" enctype="multipart/form-data">
-        <div class="row row-cols-1 row-cols-md-2 g-5">
+    <div class="row row-cols-2 row-cols-md-2 g-3">
+        <form method="POST" enctype="multipart/form-data">
             <div class="col-lg-6 mx-auto">
                 <!-- Upload d'image-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
@@ -21,8 +20,14 @@ include 'parts/header.php';?>
                 <div class="image-area mt-4">
                     <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
                 </div>
+                <div class="popup">
+                    <button type="submit" id="updateAvatar" class="mt-3 btn btn-outline-success text-center" name="updateAvatar" onclick="myFunction()">Enregistrer mon nouvel avatar</button>
+                    <span class="popuptext" id="myPopup"><?= $message ?></span>
+                </div>
             </div>
-            <div class="d-flex justify-content-evenly">
+        </form>
+        <form method="POST">
+            <div class="d-flex justify-content-around">
                 <div class="col-auto form-group ">
                     <label for="updatePseudo" class="form-label">Pseudo</label>
                     <input type="text" class="form-control px-2 py-2" id="updatePseudo" name="updatePseudo" value="<?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?>">
@@ -45,17 +50,18 @@ include 'parts/header.php';?>
                         }
                         ?>
                     </div>
+                    <div class="popup">
+                        <button type="submit" id="updateUser" class="mt-3 btn btn-outline-success text-center" name="updateUser" onclick="myFunction()">Enregistrer les modifications</button>
+                        <span class="popuptext" id="myPopup"><?= $message ?></span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="popup">
-        <button type="submit" id="updateUser" class="mt-3 btn btn-outline-success text-center" name="updateUser" onclick="myFunction()">Enregistrer les modifications</button>
-        <span class="popuptext" id="myPopup"><?= $message ?></span>
+
+        </form>
     </div>
-    </form>
 
     <!-- Button trigger modal modification mot de passe -->
-    <div class="d-flex justify-content-end mb-5">
+    <div class="d-flex justify-content-end my-5">
         <button type="button" class="btn btn-secondary btn-sm my-auto" data-bs-toggle="modal" data-bs-target="#updatePassword">
             Modifier mon mot de passe
         </button>
@@ -63,7 +69,7 @@ include 'parts/header.php';?>
     <hr>
     <div class="d-flex justify-content-between p-2 mt-5">
         <!-- Button trigger modal suppression du compte-->
-        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProfile">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProfile">
             Supprimer mon profil
         </button>
         <a href="profilPage.php" type="button" class="btn btn-sm btn-outline-secondary px-3 me-5">Annuler</a>
