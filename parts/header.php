@@ -9,7 +9,9 @@ require_once 'controllers/headerCtrl.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/style/style.css">
     <!-- Tiny MCE -->
@@ -20,8 +22,9 @@ require_once 'controllers/headerCtrl.php';
     <!-- barre de navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="#menu">
         <div class="container-fluid p-3">
+            <!-- titre + logo -->
             <div class="col-auto">
-                <div class="position-absolute top-0 start-0">
+                <div class="justify-content-start">
                     <a href="index.php" class="text-decoration-none"><img class="navbar-brand col" src="assets/images/logo.png" style="width: 5rem; height:auto">
                         <span id="title" class="text-uppercase text-light me-2">orpheus</span><span id="collection">collection</span>
                     </a>
@@ -32,28 +35,29 @@ require_once 'controllers/headerCtrl.php';
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
-                <ul class="navbar-nav mb-lg-0 my-2">
+                <ul class="navbar-nav mb-lg-0">
                     <div class="d-flex align-items-center text-uppercase">
                         <a href="OSTIndex.php" class="btn btn-outline-light rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
                             <a href="../articlelist.php" role="button" class="btn btn-outline-light bi bi-book" id="otherContent" role="button" aria-expanded="false"> Espace lecture</a>
                         </li>
-                        <!-- A afficher lorsque l'administrateur est connecté
-                         <a class="btn btn-outline-light" href="adminSettings.php">Gestion du site</a> -->
-
                         <!-- A afficher lorsque l'utilisateur est connecté -->
                         <?php
                         // On récupère nos variables de session
                         if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
                         ?>
+
                             <!-- Menu déroulant item -->
                             <li class="nav-item dropdown me-5">
                                 <i class="bi bi-menu-app fs-3 text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                 <ul class="dropdown-menu dropdown-menu-end text-center text-uppercase">
+
+                                    <!-- A afficher lorsque l'administrateur est connecté-->
+                                    <a class="dropdown-item" href="adminSettings.php">Gestion du site</a>
                                     <a class="dropdown-item" href="playlistList.php">Playlists</a>
                                     <a class="dropdown-item" href="miniPostList.php">Mini-Post</a>
-                                    <a class="dropdown-item" href="">Articles</a>
+                                    <a class="dropdown-item disabled" href="">Articles</a>
                                 </ul>
                             </li>
                             <!-- Menu déroulant utilisateur -->
@@ -73,7 +77,7 @@ require_once 'controllers/headerCtrl.php';
                                     }
                                     ?>
                                 </div>
-                                <ul class="dropdown-menu p-3">
+                                <ul class="dropdown-menu text-center mx-auto">
                                     <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
                                     </li>
                                     <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
@@ -108,7 +112,7 @@ require_once 'controllers/headerCtrl.php';
                 </div>
 
                 <!-- FORMULAIRE CONNEXION UTILISATEUR -->
-                <div class="modal-body p-4 p-md-5 text-light" >
+                <div class="modal-body p-4 p-md-5 text-light">
                     <form method="POST" action="" name="logForm" id="logForm">
                         <!-- EMAIL -->
                         <div class="mb-3">

@@ -15,7 +15,7 @@ require_once 'controllers/categoryCtrl.php'
             <div class="card-group p-5 ">
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="/assets/images/her.png" class="card-img" alt="affiche du film her">
+                        <img src="/assets/images/her.png" class="imgaccueil card-img" alt="affiche du film her">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
                                 <a href="category.php?categoryID=1" class="card-title text-decoration-none text-white">
@@ -27,7 +27,7 @@ require_once 'controllers/categoryCtrl.php'
                 </div>
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/shining.jpg" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/midsommar.jpg" class=" imgaccueil card-img" alt="affiche du film midsommar">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
                                 <a href="category.php?categoryID=2" class="card-title text-decoration-none text-white">
@@ -40,7 +40,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/theshapeofwater.jpg" class="card-img" alt="affiche du film the shape of water">
+                        <img src="../assets/images/theshapeofwater.jpg" class="imgaccueil card-img" alt="affiche du film the shape of water">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -54,7 +54,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/conanlebarbare.jpg" class="card-img" alt="affiche du film conan le barbare">
+                        <img src="../assets/images/conanlebarbare.jpg" class=" imgaccueil card-img" alt="affiche du film conan le barbare">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -72,7 +72,7 @@ require_once 'controllers/categoryCtrl.php'
             <div class="card-group p-5">
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/castleinthesky.jpg" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/castleinthesky.jpg" class="imgaccueil card-img" alt="affiche du film le chateau dans le ciel">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -86,7 +86,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/vforvendetta.jpg" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/vforvendetta.jpg" class="imgaccueil card-img" alt="affiche du film v pour vendetta">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -100,7 +100,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/platoon.png" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/platoon.png" class="imgaccueil card-img" alt="affiche du film platoon">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -114,7 +114,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/starwars5.jpg" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/starwars5.jpg" class="imgaccueil card-img" alt="affiche du film star wars">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -133,7 +133,7 @@ require_once 'controllers/categoryCtrl.php'
             <div class="card-group p-5">
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/lordoftherings.jpg" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/lordoftherings.jpg" class="imgaccueil card-img" alt="affiche du film le seigneur des anneaux">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -147,7 +147,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/singinintherain.jpg" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/singinintherain.jpg" class="imgaccueil card-img" alt="affiche du film singing in the rain">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -161,7 +161,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/bladerunner.png" class="card-img" alt="affiche du film blade runner">
+                        <img src="../assets/images/bladerunner.png" class="imgaccueil card-img" alt="affiche du film blade runner">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 
@@ -175,7 +175,7 @@ require_once 'controllers/categoryCtrl.php'
 
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/kikujiro.jpg" class="card-img" alt="affiche du film shining">
+                        <img src="../assets/images/kikujiro.jpg" class="imgaccueil card-img" alt="affiche du film l'été de Kikujiro">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
 

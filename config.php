@@ -6,8 +6,7 @@ define('DB_NAME', 'projet_titre_pro');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 
-
-define('TARGET', 'assets/images/upload/');  // Repertoire cible
+define('TARGET', 'assets/images/upload/');  // Repertoire cible de l'avatar
 /**
  * fonction pour contrôler l'accès à certaines pages ; on contrôle en fonction du niveau de rôle de l'utilisateur
  * 

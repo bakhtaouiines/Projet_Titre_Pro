@@ -148,6 +148,23 @@ class User extends MainModel
     }
 
     /**
+     * Méthode pour modifier les infos d'un utilisateur
+     *
+     * @return string
+     */
+    public function updateAvatar()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'UPDATE `user` 
+             SET `avatar` = :avatar
+             WHERE `id` = :id'
+        );
+        $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $pdoStatment->execute();
+    }
+
+    /**
      * Méthode permettant de modifier le mot de passe
      *
      * @return void
@@ -163,6 +180,21 @@ class User extends MainModel
         $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
         return $pdoStatment->execute();
     }
+    
+    /**
+     * fonction pour vérifier qu'un utilisateur existe
+     *
+     * @return void
+     */
+    public function checkUserExists()
+    {
+        $query = 'SELECT COUNT(*) AS `isExist` FROM `user` WHERE `id` = :id';
+        $pdoStatment = $this->pdo->prepare($query);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
+        $result = $pdoStatment->fetch(PDO::FETCH_OBJ); // result = objet
+        return $result->isExist;
+    }
 
     /**
      * Méthode pour supprimer un profil d'utilisateur
@@ -177,5 +209,21 @@ class User extends MainModel
         );
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
+        return !$this->checkUserExists(); // Le point d'exclamation devant $this renvoie un false
+    }
+    /**
+     * Méthode pour supprimer un profil d'utilisateur
+     *
+     * @return void
+     */
+    public function deleteAvatar()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'DELETE FROM `user`
+            WHERE `avatar`= :avatar'
+        );
+        $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_INT);
+        $pdoStatment->execute();
+        return !$this->checkUserExists(); // Le point d'exclamation devant $this renvoie un false
     }
 }

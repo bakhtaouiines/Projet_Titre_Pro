@@ -11,3 +11,18 @@ $usersList = $users->getUsersList();
 
 $article = new Article();
 $articlesList = $article->getArticlesList();
+
+
+/**
+ * Vérification formulaire de suppression du compte
+ */
+if (isset($_POST['deleteUser'])) {
+    // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
+    if (isset($_GET['userID'])) {
+        $users = new User();
+        $users->id = htmlspecialchars($_GET['userID']);
+        $deleteProfile = $users->deleteProfile();
+        // si tout est ok, on redirige vers la page d'accueil
+        header('Location: index.php');
+    }
+}

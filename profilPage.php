@@ -16,7 +16,7 @@ require_once 'controllers/profilPageCtrl.php';
                         // sinon, on affiche l'image par défaut
                     } else {
                     ?>
-                        <img src="<?= $defaultImage ?>" height="170" width="170" />
+                        <img src="<?= $defaultImage ?>" height="170" width="170">
                     <?php
                     }
                     ?>

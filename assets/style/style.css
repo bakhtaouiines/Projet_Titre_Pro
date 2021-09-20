@@ -35,12 +35,12 @@
     }
     
     .dropdown-item {
-        color: rgb(125, 142, 173);
-        font-weight: bolder;
+        color: rgb(50, 56, 66);
     }
     
     .helloUser {
         color: rgb(125, 142, 173);
+        font-weight: bolder;
     }
     
     .helloUser:hover {
@@ -165,7 +165,7 @@
     
     .hover-1-title {
         position: absolute;
-        top: 40%;
+        top: 20%;
         left: 0;
         text-align: center;
         width: 100%;
@@ -173,8 +173,10 @@
         bottom: 0;
         opacity: 0;
         z-index: 99;
-        font-family: 'Life Savers', cursive;
+        font-family: 'Josefin Slab', serif;
+        color: rgb(255, 255, 255);
         font-size: xx-large;
+        opacity: 0.5;
     }
     
     .hover-1:hover .hover-1-title {
@@ -191,6 +193,10 @@
         .end {
             margin-left: auto
         }
+    }
+    
+    .imgaccueil {
+        opacity: 0.5;
     }
     /* article */
     
@@ -265,7 +271,7 @@
     
     .avatar {
         border-radius: 50%;
-        background-color: #7D0D09;
+        background-color: #0F2027;
     }
     
     .avatar-toggle {
@@ -282,7 +288,7 @@
     .wrapper {
         max-width: 850px;
         margin: 50px auto;
-        background-color: #4d4646;
+        background-color: #515c61;
         overflow: hidden;
         box-shadow: 5px 25px 35px #3535356b
     }
@@ -335,14 +341,14 @@
     }
     
     .wrapper .contact-form .btn.btn-primary {
-        background: #7D0D09;
+        background: #0F2027;
         border: none;
         padding: 8px 18px;
         box-shadow: 0 8px 12px #3535356b
     }
     
     .wrapper .contact-form .btn.btn-primary:hover {
-        background-color: #883532;
+        background-color: #1c3742;
     }
     
     .modal .modal-content .modal-header .bi {
@@ -381,7 +387,7 @@
     /* changement couleur de la pagination */
     
     .pagination>li>a {
-        background-color: white;
+        background-color: #617883;
         color: #000000;
     }
     
@@ -389,20 +395,20 @@
     .pagination>li>a:hover,
     .pagination>li>span:focus,
     .pagination>li>span:hover {
-        color: #7D0D09;
-        background-color: #eee;
-        border-color: #ddd;
+        color: #0F2027;
+        background-color: #515c61;
+        border-color: black;
     }
     
     .pagination>.active>a {
-        color: white;
-        background-color: #7D0D09 !Important;
-        border: solid 1px #7D0D09 !Important;
+        color: rgb(255, 255, 255);
+        background-color: #0F2027 !Important;
+        border: solid 1px #1c3742 !Important;
     }
     
     .pagination>.active>a:hover {
-        background-color: #903e3b !Important;
-        border: solid 1px #903e3b;
+        background-color: #1c3742 !Important;
+        border: solid 1px #0F2027;
     }
     /* changement couleur titre des liens  */
     
@@ -412,7 +418,7 @@
     }
     
     .ostName:hover {
-        color: #903e3b !Important;
+        color: #515c61 !Important;
     }
     /* zone d'upload de l'image de l'utilisateur */
     
@@ -428,7 +434,7 @@
     }
     
     .image-area {
-        border: 2px dashed rgba(255, 255, 255, 0.7);
+        border: 2px dashed #515c61;
         padding: 1rem;
         position: relative;
     }
@@ -457,5 +463,5 @@
     
     .social,
     .btn {
-        opacity: 0.9;
+        opacity: 0.8;
     }

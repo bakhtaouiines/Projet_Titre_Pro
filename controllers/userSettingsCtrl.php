@@ -16,44 +16,30 @@ define('WIDTH_MAX', 200);   // Largeur max de l'image en pixels
 define('HEIGHT_MAX', 200); // Hauteur max de l'image en pixels
 
 // Tableaux de données
-$extensionArray = array('jpg', 'gif', 'png', 'jpeg'); // Extensions autorisees
-$avatarInfos = array();
-
+$extensionArray = array('jpg', 'gif', 'png', 'jpeg'); // Extensions autorisées
+$avatarInfos = []; // j'initialise un tableau vide pour stocker les informations relatives à l'avatar
 // Variables
 $user = new User(); // création d'une instance de classe; création d'un nouvel objet
 $updateForm = new Form();
-$updateArray = [];
+$updateArray = []; // j'initialise un tableau vide pour y stocker les modifications
 $extension = '';
 $message = '';
 $avatarName = '';
 
 /**
- * Création du répertoire cible, si il est inexistant
- */
-if (!is_dir(TARGET)) {
-    if (!mkdir(TARGET, 0755)) { //cette permission implique le propriétaire peut lire/écrire/exécuter, les utilisateurs (groupe) peuvent lire/exécuter, les autres peuvent lire/exécuter
-        exit('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement.');
-    }
-}
-
-/**
- * Vérification formulaire de modification des informations de l'utilisateur (pseudo,mail,avatar)
+ * Vérification formulaire de modification de l'avatar
  */
 if (isset($_POST['updateAvatar'])) {
-    // On vérifie l'avatar
     // On verifie si le champ est rempli
     if (!empty($_FILES['avatar']['name'])) {
         $avatar = $_FILES['avatar']['name'];
         // Recuperation de l'extension du fichier
         $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
-
-        // On verifie l'extension du fichier
+        // On verifie que l'extension du fichier existe dans notre tableau d'extensions autorisées
         if (in_array(strtolower($extension), $extensionArray)) {
             // On recupere les dimensions du fichier
-            $avatarInfos = getimagesize($_FILES['avatar']['tmp_name']);
-            var_dump($avatarInfos);
-            // On verifie les dimensions et taille de l'image
-            // 0 = largeur, 1 = hauteur
+            $avatarInfos = getimagesize($_FILES['avatar']['tmp_name']); // tmp_name correspond au nom temporaire du fichier
+            // On verifie les dimensions et taille de l'image (0 = largeur, 1 = hauteur)
             if (($avatarInfos[0] <= WIDTH_MAX) && ($avatarInfos[1] <= HEIGHT_MAX) && (filesize($_FILES['avatar']['tmp_name']) <= MAX_SIZE)) {
                 // Parcours du tableau d'erreurs
                 if (
@@ -62,7 +48,6 @@ if (isset($_POST['updateAvatar'])) {
                 ) {
                     // On renomme le fichier grâce au hachage md5, tout en lui donnant un identifiant unique 
                     $avatarName = md5(uniqid()) . '.' . $extension;
-
                     // Si c'est OK, on teste l'upload et on déplace le fichier
                     if (move_uploaded_file($_FILES['avatar']['tmp_name'], TARGET . $avatarName)) {
                         $message = 'Upload réussi !';
@@ -76,19 +61,32 @@ if (isset($_POST['updateAvatar'])) {
                 }
             } else {
                 // Sinon erreur sur les dimensions et taille de l'image
-                $message = 'Erreur dans les dimensions de l\'image !';
+                $message = 'Erreur dans les dimensions de l\'image ! Elles ne doivent pas dépasser 200x200 px.';
             }
         } else {
             // Sinon on affiche une erreur pour l'extension
-            $message = 'L\'extension du fichier est incorrecte !';
+            $message = 'L\'extension du fichier est incorrecte ! Sont autorisés uniquement: jpg, gif, png, jpeg.';
         }
     } else {
         // Sinon on affiche une erreur pour le champ vide
         $message = 'Veuillez remplir le formulaire svp !';
     }
+    //Si il n'y a pas d'erreur sur le formulaire...
+    if (!empty($updateArray)) {
+        // je modifie les attributs de la classe grâce au setter
+        $user->__set('avatar', $avatarName);
+        // ici j'exécute la méthodes updateAvatar() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
+        $isUpdated = $user->updateAvatar($updateArray);
+        if ($isUpdated) {
+            // ici, je mets à jour les informations, visuellement, sur le profil de l'utilisateur en passant par les variables de session
+            $_SESSION['user']['avatar'] = $avatarName;
+            // et j'indique à l'utilisateur que tout est ok
+            $message = 'Avatar modifié avec succès!';
+        }
+    }
 }
 /**
- * Vérification formulaire de modification des informations de l'utilisateur (pseudo,mail,avatar)
+ * Vérification formulaire de modification des informations de l'utilisateur (pseudo,mail)
  */
 if (isset($_POST['updateUser'])) {
     //Je récupère les données du formulaire
@@ -121,7 +119,7 @@ if (isset($_POST['updateUser'])) {
         $user->__set('id', $_SESSION['user']['id']);
         $user->__set('pseudo', $updateArray['pseudo']);
         $user->__set('mail', $updateArray['mail']);
-        $user->__set('avatar', $avatarName);
+
         // ici j'exécute la méthodes updateUserInfo() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
         $isUpdated = $user->updateUserInfo($updateArray);
         if ($isUpdated) {
@@ -176,15 +174,32 @@ if (isset($_POST['updateUserPassword'])) {
 }
 
 /**
+ * Vérification formulaire de suppression d'avatar
+ */
+if (isset($_POST['deleteAvatar'])) {
+    // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
+    if (isset($_GET['userID'])) {
+        $user->id = htmlspecialchars($_GET['userID']);
+        $deleteAvatar = $user->deleteAvatar();
+        // si tout est ok, on redirige vers la page d'accueil
+        header('Location: profilPage.php');
+    } else {
+        $message = 'Une erreur est survenue.';
+    }
+}
+
+
+/**
  * Vérification formulaire de suppression du compte
  */
 if (isset($_POST['deleteProfile'])) {
     // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
     if (isset($_GET['userID'])) {
-        $delete = new User();
-        $delete->id = htmlspecialchars($_GET['userID']);
-        $deleteProfile = $delete->deleteProfile();
+        $user->id = htmlspecialchars($_GET['userID']);
+        $deleteProfile = $user->deleteProfile();
         // si tout est ok, on redirige vers la page d'accueil
         header('Location: index.php');
+    } else {
+        $message = 'Une erreur est survenue.';
     }
 }

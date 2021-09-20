@@ -110,9 +110,16 @@ $(function() {
 });
 
 /**
- * Affichage du popup
+ * Affichage du popup pour l'avatar
  */
-function myFunction() {
-    let popup = document.getElementById("myPopup");
+function popup() {
+    let popup = document.getElementById("avatarPopup");
+    popup.classList.toggle("show");
+}
+/**
+ * Affichage du popup 
+ */
+function popupUser() {
+    let popup = document.getElementById("userPopup");
     popup.classList.toggle("show");
 }

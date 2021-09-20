@@ -3,10 +3,11 @@ $controllers = 'controllers/userSettingsCtrl.php';
 include 'parts/header.php'; ?>
 
 <div class="container bg-dark border border-secondary rounded text-light my-5 p-5">
-    <!-- formulaire modification avatar, pseudo, email -->
-    <div class="row row-cols-2 row-cols-md-2 g-3">
-        <form method="POST" enctype="multipart/form-data">
-            <div class="col-lg-6 mx-auto">
+    <!-- formulaire modification avatar -->
+    <div class="row row-cols-3 row-cols-md-2 g-3">
+        <div class="col-lg-6 mx-auto">
+            <form method="POST" enctype="multipart/form-data">
+
                 <!-- Upload d'image-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                     <input type="hidden" name="MAX_FILE_SIZE" value="<?= MAX_SIZE; ?>" />
@@ -21,11 +22,16 @@ include 'parts/header.php'; ?>
                     <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
                 </div>
                 <div class="popup">
-                    <button type="submit" id="updateAvatar" class="mt-3 btn btn-outline-success text-center" name="updateAvatar" onclick="myFunction()">Enregistrer mon nouvel avatar</button>
-                    <span class="popuptext" id="myPopup"><?= $message ?></span>
+                    <button type="submit" id="updateAvatar" class="mt-3 btn btn-outline-success text-center" name="updateAvatar" onclick="popup()">Enregistrer mon nouvel avatar</button>
+                    <span class="popuptext" id="avatarPopup"><?= $message ?></span>
                 </div>
-            </div>
-        </form>
+            </form>
+            <form method="POST" enctype="multipart/form-data">
+                <button type="submit" id="deleteAvatar" class="mt-3 btn btn-sm btn-outline-danger text-center" name="deleteAvatar">Supprimer mon avatar</button>
+            </form>
+        </div>
+
+        <!-- formulaire modification pseudo, email -->
         <form method="POST">
             <div class="d-flex justify-content-around">
                 <div class="col-auto form-group ">
@@ -51,12 +57,11 @@ include 'parts/header.php'; ?>
                         ?>
                     </div>
                     <div class="popup">
-                        <button type="submit" id="updateUser" class="mt-3 btn btn-outline-success text-center" name="updateUser" onclick="myFunction()">Enregistrer les modifications</button>
-                        <span class="popuptext" id="myPopup"><?= $message ?></span>
+                        <button type="submit" id="updateUser" class="mt-3 btn btn-outline-success text-center" name="updateUser" onclick="popupUser()">Enregistrer les modifications</button>
+                        <span class="popuptext" id="userPopup"><?= $message ?></span>
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 

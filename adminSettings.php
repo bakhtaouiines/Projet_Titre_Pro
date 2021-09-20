@@ -37,7 +37,9 @@ require_once 'controllers/adminSettingsCtrl.php';
                                 <td><?= $value->pseudo ?></td>
                                 <td><?= $value->mail ?></td>
                                 <td>
-                                    <button class="btn-danger bi bi-trash" data-bs-target="#confirmDelete" data-bs-toggle="modal" data-bs-dismiss="modal" onClick="deleteIdUser(<?= $value->id ?>)"></button>
+                                    <form method="POST">
+                                        <button type="submit" class="btn-danger bi bi-trash" name="deleteUser" data-bs-target="#confirmDelete" data-bs-toggle="modal" data-bs-dismiss="modal" onClick="deleteIdUser(<?= $value->id ?>)"></button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php
@@ -135,5 +137,6 @@ require_once 'controllers/adminSettingsCtrl.php';
         </div>
     </div>
 </div>
+
 
 <?php include 'parts/footer.php'; ?>
