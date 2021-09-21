@@ -21,14 +21,12 @@ require_once 'controllers/headerCtrl.php';
 <body>
     <!-- barre de navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="#menu">
-        <div class="container-fluid p-3">
+        <div class="container-fluid p-3 ms-2">
             <!-- titre + logo -->
             <div class="col-auto">
-                <div class="justify-content-start">
-                    <a href="index.php" class="text-decoration-none"><img class="navbar-brand col" src="assets/images/logo.png" style="width: 5rem; height:auto">
-                        <span id="title" class="text-uppercase text-light me-2">orpheus</span><span id="collection">collection</span>
-                    </a>
-                </div>
+                <a href="index.php" class="text-decoration-none"><img class="navbar-brand col" src="assets/images/logo.png" style="width: 5rem; height:auto">
+                    <span id="title" class="text-uppercase text-light me-2">orpheus</span><span id="collection">collection</span>
+                </a>
             </div>
             <!--Menu Burger-->
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +34,7 @@ require_once 'controllers/headerCtrl.php';
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                 <ul class="navbar-nav mb-lg-0">
-                    <div class="d-flex align-items-center text-uppercase">
+                    <div class="actionMenu d-flex align-items-center text-uppercase">
                         <a href="OSTIndex.php" class="btn btn-outline-light rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
@@ -52,22 +50,27 @@ require_once 'controllers/headerCtrl.php';
                             <li class="nav-item dropdown me-5">
                                 <i class="bi bi-menu-app fs-3 text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                 <ul class="dropdown-menu dropdown-menu-end text-center text-uppercase">
-
-                                    <!-- A afficher lorsque l'administrateur est connecté-->
-                                    <a class="dropdown-item" href="adminSettings.php">Gestion du site</a>
+                                    <?php
+                                    // On récupère nos variables de session
+                                    if (isset($_SESSION['user']['levelAccess']) && $_SESSION['user']['levelAccess'] == ROLE_ADMIN) {
+                                    ?>
+                                        <!-- A afficher lorsque l'administrateur est connecté-->
+                                        <a class="dropdown-item fw-bolder" href="adminSettings.php">Gestion du site</a>
+                                    <?php
+                                    }
+                                    ?>
                                     <a class="dropdown-item" href="playlistList.php">Playlists</a>
                                     <a class="dropdown-item" href="miniPostList.php">Mini-Post</a>
-                                    <a class="dropdown-item disabled" href="">Articles</a>
                                 </ul>
                             </li>
                             <!-- Menu déroulant utilisateur -->
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown me-5">
                                 <div class="avatar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <!-- si l'image existe, on l'affiche -->
                                     <?php
-                                    if (file_exists('assets/images/upload/' . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
+                                    if (file_exists(TARGET . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
                                     ?>
-                                        <img src="<?= 'assets/images/upload/' . $_SESSION['user']['avatar'] ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" style="width: 5rem; height:auto">
+                                        <img src="<?= TARGET . $_SESSION['user']['avatar'] ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" style="width: 5rem; height:auto">
                                     <?php
                                         // sinon, on affiche l'image par défaut
                                     } else {
@@ -77,7 +80,7 @@ require_once 'controllers/headerCtrl.php';
                                     }
                                     ?>
                                 </div>
-                                <ul class="dropdown-menu text-center mx-auto">
+                                <ul class="dropdown-menu text-center">
                                     <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
                                     </li>
                                     <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
@@ -121,7 +124,10 @@ require_once 'controllers/headerCtrl.php';
                                     <i class="bi bi-person-fill"></i>
                                 </span>
                             </div>
-                            <label for="mail" class="form-label">Adresse Email*
+                            <label for="mail" class="form-label">Adresse Email
+                                <span class="mandatory">
+                                    <p class="text-muted mb-0">ce champ est obligatoire</p>
+                                </span>
                                 <input type="email" class="form-control" id="mail" name="mail" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
@@ -134,7 +140,10 @@ require_once 'controllers/headerCtrl.php';
                         </div>
                         <!-- MOT DE PASSE -->
                         <div class=" mb-3">
-                            <label for="password" class="form-label">Mot de Passe*
+                            <label for="password" class="form-label">Mot de Passe
+                                <span class="mandatory">
+                                    <p class="text-muted mb-0">ce champ est obligatoire</p>
+                                </span>
                                 <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
@@ -168,7 +177,7 @@ require_once 'controllers/headerCtrl.php';
     <!-- FORMULAIRE CREATION DE COMPTE UTILISATEUR -->
     <div class="modal fade" id="register" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="register">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
-            <div class="modal-content">
+            <div class="signIn modal-content">
                 <div class="modal-header ">
                     <h5 class="modal-title text-uppercase">Créer mon compte</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -177,7 +186,10 @@ require_once 'controllers/headerCtrl.php';
                     <form method="POST" action="index.php" name="registerForm" id="registerForm">
                         <!-- PSEUDO -->
                         <div class="mb-3">
-                            <label for="pseudo" class="form-label">Créer mon pseudo*
+                            <label for="pseudo" class="form-label">Créer mon pseudo
+                                <span class="mandatory">
+                                    <p class="text-muted mb-0">ce champ est obligatoire</p>
+                                </span>
                                 <input type="text" class="form-control" id="pseudo" name="pseudo" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
@@ -190,7 +202,10 @@ require_once 'controllers/headerCtrl.php';
                         </div>
                         <!-- EMAIL -->
                         <div class="mb-3">
-                            <label for="mail" class="form-label">Mon adresse Email*
+                            <label for="mail" class="form-label">Mon adresse Email
+                                <span class="mandatory">
+                                    <p class="text-muted mb-0">ce champ est obligatoire</p>
+                                </span>
                                 <input type="email" class="form-control" id="mailRegister" name="mail" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
@@ -203,7 +218,10 @@ require_once 'controllers/headerCtrl.php';
                         </div>
                         <!-- MOT DE PASSE -->
                         <div class="mb-3">
-                            <label for="password" class="form-label">Créer mon mot de passe*
+                            <label for="password" class="form-label">Créer mon mot de passe
+                                <span class="mandatory">
+                                    <p class="text-muted mb-0">ce champ est obligatoire</p>
+                                </span>
                                 <input type="password" class="form-control" id="password" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()">
                             </label>
                             <?php
@@ -214,7 +232,10 @@ require_once 'controllers/headerCtrl.php';
                             }
                             ?>
                             <!-- VERIF MOT DE PASSE -->
-                            <label for="checkPassword" class="form-label">Vérifier mon mot de passe*
+                            <label for="checkPassword" class="form-label">Vérifier mon mot de passe
+                                <span class="mandatory">
+                                    <p class="text-muted mb-0">ce champ est obligatoire</p>
+                                </span>
                                 <input type="password" class="form-control" id="checkPassword" aria-required="true" name="checkPassword" oninput="checkRegisterForm()">
                             </label>
                             <?php

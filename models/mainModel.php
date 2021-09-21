@@ -1,9 +1,7 @@
 <?php
-
 /**
  * Modèle principal
  */
-
 class MainModel
 {
     //Les attributs $pdo et $table seront disponibles dans les enfants

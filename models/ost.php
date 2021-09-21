@@ -144,7 +144,7 @@ class Ost extends MainModel
         $pdoStatment->execute();
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
-    public function getRandomOST($catId)
+    public function getRandomOST($idCategory)
     {
         $pdoStatment = $this->pdo->prepare(
             'SELECT `op`.`id`, `ost`.`id` , `ost`.`name` AS `ostName`, `album`, `date` , `buy_link` , `music_link` , `path` , `title` , `alt` , `category`.`id` AS `categoryID`, `category`.`name` AS `categoryName` , `categorizedby`.`id_OST` , `composerlist`.`id_OST` , `lastname` , `firstname` , `id_Composer`
@@ -159,9 +159,9 @@ class Ost extends MainModel
             ON `ost`.`id` = `composerlist`.`id_OST`
          LEFT JOIN `composer`
              ON `composer`.`id` = `id_Composer`
-             WHERE `category`.`id` = :catid'
+             WHERE `category`.`id` = :idCategory'
         );
-        $pdoStatment->bindValue(':catid', $catId, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':idCategory', $idCategory, PDO::PARAM_INT);
         $pdoStatment->execute();
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }

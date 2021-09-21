@@ -74,7 +74,8 @@ if (isset($_POST['updateAvatar'])) {
     //Si il n'y a pas d'erreur sur le formulaire...
     if (!empty($updateArray)) {
         // je modifie les attributs de la classe grâce au setter
-        $user->__set('avatar', $avatarName);
+        $user->__set('id',$_SESSION['user']['id']);
+        $user->__set('avatar',$_SESSION['user']['avatar']);
         // ici j'exécute la méthodes updateAvatar() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
         $isUpdated = $user->updateAvatar($updateArray);
         if ($isUpdated) {
@@ -85,6 +86,7 @@ if (isset($_POST['updateAvatar'])) {
         }
     }
 }
+
 /**
  * Vérification formulaire de modification des informations de l'utilisateur (pseudo,mail)
  */

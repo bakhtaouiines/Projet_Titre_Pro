@@ -43,7 +43,6 @@ include 'parts/header.php';
         </div>
     </div>
 </div>
-</div>
 
 <!-- Modal Suppression-->
 <div class="modal fade" id="deleteElement" tabindex="-1" aria-labelledby="deleteElementLabel" aria-hidden="true">

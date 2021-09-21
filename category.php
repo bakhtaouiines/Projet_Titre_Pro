@@ -2,8 +2,8 @@
 include 'parts/header.php';
 require_once 'controllers/categoryCtrl.php'
 ?>
-<div class="container-fluid p-5">
-    <div class="row d-flex justify-content-between">
+<div class="container-fluid p-3">
+    <div class="row mx-auto">
         <!-- VOTES -->
         <div class="card" style="width: 18rem;">
             <div class="card-header bg-light">
@@ -22,41 +22,47 @@ require_once 'controllers/categoryCtrl.php'
                 ?><?php
                 } else {
                     ?>
-                <button class="btn btn-outline-secondary" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">S'inscrire pour voter</button>
+                <button class="btn btn-outline-light" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">S'inscrire pour voter</button>
             <?php
                 }
             ?>
             </div>
         </div>
         <!-- OST -->
-        <div class="card border border-dark border-2 bg-dark text-light p-2 mx-auto shadow-lg" style="width: 700px;">
-            <div class="row g-0">
-                <div class="col-md-6 my-auto me-2">
-                    <img src="<?= $ostInfo->path ?>" class="img-fluid rounded-start" alt="<?= $ostInfo->alt ?>">
+        <div class="card border border-dark border-5 text-light p-4 mx-auto shadow-lg" style="max-width: 700px; background: #0F2027">
+            <div class="row ">
+                <div class="col-sm-5 col-md-10 my-auto mx-auto">
+                    <img src="<?= $ostInfo->path ?>" class="img-fluid rounded" alt="<?= $ostInfo->alt ?>">
                 </div>
-                <div class="col-md-5">
-                    <div class="card-body">
-                        <h3 class="card-title"><?= $ostInfo->ostName ?></h3>
-                        <h4 class="card-title"><?= $ostInfo->firstname ?> <?= $ostInfo->lastname ?></h4>
+                <div class="col-sm-5 col-md-10 mx-auto">
+                    <div class="card-body me-0">
+                        <h3 class="card-title fs-5"><?= $ostInfo->ostName ?></h3>
+                        <h4 class="card-title fs-5"><?= $ostInfo->firstname ?> <?= $ostInfo->lastname ?></h4>
                         <p class="card-text"><?= $ostInfo->album ?></p>
                         <p class="card-text"><small class="text-muted"><?= $ostInfo->date ?></small></p>
                         <p class="card-text"><a href="<?= $ostInfo->buy_link ?>" class="card-link mb-3 link-light" target="_blank">Lien d'achat</a></p>
                         <?= $ostInfo->music_link ?>
                         <form action="" method="POST">
-                            <button type="submit" name="submitVote" class="btn btn-success bi bi-heart" title="je vote!"></button>
+                            <button type="submit" name="submitVote" class="btn btn-danger bi bi-heart" title="je vote!"></button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <!-- MINI-POST -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-body bg-light" style="flex: none;">
-                <h5 class="card-header card-title">Mini-Post title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <?php
+        foreach ($miniPostInfo as $value) {
+        ?>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body bg-light" style="flex: none;">
+                    <h5 class="card-header card-title"><?= $value->ostName ?></h5>
+                    <p class="card-text"><?= $value->content ?></p>
+                    <small><?= $value->pseudo ?></small>
+                </div>
             </div>
-        </div>
-
+        <?php
+        }
+        ?>
     </div>
 </div>
 <?php include 'parts/footer.php'; ?>

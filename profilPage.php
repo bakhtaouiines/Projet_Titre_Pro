@@ -9,7 +9,7 @@ require_once 'controllers/profilPageCtrl.php';
                 <div class="avatar">
                     <!-- si l'image existe, on l'affiche -->
                     <?php
-                    if (isset($_SESSION['user']['avatar'])) {
+                    if (file_exists(TARGET . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
                     ?>
                         <img src="<?= TARGET . $_SESSION['user']['avatar'] ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" height="170" width="170">
                     <?php

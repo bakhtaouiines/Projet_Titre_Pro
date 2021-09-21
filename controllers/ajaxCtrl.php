@@ -13,3 +13,4 @@ if (!empty($_GET['search'])) {
     $searchOst = trim($_GET['search']);
     echo json_encode($ost->searchOst($searchOst));
 }
+

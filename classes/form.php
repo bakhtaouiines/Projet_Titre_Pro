@@ -1,11 +1,10 @@
 <?php
-
 /**
  * Objet permettant de gerer les formulaires
  */
 class Form
 {
-    public $error = array();
+    public $error = [];
     const PATTERN = '/^[a-zA-Z0-9.-_]{3,20}$/'; //on contrôle que le pseudo contient 3 à 20 caractères
 
     /**

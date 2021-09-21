@@ -1,5 +1,5 @@
 <?php
-// Je charge ici les 
+// Je charge ici les modèles et classes
 require_once 'config.php';
 require_once 'models/mainModel.php';
 require_once 'models/miniPost.php';

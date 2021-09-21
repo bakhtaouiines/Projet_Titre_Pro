@@ -78,7 +78,7 @@ if (isset($_POST['register'])) {
             $userCreated = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
             //envoyer un mail de validation de l'inscription
         } else {
-            //Laisse ouvert la fenetre modale !!!!! 
+            //Laisse ouvert la fenetre modale !!!!! ASAP
         }
     }
 }

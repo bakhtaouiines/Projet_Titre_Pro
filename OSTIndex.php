@@ -43,7 +43,7 @@ require_once 'controllers/ostIndexCtrl.php';
                 <div class="row">
                     <div class="col-md-6 mt-3">
                         <a href="ost.php?ostID=<?= $value->id ?>"><img src="<?= $value->path ?>" class="img-fluid rounded" alt="<?= $value->alt ?>" title="<?= $value->title ?>"></a>
-                        <a class="card-title lead text-light" href="category.php?categoryID=<?= $value->categoryID ?>"><?= $value->categoryName ?></a>
+                        <a class="card-link lead " href="category.php?categoryID=<?= $value->categoryID ?>"><?= $value->categoryName ?></a>
                         <form action="" method="POST">
                             <button type="submit" name="submitVote" class="btn btn-danger btn-sm bi bi-heart" title="je vote!"></button>
                         </form>
