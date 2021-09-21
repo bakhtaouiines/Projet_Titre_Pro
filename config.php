@@ -35,4 +35,4 @@ function isConnected()
         return false;
     }
 }
-$defaultImage = 'assets/images/default_images.png';
+$defaultImage = 'assets\images\default_image.png';

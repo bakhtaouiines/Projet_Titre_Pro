@@ -4,8 +4,8 @@ require_once 'controllers/articleCtrl.php';
 ?>
 
 <!-- affichage de l'article -->
-<div class="article p-3 mt-4">
-    <a href="articlelist.php" class="btn btn-outline-dark mb-3 offset-md-10" role="button">Revenir à la liste des articles</a>
+<div class="container article p-3 mt-4">
+    <a href="articlelist.php" class="btn btn-outline-light mb-3 offset-md-10" role="button">Revenir à la liste des articles</a>
     <div class="container mb-3">
         <div class="row g-0">
             <div class="col-md-5 my-auto">
@@ -26,7 +26,7 @@ require_once 'controllers/articleCtrl.php';
 <!-- section commentaires -->
 <section class="p-5">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row d-flex justify-content-between">
             <div class="col-sm-5 col-md-6 col-12 p-5">
                 <h2 class="text-light fs-5">Commentaires</h2>
                 <?php

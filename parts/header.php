@@ -64,21 +64,10 @@ require_once 'controllers/headerCtrl.php';
                                 </ul>
                             </li>
                             <!-- Menu déroulant utilisateur -->
-                            <li class="nav-item dropdown me-5">
+                            <li class="nav-item dropdown">
                                 <div class="avatar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <!-- si l'image existe, on l'affiche -->
-                                    <?php
-                                    if (file_exists(TARGET . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
-                                    ?>
-                                        <img src="<?= TARGET . $_SESSION['user']['avatar'] ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" style="width: 5rem; height:auto">
-                                    <?php
-                                        // sinon, on affiche l'image par défaut
-                                    } else {
-                                    ?>
-                                        <img src="<?= $defaultImage ?>" style="width: 5rem; height:auto">
-                                    <?php
-                                    }
-                                    ?>
+                                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" style="width: 5rem; height:auto">
                                 </div>
                                 <ul class="dropdown-menu text-center">
                                     <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
