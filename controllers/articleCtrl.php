@@ -1,24 +1,20 @@
 <?php
-// On charge le fichier du modèle.
 require_once 'models/mainModel.php';
 require_once 'models/article.php';
 require_once 'models/comment.php';
 require_once 'classes/form.php';
 
-$message = '';
-/**
- * Récupération des informations de l'article + auteur + images
- */
 $article = new Article();
-$article->id = $_GET['articleID'];
-// on stocke dans une variable la fonction qui va appeler toutes les informations de l'article
-$articleInfo = $article->getArticleInfo();
-
-/**
- * Création d'un commentaire et son affichage
- */
 $comment = new Comment();
 $commentForm = new Form();
+$message = '';
+
+/**
+ * Affichage de l'article, l'auteur, et les images
+ */
+$article->id = $_GET['articleID'];
+$articleInfo = $article->getArticleInfo();
+
 /**
  *  Vérifications du formulaire d'écriture de commentaire
  */
@@ -41,5 +37,10 @@ if (isset($_POST['submitComment'])) {
     }
 }
 
-$commentList = $comment->getCommentsList($idArticle);
-var_dump($idArticle);
+/**
+ * Affichage des commentaires
+ */
+if (!empty($_GET['articleID'])) {
+$commentList = $comment->getCommentsList($_GET['articleID']);
+}
+

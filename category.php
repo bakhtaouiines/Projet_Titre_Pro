@@ -29,22 +29,33 @@ require_once 'controllers/categoryCtrl.php'
             </div>
         </div>
         <!-- OST -->
-        <div class="card border border-dark border-5 text-light p-4 mx-auto shadow-lg" style="max-width: 700px; background: #0F2027">
+        <div class="card border border-dark border-3 text-light p-4 mx-auto shadow-lg" style="max-width: 700px; background: #0F2027">
             <div class="row ">
                 <div class="col-sm-5 col-md-10 my-auto mx-auto">
                     <img src="<?= $ostInfo->path ?>" class="img-fluid rounded" alt="<?= $ostInfo->alt ?>">
                 </div>
                 <div class="col-sm-5 col-md-10 mx-auto">
                     <div class="card-body me-0">
-                        <h3 class="card-title fs-5"><?= $ostInfo->ostName ?></h3>
+                        <h3 class="ostName card-title fs-5"><?= $ostInfo->ostName ?></h3>
                         <h4 class="card-title fs-5"><?= $ostInfo->firstname ?> <?= $ostInfo->lastname ?></h4>
                         <p class="card-text"><?= $ostInfo->album ?></p>
                         <p class="card-text"><small class="text-muted"><?= $ostInfo->date ?></small></p>
-                        <p class="card-text"><a href="<?= $ostInfo->buy_link ?>" class="card-link mb-3 link-light" target="_blank">Lien d'achat</a></p>
+                        <a href="<?= $ostInfo->buy_link ?>" class="mb-3 btn btn-outline-light btn-sm" type="button" target="_blank">Lien d'achat</a>
                         <?= $ostInfo->music_link ?>
-                        <form action="" method="POST">
-                            <button type="submit" name="submitVote" class="btn btn-danger bi bi-heart" title="je vote!"></button>
-                        </form>
+                        <!-- A afficher lorsque l'utilisateur est connecté -->
+                        <?php
+                        // On récupère nos variables de session
+                        if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
+                        ?>
+                            <div class="d-flex justify-content-between mt-3">
+                                <form action="" method="POST">
+                                    <button type="submit" name="submitVote" class="btn btn-danger bi bi-heart" title="je vote!"></button>
+                                </form>
+                                <a href="miniPostCreation.php" title="j'écris un mini-post" class="btn btn-sm btn-secondary bi bi-pencil"></a>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

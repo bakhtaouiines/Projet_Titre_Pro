@@ -3,6 +3,9 @@ include 'parts/header.php';
 require_once 'controllers/articleListCtrl.php';
 ?>
 <div class="container py-5 p-5">
+<div class="containerRise">
+        <h3 class="rise-text">L'espace Lecture</h1>
+    </div>
 <div class="row row-cols-1 row-cols-md-2 row-cols-md-2 g-5 mt-5">
         <?php
         // On affiche chaque entrée une à une

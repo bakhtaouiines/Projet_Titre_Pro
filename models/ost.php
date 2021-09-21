@@ -129,16 +129,17 @@ class Ost extends MainModel
     {
         $pdoStatment = $this->pdo->prepare(
            'SELECT 
-                `ost`.`name` AS `ostName`, `album`, `composerlist`.`id_OST` , `lastname` , `firstname`, `ost`.`id`
+                `ost`.`name` AS `ostName`, `album`, `composerlist`.`id_OST` , `lastname` , `firstname`, `ost`.`id`,  `path` , `title` , `alt`
             FROM 
                 `ost`
                 LEFT JOIN `composerlist` ON `ost`.`id` = `composerlist`.`id_OST`
                 LEFT JOIN `composer` ON `composer`.`id` = `id_Composer` 
+                LEFT JOIN `ostpicture` AS `op` ON `id_OSTPicture` = `op`.`id`
             WHERE 
                 `ost`.`album` LIKE :searchOstList
                 OR `ost`.`name` LIKE :searchOstList
             ORDER BY `ostName`  
-            LIMIT 10'
+            LIMIT 20'
         );
         $pdoStatment->bindValue(':searchOstList', $searchOstList . '%', PDO::PARAM_STR);
         $pdoStatment->execute();
