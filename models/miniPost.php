@@ -135,4 +135,29 @@ class MiniPost extends MainModel
         $pdoStatment->execute();
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }
+    
+    /**
+     * Méthode pour afficher les mini-posts dans le dashboard de l'administrateur
+     *
+     * @return void
+     */
+    public function miniPosts()
+    {
+        $pdoStatment = $this->pdo->query(
+            'SELECT `minipost`.`id`, `content`, `id_User`, `pseudo`, `minipost`.`id_OST`, `path` , `alt` ,`title`, `ost`.`name` AS `ostName`
+                FROM `minipost`
+            LEFT JOIN `ost`
+                ON `minipost`.`id_OST` = `ost`.`id`
+            LEFT JOIN `ostpicture` AS `op`
+                ON `op`.`id` = `ost`.`id_OSTPicture`
+            LEFT JOIN `categorizedby`
+                ON `ost`.`id` = `categorizedby`.`id_OST`
+            LEFT JOIN `category`
+                ON `categorizedby`.`id` = `category`.`id`
+            LEFT JOIN `user`
+                ON `id_User` = `user`.`id`
+            ORDER BY `ostName`'
+        );
+        return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
+    }
 }

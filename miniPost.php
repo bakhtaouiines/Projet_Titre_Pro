@@ -20,7 +20,28 @@ include 'parts/header.php';
     <div class="col-auto d-flex justify-content-between">
         <a href="miniPostCreation.php" class="btn btn-outline-secondary bi bi-pencil-square"> Créer un mini-post</a>
         <a href="miniPostList.php" class="btn btn-outline-secondary bi bi-list"> Revenir à la liste des minipost</a>
-        <button type="button" class="btn btn-outline-danger bi bi-x-circle" data-bs-toggle="modal" data-bs-target="#deleteElement"> Supprimer</button>
+        <button type="button" class="btn btn-outline-danger bi bi-x-circle" data-bs-toggle="modal" data-bs-target="#deleteMiniPost"> Supprimer</button>
+    </div>
+</div>
+
+<!-- Modal Suppression-->
+<div class="modal fade" id="deleteMiniPost" tabindex="-1" aria-labelledby="deleteMiniPostLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <p class="lead">Voulez-vous vraiment supprimer cet élément?</p>
+            </div>
+            <div class="modal-footer bg-dark text-white">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <form method="POST">
+                    <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <!---------------------------------------------->
@@ -40,27 +61,6 @@ include 'parts/header.php';
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" name="updateMiniPost" class="btn btn-success">Enregistrer les modifications</button>
             </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Suppression-->
-<div class="modal fade" id="deleteElement" tabindex="-1" aria-labelledby="deleteElementLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ddeleteElementLabel">Confirmation de suppression</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="lead">Voulez-vous vraiment supprimer cet élément?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <form method="POST">
-                    <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
-                </form>
-            </div>
         </div>
     </div>
 </div>
