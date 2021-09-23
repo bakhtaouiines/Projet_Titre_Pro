@@ -4,26 +4,23 @@ require_once 'models/mainModel.php';
 require_once 'models/user.php';
 require_once 'classes/form.php';
 
-// j'ai crée une variable $controllers avec le chemin 'controllers/miniPostCtrl.php', qui sera appelé dans les vues la nécessitant; je vérifie au préalable qu'elle existe, puis je l'appelle
+// j'ai crée une variable $controllers avec le chemin fichier 'controllers/...Ctrl.php', qui sera appelé dans la vue la nécessitant; je vérifie au préalable qu'elle existe, puis je l'appelle
 
 if (isset($controllers)) {
     require $controllers;
 }
 
-//  $user = new User();
-//  $user->__set('id', 80);
-//  $user->__set('password_hash', password_hash('141095',PASSWORD_DEFAULT));
-//  $user->updateUserHash();
-
 $registerForm = new Form();
 $loginForm = new Form();
 $errorMessagePassword = [];
 $message = '';
+
 /**
  *  Vérifications du formulaire d'INSCRIPTION
  */
 if (isset($_POST['register'])) {
     //Je récupère les données du formulaire
+
     //Je vérifie le pseudo
     if (isset($_POST['pseudo'])) {
         $pseudo = htmlspecialchars($_POST['pseudo']);
@@ -72,10 +69,10 @@ if (isset($_POST['register'])) {
         if ($user->addUser() != 0) {
             $message = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
             //prévoir pour envoyer un mail de validation de l'inscription
-        } else {
-            //Laisse ouvert la fenetre modale !!!!! ASAP
-            $message = implode($registerForm->error);
         }
+    } else {
+        //Laisse ouvert la fenetre modale !!!!! ASAP
+        $message = implode($registerForm->error);
     }
 }
 
@@ -134,3 +131,8 @@ if (isset($_GET['action'])) {
         exit;
     }
 }
+
+//  $user = new User();
+//  $user->__set('id', 80);
+//  $user->__set('password_hash', password_hash('141095',PASSWORD_DEFAULT));
+//  $user->updateUserHash();
