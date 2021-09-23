@@ -11,7 +11,7 @@ require_once 'controllers/profilPageCtrl.php';
             <?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?>
         </h3>
         <span>
-            <a href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>" button type="button" class="btn btn btn-outline-light">Éditer mon profil</a>
+            <a href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>" button type="button" class="btn btn btn-secondary">Éditer mon profil</a>
         </span>
         <div class="icons my-auto">
             <a href="playlistList.php">

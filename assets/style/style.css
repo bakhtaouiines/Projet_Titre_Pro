@@ -72,6 +72,25 @@
         transform: scale(1.2);
         transition: transform .6s;
     }
+    /*Update User Page*/
+    
+    .edit {
+        background-color: #162429;
+        color: darkcyan;
+    }
+    
+    .btn.btn-outline-success,
+    .btn.btn-secondary {
+        background-color: #38484e;
+        color: rgb(92, 161, 161);
+        border: teal;
+    }
+    
+    .btn.btn-outline-success:hover,
+    .btn.btn-secondary:hover {
+        background-color: #6b8b97;
+        color: whitesmoke;
+    }
     /* Popup container */
     
     .popup {
@@ -323,7 +342,7 @@
     }
     
     .articleList:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
         /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
     }
     

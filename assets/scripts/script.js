@@ -31,7 +31,7 @@ function checkRegisterForm() {
  * SnackBar 
  * 
  */
-function myFunction() {
+function snackbarValidation() {
     // Get the snackbar DIV
     var x = document.getElementById("snackbar");
 

@@ -18,48 +18,49 @@ if (isset($controllers)) {
 $registerForm = new Form();
 $loginForm = new Form();
 $errorMessagePassword = [];
-$userCreated = '';
+$message = '';
 /**
  *  Vérifications du formulaire d'INSCRIPTION
  */
 if (isset($_POST['register'])) {
     //Je récupère les données du formulaire
+    //Je vérifie le pseudo
     if (isset($_POST['pseudo'])) {
         $pseudo = htmlspecialchars($_POST['pseudo']);
+        $registerForm->isNotEmpty('pseudo', $pseudo);
+        $registerForm->isValidFormat('pseudo', $pseudo, FORM::PATTERN);
+        $registerForm->isUnique('pseudo', $pseudo, 'user');
+        $registerForm->isValidLength('pseudo', $pseudo, 3, 20);
+    } else {
+        $registerForm->error['pseudo'];
     }
+    //Je vérifie le mail
     if (isset($_POST['mail'])) {
         $mail = htmlspecialchars($_POST['mail']);
+        $registerForm->isValidEmail('mail', $mail);
+        $registerForm->isUnique('mail', $mail, 'user');
+    } else {
+        $registerForm->error['mail'];
     }
+    //Je vérifie le mot de passe et son check
     if (isset($_POST['password'])) {
         $password = htmlspecialchars($_POST['password']);
+        $registerForm->isNotEmpty('password', $password);
+        $registerForm->isValidLength('password', $password, 6, 255);
+    } else {
+        $registerForm->error['password'];
     }
     if (isset($_POST['checkPassword'])) {
         $checkPassword = htmlspecialchars($_POST['checkPassword']);
-    }
-
-    //Je vérifie le pseudo
-    $registerForm->isNotEmpty('pseudo', $pseudo);
-    $registerForm->isValidFormat('pseudo', $pseudo, FORM::PATTERN);
-    $registerForm->isUnique('pseudo', $pseudo, 'user');
-    $registerForm->isValidLength('pseudo', $pseudo, 3, 20);
-    //Je vérifie le mail
-    $registerForm->isNotEmpty('mail', $mail);
-    $registerForm->isValidEmail('mail', $mail);
-    $registerForm->isUnique('mail', $mail, 'user');
-    //Je vérifie le mot de passe et son check
-    $registerForm->isNotEmpty('password', $password);
-    $registerForm->isValidLength('password', $password, 6, 255);
-    $registerForm->isNotEmpty('checkPassword', $checkPassword);
-    $registerForm->isValidLength('checkPassword', $checkPassword, 6, 255);
-
-    //Si il n'y a pas d'erreur sur le formulaire...
-    if ($registerForm->isValid()) {
-        //...et si le mot de passe indiqué dans le check est identique à la valeur du champ password
+        // Je vérifie que le mot de passe indiqué dans le check est identique à la valeur du champ password
         if ($password !== $checkPassword) {
             $errorMessagePassword['checkPassword'] = 'Le mot de passe indiqué ne correspond pas.';
         }
-        //...je crée une instance de classe ; création d'un nouvel objet, qui appelle la méthode constructeur 
-        $user = new User();
+    }
+
+    //Si il n'y a pas d'erreur sur le formulaire...
+    if ($registerForm->isValid()) {
+        //...je crée une instance de classe ; création d'un nouvel objet
         $user->__set('pseudo', $pseudo);
         // On ne sauvegardera pas le mot de passe en clair dans la base mais plutôt un hash
         // Donc je crée une clé de hachage pour le mot de passe
@@ -69,10 +70,11 @@ if (isset($_POST['register'])) {
         // On génère le hash qui servira à la validation du compte 
         $user->token = random_int(1, 999);
         if ($user->addUser() != 0) {
-            $userCreated = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
+            $message = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
             //prévoir pour envoyer un mail de validation de l'inscription
         } else {
             //Laisse ouvert la fenetre modale !!!!! ASAP
+            $message = implode($registerForm->error);
         }
     }
 }
@@ -93,7 +95,7 @@ if (isset($_POST['login'])) {
     $loginForm->isValidEmail('mail', $mail);
     $loginForm->doesExist('mail', $mail, 'user');
     $loginForm->isNotEmpty('password', $password);
-    $registerForm->isValidLength('password', $password, 6, 255);
+    $loginForm->isValidLength('password', $password, 6, 255);
 
     // s'il n'y a pas d'erreurs...
     if ($loginForm->isValid()) {
@@ -116,6 +118,7 @@ if (isset($_POST['login'])) {
             exit;
         } else {
             //Laisse ouvert la fenetre modale !!!!!
+            $message = implode($loginForm->error);
         }
     }
 }

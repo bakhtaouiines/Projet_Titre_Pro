@@ -118,9 +118,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="email" class="form-control" id="mail" name="mail" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($error['mail'])) {
+                            if (!empty($loginForm->error['mail'])) {
                             ?>
-                                <p class="text-danger"><?= $error['mail']; ?></p>
+                                <p class="fst-italic text-danger"><?= $message; ?></p>
                             <?php
                             }
                             ?>
@@ -134,9 +134,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="password" class="form-control" id="password" name="password" aria-required="true" oninput="checkLogForm()">
                             </label>
                             <?php
-                            if (!empty($error['password'])) {
+                            if (!empty($loginForm->error['password'])) {
                             ?>
-                                <p class="text-danger"><?= $error['password']; ?></p>
+                                <p class="fst-italic text-danger"><?= $message; ?></p>
                             <?php
                             }
                             ?>
@@ -184,9 +184,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="text" class="form-control" id="pseudo" name="pseudo" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($error['pseudo'])) {
+                            if (!empty($registerForm->error['pseudo'])) {
                             ?>
-                                <p class="text-danger"><?= $error['pseudo']; ?></p>
+                                <p class="fst-italic text-danger"><?= $message; ?></p>
                             <?php
                             }
                             ?>
@@ -200,9 +200,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="email" class="form-control" id="mailRegister" name="mail" aria-required="true" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($error['mail'])) {
+                            if (!empty($registerForm->error['mail'])) {
                             ?>
-                                <p class="text-danger"><?= $error['mail']; ?></p>
+                                <p class="fst-italic text-danger"><?= $message; ?></p>
                             <?php
                             }
                             ?>
@@ -216,9 +216,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="password" class="form-control" id="password" aria-required="true" aria-required="true" name="password" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($error['password'])) {
+                            if (!empty($registerForm->error['password'])) {
                             ?>
-                                <p class="text-danger"><?= $error['password']; ?></p>
+                                <p class="fst-italic text-danger"><?= $message; ?></p>
                             <?php
                             }
                             ?>
@@ -232,13 +232,13 @@ require_once 'controllers/headerCtrl.php';
                             <?php
                             if (!empty($errorMessagePassword['checkPassword'])) {
                             ?>
-                                <p class="text-danger"><?= $errorMessagePassword['checkPassword']; ?></p>
+                                <p class="fst-italic text-danger"><?= $errorMessagePassword['checkPassword']; ?></p>
                             <?php
                             }
                             ?>
                         </div>
                         <!--validation de formulaire-->
-                        <input type="submit" class="btn btn-primary" id="registerBtn" name="register" value="Créer mon compte" data-bs-toggle="modal" data-bs-target="#userCreated" disabled="disabled" onclick="myFunction()">
+                        <input type="submit" class="btn btn-primary" id="registerBtn" name="register" value="Créer mon compte" disabled="disabled" onclick="snackbarValidation()">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -247,5 +247,7 @@ require_once 'controllers/headerCtrl.php';
             </div>
         </div>
     </div>
-
-    
+    <!-- message dans une snackbar, informant que le compte a bien été crée -->
+    <div id="snackbar">
+        <?= $message; ?>
+    </div>

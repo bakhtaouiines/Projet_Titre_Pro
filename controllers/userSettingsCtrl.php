@@ -101,15 +101,14 @@ if (isset($_POST['updateUser'])) {
         $updateForm->isValidLength('pseudo', $updatePseudo, 3, 20);
         if (!isset($updateForm->error['pseudo'])) {
             $updateArray['pseudo'] = $updatePseudo;
-        }else {
+        } else {
             $updateForm->error['pseudo'];
+        }
     }
-}
     if (isset($_POST['updateMail'])) {
         $updateMail = htmlspecialchars($_POST['updateMail']);
         //Je vérifie le mail
         $updateForm->isUnique('mail', $updateMail, 'user');
-        $updateForm->isNotEmpty('mail', $updateMail);
         $updateForm->isValidEmail('mail', $updateMail);
         if (!isset($updateForm->error['mail'])) {
             $updateArray['mail'] = $updateMail;
@@ -125,7 +124,6 @@ if (isset($_POST['updateUser'])) {
         $user->__set('id', $_SESSION['user']['id']);
         $user->__set('pseudo', $updateArray['pseudo']);
         $user->__set('mail', $updateArray['mail']);
-
         // ici j'exécute la méthodes updateUserInfo() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
         $isUpdated = $user->updateUserInfo($updateArray);
         if ($isUpdated) {
@@ -134,6 +132,8 @@ if (isset($_POST['updateUser'])) {
             $_SESSION['user']['pseudo'] = $updateArray['pseudo'];
             $_SESSION['user']['avatar'] = $avatarName;
             $message = 'Modifications enregistrées avec succès!';
+        } else {
+            $message = implode($updateForm->error);
         }
     }
 }

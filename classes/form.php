@@ -96,7 +96,7 @@ class Form
         if ($length >= $min && $length <= $max) {
             return true;
         } else {
-            $this->error[$fieldName] = 'La taille du champ ' . $fieldName . ' doit être comprise entre ' . $min . ' et ' . $max;
+            $this->error[$fieldName] = 'La taille du champ ' . $fieldName . ' doit être comprise entre ' . $min . ' et ' . $max .' caractères.';
             return false;
         }
     }

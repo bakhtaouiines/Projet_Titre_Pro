@@ -2,7 +2,7 @@
 $controllers = 'controllers/userSettingsCtrl.php';
 include 'parts/header.php'; ?>
 
-<div class="container border border-secondary rounded text-light my-5 p-5">
+<div class="edit container border border-secondary rounded text-light my-5 p-5">
     <!-- formulaire modification avatar -->
     <div class="row">
         <div class="col-12 col-lg-6 mx-auto">
@@ -37,9 +37,9 @@ include 'parts/header.php'; ?>
                     <label for="updatePseudo" class="form-label">Pseudo</label>
                     <input type="text" class="form-control px-2 py-2" id="updatePseudo" name="updatePseudo" value="<?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?>">
                     <?php
-                    if (!empty($error['updatePseudo'])) {
+                    if (!empty($updateForm->error['pseudo'])) {
                     ?>
-                        <p class="fst-italic text-danger"><?= $error['updatePseudo']; ?></p>
+                        <p class="fst-italic text-danger"><?= $message; ?></p>
                     <?php
                     }
                     ?>
@@ -47,14 +47,14 @@ include 'parts/header.php'; ?>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="mailPrepend">@</span>
                         <input type="text" class="form-control px-2 py-2" id="updateMail" name="updateMail" aria-describedby="mailPrepend" value="<?= isset($_SESSION['user']['mail']) ? $_SESSION['user']['mail'] : '' ?>">
-                        <?php
-                        if (!empty($error['updateMail'])) {
-                        ?>
-                            <p class="fst-italic text-danger"><?= $error['updateMail']; ?></p>
-                        <?php
-                        }
-                        ?>
                     </div>
+                    <?php
+                    if (!empty($updateForm->error['mail'])) {
+                    ?>
+                        <p class="fst-italic text-danger"><?= $message; ?></p>
+                    <?php
+                    }
+                    ?>
                     <div class="popup">
                         <button type="submit" id="updateUser" class="mt-3 btn btn-outline-success text-center" name="updateUser" onclick="popupUser()">Enregistrer les modifications</button>
                         <span class="popuptext" id="userPopup"><?= $message ?></span>
