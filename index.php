@@ -199,5 +199,9 @@ require_once 'controllers/categoryCtrl.php'
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<!-- message dans une snackbar, informant que le compte a bien été crée -->
+<div id="snackbar">
+    <?= $userCreated; ?>
+</div>
 
 <?php include 'parts/footer.php'; ?>

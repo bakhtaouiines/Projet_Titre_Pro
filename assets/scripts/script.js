@@ -27,6 +27,20 @@ function checkRegisterForm() {
     document.getElementById("registerBtn").disabled = canSubmit;
 }
 
+/** 
+ * SnackBar 
+ * 
+ */
+function myFunction() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function() { x.className = x.className.replace("show", ""); }, 3000);
+}
 /**
  * Tiny MCE
  */
@@ -102,11 +116,6 @@ function readURL(input) {
     }
 }
 
-$(function() {
-    $('#upload').on('change', function() {
-        readURL(input);
-    });
-});
 
 /**
  * Affichage du popup pour l'avatar

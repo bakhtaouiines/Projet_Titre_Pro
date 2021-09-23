@@ -18,7 +18,7 @@ require_once 'controllers/ostCtrl.php';
                         <p class="card-text"><?= $ostInfo->album ?></p>
                         <p class="card-text fst-italic"><small class="text-muted"><?= $ostInfo->date ?></small></p>
                         <a class="card-link text-decoration-none" href="category.php?categoryID=<?= $ostInfo->categoryID ?>"><?= $ostInfo->categoryName ?></a>
-                        <a href="<?= $ostInfo->buy_link ?>" class="mb-3 btn btn-outline-light btn-sm" type="button" target="_blank">Lien d'achat</a>
+                        <a href="<?= $ostInfo->buy_link ?>" class="m-3 btn btn-outline-light btn-sm" type="button" target="_blank">Lien d'achat</a>
                         <?= $ostInfo->music_link ?>
                         <div class="d-flex justify-content-between my-3 ">
                             <!-- A afficher lorsque l'utilisateur est connecté -->
@@ -27,10 +27,10 @@ require_once 'controllers/ostCtrl.php';
                             if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
                             ?>
                                 <form action="" method="POST">
-                                    <button type="submit" name="submitVote" class="btn btn-danger bi bi-heart" title="je vote!"></button>
+                                    <button type="submit" name="submitVote" class="btn btn-lg btn-danger bi bi-heart" title="je vote!"></button>
                                 </form>
 
-                                <a href="miniPostCreation.php" title="j'écris un mini-post" class="btn btn-sm btn-secondary bi bi-pencil"></a>
+                                <a href="miniPostCreation.php" title="j'écris un mini-post" class="btn btn-lg btn-secondary bi bi-pencil"></a>
                             <?php
                             }
                             ?>

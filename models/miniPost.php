@@ -113,7 +113,7 @@ class MiniPost extends MainModel
      * Méthode pour lister les mini-posts des utilisateurs dans la catégorie sélectionnée
      *
      */
-    public function getMiniPosts()
+    public function getMiniPosts($idCategory)
     {
         $pdoStatment = $this->pdo->prepare(
             'SELECT `minipost`.`id`, `content`, `id_User`, `pseudo`, `minipost`.`id_OST`, `path` , `alt` ,`title`, `ost`.`name` AS `ostName`
@@ -131,7 +131,7 @@ class MiniPost extends MainModel
             WHERE `category`.`id` = :id
             ORDER BY `ostName`'
         );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':id', $idCategory, PDO::PARAM_STR);
         $pdoStatment->execute();
         return $pdoStatment->fetchAll(PDO::FETCH_OBJ);
     }

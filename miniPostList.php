@@ -17,7 +17,7 @@ require_once 'controllers/miniPostListCtrl.php';
             <?php
             foreach ($minipostList as $value) {
             ?>
-                <div class="card text-center p-2 m-2 " style="max-width: 300px;">
+                <div class="card text-center p-2 m-2  bg-dark" style="max-width: 300px;">
                     <a href="miniPost.php?minipostID=<?= $value->id ?>" class="list-group-item list-group-item-action" aria-current="true" style="background: #05171e">
                         <img class="card-img" src="<?= $value->path ?>" alt="<?= $value->alt ?>" title="<?= $value->title ?>" style="max-width: 300px;">
                         <div class="card-body lead text-center text-light">

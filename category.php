@@ -2,11 +2,14 @@
 include 'parts/header.php';
 require_once 'controllers/categoryCtrl.php'
 ?>
-<div class="container-fluid p-3">
-    <div class="row mx-auto">
+<div class="container p-2">
+    <div class="containerRise">
+        <h3 class="rise-text"><?= $categoryName->name ?></h1>
+    </div>
+    <div class="row my-5">
         <!-- VOTES -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-header bg-light">
+        <div class="vCard card my-auto" style="width: 18rem;">
+            <div class="card-header">
                 Votes
             </div>
             <ul class="list-group list-group-flush">
@@ -31,10 +34,10 @@ require_once 'controllers/categoryCtrl.php'
         <!-- OST -->
         <div class="card border border-dark border-3 text-light p-4 mx-auto shadow-lg" style="max-width: 700px; background: #0F2027">
             <div class="row ">
-                <div class="col-sm-5 col-md-10 my-auto mx-auto">
+                <div class="col-sm-5 col-md-6 mx-auto">
                     <img src="<?= $ostInfo->path ?>" class="img-fluid rounded" alt="<?= $ostInfo->alt ?>">
                 </div>
-                <div class="col-sm-5 col-md-10 mx-auto">
+                <div class="col-sm-5 col-md-6 mx-auto">
                     <div class="card-body me-0">
                         <h3 class="ostName card-title fs-5"><?= $ostInfo->ostName ?></h3>
                         <h4 class="card-title fs-5"><?= $ostInfo->firstname ?> <?= $ostInfo->lastname ?></h4>
@@ -61,19 +64,22 @@ require_once 'controllers/categoryCtrl.php'
             </div>
         </div>
         <!-- MINI-POST -->
-        <?php
-        foreach ($miniPostInfo as $value) {
-        ?>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body bg-light" style="flex: none;">
-                    <h5 class="card-header card-title"><?= $value->ostName ?></h5>
-                    <p class="card-text"><?= $value->content ?></p>
-                    <small><?= $value->pseudo ?></small>
+        <section class="d-flex justify-content-start mt-5" >
+            <?php
+            foreach ($miniPostInfo as $value) {
+            ?>
+                <div class="mpCard card">
+                    <div class="card-body" style="flex: none;">
+                        <img src="<?= $value->path ?>" class="img-thumbnail rounded" alt="<?= $value->alt ?>">
+                        <h5 class="card-header card-title"><?= $value->ostName ?></h5>
+                        <p class="card-text"><?= $value->content ?></p>
+                        <small><?= $value->pseudo ?></small>
+                    </div>
                 </div>
-            </div>
-        <?php
-        }
-        ?>
+            <?php
+            }
+            ?>
+        </section>
     </div>
 </div>
 <?php include 'parts/footer.php'; ?>

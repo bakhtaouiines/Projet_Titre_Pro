@@ -12,9 +12,10 @@ $message = '';
 /**
  * Affichage de l'article, l'auteur, et les images
  */
-$article->id = $_GET['articleID'];
-$articleInfo = $article->getArticleInfo();
-
+if (!empty($_GET['articleID'])) {
+    $article->id = $_GET['articleID'];
+    $articleInfo = $article->getArticleInfo();
+}
 /**
  *  Vérifications du formulaire d'écriture de commentaire
  */
@@ -41,6 +42,16 @@ if (isset($_POST['submitComment'])) {
  * Affichage des commentaires
  */
 if (!empty($_GET['articleID'])) {
-$commentList = $comment->getCommentsList($_GET['articleID']);
+    $commentList = $comment->getCommentsList($_GET['articleID']);
 }
 
+/**
+ * Suppression d'un commentaire
+ */
+if (isset($_POST['deleteComment'])) {
+    if (isset($_GET['articleID'])) {
+        $commentID = $comment->id;
+        $comment->deleteComment($_GET['articleID'], $commentID);
+        header('Refresh: 0');
+    } 
+}

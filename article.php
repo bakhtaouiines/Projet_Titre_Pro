@@ -1,6 +1,6 @@
 <?php
+$controllers = 'controllers/articleCtrl.php';
 include 'parts/header.php';
-require_once 'controllers/articleCtrl.php';
 ?>
 
 <!-- affichage de l'article -->
@@ -27,26 +27,24 @@ require_once 'controllers/articleCtrl.php';
 <section class="p-5">
     <div class="container-fluid">
         <div class="row d-flex justify-content-between">
-            <div class="col-sm-5 col-md-6 col-12 p-5">
+            <div class="col-sm-5 col-md-6 col-12 p-3">
                 <h2 class="text-light fs-5">Commentaires</h2>
                 <?php
                 // On affiche chaque entrée une à une
                 foreach ($commentList as $value) {
                 ?>
                     <div class="comment mt-4 text-justify float-left border border-light">
+                        <img src="<?= $value->avatar ?>" class="rounded-circle" alt="Profil de <?= $value->pseudo ?>" height="20" width="20">
+                        <h4><?= $value->pseudo ?></h4><small class="text-muted fst-italic ms-3"><?= date('d-m-Y', strtotime($value->date)) ?></small>
                         <?php
-                        if (file_exists('assets/images/upload/' . $_SESSION['user']['avatar']) && isset($_SESSION['user']['avatar'])) {
+                        // On récupère nos variables de session
+                        if (isset($_SESSION['user']['levelAccess']) && $_SESSION['user']['levelAccess'] == ROLE_ADMIN) {
                         ?>
-                            <img src="<?= $value->avatar ?>" class="rounded-circle" alt="Profil de <?= $value->pseudo ?>" height="20" width="20">
-                        <?php
-                            // sinon, on affiche l'image par défaut
-                        } else {
-                        ?>
-                            <img src="<?= $defaultImage ?>" class="rounded-circle" height="40" width="40">
+                            <!-- A afficher lorsque l'administrateur est connecté : bouton de suppression du commentaire-->
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#deleteComment" name="deleteComment" class="btn btn-sm bi bi-trash bg-danger ms-3"></button>
                         <?php
                         }
                         ?>
-                        <h4><?= $value->pseudo ?></h4><small class="text-muted fst-italic ms-3"><?= date('d-m-Y', strtotime($value->date)) ?></small>
                         <p><?= $value->content ?></p>
                     </div>
                 <?php
@@ -66,10 +64,10 @@ require_once 'controllers/articleCtrl.php';
                     // On récupère nos variables de session
                     if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
                     ?>
-                            <div class="popup">
-                                <button type="submit" id="submitComment" name="submitComment" class="btn btn-outline-light my-4" onclick="popup()">Publier</button>
-                                <span class="popuptext" id="avatarPopup"><?= $message ?></span>
-                            </div>
+                        <div class="popup">
+                            <button type="submit" id="submitComment" name="submitComment" class="btn btn-outline-light my-4" onclick="popup()">Publier</button>
+                            <span class="popuptext" id="avatarPopup"><?= $message ?></span>
+                        </div>
                 </form>
             <?php
                     } else {
@@ -83,4 +81,24 @@ require_once 'controllers/articleCtrl.php';
         </div>
     </div>
 </section>
+<!-- Modal Suppression-->
+<div class="modal fade" id="deleteComment" tabindex="-1" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">Voulez-vous vraiment supprimer ce commentaire?</p>
+            </div>
+            <div class="modal-footer bg-dark text-white">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <form method="POST">
+                    <button type="submit" name="deleteComment" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include 'parts/footer.php'; ?>

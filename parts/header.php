@@ -9,7 +9,7 @@ require_once 'controllers/headerCtrl.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/style/style.css">
@@ -20,7 +20,7 @@ require_once 'controllers/headerCtrl.php';
 <body>
     <!-- barre de navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="#menu">
-        <div class="container-fluid p-3 ms-2">
+        <div class="container-fluid me-5">
             <!-- titre + logo -->
             <div class="col-auto">
                 <a href="index.php" class="text-decoration-none"><img class="navbar-brand col" src="assets/images/logo.png" style="width: 5rem; height:auto">
@@ -44,7 +44,6 @@ require_once 'controllers/headerCtrl.php';
                         // On récupère nos variables de session
                         if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
                         ?>
-
                             <!-- Menu déroulant item -->
                             <li class="nav-item dropdown me-5">
                                 <i class="bi bi-menu-app fs-3 text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -66,7 +65,7 @@ require_once 'controllers/headerCtrl.php';
                             <li class="nav-item dropdown">
                                 <div class="avatar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <!-- si l'image existe, on l'affiche -->
-                                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" style="width: 5rem; height:auto">
+                                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" class="navAvatar" tyle="width: 5rem; height:auto">
                                 </div>
                                 <ul class="dropdown-menu text-center">
                                     <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
@@ -94,7 +93,7 @@ require_once 'controllers/headerCtrl.php';
     </nav>
 
     <!-- Fenêtre modale du bouton login -->
-    <div class="modal fade" id="login" role="dialog" aria-labelledby="login" aria-hidden="true">
+    <div class="modal fade" id="login" role="dialog" tabindex="-1" aria-labelledby="login" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
             <div class="modal-content text-center text-light" style="background: #102128;">
                 <div class="modal-header">
@@ -142,13 +141,17 @@ require_once 'controllers/headerCtrl.php';
                             }
                             ?>
                         </div>
-                        <div class="mb-3 form-check">
-                            <p class="fst-italic">Mot de passe oublié?
-                                <a href="" class="text-muted">Cliquez ici!</a>
-                            </p>
-                        </div>
+                        <script>
+                            <?php if (isset($_POST['login'])) { ?>
+
+                                $(function() {
+                                    $('#login').modal('show')
+                                })
+                            <?php }
+                            ?>
+                        </script>
                         <!--validation de formulaire-->
-                        <input type="submit" name="login" value="Se connecter" class="form-control btn btn-primary rounded submit px-1">
+                        <input type="submit" name="login" id="loginBtn" value="Se connecter" class="form-control btn btn-primary rounded submit px-1" disabled="disabled">
                     </form>
                     <hr>
                     <!-- bouton trigger 2e fenêtre modale -->
@@ -235,7 +238,7 @@ require_once 'controllers/headerCtrl.php';
                             ?>
                         </div>
                         <!--validation de formulaire-->
-                        <input type="submit" class="btn btn-primary" id="registerBtn" name="register" value="Créer mon compte" data-bs-toggle="modal" data-bs-target="#userCreated" disabled="disabled">
+                        <input type="submit" class="btn btn-primary" id="registerBtn" name="register" value="Créer mon compte" data-bs-toggle="modal" data-bs-target="#userCreated" disabled="disabled" onclick="myFunction()">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -245,22 +248,4 @@ require_once 'controllers/headerCtrl.php';
         </div>
     </div>
 
-    <!-- message dans une fenêtre modale, informant que le compte a bien été crée -->
-    <div class="modal" tabindex="-1" id="userCreated" aria-labelledby="userCreatedLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Bienvenue!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="lead"><?= $userCreated;
-                                    ?>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    

@@ -20,7 +20,14 @@ include 'parts/header.php';
     <div class="col-auto d-flex justify-content-between">
         <a href="miniPostCreation.php" class="btn btn-outline-secondary bi bi-pencil-square"> Créer un mini-post</a>
         <a href="miniPostList.php" class="btn btn-outline-secondary bi bi-list"> Revenir à la liste des minipost</a>
-        <button type="button" class="btn btn-outline-danger bi bi-x-circle" data-bs-toggle="modal" data-bs-target="#deleteMiniPost"> Supprimer</button>
+        <?php
+        // On récupère nos variables de session
+        if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
+        ?>
+            <button type="button" class="btn btn-outline-danger bi bi-x-circle" data-bs-toggle="modal" data-bs-target="#deleteMiniPost"> Supprimer</button>
+        <?php
+        }
+        ?>
     </div>
 </div>
 
@@ -33,7 +40,7 @@ include 'parts/header.php';
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <p class="lead">Voulez-vous vraiment supprimer cet élément?</p>
+                <p class="lead">Voulez-vous vraiment supprimer cet élément?</p>
             </div>
             <div class="modal-footer bg-dark text-white">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

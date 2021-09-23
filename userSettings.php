@@ -2,12 +2,11 @@
 $controllers = 'controllers/userSettingsCtrl.php';
 include 'parts/header.php'; ?>
 
-<div class="container bg-dark border border-secondary rounded text-light my-5 p-5">
+<div class="container border border-secondary rounded text-light my-5 p-5">
     <!-- formulaire modification avatar -->
-    <div class="row row-cols-3 row-cols-md-2 g-3">
-        <div class="col-lg-6 mx-auto">
+    <div class="row">
+        <div class="col-12 col-lg-6 mx-auto">
             <form method="POST" enctype="multipart/form-data">
-
                 <!-- Upload d'image-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                     <input type="hidden" name="MAX_FILE_SIZE" value="<?= MAX_SIZE; ?>" />
@@ -32,8 +31,8 @@ include 'parts/header.php'; ?>
         </div>
 
         <!-- formulaire modification pseudo, email -->
-        <form method="POST">
-            <div class="d-flex justify-content-around">
+        <div class="col-5 mx-auto">
+            <form method="POST">
                 <div class="col-auto form-group ">
                     <label for="updatePseudo" class="form-label">Pseudo</label>
                     <input type="text" class="form-control px-2 py-2" id="updatePseudo" name="updatePseudo" value="<?= isset($_SESSION['user']['pseudo']) ? $_SESSION['user']['pseudo'] : '' ?>">
@@ -61,23 +60,20 @@ include 'parts/header.php'; ?>
                         <span class="popuptext" id="userPopup"><?= $message ?></span>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- Button trigger modal modification mot de passe -->
-    <div class="d-flex justify-content-end my-5">
-        <button type="button" class="btn btn-secondary btn-sm my-auto" data-bs-toggle="modal" data-bs-target="#updatePassword">
-            Modifier mon mot de passe
-        </button>
+            </form>
+            <!-- Button trigger modal modification mot de passe -->
+            <button type="button" class="btn btn-secondary btn-sm my-auto mt-3" data-bs-toggle="modal" data-bs-target="#updatePassword">
+                Modifier mon mot de passe
+            </button>
+        </div>
     </div>
     <hr>
     <div class="d-flex justify-content-between p-2 mt-5">
+        <a href="profilPage.php" type="button" class="btn btn-sm btn-outline-secondary px-3 me-5">Annuler</a>
         <!-- Button trigger modal suppression du compte-->
         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProfile">
             Supprimer mon profil
         </button>
-        <a href="profilPage.php" type="button" class="btn btn-sm btn-outline-secondary px-3 me-5">Annuler</a>
     </div>
 </div>
 <!-- Modale modification du mot de passe-->

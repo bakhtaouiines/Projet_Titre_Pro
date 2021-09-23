@@ -1,5 +1,6 @@
 <?php
 include 'parts/header.php';
+require_once 'controllers/contactCtrl.php'
 ?>
 <div class="wrapper rounded d-flex align-items-stretch">
     <div class="bg-red">
@@ -8,23 +9,25 @@ include 'parts/header.php';
     </div>
     <div class="contact-form m-3">
         <h3>Say Hello!</h3>
-        <form>
+        <form method="POST" action="contact.php">
             <div class="form-group pt-3">
+                <label for="subject">Sujet</label>
+                <input type="text" name="subject" class="form-control" required>
                 <label for="message">Message</label>
                 <textarea name="message" class="form-control" required></textarea>
             </div>
             <div class="d-flex align-items-center flex-wrap justify-content-between pt-4">
                 <div class="form-group pt-lg-2 pt-3">
-                    <label for="name">Votre Prénom</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <label for="firstName">Votre Prénom</label>
+                    <input type="text" name="firstName" class="form-control" required>
                 </div>
                 <div class="form-group pt-lg-2 pt-3">
-                    <label for="name">Votre Mail</label>
+                    <label for="email">Votre Mail</label>
                     <input type="email" name="email" class="form-control" required>
                 </div>
             </div>
             <div class="d-flex align-items-center flex-wrap justify-content-between pt-lg-5 mt-lg-4 mt-5">
-                <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Envoyer</div>
+                <button class="btn btn-primary" type="submit" name="sendMail" data-bs-toggle="modal" data-bs-target="#myModal">Envoyer</button>
             </div>
         </form>
     </div>

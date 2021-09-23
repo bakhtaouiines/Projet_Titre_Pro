@@ -31,11 +31,15 @@
     
     .navbar-collapse {
         font-family: 'Raleway', sans-serif;
-        letter-spacing: 0.03rem;
+        letter-spacing: 0.02rem;
     }
     
     .dropdown-item {
         color: rgb(50, 56, 66);
+    }
+    
+    .actionMenu {
+        margin-right: 70px;
     }
     
     .helloUser {
@@ -55,6 +59,18 @@
     
     .navbar-toggler:hover {
         opacity: 0.8;
+    }
+    
+    .navAvatar {
+        width: 4rem;
+        height: auto;
+        border-radius: 50%;
+        border: 2px solid rgb(158, 167, 192);
+    }
+    
+    .navAvatar:hover {
+        transform: scale(1.2);
+        transition: transform .6s;
     }
     /* Popup container */
     
@@ -165,12 +181,84 @@
     .btn.btn-primary {
         background: #2C5263;
         border: 1px solid #597683;
-        color: rgb(207, 209, 223);
+        color: rgb(200, 239, 255);
+    }
+    
+    .btn.btn-primary:disabled {
+        background: #0d191f;
+        border: 1px solid #2d3b42;
+        color: rgb(50, 71, 78);
     }
     
     .mandatory {
         font-size: small;
         font-style: italic;
+    }
+    
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+    
+    #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    
+    @-webkit-keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+    
+    @-webkit-keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
+    
+    @keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
     }
     /* hover images accueil */
     
@@ -660,4 +748,29 @@
         background-color: #0A1519;
         color: whitesmoke;
         border-radius: 10%;
+    }
+    /*mini-post catégorie*/
+    
+    .mpCard,
+    .vCard {
+        background-color: #0f2027;
+        border: solid rgb(58, 96, 97);
+        max-width: 18rem;
+        color: cornsilk;
+    }
+    
+    .img-thumbnail {
+        border: 0.5px solid rgb(7, 96, 112);
+        background-color: #0f2027;
+    }
+    
+    .list-group,
+    .list-group-item {
+        background-color: #1d3d4b;
+        max-width: 18rem;
+        color: cornsilk;
+    }
+    
+    .list-group-item:hover {
+        background-color: #405761;
     }

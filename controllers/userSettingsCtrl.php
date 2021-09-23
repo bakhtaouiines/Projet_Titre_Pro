@@ -74,8 +74,8 @@ if (isset($_POST['updateAvatar'])) {
     //Si il n'y a pas d'erreur sur le formulaire...
     if (!empty($updateArray)) {
         // je modifie les attributs de la classe grâce au setter
-        $user->__set('id',$_SESSION['user']['id']);
-        $user->__set('avatar',$_SESSION['user']['avatar']);
+        $user->__set('id', $_SESSION['user']['id']);
+        $user->__set('avatar', $_SESSION['user']['avatar']);
         // ici j'exécute la méthodes updateAvatar() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
         $isUpdated = $user->updateAvatar($updateArray);
         if ($isUpdated) {
@@ -99,10 +99,12 @@ if (isset($_POST['updateUser'])) {
         $updateForm->isNotEmpty('pseudo', $updatePseudo);
         $updateForm->isValidFormat('pseudo', $updatePseudo, FORM::PATTERN);
         $updateForm->isValidLength('pseudo', $updatePseudo, 3, 20);
-        if (!isset($updateForm->error['updatePseudo'])) {
+        if (!isset($updateForm->error['pseudo'])) {
             $updateArray['pseudo'] = $updatePseudo;
-        }
+        }else {
+            $updateForm->error['pseudo'];
     }
+}
     if (isset($_POST['updateMail'])) {
         $updateMail = htmlspecialchars($_POST['updateMail']);
         //Je vérifie le mail
@@ -111,6 +113,8 @@ if (isset($_POST['updateUser'])) {
         $updateForm->isValidEmail('mail', $updateMail);
         if (!isset($updateForm->error['mail'])) {
             $updateArray['mail'] = $updateMail;
+        } else {
+            $updateForm->error['mail'];
         }
     }
 
@@ -199,9 +203,12 @@ if (isset($_POST['deleteProfile'])) {
     if (isset($_GET['userID'])) {
         $user->id = htmlspecialchars($_GET['userID']);
         $deleteProfile = $user->deleteProfile();
-        // si tout est ok, on redirige vers la page d'accueil
-        header('Location: index.php');
-    } else {
-        $message = 'Une erreur est survenue.';
+        if ($deleteProfile) {
+            unset($_SESSION['user']['id']);
+            header('Location: index.php');
+            exit;
+        } else {
+            $message = 'Une erreur est survenue.';
+        }
     }
 }

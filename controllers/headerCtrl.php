@@ -6,7 +6,7 @@ require_once 'classes/form.php';
 
 // j'ai crée une variable $controllers avec le chemin 'controllers/miniPostCtrl.php', qui sera appelé dans les vues la nécessitant; je vérifie au préalable qu'elle existe, puis je l'appelle
 
-if(isset($controllers)){
+if (isset($controllers)) {
     require $controllers;
 }
 
@@ -19,16 +19,10 @@ $registerForm = new Form();
 $loginForm = new Form();
 $errorMessagePassword = [];
 $userCreated = '';
-$errorMessage = '';
 /**
  *  Vérifications du formulaire d'INSCRIPTION
  */
 if (isset($_POST['register'])) {
-    $pseudo = '';
-    $mail = '';
-    $password = '';
-    $checkPassword = '';
-
     //Je récupère les données du formulaire
     if (isset($_POST['pseudo'])) {
         $pseudo = htmlspecialchars($_POST['pseudo']);
@@ -76,7 +70,7 @@ if (isset($_POST['register'])) {
         $user->token = random_int(1, 999);
         if ($user->addUser() != 0) {
             $userCreated = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
-            //envoyer un mail de validation de l'inscription
+            //prévoir pour envoyer un mail de validation de l'inscription
         } else {
             //Laisse ouvert la fenetre modale !!!!! ASAP
         }
@@ -87,8 +81,6 @@ if (isset($_POST['register'])) {
  * Vérification du formulaire de connexion
  */
 if (isset($_POST['login'])) {
-    $mail = '';
-    $password = '';
 
     if (isset($_POST['mail'])) {
         $mail = htmlspecialchars($_POST['mail']);
@@ -99,7 +91,9 @@ if (isset($_POST['login'])) {
 
     $loginForm->isNotEmpty('mail', $mail);
     $loginForm->isValidEmail('mail', $mail);
-    // $loginForm->isNotEmpty('password', $password);
+    $loginForm->doesExist('mail', $mail, 'user');
+    $loginForm->isNotEmpty('password', $password);
+    $registerForm->isValidLength('password', $password, 6, 255);
 
     // s'il n'y a pas d'erreurs...
     if ($loginForm->isValid()) {

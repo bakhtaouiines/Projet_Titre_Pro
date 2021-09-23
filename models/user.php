@@ -209,7 +209,6 @@ class User extends MainModel
         );
         $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
-        return !$this->checkUserExists(); // Le point d'exclamation devant $this renvoie un false
     }
     /**
      * Méthode pour supprimer un profil d'utilisateur
