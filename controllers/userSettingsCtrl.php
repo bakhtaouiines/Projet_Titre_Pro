@@ -12,8 +12,8 @@ require_once 'models/playlist.php';
  */
 // Constantes (valeurs qui ne changeront pas)
 define('MAX_SIZE', 5242880);  // Taille max de 5mo 
-define('WIDTH_MAX', 200);   // Largeur max de l'image en pixels
-define('HEIGHT_MAX', 200); // Hauteur max de l'image en pixels
+define('WIDTH_MAX', 1920);   // Largeur max de l'image en pixels
+define('HEIGHT_MAX', 1080); // Hauteur max de l'image en pixels
 
 // Tableaux de données
 $extensionArray = array('jpg', 'gif', 'png', 'jpeg'); // Extensions autorisées
@@ -26,6 +26,7 @@ $extension = '';
 $message = '';
 $avatarName = '';
 
+
 /**
  * Vérification formulaire de modification de l'avatar
  */
@@ -34,34 +35,44 @@ if (isset($_POST['updateAvatar'])) {
     if (!empty($_FILES['avatar']['name'])) {
         $avatar = $_FILES['avatar']['name'];
         // Recuperation de l'extension du fichier
-        $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+        $extension = pathinfo($avatar, PATHINFO_EXTENSION);
         // On verifie que l'extension du fichier existe dans notre tableau d'extensions autorisées
         if (in_array(strtolower($extension), $extensionArray)) {
             // On recupere les dimensions du fichier
             $avatarInfos = getimagesize($_FILES['avatar']['tmp_name']); // tmp_name correspond au nom temporaire du fichier
-            // On verifie les dimensions et taille de l'image (0 = largeur, 1 = hauteur)
-            if (($avatarInfos[0] <= WIDTH_MAX) && ($avatarInfos[1] <= HEIGHT_MAX) && (filesize($_FILES['avatar']['tmp_name']) <= MAX_SIZE)) {
-                // Parcours du tableau d'erreurs
-                if (
-                    isset($_FILES['avatar']['error'])
-                    && UPLOAD_ERR_OK === $_FILES['avatar']['error']
-                ) {
-                    // On renomme le fichier grâce au hachage md5, tout en lui donnant un identifiant unique 
-                    $avatarName = md5(uniqid()) . '.' . $extension;
-                    // Si c'est OK, on teste l'upload et on déplace le fichier
-                    if (move_uploaded_file($_FILES['avatar']['tmp_name'], TARGET . $avatarName)) {
-                        $message = 'Upload réussi !';
-                        $updateArray['avatar'] = $avatarName;
+
+            // On verifie le type de l'image
+            if ($avatarInfos[2] >= 1 && $avatarInfos[2] <= 14) {
+                // On verifie les dimensions et taille de l'image (0 = largeur, 1 = hauteur)
+                if (($avatarInfos[0] <= WIDTH_MAX) && ($avatarInfos[1] <= HEIGHT_MAX) && (filesize($_FILES['avatar']['tmp_name']) <= MAX_SIZE)) {
+                    // Parcours du tableau d'erreurs
+                    if (
+                        isset($_FILES['avatar']['error'])
+                        && UPLOAD_ERR_OK === $_FILES['avatar']['error']
+                    ) {
+                        // On renomme le fichier grâce au hachage md5, tout en lui donnant un identifiant unique 
+                        $avatarName = md5(uniqid()) . '.' . $extension;
+                        // Si c'est OK, on teste l'upload et on déplace le fichier
+                        if (move_uploaded_file($_FILES['avatar']['tmp_name'], TARGET . $avatarName)) {
+                            $_SESSION['user']['avatar'] = $avatarName;
+                            $user->__set('avatar', $avatarName);
+                            $user->__set('id', $_SESSION['user']['id']);
+                            $user->updateAvatar();
+                            $message = 'Upload réussi !';
+                        } else {
+                            // Sinon on affiche une erreur systeme
+                            $message = 'Problème lors de l\'upload !';
+                        }
                     } else {
-                        // Sinon on affiche une erreur systeme
-                        $message = 'Problème lors de l\'upload !';
+                        $message = 'Une erreur interne a empêché l\'uplaod de l\'image';
                     }
                 } else {
-                    $message = 'Une erreur interne a empêché l\'uplaod de l\'image';
+                    // Sinon erreur sur les dimensions et taille de l'image
+                    $message = 'Erreur dans les dimensions de l\'image ! Elles ne doivent pas dépasser 200x200 px.';
                 }
             } else {
-                // Sinon erreur sur les dimensions et taille de l'image
-                $message = 'Erreur dans les dimensions de l\'image ! Elles ne doivent pas dépasser 200x200 px.';
+                // Sinon erreur sur le type de l'image
+                $message = 'Le fichier à uploader n\'est pas une image !';
             }
         } else {
             // Sinon on affiche une erreur pour l'extension
@@ -71,20 +82,23 @@ if (isset($_POST['updateAvatar'])) {
         // Sinon on affiche une erreur pour le champ vide
         $message = 'Veuillez remplir le formulaire svp !';
     }
-    //Si il n'y a pas d'erreur sur le formulaire...
-    if (!empty($updateArray)) {
-        // je modifie les attributs de la classe grâce au setter
-        $user->__set('id', $_SESSION['user']['id']);
-        $user->__set('avatar', $_SESSION['user']['avatar']);
-        // ici j'exécute la méthodes updateAvatar() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
-        $isUpdated = $user->updateAvatar($updateArray);
-        if ($isUpdated) {
-            // ici, je mets à jour les informations, visuellement, sur le profil de l'utilisateur en passant par les variables de session
-            $_SESSION['user']['avatar'] = $avatarName;
-            // et j'indique à l'utilisateur que tout est ok
-            $message = 'Avatar modifié avec succès!';
-        }
-    }
+    // var_dump($message);
+    // //Si il n'y a pas d'erreur sur le formulaire...
+    // if (!empty($updateArray)) {
+
+    //     // je modifie les attributs de la classe grâce au setter
+    //     $user->__set('id', $_SESSION['user']['id']);
+    //     $user->__set('avatar', $_SESSION['user']['avatar']);
+    //     // ici j'exécute la méthodes updateAvatar() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
+    //     $isUpdated = $user->updateAvatar($updateArray);
+    //     if ($isUpdated) {
+
+    //         // ici, je mets à jour les informations, visuellement, sur le profil de l'utilisateur en passant par les variables de session
+    //         $_SESSION['user']['avatar'] = $avatarName;
+    //         // et j'indique à l'utilisateur que tout est ok
+    //         $message = 'Avatar modifié avec succès!';
+    //     }
+    // }
 }
 
 /**
@@ -119,7 +133,6 @@ if (isset($_POST['updateUser'])) {
 
     //Si il n'y a pas d'erreur sur le formulaire...
     if (!empty($updateArray)) {
-
         // je modifie les attributs de la classe grâce au setter
         $user->__set('id', $_SESSION['user']['id']);
         $user->__set('pseudo', $updateArray['pseudo']);
@@ -130,10 +143,11 @@ if (isset($_POST['updateUser'])) {
             // ici, je mets à jour les informations, visuellement, sur le profil de l'utilisateur en passant par les variables de session
             $_SESSION['user']['mail'] = $updateArray['mail'];
             $_SESSION['user']['pseudo'] = $updateArray['pseudo'];
-            $_SESSION['user']['avatar'] = $avatarName;
-            $message = 'Modifications enregistrées avec succès!';
+            // si tout est ok, je redirige l'utilisateur vers sa page de profil
+            header('Location: ../profilPage.php');
         } else {
             $message = implode($updateForm->error);
+            var_dump($message);
         }
     }
 }

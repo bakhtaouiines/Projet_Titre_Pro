@@ -1,9 +1,9 @@
 <!-----------------------------------------------------------footer------------------------------------------->
 
 <footer class="text-white" style="background-color: #102128;">
-    <div class="container-fluid me-5 mb-4 p-4 pb-0">
-<!-- page de contact -->
-        <a href="../contact.php" class="contact d-flex justify-content-end text-decoration-none text-uppercase me-5">Me contacter</a>
+    <div class="container-fluid me-5 mb-4 p-4 pb-0  d-flex justify-content-end ">
+        <!-- page de contact -->
+        <a href="../contact.php" role="button" class="btn p-2 btn-secondary text-decoration-none text-uppercase me-5">Me contacter</a>
     </div>
     <div class="p-4" style="background-color: #0a1519">
         <section class="social mb-2">
@@ -26,8 +26,12 @@
 
 <script>
     tinymce.init({
-        selector: 'textarea'
-
+        selector: 'textarea',
+        plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
     });
 </script>
 <!-- JQUERY -->

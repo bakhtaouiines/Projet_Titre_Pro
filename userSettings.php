@@ -22,7 +22,7 @@ include 'parts/header.php'; ?>
                 </div>
                 <div class="popup">
                     <button type="submit" id="updateAvatar" class="mt-3 btn btn-outline-success text-center" name="updateAvatar" onclick="popup()">Enregistrer mon nouvel avatar</button>
-                    <span class="popuptext" id="avatarPopup"><?= $message ?></span>
+                    <p class="fst-italic"><?= $message ?></p>
                 </div>
             </form>
             <form method="POST" enctype="multipart/form-data">
@@ -39,7 +39,7 @@ include 'parts/header.php'; ?>
                     <?php
                     if (!empty($updateForm->error['pseudo'])) {
                     ?>
-                        <p class="fst-italic text-danger"><?= $message; ?></p>
+                        <p class="fst-italic text-danger"><?= $message ?></p>
                     <?php
                     }
                     ?>
@@ -51,7 +51,7 @@ include 'parts/header.php'; ?>
                     <?php
                     if (!empty($updateForm->error['mail'])) {
                     ?>
-                        <p class="fst-italic text-danger"><?= $message; ?></p>
+                        <p class="fst-italic text-danger"><?= $message ?></p>
                     <?php
                     }
                     ?>

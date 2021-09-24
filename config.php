@@ -10,10 +10,18 @@ define('ROLE_NOT_USER' , 0);
 
 define('TARGET', 'assets/images/upload/');  // Repertoire cible de l'avatar
 /**
+ * Creation du repertoire cible si inexistant
+ **/
+// if( !is_dir(TARGET) ) {
+//     if( !mkdir(TARGET, 0755) ) {
+//       exit('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement.');
+//     }
+//   }
+  
+/**
  * fonction pour contrôler l'accès à certaines pages ; on contrôle en fonction du niveau de rôle de l'utilisateur
  * 
  */
-
 function authorizedAccess($levelMin)
 {
     if (!isset($_SESSION['user']['isConnected']) || !$_SESSION['user']['isConnected'] || $_SESSION['user']['levelAccess'] < $levelMin) {

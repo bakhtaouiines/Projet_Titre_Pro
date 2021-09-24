@@ -65,7 +65,7 @@ require_once 'controllers/headerCtrl.php';
                             <li class="nav-item dropdown">
                                 <div class="avatar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <!-- si l'image existe, on l'affiche -->
-                                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? $_SESSION['user']['avatar'] :  $defaultImage ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" class="navAvatar" tyle="width: 5rem; height:auto">
+                                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? TARGET . $_SESSION['user']['avatar'] :  $defaultImage ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" class="navAvatar">
                                 </div>
                                 <ul class="dropdown-menu text-center">
                                     <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
@@ -186,7 +186,7 @@ require_once 'controllers/headerCtrl.php';
                             <?php
                             if (!empty($registerForm->error['pseudo'])) {
                             ?>
-                                <p class="fst-italic text-danger"><?= $message; ?></p>
+                                <p class="fst-italic text-danger"><?= $message ?></p>
                             <?php
                             }
                             ?>
@@ -202,7 +202,7 @@ require_once 'controllers/headerCtrl.php';
                             <?php
                             if (!empty($registerForm->error['mail'])) {
                             ?>
-                                <p class="fst-italic text-danger"><?= $message; ?></p>
+                                <p class="fst-italic text-danger"><?= $message ?></p>
                             <?php
                             }
                             ?>
@@ -218,7 +218,7 @@ require_once 'controllers/headerCtrl.php';
                             <?php
                             if (!empty($registerForm->error['password'])) {
                             ?>
-                                <p class="fst-italic text-danger"><?= $message; ?></p>
+                                <p class="fst-italic text-danger"><?= $message ?></p>
                             <?php
                             }
                             ?>

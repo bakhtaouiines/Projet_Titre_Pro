@@ -3,32 +3,25 @@ $controllers = 'controllers/miniPostCtrl.php';
 include 'parts/header.php';
 ?>
 <div class="container-fluid p-5">
-    <div class="card mb-3 bg-dark text-white p-2 mx-auto mb-5" style="width: 940px;">
+    <div class="col-auto d-flex justify-content-between p-5">
+        <a href="miniPostCreation.php" class="btn btn-secondary bi bi-pencil-square"> Créer un mini-post</a>
+        <a href="miniPostList.php" class="btn btn-secondary bi bi-list"> Revenir à la liste des minipost</a>
+    </div>
+    <div class="card mb-3 p-2 mx-auto mb-5" style="max-width: 840px;">
         <div class="row">
             <div class="col-md-7">
                 <img src="<?= $minipostInfo->path ?>" class="img-fluid rounded-start" title="<?= $minipostInfo->title ?>" alt="<?= $minipostInfo->alt ?>">
             </div>
             <div class="col-md-5">
                 <div class="card-body">
-                    <button type="button" class="offset-11 btn btn-sm btn-outline-secondary bi bi-pencil" data-bs-toggle="modal" data-bs-target="#updateElement"></button>
+                    <button type="button" class="offset-11 btn btn-sm btn-secondary bi bi-pencil" data-bs-toggle="modal" data-bs-target="#updateElement"></button>
                     <h3 class="card-title"><?= $minipostInfo->ostName ?></h3>
                     <p class="card-text"><?= $minipostInfo->content ?></p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-auto d-flex justify-content-between">
-        <a href="miniPostCreation.php" class="btn btn-outline-secondary bi bi-pencil-square"> Créer un mini-post</a>
-        <a href="miniPostList.php" class="btn btn-outline-secondary bi bi-list"> Revenir à la liste des minipost</a>
-        <?php
-        // On récupère nos variables de session
-        if (isset($_SESSION['user']['isConnected']) && $_SESSION['user']['isConnected']) {
-        ?>
-            <button type="button" class="btn btn-outline-danger bi bi-x-circle" data-bs-toggle="modal" data-bs-target="#deleteMiniPost"> Supprimer</button>
-        <?php
-        }
-        ?>
-    </div>
+    <button type="button" class="btn btn-danger bi bi-x-circle" data-bs-toggle="modal" data-bs-target="#deleteMiniPost"> Supprimer</button>
 </div>
 
 <!-- Modal Suppression-->

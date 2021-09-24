@@ -61,12 +61,6 @@ tinymce.init({
     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
 });
 
-/**
- * suppression utilisateur
- */
-function deleteIdUser(id) {
-    document.getElementById('deleteInfo').value = id;
-}
 
 /**
  * Barre de recherche Ajax
@@ -83,6 +77,7 @@ function searchOst(searchContent) {
             //On commence par vider le contenue de la div parent
             clearElement("resultSearch")
             let selectParent = document.getElementById("resultSearch")
+            console.log(this.response)
             let element = JSON.parse(this.response)
                 //faire une boucle
             for (let i = 0; i < element.length; i++) {
@@ -115,7 +110,6 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
 
 /**
  * Affichage du popup pour l'avatar

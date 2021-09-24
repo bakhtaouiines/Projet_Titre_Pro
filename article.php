@@ -33,9 +33,9 @@ include 'parts/header.php';
                 // On affiche chaque entrée une à une
                 foreach ($commentList as $value) {
                 ?>
-                    <div class="comment mt-4 text-justify float-left border border-light">
-                        <img src="<?= $value->avatar ?>" class="rounded-circle" alt="Profil de <?= $value->pseudo ?>" height="20" width="20">
-                        <h4><?= $value->pseudo ?></h4><small class="text-muted fst-italic ms-3"><?= date('d-m-Y', strtotime($value->date)) ?></small>
+                    <div class="comment mt-4 text-justify float-left border border-secondary">
+                        <img src="<?= TARGET . $value->avatar ?>" class="rounded-circle" alt="Profil de <?= $value->pseudo ?>" height="45" width="45">
+                        <h5><?= $value->pseudo ?></h5><small class="date fst-italic ms-3"><?= date('d-m-Y', strtotime($value->date)) ?></small>
                         <?php
                         // On récupère nos variables de session
                         if (isset($_SESSION['user']['levelAccess']) && $_SESSION['user']['levelAccess'] == ROLE_ADMIN) {
