@@ -56,15 +56,13 @@ class Comment extends MainModel
     /**
      * Méthode permettant de supprimer un commentaire
      */
-    public function deleteComment($idArticle, $idComment)
+    public function deleteComment()
     {
         $pdoStatment = $this->pdo->prepare(
             'DELETE FROM `comment`
-            WHERE `id`= :id 
-            AND `id_Article` = :id_Article'
+            WHERE `id`= :id '
         );
-        $pdoStatment->bindValue(':id_Article', $idArticle, PDO::PARAM_INT);
-        $pdoStatment->bindValue(':id', $idComment, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatment->execute();
     }
 }

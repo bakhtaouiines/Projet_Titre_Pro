@@ -12,7 +12,7 @@ require_once 'controllers/articleListCtrl.php';
         foreach ($articlesList as $value) {
         ?>
             <div class="articleList p-3">
-                <a href="article.php?articleID=<?= $value->articleID ?>" class="articleLink">
+                <a href="article.php?articleID=<?= $value->articleID ?>">
                     <div class="card m-2 bg-dark border border-dark shadow-lg" style="max-width: 550px;">
                         <img src="<?= $value->path ?>" alt="<?= $value->alt ?>" title="<?= $value->title ?>" style="opacity: 0.7;">
                         <div class="card-img-overlay mb-0">

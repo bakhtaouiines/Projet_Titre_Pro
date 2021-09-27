@@ -10,22 +10,16 @@ $commentForm = new Form();
 $message = '';
 
 /**
- * Affichage de l'article, l'auteur, et les images
- */
-if (!empty($_GET['articleID'])) {
-    $article->id = $_GET['articleID'];
-    $articleInfo = $article->getArticleInfo();
-}
-/**
  *  Vérifications du formulaire d'écriture de commentaire
  */
 if (isset($_POST['submitComment'])) {
     //Je récupère les données du formulaire
     if (isset($_POST['content'])) {
         $content = ($_POST['content']);
+        //Je vérifie le content du commentaire
+        $commentForm->isNotEmpty('content', $content);
+        $commentForm->isValidLength('content', $content, 1, 255);
     }
-    //Je vérifie le content du commentaire
-    $commentForm->isNotEmpty('content', $content);
     //Si il n'y a pas d'erreur sur le formulaire...
     if ($commentForm->isValid()) {
         $comment->__set('content', $content);
@@ -34,7 +28,7 @@ if (isset($_POST['submitComment'])) {
         $comment->addComment();
         $message = 'Commentaire Publié!';
     } else {
-        echo 'Une erreur a été identifié.';
+        $commentForm->error['content'];
     }
 }
 
@@ -49,9 +43,17 @@ if (!empty($_GET['articleID'])) {
  * Suppression d'un commentaire
  */
 if (isset($_POST['deleteComment'])) {
-    if (isset($_GET['articleID'])) {
-        $commentID = $comment->id;
-        $comment->deleteComment($_GET['articleID'], $commentID);
+    if (isset($_POST['deleteID'])) {
+        $comment->id = $_POST['deleteID'];
+        $comment->deleteComment();
         header('Refresh: 0');
-    } 
+    }
+}
+
+/**
+ * Affichage de l'article, l'auteur, et les images
+ */
+if (!empty($_GET['articleID'])) {
+    $article->id = $_GET['articleID'];
+    $articleInfo = $article->getArticleInfo();
 }

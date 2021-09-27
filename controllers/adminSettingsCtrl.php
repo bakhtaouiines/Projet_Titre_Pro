@@ -8,24 +8,27 @@ require_once 'models/article.php';
 require_once 'models/minipost.php';
 
 $users = new User();
-$usersList = $users->getUsersList();
-
-$article = new Article();
-$articlesList = $article->getArticlesList();
-
-$minipost = new MiniPost();
-$minipostList = $minipost->miniPosts();
+$articles = new Article();
+$miniposts = new MiniPost();
 
 /**
- * Vérification formulaire de suppression du compte
+ * Vérification formulaire de suppression
  */
 if (isset($_POST['deleteElement'])) {
-    // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
-    if (isset($_GET['userID'])) {
-        $users = new User();
-        $users->id = htmlspecialchars($_GET['userID']);
-        $deleteProfile = $users->deleteProfile();
-        // si tout est ok, on redirige vers la page d'accueil
-        header('Refresh:0');
+    // on vérifie que l'ID de l'élément à supprimer a bien été récupéré
+    if (isset($_POST['deleteID'])) {
+        $users->id = $_POST['deleteID'];
+        $users->deleteProfile();
+        $articles->id = $_POST['deleteID'];
+        $articles->deleteArticle();
+        $miniposts->id = $_POST['deleteID'];
+        $miniposts->deleteMiniPost();
     }
 }
+
+/**
+ * Affichage des utilisateurs, articles, mini-posts
+ */
+$usersList = $users->getUsersList();
+$articlesList = $articles->getArticlesList();
+$minipostList = $miniposts->miniPosts();

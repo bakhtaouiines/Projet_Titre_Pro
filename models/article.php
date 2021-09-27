@@ -61,4 +61,19 @@ class Article extends MainModel
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $pdoStatment->fetch(PDO::FETCH_OBJ);
     }
+
+    /**
+     * Méthode pour supprimer un article
+     *
+     * @return void
+     */
+    public function deleteArticle()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'DELETE FROM `article`
+            WHERE `id`= :id'
+        );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
+    }
 }

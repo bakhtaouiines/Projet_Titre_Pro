@@ -1,9 +1,9 @@
 <!-----------------------------------------------------------footer------------------------------------------->
 
 <footer class="text-white" style="background-color: #102128;">
-    <div class="container-fluid me-5 mb-4 p-4 pb-0  d-flex justify-content-end ">
+    <div class="container-fluid me-5 mb-4 p-4 pb-0 d-flex justify-content-end ">
         <!-- page de contact -->
-        <a href="../contact.php" role="button" class="btn p-2 btn-secondary text-decoration-none text-uppercase me-5">Me contacter</a>
+        <a href="../contact.php" role="button" class="contact p-2 text-decoration-none text-uppercase me-5">Me contacter</a>
     </div>
     <div class="p-4" style="background-color: #0a1519">
         <section class="social mb-2">
@@ -20,10 +20,8 @@
             <a class="btn btn-sm btn-floating " style="background-color: #E14B0C;" href="#!" role="button"><i class="fas fa-rss-square"></i></a>
         </section>
     </div>
-    <a href="#" id="scroll" style="display: none;">
 </footer>
 <script src="/assets/scripts/script.js"></script>
-
 <script>
     tinymce.init({
         selector: 'textarea',

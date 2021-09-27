@@ -34,7 +34,7 @@ require_once 'controllers/headerCtrl.php';
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                 <ul class="navbar-nav mb-lg-0">
                     <div class="actionMenu d-flex align-items-center text-uppercase">
-                        <a href="OSTIndex.php" class="btn btn-outline-light rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
+                        <a href="ostindex.php" class="btn btn-outline-light rounded me-5 bi bi-collection-play" type="button" title="index"> Index</a>
                         <!-- bouton d'accès aux articles -->
                         <li class="nav-item me-5">
                             <a href="../articlelist.php" role="button" class="btn btn-outline-light bi bi-book" id="otherContent" role="button" aria-expanded="false"> Espace lecture</a>
@@ -64,8 +64,8 @@ require_once 'controllers/headerCtrl.php';
                             <!-- Menu déroulant utilisateur -->
                             <li class="nav-item dropdown">
                                 <div class="avatar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <!-- si l'image existe, on l'affiche -->
-                                    <img src="<?= (!empty($_SESSION['user']['avatar']))  ? TARGET . $_SESSION['user']['avatar'] :  $defaultImage ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" class="navAvatar">
+                                    <!-- si l'image existe, on l'affiche, sinon on affiche l'image par défaut-->
+                                    <img src="<?= (!empty($_SESSION['user']['avatar'])) ? TARGET . $_SESSION['user']['avatar'] : $defaultImage ?>" alt="Profil de <?= $_SESSION['user']['pseudo'] ?>" class="navAvatar">
                                 </div>
                                 <ul class="dropdown-menu text-center">
                                     <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
@@ -93,9 +93,9 @@ require_once 'controllers/headerCtrl.php';
     </nav>
 
     <!-- Fenêtre modale du bouton login -->
-    <div class="modal fade" id="login" role="dialog" tabindex="-1" aria-labelledby="login" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="login" role="dialog" tabindex="-1" aria-labelledby="login" aria-hidden="true" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
-            <div class="modal-content text-center text-light" style="background: #102128;">
+            <div class="modal-content text-center">
                 <div class="modal-header">
                     <p class="modal-title text-uppercase fs-5">Mon compte</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -141,21 +141,12 @@ require_once 'controllers/headerCtrl.php';
                             }
                             ?>
                         </div>
-                        <script>
-                            <?php if (isset($_POST['login'])) { ?>
-
-                                $(function() {
-                                    $('#login').modal('show')
-                                })
-                            <?php }
-                            ?>
-                        </script>
                         <!--validation de formulaire-->
                         <input type="submit" name="login" id="loginBtn" value="Se connecter" class="form-control btn btn-primary rounded submit px-1" disabled="disabled">
+                        <p class="fst-italic text-danger"><?= $errorMessage ?></p>
                     </form>
-                    <hr>
                     <!-- bouton trigger 2e fenêtre modale -->
-                    <div class="modal-footer justify-content-center">
+                    <div class="footerLog modal-footer justify-content-center">
                         <p>Vous n'êtes pas membre?
                             <button class="btn btn-primary" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Créer un compte</button>
                         </p>
@@ -166,9 +157,9 @@ require_once 'controllers/headerCtrl.php';
     </div>
 
     <!-- FORMULAIRE CREATION DE COMPTE UTILISATEUR -->
-    <div class="modal fade" id="register" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="register">
+    <div class="modal fade" id="register" aria-hidden="true" aria-labelledby="register">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
-            <div class="signIn modal-content">
+            <div class="modal-content">
                 <div class="modal-header ">
                     <h5 class="modal-title text-uppercase">Créer mon compte</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

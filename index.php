@@ -4,10 +4,7 @@ include 'parts/header.php';
 require_once 'controllers/categoryCtrl.php'
 ?>
 <!-- CORPS DE L'ACCUEIL -->
-<div id="subtitle" class="text-center text-uppercase mt-5">
-    <h2 class="fs-4">"l'accord parfait entre musique et cinéma"</h2>
-</div>
-
+    <h2 class="quote fs-4 text-center text-uppercase mt-5">"l'accord parfait entre musique et cinéma"</h2>
 <div class="carousel slide my-2" data-bs-ride="carousel" id="carousel" data-bs-interval="0">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -45,7 +42,7 @@ require_once 'controllers/categoryCtrl.php'
                             <div class="card-img-overlay">
 
                                 <a href="category.php?categoryID=3" class="card-title text-decoration-none text-white">
-                                    <h5 class="hover-1-title card-title mb-5 text-center">Passion et lyricisme</h5>
+                                    <h5 class="hover-1-title card-title mb-5 text-center">Passion et lyrisme</h5>
                                 </a>
                             </div>
                         </div>

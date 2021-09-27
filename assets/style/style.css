@@ -6,8 +6,30 @@
         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     
+    #title {
+        font-family: 'Raleway', sans-serif;
+        font-weight: bolder;
+        letter-spacing: .1rem;
+    }
+    
+    #collection {
+        color: rgb(190, 192, 199);
+        -webkit-transition: color 1s;
+        transition: color 1s;
+        font-family: 'Josefin Slab', serif;
+    }
+    
+    #collection:hover {
+        color: #C5981B;
+    }
+    
+    #collection {
+        letter-spacing: .2rem;
+        font-size: larger;
+    }
+    
     .quote {
-        color: rgb(125, 142, 173);
+        color: #C5981B;
         font-family: 'Josefin Slab', serif;
         font-weight: bolder;
         font-size: larger;
@@ -16,12 +38,15 @@
     .contact {
         font-family: 'Raleway', sans-serif;
         letter-spacing: 0.03rem;
-        color: rgb(160, 165, 175);
+        color: #C5981B;
+        border: solid 1px #C5981B;
+        border-radius: 10%;
     }
     
     .contact:hover {
-        color: rgb(195, 216, 255);
-        transition: color 0.2s;
+        color: #ffecb6;
+        border: solid 1px #ffecb6;
+        transition: color 0.5s;
     }
     
     .navbar {
@@ -39,7 +64,13 @@
     }
     
     .dropdown-item {
-        color: rgb(141, 146, 153);
+        color: #C5981B;
+    }
+    
+    .dropdown-item:hover {
+        font-weight: bolder;
+        color: #C5981B;
+        background-color: rgb(65, 73, 87);
     }
     
     .actionMenu {
@@ -57,7 +88,7 @@
     }
     
     .navbar-toggler {
-        background-color: rgb(172, 194, 236);
+        background-color: #C5981B;
     }
     
     .navbar-toggler:hover {
@@ -65,10 +96,10 @@
     }
     
     .navAvatar {
-        width: 4rem;
+        width: 4.5rem;
         height: auto;
         border-radius: 50%;
-        border: 2px solid rgb(158, 167, 192);
+        border: 3px solid #C5981B;
     }
     
     .navAvatar:hover {
@@ -155,39 +186,24 @@
             opacity: 1;
         }
     }
-    
-    #title {
-        font-family: 'Raleway', sans-serif;
-        font-weight: bolder;
-        letter-spacing: .1rem;
-    }
-    
-    #subtitle,
-    #collection {
-        color: rgb(190, 192, 199);
-        -webkit-transition: color 1s;
-        transition: color 1s;
-        font-family: 'Josefin Slab', serif;
-    }
-    
-    #subtitle:hover,
-    #collection:hover {
-        color: #787f86 !Important;
-    }
-    
-    #collection {
-        letter-spacing: .2rem;
-        font-size: larger;
-    }
     /* fenêtre modale d'inscription et log */
+    
+    .modal-content {
+        background: #102128;
+        color: #a4b3b9;
+    }
     
     .modal-content .modal-body .icon {
         width: 80px;
         height: 80px;
-        border: 1px solid #597683;
+        border: 1px solid #C5981B;
         border-radius: 50%;
         margin: 0 auto;
         margin-bottom: 10px;
+    }
+    
+    .modal-title {
+        color: #C5981B;
     }
     
     .modal-content .modal-body .icon span {
@@ -195,8 +211,8 @@
         font-size: xx-large;
     }
     
-    .modal-content .modal-footer {
-        border: none;
+    .modal-content .footerLog {
+        border: solid 1px #C5981B;
         color: rgb(125, 142, 173);
     }
     
@@ -222,7 +238,7 @@
         min-width: 250px;
         margin-left: -125px;
         background-color: #333;
-        color: #fff;
+        color: #C5981B;
         text-align: center;
         border-radius: 2px;
         padding: 16px;
@@ -330,16 +346,6 @@
         color: whitesmoke
     }
     
-    .articleLink {
-        color: rgb(223, 121, 121);
-    }
-    
-    .articleLink:hover {
-        -webkit-transition: color 1s;
-        transition: color 1s;
-        color: rgb(211, 214, 233);
-    }
-    
     .articleList {
         transition: transform .4s;
     }
@@ -351,18 +357,25 @@
     
     .article {
         font-family: 'Raleway', sans-serif;
-        background-color: rgb(169, 174, 182);
+        font-size: large;
+        background-color: rgba(40, 72, 117, 0.212);
+    }
+    
+    .article,
+    p {
+        color: rgb(235, 222, 222);
     }
     
     .figure-caption {
         font-family: 'Life Savers', cursive;
         font-size: larger;
+        color: #C5981B;
     }
     
     .author {
         font-family: 'Life Savers', cursive;
         font-size: larger;
-        color: cadetblue;
+        color: #C5981B;
         font-weight: bolder;
         letter-spacing: .1rem;
     }
@@ -371,6 +384,7 @@
         width: 100%;
         max-width: 500px;
         height: auto;
+        border: solid 1px #C5981B;
     }
     /* commentaires */
     
@@ -383,16 +397,14 @@
         background-color: #446a7a;
         float: left;
         border-radius: 10px;
-        padding-right: 30px;
-        padding-top: 10px;
-        padding: 25px
+        width: auto;
     }
     
     .comment h5,
     .date {
         display: inline;
         font-weight: lighter;
-        color: rgb(172, 207, 207);
+        color: #C5981B;
         font-family: 'Raleway', sans-serif;
     }
     
@@ -523,13 +535,13 @@
     .pagination>li>a:hover,
     .pagination>li>span:focus,
     .pagination>li>span:hover {
-        color: #0F2027;
+        color: #C5981B;
         background-color: #515c61;
         border-color: black;
     }
     
     .pagination>.active>a {
-        color: rgb(141, 138, 138);
+        color: #C5981B;
         background-color: #0F2027 !Important;
         border: solid 1px #1c3742 !Important;
     }
@@ -605,6 +617,11 @@
     .social,
     .btn {
         opacity: 0.8;
+    }
+    
+    .social,
+    .btn:hover {
+        opacity: 1;
     }
     
     .containerRise {
@@ -691,6 +708,8 @@
         box-shadow: 3px 3px 20px rgba(88, 90, 99, 0.5);
         border: 2px solid rgba(45, 45, 46, 0.5);
         transform: translate(-50%, 0%);
+        background-color: transparent;
+        background-color: #0f2027;
     }
     
     .profile h3 {
@@ -732,7 +751,7 @@
     /* Page Admin */
     
     .dashboard {
-        margin-left: 20%;
+        padding-bottom: 4%
     }
     
     .nav-link {
@@ -745,17 +764,22 @@
     
     .nav-pills .nav-link.active,
     .nav-pills .show>.nav-link {
-        background-color: #2a4c5a;
-        border: solid rgb(207, 209, 223);
+        margin: auto;
+        background-color: transparent;
+        border: solid 1px #C5981B;
         color: rgb(156, 184, 185);
     }
     
     .admincard,
-    th,
     td {
         background-color: #0A1519;
         color: whitesmoke;
         border-radius: 10%;
+    }
+    
+    thead {
+        font-size: x-large;
+        color: #C5981B;
     }
     /*mini-post catégorie*/
     
@@ -776,11 +800,12 @@
     .list-group-item {
         background-color: #1d3d4b;
         max-width: 18rem;
-        color: cornsilk;
+        color: rgb(223, 209, 156);
     }
     
     .list-group-item:hover {
-        background-color: #405761;
+        color: rgb(255, 251, 234);
+        background-color: #1d3d4b;
     }
     /*mini-post*/
     

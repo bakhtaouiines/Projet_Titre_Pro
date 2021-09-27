@@ -35,24 +35,24 @@ class User extends MainModel
         return $this->pdo->lastInsertId();
     }
 
-    // /**
-    //  * Méthode permettant de vérifier qu'un utilisateur existe
-    //  *
-    //  * @return boolean
-    //  */
-    // public function checkUserExists()
-    // {
-    //     $pdoStatment = $this->pdo->prepare(
-    //         'SELECT 
-    //         COUNT(`id`) AS `userExists`
-    //         FROM `user`
-    //         WHERE `mail` = :mail
-    //         OR `pseudo` = :pseudo'
-    //     );
-    //     $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_INT);
-    //     $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_INT);
-    //     return $pdoStatment->fetch(PDO::FETCH_OBJ)->userExists;
-    // }
+    /**
+     * Méthode permettant de vérifier qu'un utilisateur existe
+     *
+     * @return boolean
+     */
+    public function checkUserExists()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'SELECT 
+             COUNT(`id`) AS `userExists`
+             FROM `user`
+             WHERE `mail` = :mail
+             OR `pseudo` = :pseudo'
+        );
+        $pdoStatment->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $pdoStatment->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
+        return $pdoStatment->fetch(PDO::FETCH_OBJ);
+    }
 
     /**
      * Methode permettant de lister les utilisateurs
@@ -180,21 +180,6 @@ class User extends MainModel
         $pdoStatment->bindValue(':password_hash', $this->password_hash, PDO::PARAM_STR);
         return $pdoStatment->execute();
     }
-    
-    /**
-     * fonction pour vérifier qu'un utilisateur existe
-     *
-     * @return void
-     */
-    public function checkUserExists()
-    {
-        $query = 'SELECT COUNT(*) AS `isExist` FROM `user` WHERE `id` = :id';
-        $pdoStatment = $this->pdo->prepare($query);
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $pdoStatment->execute();
-        $result = $pdoStatment->fetch(PDO::FETCH_OBJ); // result = objet
-        return $result->isExist;
-    }
 
     /**
      * Méthode pour supprimer un profil d'utilisateur
@@ -211,7 +196,7 @@ class User extends MainModel
         $pdoStatment->execute();
     }
     /**
-     * Méthode pour supprimer un profil d'utilisateur
+     * Méthode pour supprimer l'avatar
      *
      * @return void
      */

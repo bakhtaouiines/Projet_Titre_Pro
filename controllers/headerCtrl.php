@@ -9,10 +9,11 @@ require_once 'classes/form.php';
 if (isset($controllers)) {
     require $controllers;
 }
-
+$user = new User();
 $registerForm = new Form();
 $loginForm = new Form();
 $errorMessagePassword = [];
+$errorMessage = '';
 $message = '';
 
 /**
@@ -80,25 +81,25 @@ if (isset($_POST['register'])) {
  * Vérification du formulaire de connexion
  */
 if (isset($_POST['login'])) {
-
     if (isset($_POST['mail'])) {
         $mail = htmlspecialchars($_POST['mail']);
+        $loginForm->isNotEmpty('mail', $mail);
+        $loginForm->isValidEmail('mail', $mail);
+    } else {
+        $loginForm->error['mail'];
     }
     if (isset($_POST['password'])) {
         $password = htmlspecialchars($_POST['password']);
+        $loginForm->isNotEmpty('password', $password);
+        $loginForm->isValidLength('password', $password, 6, 255);
+    } else {
+        $loginForm->error['password'];
     }
-
-    $loginForm->isNotEmpty('mail', $mail);
-    $loginForm->isValidEmail('mail', $mail);
-    $loginForm->doesExist('mail', $mail, 'user');
-    $loginForm->isNotEmpty('password', $password);
-    $loginForm->isValidLength('password', $password, 6, 255);
-
     // s'il n'y a pas d'erreurs...
     if ($loginForm->isValid()) {
-        $user = new User();
-        $user->__set('mail', $mail);
+                $user->__set('mail', $mail);
         // on vérifie la concordance entre le mdp indiqué et celui inscrit dans la bdd
+        $user->checkUserExists();
         $passwordHash = $user->getUserHash();
         if (password_verify($password, $passwordHash)) {
             // on a vérifié les informations du formulaire, à savoir si l'email saisi est bien valide, de même pour le mot de passe
@@ -116,9 +117,11 @@ if (isset($_POST['login'])) {
         } else {
             //Laisse ouvert la fenetre modale !!!!!
             $message = implode($loginForm->error);
+            $errorMessage = 'Mot de passe non reconnu.';
         }
     }
 }
+
 /**
  * lorsque l'on clique sur le bouton déconnexion, la session prend fin et on est redirigé vers la page d'accueil
  */

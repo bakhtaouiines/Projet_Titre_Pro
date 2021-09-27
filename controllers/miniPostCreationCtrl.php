@@ -14,28 +14,29 @@ $message = '';
  *  Vérifications du formulaire d'écriture de minipost
  */
 if (isset($_POST['submitMiniPost'])) {
-    $miniPostContent = '';
-    $resultSearch = '';
     //Je récupère les données du formulaire
     if (isset($_POST['miniPostContent'])) {
-        $miniPostContent = ($_POST['miniPostContent']);
+        $miniPostContent = $_POST['miniPostContent'];
+        //Je vérifie le content du minipost
+        $minipostForm->isNotEmpty('content', $miniPostContent);
+    } else {
+        $minipostForm->error['content'];
     }
     if (isset($_POST['resultSearch'])) {
         $resultSearch = htmlspecialchars($_POST['resultSearch']);
+        if (empty($resultSearch)) {
+            $message = 'Veuillez choisir une musique s\'il vous plait!';
+        }
     }
-    //Je vérifie le content du minipost
-    $minipostForm->isNotEmpty('miniPostContent', $miniPostContent);
-    $minipostForm->isNotEmpty('resultSearch', $resultSearch);
     //Si il n'y a pas d'erreur sur le formulaire...
     if ($minipostForm->isValid()) {
         $minipost->__set('content', $miniPostContent);
         $minipost->__set('id_OST', $resultSearch);
         $minipost->__set('id_User', $_SESSION['user']['id']);
         $minipost->createMiniPost();
-        echo $message = 'Mini-post bien publié!';
-        // redirection au bout de 3s sur la page des minipost
-        header('Refresh:3; url=../miniPost.php?=' . $_GET['minipostID']);
+        // redirection au bout de 3s sur la page des miniposts
+        header('Refresh:3; url=../miniPostList.php');
     } else {
-        echo $message = 'Une erreur a été identifié.';
+        $message = 'Une erreur est survenue!';
     }
 }

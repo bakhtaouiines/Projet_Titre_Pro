@@ -58,30 +58,6 @@ class Form
             return null;
         }
     }
-
-    /**
-     * Vérification de l'existence d'une valeur
-     *
-     * @param [type] $fieldName
-     * @param [type] $fieldValue
-     * @param [type] $className
-     * @return void
-     */
-    public function doesExist($fieldName, $fieldValue, $className)
-    {
-        $class = new $className();
-        if (method_exists($class, 'doesExist')) {
-            if ($class->doesExist($fieldName, $fieldValue)) {
-                return true;
-            } else {
-                $this->error[$fieldName] = 'La valeur ' . $fieldName . ' n\'existe pas';
-                return false;
-            }
-        } else {
-            return null;
-        }
-    }
-
     /**
      * Vérification de la taille d'un champ
      * @param string $fieldName

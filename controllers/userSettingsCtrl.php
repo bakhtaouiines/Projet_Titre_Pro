@@ -59,6 +59,8 @@ if (isset($_POST['updateAvatar'])) {
                             $user->__set('id', $_SESSION['user']['id']);
                             $user->updateAvatar();
                             $message = 'Upload réussi !';
+                            // si tout est ok, je redirige l'utilisateur vers sa page de profil
+                            header('Location: ../profilPage.php');
                         } else {
                             // Sinon on affiche une erreur systeme
                             $message = 'Problème lors de l\'upload !';
@@ -82,23 +84,6 @@ if (isset($_POST['updateAvatar'])) {
         // Sinon on affiche une erreur pour le champ vide
         $message = 'Veuillez remplir le formulaire svp !';
     }
-    // var_dump($message);
-    // //Si il n'y a pas d'erreur sur le formulaire...
-    // if (!empty($updateArray)) {
-
-    //     // je modifie les attributs de la classe grâce au setter
-    //     $user->__set('id', $_SESSION['user']['id']);
-    //     $user->__set('avatar', $_SESSION['user']['avatar']);
-    //     // ici j'exécute la méthodes updateAvatar() de l'objet $user, j'y récupère les modifications stockées dans le tableau $updateArray
-    //     $isUpdated = $user->updateAvatar($updateArray);
-    //     if ($isUpdated) {
-
-    //         // ici, je mets à jour les informations, visuellement, sur le profil de l'utilisateur en passant par les variables de session
-    //         $_SESSION['user']['avatar'] = $avatarName;
-    //         // et j'indique à l'utilisateur que tout est ok
-    //         $message = 'Avatar modifié avec succès!';
-    //     }
-    // }
 }
 
 /**
@@ -200,7 +185,7 @@ if (isset($_POST['deleteAvatar'])) {
     // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
     if (isset($_GET['userID'])) {
         $user->id = htmlspecialchars($_GET['userID']);
-        $deleteAvatar = $user->deleteAvatar();
+        $user->deleteAvatar();
         // si tout est ok, on redirige vers la page d'accueil
         header('Location: profilPage.php');
     } else {

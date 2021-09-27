@@ -144,7 +144,7 @@ class MiniPost extends MainModel
     public function miniPosts()
     {
         $pdoStatment = $this->pdo->query(
-            'SELECT `minipost`.`id`, `content`, `id_User`, `pseudo`, `minipost`.`id_OST`, `path` , `alt` ,`title`, `ost`.`name` AS `ostName`
+            'SELECT `minipost`.`id` AS `miniPostID`, `content`, `id_User`, `pseudo`, `minipost`.`id_OST`, `path` , `alt` ,`title`, `ost`.`name` AS `ostName`
                 FROM `minipost`
             LEFT JOIN `ost`
                 ON `minipost`.`id_OST` = `ost`.`id`
