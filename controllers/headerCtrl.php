@@ -86,6 +86,7 @@ if (isset($_POST['login'])) {
         $loginForm->isNotEmpty('mail', $mail);
         $loginForm->isValidEmail('mail', $mail);
     } else {
+        $message = 'Utilisateur inconnu!';
         $loginForm->error['mail'];
     }
     if (isset($_POST['password'])) {
@@ -97,27 +98,32 @@ if (isset($_POST['login'])) {
     }
     // s'il n'y a pas d'erreurs...
     if ($loginForm->isValid()) {
-                $user->__set('mail', $mail);
-        // on vérifie la concordance entre le mdp indiqué et celui inscrit dans la bdd
-        $user->checkUserExists();
-        $passwordHash = $user->getUserHash();
-        if (password_verify($password, $passwordHash)) {
-            // on a vérifié les informations du formulaire, à savoir si l'email saisi est bien valide, de même pour le mot de passe
-            // GESTION DE LA SESSION:
-            $_SESSION['user']['isConnected'] = true;
-            $userInfo = $user->getUserInfoByMail();
-            // on enregistre les paramètres de notre visiteur comme variables de session
-            $_SESSION['user']['id'] = $userInfo->id;
-            $_SESSION['user']['pseudo'] = $userInfo->pseudo;
-            $_SESSION['user']['mail'] = $mail;
-            $_SESSION['user']['levelAccess'] = $userInfo->level;
-            $_SESSION['user']['avatar'] = $userInfo->avatar;
-            header('location: ../profilPage.php');
-            exit;
+        $userMail = $user->checkUserExists();
+        var_dump($userMail);
+        if ($userMail) {
+            $message = 'UTILISATEUR INCONNU!';
         } else {
-            //Laisse ouvert la fenetre modale !!!!!
-            $message = implode($loginForm->error);
-            $errorMessage = 'Mot de passe non reconnu.';
+            $user->__set('mail', $mail);
+            // on vérifie la concordance entre le mdp indiqué et celui inscrit dans la bdd
+            $passwordHash = $user->getUserHash();
+            if (password_verify($password, $passwordHash)) {
+                // on a vérifié les informations du formulaire, à savoir si l'email saisi est bien valide, de même pour le mot de passe
+                // GESTION DE LA SESSION:
+                $_SESSION['user']['isConnected'] = true;
+                $userInfo = $user->getUserInfoByMail();
+                // on enregistre les paramètres de notre visiteur comme variables de session
+                $_SESSION['user']['id'] = $userInfo->id;
+                $_SESSION['user']['pseudo'] = $userInfo->pseudo;
+                $_SESSION['user']['mail'] = $mail;
+                $_SESSION['user']['levelAccess'] = $userInfo->level;
+                $_SESSION['user']['avatar'] = $userInfo->avatar;
+                header('location: ../profilPage.php');
+                exit;
+            } else {
+                //Laisse ouvert la fenetre modale !!!!!
+                $message = implode($loginForm->error);
+                $errorMessage = 'Mot de passe non reconnu.';
+            }
         }
     }
 }

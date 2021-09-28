@@ -45,7 +45,7 @@ class MiniPost extends MainModel
             LEFT JOIN `ostpicture` AS `op`
             ON `op`.`id` = `ost`.`id_OSTPicture`
             WHERE `id_User` = :id_User
-           ORDER BY `id`'
+           ORDER BY `ostName`'
         );
         $pdoStatment->bindValue(':id_User', $idUser, PDO::PARAM_STR);
         $pdoStatment->execute();

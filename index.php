@@ -24,7 +24,7 @@ require_once 'controllers/categoryCtrl.php'
                 </div>
                 <div class="card me-2 border-0" style="width: 25rem;">
                     <div class="hover hover-1 text-white rounded">
-                        <img src="../assets/images/midsommar.jpg" class=" imgaccueil card-img" alt="affiche du film midsommar">
+                        <img src="../assets/images/2soeurs.jpg" class=" imgaccueil card-img" alt="affiche du film 2 Soeurs">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
                                 <a href="category.php?categoryID=2" class="card-title text-decoration-none text-white">
@@ -56,7 +56,7 @@ require_once 'controllers/categoryCtrl.php'
                             <div class="card-img-overlay">
 
                                 <a href="category.php?categoryID=4" class="card-title text-decoration-none text-white">
-                                    <h5 class="hover-1-title card-title mb-5 text-center">Épique/Héroïque</h5>
+                                    <h5 class="hover-1-title card-title mb-5 text-center">Épique et Héroïque</h5>
                                 </a>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ require_once 'controllers/categoryCtrl.php'
                             <div class="card-img-overlay">
 
                                 <a href="category.php?categoryID=5" class="card-title text-decoration-none text-white">
-                                    <h5 class="hover-1-title card-title mb-5 text-center">Onirisme/Sérénité</h5>
+                                    <h5 class="hover-1-title card-title mb-5 text-center">Onirisme et Sérénité</h5>
                                 </a>
                             </div>
                         </div>
@@ -100,7 +100,6 @@ require_once 'controllers/categoryCtrl.php'
                         <img src="../assets/images/platoon.png" class="imgaccueil card-img" alt="affiche du film platoon">
                         <div class="hover-1-content">
                             <div class="card-img-overlay">
-
                                 <a href="category.php?categoryID=7" class="card-title text-decoration-none text-white">
                                     <h5 class="hover-1-title card-title mb-5 text-center">Chant guerrier</h5>
                                 </a>
@@ -135,7 +134,7 @@ require_once 'controllers/categoryCtrl.php'
                             <div class="card-img-overlay">
 
                                 <a href="category.php?categoryID=9" class="card-title text-decoration-none text-white">
-                                    <h5 class="hover-1-title card-title mb-5 text-center">Fantastique</h5>
+                                    <h5 class="hover-1-title card-title mb-5 text-center">Épopée Fantastique</h5>
                                 </a>
                             </div>
                         </div>
@@ -149,7 +148,7 @@ require_once 'controllers/categoryCtrl.php'
                             <div class="card-img-overlay">
 
                                 <a href="category.php?categoryID=10" class="card-title text-decoration-none text-white">
-                                    <h5 class="hover-1-title card-title mb-5 text-center">Comédie musicale</h5>
+                                    <h5 class="hover-1-title card-title mb-5 text-center">Une Danse à Broadway</h5>
                                 </a>
                             </div>
                         </div>
@@ -163,7 +162,7 @@ require_once 'controllers/categoryCtrl.php'
                             <div class="card-img-overlay">
 
                                 <a href="category.php?categoryID=11" class="card-title text-decoration-none text-white">
-                                    <h5 class="hover-1-title card-title mb-5 text-center">Extraterrestre</h5>
+                                    <h5 class="hover-1-title card-title mb-5 text-center">Chant Extraterrestre</h5>
                                 </a>
                             </div>
                         </div>
@@ -177,7 +176,7 @@ require_once 'controllers/categoryCtrl.php'
                             <div class="card-img-overlay">
 
                                 <a href="category.php?categoryID=12" class="card-title text-decoration-none text-white">
-                                    <h5 class="hover-1-title card-title mb-5 text-center">Voyage</h5>
+                                    <h5 class="hover-1-title card-title mb-5 text-center">Souvenir de Voyage</h5>
                                 </a>
                             </div>
                         </div>

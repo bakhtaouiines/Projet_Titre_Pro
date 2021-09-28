@@ -120,6 +120,7 @@ class Ost extends MainModel
         $infoPage->execute();
         return $infoPage->fetchAll(PDO::FETCH_OBJ);
     }
+    
     /**
      * Méthode pour récupérer les informations d'une OST via la barre de recherche AJAX
      *
@@ -138,6 +139,8 @@ class Ost extends MainModel
             WHERE 
                 `ost`.`album` LIKE :searchOstList
                 OR `ost`.`name` LIKE :searchOstList
+                OR `composer`.`lastname` LIKE :searchOstList
+                OR `composer`.`firstname` LIKE :searchOstList
             ORDER BY `ostName`  
             LIMIT 20'
         );

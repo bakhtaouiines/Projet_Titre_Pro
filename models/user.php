@@ -192,7 +192,7 @@ class User extends MainModel
             'DELETE FROM `user`
             WHERE `id`= :id'
         );
-        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':id', $_SESSION['user']['id'], PDO::PARAM_INT);
         $pdoStatment->execute();
     }
     /**
@@ -208,6 +208,5 @@ class User extends MainModel
         );
         $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_INT);
         $pdoStatment->execute();
-        return !$this->checkUserExists(); // Le point d'exclamation devant $this renvoie un false
     }
 }
