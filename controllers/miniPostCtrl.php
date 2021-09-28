@@ -1,11 +1,11 @@
 <?php
-// On charge le fichier du modèle.
 require_once 'models/mainModel.php';
 require_once 'models/miniPost.php';
 require_once 'classes/form.php';
 
 $minipostForm = new Form();
 $minipost = new MiniPost();
+
 /**
  * Récupération des informations du mini-post + pochette de l'OST et son nom
  */
@@ -26,6 +26,7 @@ if (isset($_POST['updateMiniPost'])) {
         if ($minipostForm->isValid()) {
             $minipost->__set('content', $updateContent);
             $minipost->updateMiniPost();
+            // si tout est ok, j'actualise la page sans attente
             header('Refresh:0');
         }
     }

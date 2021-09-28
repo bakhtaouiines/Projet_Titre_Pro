@@ -27,7 +27,7 @@ include 'parts/header.php' ?>
 
         </div>
         <div class="card-footer bg-light">
-            <a href="playlistCreation.php" class="btn btn-outline-secondary bi bi-list">Créer une playlist</a>
+            <a href="playlistcreation.php" class="btn btn-outline-secondary bi bi-list">Créer une playlist</a>
             <button type="button" class="btn btn-outline-secondary bi bi-list" data-bs-toggle="modal" data-bs-target="#updatePlaylist">Modifier ma playlist</button>
         </div>
     </form>

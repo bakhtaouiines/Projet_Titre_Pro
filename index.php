@@ -4,7 +4,7 @@ include 'parts/header.php';
 require_once 'controllers/categoryCtrl.php'
 ?>
 <!-- CORPS DE L'ACCUEIL -->
-    <h2 class="quote fs-4 text-center text-uppercase mt-5">"l'accord parfait entre musique et cinéma"</h2>
+<h2 class="quote fs-4 text-center text-uppercase mt-5">"l'accord parfait entre musique et cinéma"</h2>
 <div class="carousel slide my-2" data-bs-ride="carousel" id="carousel" data-bs-interval="0">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -194,6 +194,10 @@ require_once 'controllers/categoryCtrl.php'
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
+<!-- message dans une snackbar, informant que le compte a bien été crée -->
+<div id="snackbar">
+    <p><?= $success ?></p>
 </div>
 
 <?php include 'parts/footer.php'; ?>

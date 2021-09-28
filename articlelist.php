@@ -16,8 +16,8 @@ require_once 'controllers/articleListCtrl.php';
                     <div class="card m-2 bg-dark border border-dark shadow-lg" style="max-width: 550px;">
                         <img src="<?= $value->path ?>" alt="<?= $value->alt ?>" title="<?= $value->title ?>" style="opacity: 0.7;">
                         <div class="card-img-overlay mb-0">
-                            <h5 class="card-title"><?= $value->articleTitle ?></h5>
-                            <p class="card-text mb-0"><?= substr($value->content, 0, 250) ?></p>
+                            <h5 class="articlesTitle card-title"><?= $value->articleTitle ?></h5>
+                            <p class="card-text mb-0"><?= substr($value->content, 0, 180) ?></p>
                             <small class="mb-0 text-small fst-italic">Lire la suite...</small>
                         </div>
                     </div>

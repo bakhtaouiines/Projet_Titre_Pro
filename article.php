@@ -8,16 +8,16 @@ include 'parts/header.php';
 </div>
 <!-- affichage de l'article -->
 <div class="container article p-3 mt-4">
-    <a href="articlelist.php" class="btn btn-outline-light mb-3 offset-md-10" role="button">Revenir à la liste des articles</a>
+    <a href="articlelist.php" class="btn btn-secondary mb-3 offset-md-10" role="button">Revenir à la liste des articles</a>
     <div class="container mb-3">
         <div class="row g-0">
             <div class="col-md-5 my-auto">
                 <img src="<?= $articleInfo->path ?>" class="figure-img rounded" title="<?= $articleInfo->title ?>" alt="<?= $articleInfo->alt ?>">
-                <figcaption class="figure-caption text-center"><?= $articleInfo->title ?></figcaption>
+                <figcaption class="figure-caption text-center fst-italic"><?= $articleInfo->title ?></figcaption>
             </div>
             <div class="col-md-7">
                 <div class="card-body">
-                    <h1 class="card-title fs-2 fst-italic"><?= $articleInfo->articleTitle ?></h1>
+                    <h2 class="card-title"><?= $articleInfo->articleTitle ?></h2>
                     <p class="card-text"><?= $articleInfo->content ?></p>
                     <p class="author text-end"><?= $articleInfo->pseudo ?></p>
                 </div>
@@ -83,7 +83,7 @@ include 'parts/header.php';
                     } else {
             ?>
                 <!-- Bouton login -->
-                <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-dark me-4">Se connecter pour écrire un commentaire</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-secondary me-4 my-3">Se connecter pour écrire un commentaire</button>
             <?php
                     }
             ?>

@@ -64,18 +64,20 @@ tinymce.init({
  * Barre de recherche Ajax
  */
 function clearElement(elementId) {
-    document.getElementById(elementId).innerHTML = "";
+    document.getElementById(elementId).innerHTML = ""
 }
 
 function searchOst(searchContent) {
+    // création d'un nouvel objet XMLHttpRequest
     let xhr
     xhr = new XMLHttpRequest()
     xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) { //4: request finished and response is ready, 200: "OK"
-            //On commence par vider le contenue de la div parent
-            clearElement("resultSearch")
-            let selectParent = document.getElementById("resultSearch")
-            console.log(this.response)
+        if (this.readyState == 4 && this.status == 200) { //4: requête terminée, réponse prête, 200: "OK"
+            // On crée des éléments virtuel grâce au DOM, pour gérer l'affichage
+            // On commence par vider le contenue de la div parent
+            clearElement('resultSearch')
+            let selectParent = document.getElementById('resultSearch')
+                // On convertit la réponse de la requête en objet
             let element = JSON.parse(this.response)
                 //faire une boucle
             for (let i = 0; i < element.length; i++) {
@@ -84,9 +86,8 @@ function searchOst(searchContent) {
                 optionChild.innerText = element[i].ostName
                 selectParent.appendChild(optionChild)
             }
-            console.log(this)
         } else {
-            document.getElementById('resultSearch').innerHtml = '<option>OST non trouvée.</option>'
+            selectParent.innerHtml = '<option>OST non trouvée.</option>'
         }
     }
     xhr.open('GET', '../controllers/ajaxCtrl.php?search=' + encodeURIComponent(searchContent), true)

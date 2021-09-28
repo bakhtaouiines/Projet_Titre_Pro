@@ -2,22 +2,16 @@
 session_start();
 //Création des constantes de configuration de la base de données
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'projet_titre_pro');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_NAME', 'c284orpheus');
+define('DB_USER', 'c284orpheus');
+define('DB_PASSWORD', 'aqirMZE!96');
 define('ROLE_ADMIN' , 100);
 define('ROLE_NOT_USER' , 0);
 
 define('TARGET', 'assets/images/upload/');  // Repertoire cible de l'avatar
-/**
- * Creation du repertoire cible si inexistant
- **/
-// if( !is_dir(TARGET) ) {
-//     if( !mkdir(TARGET, 0755) ) {
-//       exit('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement.');
-//     }
-//   }
-  
+// avatar par défaut:
+$defaultImage = 'assets\images\default_image.png';
+
 /**
  * fonction pour contrôler l'accès à certaines pages ; on contrôle en fonction du niveau de rôle de l'utilisateur
  * 
@@ -43,4 +37,3 @@ function isConnected()
         return false;
     }
 }
-$defaultImage = 'assets\images\default_image.png';

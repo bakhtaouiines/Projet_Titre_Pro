@@ -63,7 +63,7 @@ class User extends MainModel
     {
         // On récupère tout le contenu de la table patients
         $pdoStatment = $this->pdo->query(
-            'SELECT `id`, `pseudo`, `mail` 
+            'SELECT `id`, `pseudo`, `mail`, `id_Role`
             FROM `user`
             ORDER BY `pseudo`'
         );
@@ -192,6 +192,20 @@ class User extends MainModel
             'DELETE FROM `user`
             WHERE `id`= :id'
         );
+        $pdoStatment->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatment->execute();
+    }
+    /**
+     * Méthode pour que l'utilisateur puisse supprimer son compte
+     *
+     * @return void
+     */
+    public function deleteAccount()
+    {
+        $pdoStatment = $this->pdo->prepare(
+            'DELETE FROM `user`
+            WHERE `id`= :id'
+        );
         $pdoStatment->bindValue(':id', $_SESSION['user']['id'], PDO::PARAM_INT);
         $pdoStatment->execute();
     }
@@ -206,7 +220,8 @@ class User extends MainModel
             'DELETE FROM `user`
             WHERE `avatar`= :avatar'
         );
-        $pdoStatment->bindValue(':avatar', $this->avatar, PDO::PARAM_INT);
+        $pdoStatment->bindValue(':avatar', $_SESSION['user']['avatar'], PDO::PARAM_INT);
         $pdoStatment->execute();
+        return !$this->checkUserExists(); // Le point d'exclamation devant $this renvoie un false
     }
 }

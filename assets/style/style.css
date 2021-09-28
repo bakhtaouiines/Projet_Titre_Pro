@@ -31,7 +31,6 @@
     .quote {
         color: #C5981B;
         font-family: 'Josefin Slab', serif;
-        font-weight: bolder;
         font-size: larger;
     }
     
@@ -47,6 +46,16 @@
         color: #ffecb6;
         border: solid 1px #ffecb6;
         transition: color 0.5s;
+    }
+    
+    .btn-outline-light {
+        border: solid 1px #C5981B;
+    }
+    
+    .btn-outline-light:hover {
+        border: solid 2px #C5981B;
+        background-color: #1c3742;
+        color: whitesmoke;
     }
     
     .navbar {
@@ -251,8 +260,7 @@
     
     #snackbar.show {
         visibility: visible;
-        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 15s 2.5s;
     }
     
     @-webkit-keyframes fadein {
@@ -346,8 +354,18 @@
         color: whitesmoke
     }
     
+    .card-title {
+        color: #C5981B;
+    }
+    
     .articleList {
         transition: transform .4s;
+    }
+    
+    .articlesTitle {
+        font-family: 'Raleway', sans-serif;
+        font-weight: bolder;
+        color: #C5981B;
     }
     
     .articleList:hover {
@@ -363,7 +381,7 @@
     
     .article,
     p {
-        color: rgb(235, 222, 222);
+        color: rgb(222, 227, 235);
     }
     
     .figure-caption {
@@ -566,7 +584,7 @@
     
     .ostName:hover,
     .card-link:hover {
-        color: #515c61 !Important;
+        color: #C5981B !Important;
     }
     
     .OSTcontainer {
@@ -672,7 +690,6 @@
         min-width: 230px;
         max-width: 450px;
         width: 100%;
-        color: #ffffff;
         text-align: center;
         background-color: #0F2027;
     }
@@ -709,7 +726,7 @@
         border: 2px solid rgba(45, 45, 46, 0.5);
         transform: translate(-50%, 0%);
         background-color: transparent;
-        background-color: #0f2027;
+        background-color: #C5981B;
     }
     
     .profile h3 {
@@ -717,7 +734,7 @@
         font-weight: 500;
         font-size: xx-large;
         letter-spacing: .2rem;
-        color: #6c7f8f;
+        color: #C5981B;
     }
     
     .profile span {
@@ -742,6 +759,7 @@
     .profile i:hover {
         opacity: 1;
         transition: all 0.35s ease;
+        color: #C5981B;
     }
     
     .profile:hover .background,

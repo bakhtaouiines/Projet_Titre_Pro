@@ -31,6 +31,7 @@ require_once 'controllers/headerCtrl.php';
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Menu de navigation  -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                 <ul class="navbar-nav mb-lg-0">
                     <div class="actionMenu d-flex align-items-center text-uppercase">
@@ -53,12 +54,12 @@ require_once 'controllers/headerCtrl.php';
                                     if (isset($_SESSION['user']['levelAccess']) && $_SESSION['user']['levelAccess'] == ROLE_ADMIN) {
                                     ?>
                                         <!-- A afficher lorsque l'administrateur est connecté-->
-                                        <a class="dropdown-item fw-bolder" href="adminSettings.php">Gestion du site</a>
+                                        <a class="dropdown-item fw-bolder" href="adminsettings.php">Gestion du site</a>
                                     <?php
                                     }
                                     ?>
-                                    <a class="dropdown-item" href="playlistList.php">Playlists</a>
-                                    <a class="dropdown-item" href="miniPostList.php">Mini-Post</a>
+                                    <a class="dropdown-item" href="playlistlist.php">Playlists</a>
+                                    <a class="dropdown-item" href="minipostlist.php">Mini-Post</a>
                                 </ul>
                             </li>
                             <!-- Menu déroulant utilisateur -->
@@ -70,10 +71,10 @@ require_once 'controllers/headerCtrl.php';
                                 <ul class="dropdown-menu text-center">
                                     <li class="helloUser dropdown-item">Hello <?= $_SESSION['user']['pseudo'] ?>
                                     </li>
-                                    <a href="profilPage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
-                                    <a class="dropdown-item" href="userSettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
-                                    <li><a class="dropdown-item" href="playlistCreation.php">Créer une playlist</a></li>
-                                    <li><a class="dropdown-item" href="miniPostCreation.php">Créer un mini-post</a></li>
+                                    <a href="profilpage.php?userID=<?= $_SESSION['user']['pseudo'] ?>" class="dropdown-item" href="<?= $_SESSION['user']['pseudo'] ?>">Mon profil</a>
+                                    <a class="dropdown-item" href="usersettings.php?userID=<?= $_SESSION['user']['pseudo'] ?>">Éditer mon profil</a>
+                                    <li><a class="dropdown-item" href="playlistcreation.php">Créer une playlist</a></li>
+                                    <li><a class="dropdown-item" href="minipostcreation.php">Créer un mini-post</a></li>
                                     <li><a class="dropdown-item" href="?action=disconnect">Me déconnecter</a></li>
                                 </ul>
                             </li>
@@ -124,6 +125,13 @@ require_once 'controllers/headerCtrl.php';
                             <?php
                             }
                             ?>
+                            <?php
+                            if (!empty($logMsg['mail'])) {
+                            ?>
+                                <p class="fst-italic text-danger"><?= $logMsg['mail'] ?></p>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <!-- MOT DE PASSE -->
                         <div class=" mb-3">
@@ -140,10 +148,19 @@ require_once 'controllers/headerCtrl.php';
                             <?php
                             }
                             ?>
+                            <?php
+                            if (!empty($logMsg['password'])) {
+                            ?>
+                                <p class="fst-italic text-danger"><?= $logMsg['password'] ?></p>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <!--validation de formulaire-->
                         <input type="submit" name="login" id="loginBtn" value="Se connecter" class="form-control btn btn-primary rounded submit px-1" disabled="disabled">
-                        <p class="fst-italic text-danger"><?= $errorMessage ?></p>
+                        <!-- messages d'erreurs de la classe FORM -->
+
+                        <p class="fst-italic text-danger"><?= $error ?></p>
                     </form>
                     <!-- bouton trigger 2e fenêtre modale -->
                     <div class="footerLog modal-footer justify-content-center">
@@ -181,6 +198,13 @@ require_once 'controllers/headerCtrl.php';
                             <?php
                             }
                             ?>
+                            <?php
+                            if (!empty($registerMsg['pseudo'])) {
+                            ?>
+                                <p class="fst-italic text-danger"><?= $registerMsg['pseudo'] ?></p>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <!-- EMAIL -->
                         <div class="mb-3">
@@ -194,6 +218,13 @@ require_once 'controllers/headerCtrl.php';
                             if (!empty($registerForm->error['mail'])) {
                             ?>
                                 <p class="fst-italic text-danger"><?= $message ?></p>
+                            <?php
+                            }
+                            ?>
+                            <?php
+                            if (!empty($registerMsg['mail'])) {
+                            ?>
+                                <p class="fst-italic text-danger"><?= $registerMsg['mail'] ?></p>
                             <?php
                             }
                             ?>
@@ -221,9 +252,9 @@ require_once 'controllers/headerCtrl.php';
                                 <input type="password" class="form-control" id="checkPassword" aria-required="true" name="checkPassword" oninput="checkRegisterForm()">
                             </label>
                             <?php
-                            if (!empty($errorMessagePassword['checkPassword'])) {
+                            if (!empty($registerMsg['checkPassword'])) {
                             ?>
-                                <p class="fst-italic text-danger"><?= $errorMessagePassword['checkPassword']; ?></p>
+                                <p class="fst-italic text-danger"><?= $registerMsg['checkPassword']; ?></p>
                             <?php
                             }
                             ?>
@@ -237,8 +268,4 @@ require_once 'controllers/headerCtrl.php';
                 </div>
             </div>
         </div>
-    </div>
-    <!-- message dans une snackbar, informant que le compte a bien été crée -->
-    <div id="snackbar">
-        <?= $message; ?>
     </div>
