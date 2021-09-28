@@ -2,9 +2,9 @@
 session_start();
 //Création des constantes de configuration de la base de données
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'c284orpheus');
-define('DB_USER', 'c284orpheus');
-define('DB_PASSWORD', 'aqirMZE!96');
+define('DB_NAME', 'projet_titre_pro');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 define('ROLE_ADMIN' , 100);
 define('ROLE_NOT_USER' , 0);
 

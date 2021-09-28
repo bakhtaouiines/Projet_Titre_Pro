@@ -183,9 +183,9 @@ if (isset($_POST['updateUserPassword'])) {
  */
 if (isset($_POST['deleteAvatar'])) {
     // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
-    if (isset($_GET['userID'])) {
-        $user->id = htmlspecialchars($_GET['userID']);
+    if (isset($_SESSION['user']['avatar'])) {
         $user->deleteAvatar();
+
         // si tout est ok, on redirige vers la page de profil
         header('Location: profilPage.php');
     } else {
@@ -194,19 +194,18 @@ if (isset($_POST['deleteAvatar'])) {
 }
 
 
+
 /**
  * Vérification formulaire de suppression du compte
  */
 if (isset($_POST['deleteProfile'])) {
     // on vérifie  que l'ID de l'utilisateur a bien été récupéré dans l'URL
     if (isset($_SESSION['user']['id'])) {
-        $deleteProfile = $user->deleteProfile();
-        if ($deleteProfile) {
-            session_destroy();
-            header('Location: index.php');
-            exit;
-        } else {
-            $message = 'Une erreur est survenue.';
-        }
+        $user->deleteProfile();
+        unset($_SESSION['user']);
+        header('Location: index.php');
+        exit;
+    } else {
+        $message = 'Une erreur est survenue.';
     }
 }

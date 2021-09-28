@@ -27,7 +27,6 @@ if (isset($_POST['register'])) {
         $pseudo = htmlspecialchars($_POST['pseudo']);
         $registerForm->isNotEmpty('pseudo', $pseudo);
         $registerForm->isValidFormat('pseudo', $pseudo, FORM::PATTERN);
-        $registerForm->isUnique('pseudo', $pseudo, 'user');
         $registerForm->isValidLength('pseudo', $pseudo, 3, 20);
     } else {
         $registerForm->error['pseudo'];
@@ -58,22 +57,27 @@ if (isset($_POST['register'])) {
 
     //Si il n'y a pas d'erreur sur le formulaire...
     if ($registerForm->isValid()) {
-        //...je crée une instance de classe ; création d'un nouvel objet
-        $user->__set('pseudo', $pseudo);
-        // On ne sauvegardera pas le mot de passe en clair dans la base mais plutôt un hash
-        // Donc je crée une clé de hachage pour le mot de passe
-        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-        $user->__set('password_hash', $hashPassword);
-        $user->__set('mail', $mail);
-        // On génère le hash qui servira à la validation du compte 
-        $user->token = random_int(1, 999);
-        if ($user->addUser() != 0) {
-            $message = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
-            //prévoir pour envoyer un mail de validation de l'inscription
+        $userExists = $user->checkUserExists();
+        if ($userExists > 0) {
+            $message = 'UTILISATEUR DEJA EXISTANT!';
+        } else {
+            //...je crée une instance de classe ; création d'un nouvel objet
+            $user->__set('pseudo', $pseudo);
+            // On ne sauvegardera pas le mot de passe en clair dans la base mais plutôt un hash
+            // Donc je crée une clé de hachage pour le mot de passe
+            $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+            $user->__set('password_hash', $hashPassword);
+            $user->__set('mail', $mail);
+            // On génère le hash qui servira à la validation du compte 
+            $user->token = random_int(1, 999);
+            if ($user->addUser() != 0) {
+                $message = 'Votre compte a bien été crée! Vous pouvez vous connecter.';
+                //prévoir pour envoyer un mail de validation de l'inscription
+            } else {
+                //Laisse ouvert la fenetre modale !!!!! ASAP
+                $message = implode($registerForm->error);
+            }
         }
-    } else {
-        //Laisse ouvert la fenetre modale !!!!! ASAP
-        $message = implode($registerForm->error);
     }
 }
 
@@ -86,7 +90,6 @@ if (isset($_POST['login'])) {
         $loginForm->isNotEmpty('mail', $mail);
         $loginForm->isValidEmail('mail', $mail);
     } else {
-        $message = 'Utilisateur inconnu!';
         $loginForm->error['mail'];
     }
     if (isset($_POST['password'])) {
@@ -96,37 +99,41 @@ if (isset($_POST['login'])) {
     } else {
         $loginForm->error['password'];
     }
+
     // s'il n'y a pas d'erreurs...
     if ($loginForm->isValid()) {
-        $userMail = $user->checkUserExists();
-        var_dump($userMail);
-        if ($userMail) {
-            $message = 'UTILISATEUR INCONNU!';
-        } else {
-            $user->__set('mail', $mail);
-            // on vérifie la concordance entre le mdp indiqué et celui inscrit dans la bdd
-            $passwordHash = $user->getUserHash();
-            if (password_verify($password, $passwordHash)) {
-                // on a vérifié les informations du formulaire, à savoir si l'email saisi est bien valide, de même pour le mot de passe
-                // GESTION DE LA SESSION:
-                $_SESSION['user']['isConnected'] = true;
-                $userInfo = $user->getUserInfoByMail();
-                // on enregistre les paramètres de notre visiteur comme variables de session
-                $_SESSION['user']['id'] = $userInfo->id;
-                $_SESSION['user']['pseudo'] = $userInfo->pseudo;
-                $_SESSION['user']['mail'] = $mail;
-                $_SESSION['user']['levelAccess'] = $userInfo->level;
-                $_SESSION['user']['avatar'] = $userInfo->avatar;
-                header('location: ../profilPage.php');
-                exit;
-            } else {
-                //Laisse ouvert la fenetre modale !!!!!
-                $message = implode($loginForm->error);
-                $errorMessage = 'Mot de passe non reconnu.';
-            }
+        $userExists = $user->checkUserExists();
+        // on vérifie l'existence de l'utilisateur, grâce à la méthode checkUserExists; s'il existe (1) 
+        if ($userExists == 0) {
+            $errorMessage = 'UTILISATEUR INCONNU!';
         }
+        $user->__set('mail', $mail);
+        // on vérifie la concordance entre le mdp indiqué et celui inscrit dans la bdd
+        $passwordHash = $user->getUserHash();
+        if (!password_verify($password, $passwordHash)) {
+            $errorMessage = 'Mot de passe non reconnu.';
+        } else {
+            // on a vérifié les informations du formulaire, à savoir si l'email saisi est bien valide, de même pour le mot de passe
+            // GESTION DE LA SESSION:
+            $_SESSION['user']['isConnected'] = true;
+            $userInfo = $user->getUserInfoByMail();
+            // on enregistre les paramètres de notre visiteur comme variables de session
+            $_SESSION['user']['id'] = $userInfo->id;
+            $_SESSION['user']['pseudo'] = $userInfo->pseudo;
+            $_SESSION['user']['mail'] = $mail;
+            $_SESSION['user']['levelAccess'] = $userInfo->level;
+            $_SESSION['user']['avatar'] = $userInfo->avatar;
+            header('location: ../profilPage.php');
+            exit;
+        }
+    } else {
+        //Laisse ouvert la fenetre modale !!!!!
+        $message = implode($loginForm->error);
     }
 }
+
+
+
 
 /**
  * lorsque l'on clique sur le bouton déconnexion, la session prend fin et on est redirigé vers la page d'accueil

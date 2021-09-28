@@ -1,26 +1,35 @@
 <!-----------------------------------------------------------footer------------------------------------------->
 
 <footer class="text-white" style="background-color: #102128;">
-    <div class="container-fluid me-5 mb-4 p-4 pb-0 d-flex justify-content-end ">
+    <div class="me-5 mb-4 p-4 pb-0 d-flex justify-content-end ">
         <!-- page de contact -->
         <a href="../contact.php" role="button" class="contact p-2 text-decoration-none text-uppercase me-5">Me contacter</a>
     </div>
     <div class="p-4" style="background-color: #0a1519">
-        <section class="social mb-2">
-            <!-- Section: Social media -->
-            <!-- Spotify -->
-            <a class="btn btn-sm btn-floating " style="background-color: #1FD35E;" href="#!" role="button"><i class="fa fa-spotify"></i></a>
-            <!-- Deezer -->
-            <a class="btn btn-sm btn-floating " style="background-color: #FFD9ED;" href="#!" role="button"><i class="fab fa-deezer"></i></a>
-            <!-- Twitter -->
-            <a class="btn btn-sm btn-floating " style="background-color: #55acee;" href="#!" role="button"><i class="fa fa-twitter"></i></a>
-            <!-- Instagram -->
-            <a class="btn btn-sm btn-floating " style="background-color: #ac2bac;" href="#!" role="button"><i class="fa fa-instagram"></i></a>
-            <!--Flux RSS-->
-            <a class="btn btn-sm btn-floating " style="background-color: #E14B0C;" href="#!" role="button"><i class="fas fa-rss-square"></i></a>
+        <section class="social row mb-0">
+            <!-- titre + logo -->
+            <div class="col-auto mx-auto">
+                <a href="index.php" class="text-decoration-none"><img class="navbar-brand col" src="assets/images/logo.png" style="width: 8rem; opacity: 0.2">
+                    <span id="title" class="text-uppercase text-light me-2">orpheus</span><span id="collection">collection</span>
+                </a>
+            </div>
+            <div class="col-auto my-auto">
+                <!-- Section: Social media -->
+                <!-- Spotify -->
+                <a class="btn btn-sm btn-floating " style="background-color: #1FD35E;" href="#!" role="button"><i class="fa fa-spotify"></i></a>
+                <!-- Deezer -->
+                <a class="btn btn-sm btn-floating " style="background-color: #FFD9ED;" href="#!" role="button"><i class="fab fa-deezer"></i></a>
+                <!-- Twitter -->
+                <a class="btn btn-sm btn-floating " style="background-color: #55acee;" href="#!" role="button"><i class="fa fa-twitter"></i></a>
+                <!-- Instagram -->
+                <a class="btn btn-sm btn-floating " style="background-color: #ac2bac;" href="#!" role="button"><i class="fa fa-instagram"></i></a>
+                <!--Flux RSS-->
+                <a class="btn btn-sm btn-floating " style="background-color: #E14B0C;" href="#!" role="button"><i class="fas fa-rss-square"></i></a>
+            </div>
         </section>
     </div>
 </footer>
+
 <script src="/assets/scripts/script.js"></script>
 <script>
     tinymce.init({

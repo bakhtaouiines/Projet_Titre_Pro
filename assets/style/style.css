@@ -652,9 +652,9 @@
         text-align: center;
         margin: auto;
         opacity: 0;
-        color: rgb(168, 184, 194);
+        color: #C5981B;
         font-family: 'Josefin Slab', serif;
-        font-size: 4em;
+        font-size: 3.5em;
         font-weight: lighter;
         letter-spacing: .5rem;
         animation-name: rise;
@@ -813,4 +813,54 @@
         background-color: #0f2027;
         border: solid rgb(58, 96, 97);
         color: cornsilk;
+    }
+    /*error 404*/
+    
+    .error-header {
+        background: rgb(58, 96, 97);
+        height: 200px;
+    }
+    
+    .error-container {
+        background: rgba(0, 0, 0, .05);
+        text-align: center;
+    }
+    
+    .error-container h1 {
+        color: #C5981B;
+    }
+    
+    .error-container h1 {
+        font-size: 110px;
+        font-weight: 300;
+        margin: -103px 0 0 0;
+        text-align: center;
+    }
+    
+    .error-divider {
+        margin-top: -27px;
+        padding: 30px 0;
+    }
+    
+    .error-container h2 {
+        font-size: 58px;
+        font-weight: 300;
+        margin: 0;
+    }
+    
+    .error-container p.description {
+        color: #C5981B;
+        font-size: 40px;
+        margin: 0;
+        font-family: 'Josefin Slab', serif;
+    }
+    
+    .return-btn,
+    .return-btn:hover {
+        border: 1px solid rgba(255, 255, 255, .3);
+        padding: 10px 15px;
+        margin-top: 100px;
+        margin-bottom: 80px;
+        display: inline-block;
+        border-radius: 5px;
     }
